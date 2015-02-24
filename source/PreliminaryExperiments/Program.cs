@@ -13,13 +13,12 @@ namespace PreliminaryExperiments
     {
         static void Main(string[] args)
         {
-            var dataset = new Dataset();
-            dataset.parseCSVFileToExample(@"wdbc.data", 1);
+            var dataset = Dataset.FromCsvFile(@"wdbc.data", 1);
 
             const int iterations = 10;
 
             var agent = new PINQAgentBudget(3.5*iterations);
-            var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(dataset.AsQueryable(), agent);
+            var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(dataset.Examples.AsQueryable(), agent);
             var random = new Random();
 
             var parameters = new double[30];
@@ -28,11 +27,7 @@ namespace PreliminaryExperiments
                 parameters[i] = random.NextDouble();
             }
 
-            var trainingSet = 0;
-            var 
-
             PrintEnumerable(parameters);
-
             
             for (int iteration = 0; iteration < iterations; iteration++)
             {

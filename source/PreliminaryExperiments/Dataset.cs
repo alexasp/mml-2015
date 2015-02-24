@@ -11,29 +11,43 @@ namespace PreliminaryExperiments
 {
     class Dataset
     {
-        private List<MachineLearning.Program.Example> examples;
+        private readonly List<MachineLearning.Program.Example> _examples;
 
-        public Dataset()
+        public Dataset(List<MachineLearning.Program.Example> examples)
         {
-            examples = new List<MachineLearning.Program.Example>();
+            _examples = new List<MachineLearning.Program.Example>();
         }
-        public List<MachineLearning.Program.Example> parseCSVFileToExample(string path, int labelPos)
-        {
-            //var examples = new List<MachineLearning.Program.Example>();
 
+        public List<MachineLearning.Program.Example> Examples {
+            get { return new List<MachineLearning.Program.Example>(_examples); }
+        }
+
+
+        public static Dataset FromCsvFile(string path, int labelPos, string delimiter = ",")
+        {
+            var examples = new List<MachineLearning.Program.Example>();
             var parser = new TextFieldParser(path) {TextFieldType = FieldType.Delimited};
-            parser.SetDelimiters(",");
+
+            parser.SetDelimiters(delimiter);
             while (!parser.EndOfData)
             {
                 String[] fields = parser.ReadFields();
+                if (fields == null) { throw new MissingFieldException("Reading fields from data file did not return any fields."); }
+
                 double label = Double.Parse(fields[labelPos]);
-                double[] features = new double[fields.Length-1];
+                var features = new double[fields.Length-1];
 
-                for(int i = 0; i < fields.Length; i++){
-
+                int counter = 0;
+                foreach (var field in fields)
+                {
+                    if (counter != labelPos){ features[counter] = Double.Parse(field); }
+                    counter++;
                 }
+
+                examples.Add(new MachineLearning.Program.Example(features, label));
             } 
-            return null;
+
+            return new Dataset(examples);
         }
         
     }
