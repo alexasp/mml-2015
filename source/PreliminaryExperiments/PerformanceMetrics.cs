@@ -4,15 +4,21 @@ namespace PreliminaryExperiments
 {
     internal class PerformanceMetrics
     {
-        public static void ErrorRate(List<double?> trueLabels, Dataset labelledSet)
+        
+        public static double ErrorRate(List<double?> trueLabels, Dataset labelledSet)
         {
-            foreach (var label in labels)
+            int correctLabels=0;
+            for (int i = 0; i < labelledSet.Samples.Count; i++)
             {
-                var i = 0;
-                testSet.Samples.
+                double? label = trueLabels[i];
+                double? guessedLabel = labelledSet.Samples[i].Label;
+                if (label.Equals(guessedLabel))
+                {
+                    correctLabels++;
+                }
             }
-
-            throw new System.NotImplementedException();
+            return correctLabels / labelledSet.Samples.Count;
+    
         }
     }
 }
