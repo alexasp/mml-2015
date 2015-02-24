@@ -13,7 +13,8 @@ namespace PreliminaryExperiments
     {
         static void Main(string[] args)
         {
-            List<MachineLearning.Program.Example> dataset = DataLoader.CsvToExamples(@"wdbc.data");
+            var dataset = new Dataset();
+            dataset.parseCSVFileToExample(@"wdbc.data", 1);
 
             const int iterations = 10;
 
@@ -26,6 +27,9 @@ namespace PreliminaryExperiments
             {
                 parameters[i] = random.NextDouble();
             }
+
+            var trainingSet = 0;
+            var 
 
             PrintEnumerable(parameters);
 
@@ -46,6 +50,7 @@ namespace PreliminaryExperiments
                 builder.Append(parameter + ",");
             }
             Console.WriteLine(builder.ToString());
+            Console.Read();
         }
     }
 }
