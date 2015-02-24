@@ -43,8 +43,9 @@ namespace PreliminaryExperiments
             var model = new LogisticModel(parameters);
 
             model.Label(testSet);
-            PerformanceMetrics.ErrorRate(labels, testSet);
+            double errorRate = PerformanceMetrics.ErrorRate(labels, testSet);
 
+            Console.Out.WriteLine("Error rate is " + errorRate);
 
         }
 

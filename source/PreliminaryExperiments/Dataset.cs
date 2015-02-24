@@ -14,7 +14,7 @@ namespace PreliminaryExperiments
 
         public Dataset(List<MachineLearning.Program.Example> examples)
         {
-            Samples = new List<MachineLearning.Program.Example>();
+            Samples = examples;
         }
 
         public Dataset ExtractSample(double rate)
@@ -26,9 +26,13 @@ namespace PreliminaryExperiments
             {
                 if (random.NextDouble() < rate)
                 {
-                    Samples.Remove(example);
                     newExamples.Add(example);
                 }
+            }
+
+            foreach (var newExample in newExamples)
+            {
+                Samples.Remove(newExample);
             }
 
             return new Dataset(newExamples);
@@ -48,14 +52,16 @@ namespace PreliminaryExperiments
                 String[] fields = parser.ReadFields();
                 if (fields == null) { throw new MissingFieldException("Reading fields from data file did not return any fields."); }
 
-                double label = Double.Parse(fields[labelPos]);
-                var features = new double[fields.Length-1];
+                double label = fields[labelPos] == "M" ? 1 : -1;
+                var features = new double[fields.Length-2];
 
-                int counter = 0;
-                foreach (var field in fields)
+                for (int index = 1; index < fields.Length; index++)
                 {
-                    if (counter != labelPos){ features[counter] = Double.Parse(field); }
-                    counter++;
+                    var field = fields[index];
+                    if (index != labelPos)
+                    {
+                        features[index] = Double.Parse(field, CultureInfo.InvariantCulture);
+                    }
                 }
 
                 examples.Add(new MachineLearning.Program.Example(features, label));
@@ -65,14 +71,14 @@ namespace PreliminaryExperiments
         }
 
 
-        public List<double?> ClearLabels()
+        public List<double> ClearLabels()
         {
-            var labels = new List<double?>();
+            var labels = new List<double>();
 
             foreach (var example in Samples)
             {
                 labels.Add(example.Label);
-                example.Label = null;
+                example.Label = 0;
             }
 
             return labels;

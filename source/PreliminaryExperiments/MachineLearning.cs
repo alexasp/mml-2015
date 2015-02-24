@@ -27,7 +27,7 @@ namespace MachineLearning
         {
             public double[] Vector { get; set; }
 
-            public double? Label { get; set; }
+            public double Label { get; set; }
 
             public Example(double[] v, double l) { Vector = v; Label = l; }
         }
