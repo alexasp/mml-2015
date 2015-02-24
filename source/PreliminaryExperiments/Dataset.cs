@@ -11,12 +11,10 @@ namespace PreliminaryExperiments
 {
     class Dataset
     {
-        private readonly List<MachineLearning.Program.Example> _examples;
-
 
         public Dataset(List<MachineLearning.Program.Example> examples)
         {
-            _examples = new List<MachineLearning.Program.Example>();
+            Samples = new List<MachineLearning.Program.Example>();
         }
 
         public Dataset ExtractSample(double rate)
@@ -24,11 +22,11 @@ namespace PreliminaryExperiments
             var newExamples = new List<MachineLearning.Program.Example>();
             var random = new Random((int) DateTime.Now.Ticks);
 
-            foreach (var example in _examples)
+            foreach (var example in Samples)
             {
                 if (random.NextDouble() < rate)
                 {
-                    _examples.Remove(example);
+                    Samples.Remove(example);
                     newExamples.Add(example);
                 }
             }
@@ -36,12 +34,7 @@ namespace PreliminaryExperiments
             return new Dataset(newExamples);
         }
 
-        public List<MachineLearning.Program.Example> Samples {
-            get
-            {
-                return new List<MachineLearning.Program.Example>(_examples);
-            }
-        }
+        public List<MachineLearning.Program.Example> Samples { get; private set; }
 
 
         public static Dataset FromCsvFile(string path, int labelPos, string delimiter = ",")
@@ -76,7 +69,7 @@ namespace PreliminaryExperiments
         {
             var labels = new List<double?>();
 
-            foreach (var example in _examples)
+            foreach (var example in Samples)
             {
                 labels.Add(example.Label);
                 example.Label = null;
