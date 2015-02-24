@@ -25,22 +25,23 @@ namespace MachineLearning
 
         public class Example
         {
-            public double[] vector;
-            public double label;
+            public double[] Vector { get; set; }
 
-            public Example(double[] v, double l) { vector = v; label = l; }
+            public double? Label { get; set; }
+
+            public Example(double[] v, double l) { Vector = v; Label = l; }
         }
 
         // computes and steps along the gradient of 
         public static double[] PerceptronStep(PINQueryable<Example> input, double[] normal, double epsilon)
         {
             // select the examples that are currently mis-labeled by the normal vector
-            var errors = input.Where(x => x.label * x.vector.Select((v, i) => v * normal[i]).Sum() < 0.0);
+            var errors = input.Where(x => x.Label * x.Vector.Select((v, i) => v * normal[i]).Sum() < 0.0);
 
             // fold the average error into the normal
             var newnormal = new double[normal.Length];
             foreach (var coordinate in Enumerable.Range(0, normal.Length))
-                newnormal[coordinate] = normal[coordinate] + errors.NoisyAverage(epsilon, x => x.label * x.vector[coordinate]);
+                newnormal[coordinate] = normal[coordinate] + errors.NoisyAverage(epsilon, x => x.Label * x.Vector[coordinate]);
 
             return newnormal;
         }
@@ -50,13 +51,13 @@ namespace MachineLearning
         public static double[] SupportVectorStep(PINQueryable<Example> input, double[] normal, double epsilon)
         {
             // select the examples that are currently mis-labeled by the normal vector. also add some negative normal for our regularizer
-            var errors = input.Where(x => x.label * x.vector.Select((v, i) => v * normal[i]).Sum() < 1.0)
+            var errors = input.Where(x => x.Label * x.Vector.Select((v, i) => v * normal[i]).Sum() < 1.0)
                               .Concat(Enumerable.Repeat(new Example(normal, -1.0), 10).AsQueryable());
 
             // fold the average error into the normal
             var newnormal = new double[normal.Length];
             foreach (var coordinate in Enumerable.Range(0, normal.Length))
-                newnormal[coordinate] = normal[coordinate] + errors.NoisyAverage(epsilon, x => x.label * x.vector[coordinate]);
+                newnormal[coordinate] = normal[coordinate] + errors.NoisyAverage(epsilon, x => x.Label * x.Vector[coordinate]);
 
             return newnormal;
         }
@@ -67,8 +68,8 @@ namespace MachineLearning
             // compute the logistic probability of (xi, yi) under "normal", subtracted from (label + 1.0)/2.0 = target
             var errors = input.Select(x => new
             {
-                vector = x.vector,
-                error = (x.label + 1.0) / 2.0 - 1.0 / (1 + Math.Exp(-x.vector.Select((v, i) => v * normal[i]).Sum()))
+                vector = x.Vector,
+                error = (x.Label + 1.0) / 2.0 - 1.0 / (1 + Math.Exp(-x.Vector.Select((v, i) => v * normal[i]).Sum()))
             });
 
             // fold the average error into the normal
@@ -193,7 +194,7 @@ namespace MachineLearning
             foreach (var index in Enumerable.Range(0, iterations))
                 perceptronnormal = PerceptronStep(labeled, perceptronnormal, 0.1);
 
-            var perceptronerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * perceptronnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
+            var perceptronerror = labeled.NoisyAverage(0.1, x => x.Label * x.Vector.Select((v, i) => v * perceptronnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
             Console.WriteLine("perceptron error rate:\t\t{0:F4}", perceptronerror);
 
             // the Support Vector Machine attempts to find a maximum margin classifier
@@ -201,7 +202,7 @@ namespace MachineLearning
             foreach (var index in Enumerable.Range(0, iterations))
                 supportvectornormal = SupportVectorStep(labeled, supportvectornormal, 0.1);
 
-            var supportvectorerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * supportvectornormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
+            var supportvectorerror = labeled.NoisyAverage(0.1, x => x.Label * x.Vector.Select((v, i) => v * supportvectornormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
             Console.WriteLine("support vector error rate:\t{0:F4}", supportvectorerror);
 
             // Logistic regression optimizes the likelihood of the labels under the logistic function
@@ -209,7 +210,7 @@ namespace MachineLearning
             foreach (var index in Enumerable.Range(0, iterations))
                 logisticnormal = LogisticStep(labeled, logisticnormal, 0.1);
 
-            var logisticerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * logisticnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
+            var logisticerror = labeled.NoisyAverage(0.1, x => x.Label * x.Vector.Select((v, i) => v * logisticnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
             Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
 
             Console.ReadKey();

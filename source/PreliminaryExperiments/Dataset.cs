@@ -13,13 +13,34 @@ namespace PreliminaryExperiments
     {
         private readonly List<MachineLearning.Program.Example> _examples;
 
+
         public Dataset(List<MachineLearning.Program.Example> examples)
         {
             _examples = new List<MachineLearning.Program.Example>();
         }
 
-        public List<MachineLearning.Program.Example> Examples {
-            get { return new List<MachineLearning.Program.Example>(_examples); }
+        public Dataset ExtractSample(double rate)
+        {
+            var newExamples = new List<MachineLearning.Program.Example>();
+            var random = new Random((int) DateTime.Now.Ticks);
+
+            foreach (var example in _examples)
+            {
+                if (random.NextDouble() < rate)
+                {
+                    _examples.Remove(example);
+                    newExamples.Add(example);
+                }
+            }
+
+            return new Dataset(newExamples);
+        }
+
+        public List<MachineLearning.Program.Example> Samples {
+            get
+            {
+                return new List<MachineLearning.Program.Example>(_examples);
+            }
         }
 
 
@@ -49,6 +70,19 @@ namespace PreliminaryExperiments
 
             return new Dataset(examples);
         }
-        
+
+
+        public List<double?> ClearLabels()
+        {
+            var labels = new List<double?>();
+
+            foreach (var example in _examples)
+            {
+                labels.Add(example.Label);
+                example.Label = null;
+            }
+
+            return labels;
+        }
     }
 }

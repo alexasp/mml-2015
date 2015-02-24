@@ -17,8 +17,13 @@ namespace PreliminaryExperiments
 
             const int iterations = 10;
 
+            var trainSet = dataset.ExtractSample(0.8);
+            
+            Dataset testSet = dataset;
+            var labels = testSet.ClearLabels();
+
             var agent = new PINQAgentBudget(3.5*iterations);
-            var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(dataset.Examples.AsQueryable(), agent);
+            var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(trainSet.Samples.AsQueryable(), agent);
             var random = new Random();
 
             var parameters = new double[30];
@@ -34,7 +39,13 @@ namespace PreliminaryExperiments
                 parameters = MachineLearning.Program.LogisticStep(pinqQueryable, parameters, 0.1);
                 PrintEnumerable(parameters);
             }
-            
+
+            var model = new LogisticModel(parameters);
+
+            model.Label(testSet);
+            PerformanceMetrics.ErrorRate(labels, testSet);
+
+
         }
 
         private static void PrintEnumerable(IEnumerable<double> parameters)
