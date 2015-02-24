@@ -4,7 +4,7 @@ namespace PreliminaryExperiments
 {
     internal class PerformanceMetrics
     {
-        public static void ErrorRate(List<double?> labels, Dataset testSet)
+        public static void ErrorRate(List<double?> trueLabels, Dataset labelledSet)
         {
             throw new System.NotImplementedException();
         }
