@@ -65,8 +65,8 @@ namespace PreliminaryExperiments
                 Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
             }
 
-            
 
+            Console.ReadKey(); 
         }
 
         private static void PrintEnumerable(IEnumerable<double> parameters)
