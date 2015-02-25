@@ -74,8 +74,9 @@ namespace MachineLearning
 
             // fold the average error into the normal
             var newnormal = new double[normal.Length];
-            foreach (var coordinate in Enumerable.Range(0, normal.Length))
+            foreach (var coordinate in Enumerable.Range(0, normal.Length)) {
                 newnormal[coordinate] = normal[coordinate] + errors.NoisySum(epsilon, x => x.error * x.vector[coordinate]);
+}
 
             return newnormal;
         }

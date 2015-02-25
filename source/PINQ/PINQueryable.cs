@@ -307,7 +307,9 @@ namespace PINQ
                                                   .Select(x => x > +1.0 ? +1.0 : x)
                                                   .Select(x => x < -1.0 ? -1.0 : x);
 
-                return values.Sum() + Laplace(1.0 / epsilon);
+                double noise = Laplace(1.0/epsilon);
+                double sum = values.Sum();
+                return sum + noise;
             }
             else
                 throw new Exception("PINQ access denied");

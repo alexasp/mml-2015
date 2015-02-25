@@ -55,13 +55,13 @@ namespace PreliminaryExperiments
                 double label = fields[labelPos] == "M" ? 1 : -1;
                 var features = new double[fields.Length-2];
 
-                for (int index = 1; index < fields.Length; index++)
+                int offset = 0;
+                for (int index = 1; index < fields.Length-2; index++)
                 {
-                    var field = fields[index];
-                    if (index != labelPos)
-                    {
-                        features[index] = Double.Parse(field, CultureInfo.InvariantCulture);
-                    }
+                    if (index == labelPos) { offset = 1; }
+                    var field = fields[index + offset];
+
+                    features[index] = Double.Parse(field, CultureInfo.InvariantCulture);
                 }
 
                 examples.Add(new MachineLearning.Program.Example(features, label));

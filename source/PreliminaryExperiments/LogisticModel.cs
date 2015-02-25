@@ -24,7 +24,7 @@ namespace PreliminaryExperiments
         }
         private double Logit(double dotProduct)
         {
-            return 1 / (1 + Math.Pow(Math.E, -dotProduct));
+            return 1 / (1 + Math.Pow(Math.E, - dotProduct));
         }
 
         private double Dot(IEnumerable<double> parameters, IList<double> vector)

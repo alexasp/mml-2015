@@ -17,7 +17,7 @@ namespace PreliminaryExperiments
                     correctLabels++;
                 }
             }
-            return correctLabels / labelledSet.Samples.Count;
+            return (double)correctLabels / (double)labelledSet.Samples.Count;
     
         }
     }
