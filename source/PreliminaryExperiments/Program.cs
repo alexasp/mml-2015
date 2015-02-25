@@ -41,28 +41,20 @@ namespace PreliminaryExperiments
         {
             const int dimensions = 10;
             var dataset = Dataset.FromCsvFile(@"magic04.data", 10, "g", dimensions);
-
+            dataset = dataset.ExtractSample(0.8);
 //            var dataset = Dataset.FromCsvFile(@"iris.data", 4, "Iris-setosa", dimensions);
             dataset.Shuffle();
 
-            const int iterations = 50;
-
-
-            
-//            Dataset testSet = dataset;
-//            var labels = testSet.ClearLabels();
+            const int iterations = 100;
 
             var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(dataset.Samples.AsQueryable(), null);
-            var random = new Random();
-
-            
 
             var parameters = GenerateData(dimensions).First();
 
             
             for (int iteration = 0; iteration < iterations; iteration++)
             {
-                parameters = MachineLearning.Program.LogisticStep(pinqQueryable, parameters, 0.1);
+                parameters = MachineLearning.Program.LogisticStep(pinqQueryable, parameters, 0.01);
 
                 var logisticerror = pinqQueryable.NoisyAverage(0.1, x => x.Label * x.Vector.Select((v, i) => v * parameters[i]).Sum() < 0.0 ? 1.0 : 0.0);
                 Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
