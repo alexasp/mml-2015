@@ -3,45 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Globalization;
-using Microsoft.VisualBasic.FileIO;
 
 namespace PreliminaryExperiments
 {
-    public class Dataset
+    class IrisDataset
     {
-
-        public Dataset(List<MachineLearning.Program.Example> examples)
-        {
-            Samples = examples;
-        }
-
-        public Dataset ExtractSample(double rate)
-        {
-            var newExamples = new List<MachineLearning.Program.Example>();
-            var random = new Random((int) DateTime.Now.Ticks);
-
-            foreach (var example in Samples)
-            {
-                if (random.NextDouble() < rate)
-                {
-                    newExamples.Add(example);
-                }
-            }
-
-            foreach (var newExample in newExamples)
-            {
-                Samples.Remove(newExample);
-            }
-
-            return new Dataset(newExamples);
-        }
-
-        public List<MachineLearning.Program.Example> Samples { get; private set; }
-
-
-        public static Dataset FromCsvFile(string path, int labelPos,string labelText, int nrOfFeatures, string delimiter = ",")
+          public static Dataset FromCsvFile(string path, int labelPos, string delimiter = ",")
         {
             var examples = new List<MachineLearning.Program.Example>();
             var parser = new TextFieldParser(path) {TextFieldType = FieldType.Delimited};
@@ -52,11 +19,11 @@ namespace PreliminaryExperiments
                 String[] fields = parser.ReadFields();
                 if (fields == null) { throw new MissingFieldException("Reading fields from data file did not return any fields."); }
 
-                double label = fields[labelPos] == labelText ? 1 : -1;
-                var features = new double[nrOfFeatures];
+                double label = fields[labelPos] == "Iris-setosa" ? 1 : -1;
+                var features = new double[fields.Length-1];
 
                 int offset = 0;
-                for (int index = 1; index < fields.Length-2; index++)
+                for (int index = 0; index < fields.Length-2; index++)
                 {
                     if (index == labelPos) { offset = 1; }
                     var field = fields[index + offset];
@@ -83,5 +50,6 @@ namespace PreliminaryExperiments
 
             return labels;
         }
+    }
     }
 }
