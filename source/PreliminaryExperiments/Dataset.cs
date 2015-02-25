@@ -9,7 +9,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace PreliminaryExperiments
 {
-    class Dataset
+    public class Dataset
     {
 
         public Dataset(List<MachineLearning.Program.Example> examples)

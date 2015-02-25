@@ -145,27 +145,27 @@ namespace MachineLearning
             var securedata = new PINQueryable<double[]>(sourcedata, null);
 
             // let's start by computing the centroid of the data
-            var means = Mean(securedata, dimensions, 0.1);
-
-            Console.WriteLine("mean vector:");
-            foreach (var mean in means)
-                Console.Write("\t{0:F4}", mean);
-            Console.WriteLine();
-            Console.WriteLine();
-
-
-            // we can also center the data and compute its covariance
-            var centered = securedata.Select(x => x.Select((v, i) => v - means[i]).ToArray());
-            var covariance = Covariance(centered, dimensions, 8);
-
-            Console.WriteLine("covariance matrix:");
-            foreach (var row in covariance)
-            {
-                foreach (var entry in row)
-                    Console.Write("\t{0:F4}", entry);
-                Console.WriteLine();
-            }
-            Console.WriteLine();
+//            var means = Mean(securedata, dimensions, 0.1);
+//
+//            Console.WriteLine("mean vector:");
+//            foreach (var mean in means)
+//                Console.Write("\t{0:F4}", mean);
+//            Console.WriteLine();
+//            Console.WriteLine();
+//
+//
+//            // we can also center the data and compute its covariance
+//            var centered = securedata.Select(x => x.Select((v, i) => v - means[i]).ToArray());
+//            var covariance = Covariance(centered, dimensions, 8);
+//
+//            Console.WriteLine("covariance matrix:");
+//            foreach (var row in covariance)
+//            {
+//                foreach (var entry in row)
+//                    Console.Write("\t{0:F4}", entry);
+//                Console.WriteLine();
+//            }
+//            Console.WriteLine();
 
 
             // iterative algorithms are also possible. we'll do k-means first
@@ -189,27 +189,33 @@ namespace MachineLearning
             var labeled = securedata.Select(x => new Example(x, NearestCenter(x, centers) == centers[0] ? 1.0 : -1.0));
 
             // the Perceptron algorithm repeatedly adds misclassified examples to a normal vector
-            var perceptronnormal = GenerateData(dimensions).First();
-            foreach (var index in Enumerable.Range(0, iterations))
-                perceptronnormal = PerceptronStep(labeled, perceptronnormal, 0.1);
-
-            var perceptronerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * perceptronnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
-            Console.WriteLine("perceptron error rate:\t\t{0:F4}", perceptronerror);
-
-            // the Support Vector Machine attempts to find a maximum margin classifier
-            var supportvectornormal = GenerateData(dimensions).First();
-            foreach (var index in Enumerable.Range(0, iterations))
-                supportvectornormal = SupportVectorStep(labeled, supportvectornormal, 0.1);
-
-            var supportvectorerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * supportvectornormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
-            Console.WriteLine("support vector error rate:\t{0:F4}", supportvectorerror);
+//            var perceptronnormal = GenerateData(dimensions).First();
+//            foreach (var index in Enumerable.Range(0, iterations))
+//                perceptronnormal = PerceptronStep(labeled, perceptronnormal, 0.1);
+//
+//            var perceptronerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * perceptronnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
+//            Console.WriteLine("perceptron error rate:\t\t{0:F4}", perceptronerror);
+//
+//            // the Support Vector Machine attempts to find a maximum margin classifier
+//            var supportvectornormal = GenerateData(dimensions).First();
+//            foreach (var index in Enumerable.Range(0, iterations))
+//                supportvectornormal = SupportVectorStep(labeled, supportvectornormal, 0.1);
+//
+//            var supportvectorerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * supportvectornormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
+//            Console.WriteLine("support vector error rate:\t{0:F4}", supportvectorerror);
 
             // Logistic regression optimizes the likelihood of the labels under the logistic function
             var logisticnormal = GenerateData(dimensions).First();
+            double logisticerror;
             foreach (var index in Enumerable.Range(0, iterations))
-                logisticnormal = LogisticStep(labeled, logisticnormal, 0.1);
+            {
+                logisticerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * logisticnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
 
-            var logisticerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * logisticnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
+                Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
+                logisticnormal = LogisticStep(labeled, logisticnormal, 0.1);
+            }
+
+            logisticerror = labeled.NoisyAverage(0.1, x => x.label * x.vector.Select((v, i) => v * logisticnormal[i]).Sum() < 0.0 ? 1.0 : 0.0);
             Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
 
             Console.ReadKey();
