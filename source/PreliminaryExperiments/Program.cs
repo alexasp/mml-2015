@@ -39,17 +39,9 @@ namespace PreliminaryExperiments
 
         static void Main(string[] args)
         {
-            var dataset = Dataset.FromCsvFile(@"wdbc.data", 1);
 
             const int iterations = 5;
 
-            var trainSet = dataset.ExtractSample(0.8);
-            
-            Dataset testSet = dataset;
-            var labels = testSet.ClearLabels();
-
-            var agent = new PINQAgentBudget(35*iterations);
-            var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(trainSet.Samples.AsQueryable(), agent);
             var random = new Random();
 
             var dimensions = 8;
@@ -64,19 +56,19 @@ namespace PreliminaryExperiments
 
             var labeled = securedata.Select(x => new MachineLearning.Program.Example(x, NearestCenter(x, centers) == centers[0] ? 1.0 : -1.0));
 
-            var parameters = new double[dimensions];
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                parameters[i] = 2.0*random.NextDouble() - 1.0;
-            }
+            var parameters = MachineLearning.Program.GenerateData(dimensions).First();
 
+
+            double logisticerror;
             
             for (int iteration = 0; iteration < iterations; iteration++)
             {
+                logisticerror = labeled.NoisyAverage(0.1, x => x.Label * x.Vector.Select((v, i) => v * parameters[i]).Sum() < 0.0 ? 1.0 : 0.0);
+                Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
+                
                 parameters = MachineLearning.Program.LogisticStep(labeled, parameters, 0.1);
 
-                var logisticerror = labeled.NoisyAverage(0.1, x => x.Label * x.Vector.Select((v, i) => v * parameters[i]).Sum() < 0.0 ? 1.0 : 0.0);
-                Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
+                
 //
 //                var model = new LogisticModel(parameters);
 //
@@ -85,7 +77,8 @@ namespace PreliminaryExperiments
 //
 //                Console.Out.WriteLine("Accuracy is " + errorRate);
             }
-
+            logisticerror = labeled.NoisyAverage(0.1, x => x.Label * x.Vector.Select((v, i) => v * parameters[i]).Sum() < 0.0 ? 1.0 : 0.0);
+            Console.WriteLine("logistic error rate:\t\t{0:F4}", logisticerror);
             
 
         }
