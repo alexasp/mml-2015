@@ -39,20 +39,23 @@ namespace PreliminaryExperiments
 
         static void Main(string[] args)
         {
-            var dataset = Dataset.FromCsvFile(@"wdbc.data", 1);
+            const int dimensions = 10;
+            var dataset = Dataset.FromCsvFile(@"magic04.data", 10, "g", dimensions);
 
-            const int iterations = 5;
+//            var dataset = Dataset.FromCsvFile(@"iris.data", 4, "Iris-setosa", dimensions);
+            dataset.Shuffle();
 
-            var trainSet = dataset.ExtractSample(0.8);
+            const int iterations = 50;
+
+
             
 //            Dataset testSet = dataset;
 //            var labels = testSet.ClearLabels();
 
-            var agent = new PINQAgentBudget(35*iterations);
-            var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(trainSet.Samples.AsQueryable(), agent);
+            var pinqQueryable = new PINQueryable<MachineLearning.Program.Example>(dataset.Samples.AsQueryable(), null);
             var random = new Random();
 
-            var dimensions = 30;
+            
 
             var parameters = GenerateData(dimensions).First();
 

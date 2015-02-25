@@ -60,7 +60,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IrisDataset.cs" />
     <Compile Include="DataLoader.cs" />
     <Compile Include="Dataset.cs" />
     <Compile Include="LogisticModel.cs" />

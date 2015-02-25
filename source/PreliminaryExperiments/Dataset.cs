@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -82,6 +84,20 @@ namespace PreliminaryExperiments
             }
 
             return labels;
+        }
+
+        public void Shuffle()
+        {
+            var rnd = new Random();
+            for (var i = 0; i < Samples.Count; i++)
+                Swap(Samples, i, rnd.Next(i, Samples.Count));
+        }
+
+        public void Swap(IList list, int i, int j)
+        {
+            var temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
         }
     }
 }
