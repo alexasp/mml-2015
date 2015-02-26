@@ -1,5 +1,11 @@
+% !TeX spellcheck = <none>
 %===================================== CHAP 3 =================================
 
 \chapter{Basic Theory}
 
 \cleardoublepage
+In a world where massive amounts of sensitive personal data are being collected, attacks on the individual's privacy are becoming more and more of a threat. One type of attack is the identification of an individual's personal information from massive data sets, such as people's movie ratings from the Netflix data set\cite{narayanan2008robust}, and the medical records of a former governor of Massachussets\cite{barth2012re}. These types of privacy breaches may lead to the unwanted discovery of a person's embarrasing information, and could also lead to the theft of an individual's private data or identity.  
+
+Many different approaches have been tried by data custodians to privatize the data they hold, such as removing any columns containing Personally Identifiable Information (PII), anonymizing the data by providing k-anonymity protection\cite{sweeney2002k}, or perform group based anonymization through l-diversity\cite{machanavajjhala2007diversity}. All of these methods mentioned have been proved to be vulnerable in some way or form to attacks \cite{ganta2008composition}. 
+
+The term "Differential privacy" was defined by Dwork  as a description of a promise, made by a data holder to a data subject: "“You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available." \cite{dwork2013algorithmic}
