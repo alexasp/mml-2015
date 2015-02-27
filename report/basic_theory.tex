@@ -1,11 +1,25 @@
-% !TeX spellcheck = <none>
+% !TeX spellcheck = en_US
 %===================================== CHAP 3 =================================
 
 \chapter{Basic Theory}
+In a world where massive amounts of sensitive personal data are being collected, attacks on the individual's privacy are becoming more and more of a threat. One type of attack is the identification of an individual's personal information from massive data sets, such as people's movie ratings from the Netflix data set\cite{narayanan2008robust}, and the medical records of a former governor of Massachusetts\cite{barth2012re}. These types of privacy breaches may lead to the unwanted discovery of a person's embarrassing information, and could also lead to the theft of an individual's private data or identity.  
+
+Many different approaches have been tried by data custodians to privatize the data they hold, such as removing any columns containing Personally Identifiable Information (PII), anonymizing the data by providing k-anonymity protection\cite{sweeney2002k}, or perform group based anonymization through l-diversity\cite{machanavajjhala2007diversity}. All of these methods mentioned have been proved to be susceptible in some way or form to attacks \cite{ganta2008composition}. Motivated by these shortcomings, a researcher at Microsoft came up with a data theoretical framework called differential privacy, which operates off a solid mathematical foundation and have strong theoretical guarantees on the privacy and utility of the released data.
+
+The term "differential privacy" was defined by Dwork as a description of a promise, made by a data holder to a data subject: "“You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available." \cite{dwork2013algorithmic}
+In an ideal situation, databases which implement differential privacy mechanisms can make confidential data widely available for accurate data analysis, without resorting to data usage agreements, data protection plans, or restricted views. Nevertheless, the Fundamental Law of Information Recovery states that overly accurate answers to too many questions will destroy privacy in a spectacular way \cite{dwork2013algorithmic}, meaning that data utility will eventually be consumed.
+
+The classic example for explaining a security breach is the case of Mr White: Suppose you have access to a database that allows you to compute the income of all residents in a specified area. If you knew that Mr White was going to move, simply querying the database before and after his relocation would allow you to deduce his income. 
+
+Formally, differential privacy is defined as follows:
+A randomized function K gives $\epsilon$-differential privacy if for all data sets D and D' differing on at most one row, and all S$\subseteq$Range(K),
+
+ $Pr[K(D)\in S]\leq exp(\epsilon)\times Pr[K(D')\in S]$
+ 
+What this means is that the risk to an individual's privacy should not be substantially increase as a result of participating in a statistical database, as the risk is bounded by the parameter $\epsilon$. Therefore an attacker should not be able to learn anything about any participant that they would not have learned if the participant had opted out of participating.
+
+This is guaranteed by applying noise to the result of an query to the dataset, by using the function K(). There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
+
+The Laplace mechanism involves adding random noise which conforms to the Laplace statistical distribution. 
 
 \cleardoublepage
-In a world where massive amounts of sensitive personal data are being collected, attacks on the individual's privacy are becoming more and more of a threat. One type of attack is the identification of an individual's personal information from massive data sets, such as people's movie ratings from the Netflix data set\cite{narayanan2008robust}, and the medical records of a former governor of Massachussets\cite{barth2012re}. These types of privacy breaches may lead to the unwanted discovery of a person's embarrasing information, and could also lead to the theft of an individual's private data or identity.  
-
-Many different approaches have been tried by data custodians to privatize the data they hold, such as removing any columns containing Personally Identifiable Information (PII), anonymizing the data by providing k-anonymity protection\cite{sweeney2002k}, or perform group based anonymization through l-diversity\cite{machanavajjhala2007diversity}. All of these methods mentioned have been proved to be vulnerable in some way or form to attacks \cite{ganta2008composition}. 
-
-The term "Differential privacy" was defined by Dwork  as a description of a promise, made by a data holder to a data subject: "“You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available." \cite{dwork2013algorithmic}
