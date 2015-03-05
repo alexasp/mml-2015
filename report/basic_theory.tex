@@ -39,5 +39,13 @@ $$\Delta \mathit{f}=\underset{D,D'}{max}||\mathit{f(D)}-\mathit{f(D')}||_{1}$$
 This equation states that the maximum difference in the values that the query \textit{f} may take is on a pair of databases that differ on only one row. Dwork proved that adding a random Laplace variable, $(\Delta f/\epsilon)$, to a query you could guarantee $\epsilon$-differential privacy\cite{dwork2013algorithmic}. 
 
 \subsubsection{Exponential Mechanism}
-The Exponential mechanism is a method for selecting one element from a set, and is commonly used if a non-numeric valued query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. Instead we would use the aforementioned mechanism and make it exponentially more likely to make high quality outputs.  
+The Exponential mechanism is a method for selecting one element from a set, and is commonly used if a non-numeric valued query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. Instead we would use the aforementioned mechanism and make it exponentially more likely to make high quality outputs. 
+
+\textbf{Definition 4}: the sensitivity of score function H is defined as
+$$s(H, ||.||) = \underset{(D,D′)=1,a\in A}{max}||H(D, a)-H(D',a)||$$
+The exponential mechanism: given a dataset D and a set of possible answers
+A, if a random mechanism selects an answer based on the following probability,
+then the mechanism is ǫ-differentially private:
+P(a ∈ A is selected) ∝ e
+ǫH(D,a)/2s(H,k.k) 
 \cleardoublepage
