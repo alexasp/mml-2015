@@ -14,12 +14,14 @@ The classic example for explaining a security breach is the case of Mr White: Su
 Formally, differential privacy is defined as follows:
 A randomized function K gives $\epsilon$-differential privacy if for all data sets D and D' differing on at most one row, and all S$\subseteq$Range(K),
 
- $Pr[K(D)\in S]\leq exp(\epsilon)\times Pr[K(D')\in S]$
+ $$Pr[K(D)\in S]\leq exp(\epsilon)\times Pr[K(D')\in S]$$
  
 What this means is that the risk to an individual's privacy should not be substantially increase as a result of participating in a statistical database, as the risk is bounded by the parameter $\epsilon$. Therefore an attacker should not be able to learn anything about any participant that they would not have learned if the participant had opted out of participating.
 
 This is guaranteed by applying noise to the result of an query to the dataset, by using the function K(). There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
-The Laplace mechanism involves adding random noise which conforms to the Laplace statistical distribution. 
+The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The most common question that needs to be answered before doing research with differentially private data, is how we should define our Laplace random variable, i.e how much noise needs to be added. The Laplace distribution centered around zero has only one parameter, its scale, and this is proportional to its standard deviation. The scale is naturally dependent on the privacy parameter $\epsilon$, and also on the risk of the most different individual having their private information leaked from the data. This risk is called the sensitivity of the query, and is defined mathematically as:
+
+$$\Delta \mathit{f}=\underset{D,D'}{max}||\mathit{f(D)}-\mathit{f(D')}||_{1}$$
 
 \cleardoublepage
