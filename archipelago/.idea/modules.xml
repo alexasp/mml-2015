@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/archipelago.iml" filepath="$PROJECT_DIR$/archipelago.iml" />
+      <module fileurl="file://$PROJECT_DIR$/archipelago.core/archipelago.core.iml" filepath="$PROJECT_DIR$/archipelago.core/archipelago.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/archipelago.tests/archipelago.tests.iml" filepath="$PROJECT_DIR$/archipelago.tests/archipelago.tests.iml" />
     </modules>
   </component>
 </project>
