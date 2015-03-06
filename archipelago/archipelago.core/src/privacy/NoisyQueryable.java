@@ -15,8 +15,10 @@ public class NoisyQueryable<T> {
     private PinqAgent _agent;
     private NoiseGenerator _noiseGenerator;
 
-    public NoisyQueryable(PinqAgent _agent, Collection<T> data, NoiseGenerator _noiseGenerator) {
+    public NoisyQueryable(PinqAgent agent, Collection<T> data, NoiseGenerator noiseGenerator) {
         _data = data;
+        _agent = agent;
+        _noiseGenerator = noiseGenerator;
     }
 
     public <Y> NoisyQueryable<Y> project(Function<T, Y> projection) {
@@ -37,8 +39,12 @@ public class NoisyQueryable<T> {
         return _agent;
     }
 
-    public long Count() {
-        return 0;
+    public double Count(double epsilon) {
+        if(_agent.getEpsilon() >= epsilon){
+            return ((double)_data.size()) + _noiseGenerator.fromLaplacian(1.0 / epsilon);
+        } else {
+            throw new IllegalStateException("Agent disclosure budget too low for query.");
+        }
     }
 
     public double sum(double epsilon) {

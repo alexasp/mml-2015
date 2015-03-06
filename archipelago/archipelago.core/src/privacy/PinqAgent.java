@@ -7,4 +7,8 @@ public class PinqAgent {
     public double getEpsilon(){
         return 0.0;
     }
+
+    public boolean apply(double epsilon) {
+        return false;
+    }
 }

@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -52,15 +53,15 @@ public class NoisyQueryableTest {
 
         NoisyQueryable<Boolean> projection = _queryable.project(func);
 
-        assertEquals(_queryable.Count(), projection.Count());
+        assertEquals(_queryable.Count(_agent.getEpsilon()*0.1), projection.Count(_agent.getEpsilon()*0.1), 0.001);
     }
 
     @Test
     public void count_AddsLaplaceNoise(){
         _data.addAll(Arrays.asList(3.0, 4.0, 5.0));
-        when(_noiseGenerator.fromLaplacian(_agent.getEpsilon())).thenReturn(-2.0);
+        when(_noiseGenerator.fromLaplacian(anyDouble())).thenReturn(-2.0);
 
-        assertEquals(_queryable.Count(), 1.0, 0.001);
+        assertEquals(1.0, _queryable.Count(_agent.getEpsilon()*0.1), 0.001);
     }
 
 
