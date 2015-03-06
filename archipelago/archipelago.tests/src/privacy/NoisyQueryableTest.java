@@ -4,12 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import privacy.math.NoiseGenerator;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -22,18 +26,32 @@ public class NoisyQueryableTest {
 
     private NoisyQueryable _queryable;
     private Collection<Double> _data;
-    private PinqAgent _agent;
     private NoiseGenerator _noiseGenerator;
+    private BudgetedAgent _agent;
 
     @Before
-    public void PinqQueryable(){
+    public void PinqQueryable() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         _data = new ArrayList<Double>();
-        _agent = mock(PinqAgent.class);
+        _agent = mock(BudgetedAgent.class);
         when(_agent.getEpsilon()).thenReturn(1.0);
 
         _noiseGenerator = mock(NoiseGenerator.class);
 
-        _queryable = new NoisyQueryable<Double>(_agent, _data, _noiseGenerator);
+        _queryable = breakConstructorPrivacy(_agent, _data, _noiseGenerator);
+    }
+
+    private NoisyQueryable breakConstructorPrivacy(BudgetedAgent agent, Collection<Double> data, NoiseGenerator noiseGenerator) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor<NoisyQueryable> constructor = (Constructor<NoisyQueryable>) NoisyQueryable.class.getDeclaredConstructors()[0];
+        constructor.setAccessible(true);
+        return constructor.newInstance(_agent, _data, _noiseGenerator);
+    }
+
+    @Test
+    public void constructor_AllPrivate(){
+        Constructor<?>[] constructors = NoisyQueryable.class.getDeclaredConstructors();
+        for(Constructor constructor : constructors){
+            assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        }
     }
 
     @Test
@@ -46,8 +64,8 @@ public class NoisyQueryableTest {
     }
 
     @Test
-    public void project_DoubleToBooleanNoNoise_ApproximatelySameSize(){
-        _queryable = new NoisyQueryable(_agent, _data, getNoiseLessNoiseGenerator());
+    public void project_DoubleToBooleanNoNoise_ApproximatelySameSize() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        _queryable = breakConstructorPrivacy(_agent, _data, getNoiseLessNoiseGenerator());
         Function<Double, Boolean> func = x -> x > 0.0;
         _data.addAll(Arrays.asList(5.0, 5.0, 5.0, 5.0));
 
@@ -55,6 +73,7 @@ public class NoisyQueryableTest {
 
         assertEquals(_queryable.Count(_agent.getEpsilon()*0.1), projection.Count(_agent.getEpsilon()*0.1), 0.001);
     }
+
 
     @Test
     public void count_AddsLaplaceNoise(){
@@ -64,6 +83,10 @@ public class NoisyQueryableTest {
         assertEquals(1.0, _queryable.Count(_agent.getEpsilon()*0.1), 0.001);
     }
 
+    @Test
+    public void sum_NoNoise_ReturnsCorrectSum(){
+
+    }
 
     private NoiseGenerator getNoiseLessNoiseGenerator() {
         NoiseGenerator generator = mock(NoiseGenerator.class);

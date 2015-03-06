@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 /**
  * Created by alex on 3/6/15.
  */
-public class PinqAgentTest {
+public class BudgetedAgentTest {
 
     public void apply_NoBudget_ThrowsException(){
         fail();

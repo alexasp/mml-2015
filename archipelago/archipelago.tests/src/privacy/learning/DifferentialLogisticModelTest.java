@@ -3,10 +3,8 @@ package privacy.learning;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
-import privacy.PinqAgent;
-import privacy.math.NoiseGenerator;
+import privacy.BudgetedAgent;
 
-import java.util.Arrays;
 import java.util.function.Function;
 
 import static org.junit.Assert.fail;
@@ -25,11 +23,11 @@ public class DifferentialLogisticModelTest {
     private double _epsilon;
     private DifferentialLogisticModel _model;
     private NoisyQueryable _queryable;
-    private PinqAgent _agent;
+    private BudgetedAgent _agent;
 
     @Before
     public void setUp(){
-
+        _agent = mock(BudgetedAgent.class);
         _queryable = mock(NoisyQueryable.class);
         _model = new DifferentialLogisticModel();
     }
@@ -37,7 +35,7 @@ public class DifferentialLogisticModelTest {
 
     @Test
     public void step_WithData_UpdatesByNoisySum(){
-        NoisyQueryable<Double> projected = new NoisyQueryable<Double>(_agent, Arrays.asList(5.0, 6.0), mock(NoiseGenerator.class));
+        NoisyQueryable<Double> projected = mock(NoisyQueryable.class);
         when(_queryable.project(any(Function.class))).thenReturn(projected);
 
         _model.step(_epsilon, _queryable);
@@ -45,7 +43,7 @@ public class DifferentialLogisticModelTest {
         verify(_queryable).sum(_agent.getEpsilon());
 
 
-        fail("Make this test require a very specific, correct pojection");
+        fail("Make this test require a very specific, correct projection");
     }
 
 }
