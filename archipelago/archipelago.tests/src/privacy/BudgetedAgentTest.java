@@ -1,5 +1,7 @@
 package privacy;
 
+import org.junit.Test;
+
 import static org.junit.Assert.fail;
 
 /**
@@ -12,6 +14,11 @@ public class BudgetedAgentTest {
     }
 
     public void apply_TooSmallBudget_ThrowsException(){
+        fail();
+    }
+
+    @Test
+    public void apply_EnoughBudget_SubtractsCost(){
         fail();
     }
 

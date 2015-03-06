@@ -39,8 +39,9 @@ public class NoisyQueryable<T> {
         return _agent;
     }
 
-    public double Count(double epsilon) {
+    public double count(double epsilon) {
         if(_agent.getEpsilon() >= epsilon){
+            _agent.apply(epsilon);
             return ((double)_data.size()) + _noiseGenerator.fromLaplacian(1.0 / epsilon);
         } else {
             throw new IllegalStateException("Agent disclosure budget too low for query.");
