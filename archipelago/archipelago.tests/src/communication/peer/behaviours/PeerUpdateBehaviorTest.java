@@ -7,9 +7,7 @@ import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by alex on 3/9/15.
@@ -22,7 +20,10 @@ public class PeerUpdateBehaviorTest {
 
     @Before
     public void setUp(){
-        _updateBehavior = new PeerUpdateBehavior();
+        _messageFacade = mock(MessageFacade.class);
+        _peerAgent = mock(PeerAgent.class);
+
+        _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade);
     }
 
     @Test
@@ -36,6 +37,15 @@ public class PeerUpdateBehaviorTest {
         _updateBehavior.action();
 
         verify(_peerAgent).addModel(model);
+    }
+
+    @Test
+    public void action_NoNewMessage_DoesNotGetMessage(){
+        when(_messageFacade.hasMessage()).thenReturn(false);
+
+        _updateBehavior.action();
+
+        verify(_peerAgent, never()).addModel(any(Model.class));
     }
 
 }

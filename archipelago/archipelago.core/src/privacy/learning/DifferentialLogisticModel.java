@@ -9,6 +9,7 @@ public class DifferentialLogisticModel {
 
 
     public void step(double epsilon, NoisyQueryable queryable) {
+        throw new UnsupportedOperationException();
 
     }
 }
