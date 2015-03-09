@@ -13,28 +13,25 @@ In an ideal situation, databases which implement differential privacy mechanisms
 \subsection{Definition of Differential Privacy}
 The classic example for explaining a security breach is the case of Mr White: Suppose you have access to a database that allows you to compute the income of all residents in a specified area. If you knew that Mr White was going to move, simply querying the database before and after his relocation would allow you to deduce his income. 
 
-\textbf{Definition 1}: a mechanism $\tilde{f}$ is a random function that takes a dataset D as input, and outputs a random variable $\tilde{f}$(D).
+\textbf{Definition 1}: a mechanism $M$ is a random function that takes a dataset D as input, and outputs a random variable $M$(D).
 
-\textbf{Definition 2}: the distance of two datasets, d(D, D′), denotes the minimum number of sample changes that are required to change D into D′.
+\textbf{Definition 2}: the distance of two datasets, d($D_1$, $D_2$), denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
 
 Formally, differential privacy is defined as follows:
-A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets D and D' differing on at most one row, and all S$\subseteq$Range($\tilde{f}$),
+A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ differing on at most one row, and all $S\subseteq Range(M)$,
 
- $$Pr[\tilde{f}(D)\in S]\leq \mathrm{e}^{(\epsilon)}\times P[\tilde{f}(D')\in S]$$
+ $$Pr[M(D_1)\in S]\leq \mathrm{e}^{(\epsilon)}\times P[M(D_2)\in S]$$
  
 What this means is that the risk to an individual's privacy should not be substantially increase as a result of participating in a statistical database, as the risk is bounded by the parameter $\epsilon$. Therefore an attacker should not be able to learn anything about any participant that they would not have learned if the participant had opted out of participating.
 
 
 \subsection{Noise Mechanisms}
-This is guaranteed by applying noise to the result of an query to the dataset, by using the function $f()$. \\
-\textbf{Definition 3}: A query $f$ is a function that takes a dataset as input. The answer to the query $f$ is denoted $f(D)$.
-
-There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
+This is guaranteed by applying noise to the result of an query to the dataset, by using the function $M$.There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
 \subsubsection{Laplace Mechanism}
 The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The most common question that needs to be answered before doing research with differentially private data, is how we should define our Laplace random variable, i.e how much noise needs to be added. The Laplace distribution centered around zero has only one parameter, its scale, and this is proportional to its standard deviation. The scale is naturally dependent on the privacy parameter $\epsilon$, and also on the risk of the most different individual having their private information leaked from the data. This risk is called the sensitivity of the query, and is defined mathematically as:
 
-$$\Delta \mathit{f}=\underset{D,D'}{max}||\mathit{f(D)}-\mathit{f(D')}||_{1}$$
+$$\Delta \mathit{f}=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}$$
 
 This equation states that the maximum difference in the values that the query \textit{f} may take is on a pair of databases that differ on only one row. Dwork proved that adding a random Laplace variable, $(\Delta f/\epsilon)$, to a query you could guarantee $\epsilon$-differential privacy\cite{dwork2013algorithmic}. 
 
@@ -42,7 +39,7 @@ This equation states that the maximum difference in the values that the query \t
 The Exponential mechanism proposed by McSherry and Talwar \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
 
 More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input dataset is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
-\textbf{Definition 4}: the sensitivity of score function H is defined as
-$$S(u_f) = \underset{(D,D′)=1,a\in A}{max}||u_f(D, a)-u_f(D',a)||$$
+\textbf{Definition 4}: the sensitivity of score function $u_f$ is defined as
+$$S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||$$
 
 \cleardoublepage
