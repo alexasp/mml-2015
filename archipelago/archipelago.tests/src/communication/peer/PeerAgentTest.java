@@ -1,5 +1,6 @@
-package communication;
+package communication.peer;
 
+import communication.BehaviorFactory;
 import communication.PeerAgent;
 import communication.peer.behaviours.PeerUpdateBehavior;
 import org.junit.Before;
@@ -20,16 +21,15 @@ public class PeerAgentTest {
     @Before
     public void setUp(){
         _behaviorFactory = mock(BehaviorFactory.class);
+        PeerUpdateBehavior peerUpdateBehavior = mock(PeerUpdateBehavior.class);
+        when(_behaviorFactory.getPeerUpdate()).thenReturn(peerUpdateBehavior);
 
         _peerAgent = new PeerAgent(_behaviorFactory);
     }
 
     @Test
     public void contructor_AddsUpdatingBehavior(){
-        PeerUpdateBehavior peerUpdateBehavior = mock(PeerUpdateBehavior.class);
-        when(_behaviorFactory.getPeerUpdate()).thenReturn(peerUpdateBehavior);
-
-        verify(_behaviorFactory.getPeerUpdate());
+        verify(_behaviorFactory).getPeerUpdate();
     }
 
 

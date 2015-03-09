@@ -8,7 +8,7 @@ import jade.core.behaviours.CyclicBehaviour;
 public class PeerUpdateBehavior extends CyclicBehaviour {
     @Override
     public void action() {
-        throw new UnsupportedOperationException("Not yet implemented.");
+        throw new UnsupportedOperationException("Not yet implemented.") ;
     }
 
 }
