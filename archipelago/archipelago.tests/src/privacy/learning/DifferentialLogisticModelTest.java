@@ -40,7 +40,7 @@ public class DifferentialLogisticModelTest {
 
         _model.step(_epsilon, _queryable);
 
-        verify(_queryable).sum(_agent.getEpsilon());
+        verify(projected).sum(_agent.getEpsilon());
 
 
         fail("Make this test require a very specific, correct projection");
