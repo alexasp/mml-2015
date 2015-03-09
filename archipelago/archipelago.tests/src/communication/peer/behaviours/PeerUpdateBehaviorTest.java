@@ -27,7 +27,7 @@ public class PeerUpdateBehaviorTest {
     }
 
     @Test
-    public void action_newMessage_AddsMessageToModelPool(){
+    public void action_NewMessage_AddsMessageToModelPool(){
         Message message = mock(Message.class);
         when(_messageFacade.hasMessage()).thenReturn(true);
         when(_messageFacade.nextMessage()).thenReturn(message);
@@ -40,12 +40,12 @@ public class PeerUpdateBehaviorTest {
     }
 
     @Test
-    public void action_NoNewMessage_DoesNotGetMessage(){
+    public void action_NoNewMessage_DoesNotFetchMessage(){
         when(_messageFacade.hasMessage()).thenReturn(false);
 
         _updateBehavior.action();
 
-        verify(_peerAgent, never()).addModel(any(Model.class));
+        verify(_messageFacade, never()).nextMessage();
     }
 
 }
