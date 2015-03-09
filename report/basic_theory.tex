@@ -39,13 +39,10 @@ $$\Delta \mathit{f}=\underset{D,D'}{max}||\mathit{f(D)}-\mathit{f(D')}||_{1}$$
 This equation states that the maximum difference in the values that the query \textit{f} may take is on a pair of databases that differ on only one row. Dwork proved that adding a random Laplace variable, $(\Delta f/\epsilon)$, to a query you could guarantee $\epsilon$-differential privacy\cite{dwork2013algorithmic}. 
 
 \subsubsection{Exponential Mechanism}
-The Exponential mechanism is a method for selecting one element from a set, and is commonly used if a non-numeric valued query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. Instead we would use the aforementioned mechanism and make it exponentially more likely to make high quality outputs. 
+The Exponential mechanism proposed by McSherry and Talwar \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
 
+More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input dataset is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
 \textbf{Definition 4}: the sensitivity of score function H is defined as
-$$s(H, ||.||) = \underset{(D,D′)=1,a\in A}{max}||H(D, a)-H(D',a)||$$
-The exponential mechanism: given a dataset D and a set of possible answers
-A, if a random mechanism selects an answer based on the following probability,
-then the mechanism is ǫ-differentially private:
-P(a ∈ A is selected) ∝ e
-ǫH(D,a)/2s(H,k.k) 
+$$S(u_f) = \underset{(D,D′)=1,a\in A}{max}||u_f(D, a)-u_f(D',a)||$$
+
 \cleardoublepage
