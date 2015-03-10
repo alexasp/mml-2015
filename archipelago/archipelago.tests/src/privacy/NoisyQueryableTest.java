@@ -86,17 +86,11 @@ public class NoisyQueryableTest {
     }
 
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void count_AgentBudgetTooLow_ThrowsException(){
         when(_agent.getEpsilon()).thenReturn(0.0);
 
-        try {
-            _queryable.count(1.0);
-            fail();
-        } catch(IllegalStateException e){
-
-        }
-
+        _queryable.count(1.0);
     }
 
     @Test
