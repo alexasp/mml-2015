@@ -2,6 +2,7 @@ package privacy;
 
 import privacy.math.NoiseGenerator;
 
+import java.nio.channels.IllegalChannelGroupException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;

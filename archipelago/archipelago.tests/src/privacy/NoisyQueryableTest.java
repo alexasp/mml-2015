@@ -76,7 +76,6 @@ public class NoisyQueryableTest {
         assertEquals(_queryable.count(_agent.getEpsilon() * 0.1), projection.count(_agent.getEpsilon() * 0.1), 0.001);
     }
 
-
     @Test
     public void count_AddsLaplaceNoise(){
         _data.addAll(Arrays.asList(3.0, 4.0, 5.0));
@@ -84,7 +83,6 @@ public class NoisyQueryableTest {
 
         assertEquals(1.0, _queryable.count(_agent.getEpsilon() * 0.1), 0.001);
     }
-
 
     @Test(expected = IllegalStateException.class)
     public void count_AgentBudgetTooLow_ThrowsException(){
