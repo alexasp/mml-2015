@@ -1,6 +1,7 @@
 package privacy.learning;
 
 import learning.LabeledExample;
+import learning.models.LogisticModel;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
@@ -8,6 +9,7 @@ import privacy.BudgetedAgent;
 
 import java.util.function.Function;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -24,26 +26,31 @@ public class DifferentialLogisticModelTest {
     private double _epsilon;
     private DifferentialLogisticModel _model;
     private NoisyQueryable<LabeledExample> _queryable;
-    private BudgetedAgent _agent;
+    private LogisticModel _logisticModel;
 
     @Before
     public void setUp(){
         _epsilon = 1.0;
 
-        _agent = mock(BudgetedAgent.class);
+        _logisticModel = mock(LogisticModel.class);
         _queryable = mock(NoisyQueryable.class);
-        _model = new DifferentialLogisticModel();
+        _model = new DifferentialLogisticModel(_logisticModel);
     }
 
 
     @Test
-    public void step_WithData_UpdatesByNoisySum(){
+    public void step_WithData_UpdatesByProjectingToErrorAndSumming(){
         NoisyQueryable<Double> errors = mock(NoisyQueryable.class);
-        when(_queryable.project(DifferentialLogisticModel::errorProjection)).thenReturn(errors);
+        NoisyQueryable<Double> parameterUpdate = mock(NoisyQueryable.class);
+        when(_queryable.project(any(Function.class))).thenReturn(errors);
+        when(_logisticModel.getParameters()).thenReturn(new double[]{2.0, 2.0, 2.0});
+        when(errors.project(any(Function.class))).thenReturn(parameterUpdate);
+        when(parameterUpdate.sum(_epsilon)).thenReturn(5.0);
+        when(_logisticModel.getDimensionality()).thenReturn(3);
 
         _model.step(_epsilon, _queryable);
 
-        fail("Make this test require a very specific, correct projection");
+        verify(_logisticModel).gradientUpdate(new double[]{5.0, 5.0, 5.0});
     }
 
     @Test
@@ -51,8 +58,10 @@ public class DifferentialLogisticModelTest {
         LabeledExample example = mock(LabeledExample.class);
         when(example.getLabel()).thenReturn(-1.0);
         when(example.getFeatures()).thenReturn(new double[]{2.0, 3.0, 4.0});
+        double expectedError = -0.4;
+        when(_logisticModel.errorProjection(example)).thenReturn(expectedError);
 
-        Double error = _model.errorProjection(example);
+        assertEquals(expectedError, _model.errorProjection(example), 0.0001d);
     }
 
 }

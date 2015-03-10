@@ -16,16 +16,24 @@ public class LogisticModel implements Model {
     }
 
     public Double errorProjection(LabeledExample example) {
-        double error = (example.getLabel() + 1.0) / 2.0 - sigmoid(example.getFeatures());
+        double error = (example.getLabel() + 1.0) / 2.0 - sigmoid(example.getFeatures(), _parameters);
         return error;
     }
 
-    private double sigmoid(double[] features) {
+    private static double sigmoid(double[] features, double[] parameters) {
         double dotProduct = IntStream.range(0, features.length)
                 .parallel()
-                .mapToDouble(i -> features[i] * _parameters[i])
+                .mapToDouble(i -> features[i] * parameters[i])
                 .sum();
 
         return 1.0 / (1 + Math.exp(-dotProduct));
+    }
+
+    public void gradientUpdate(double[] doubles) {
+        throw new UnsupportedOperationException();
+    }
+
+    public int getDimensionality() {
+        return _parameters.length;
     }
 }
