@@ -1,8 +1,10 @@
 package communication;
 
+import jade.core.Agent;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
+import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
@@ -10,6 +12,8 @@ import jade.wrapper.StaleProxyException;
  * Created by alex on 3/10/15.
  */
 public class JadeEnvironment {
+
+    private AgentContainer _mainContainer;
 
     /**
      * Based on code by James Malone here: http://jade.tilab.com/pipermail/jade-develop/2008q3/012874.html
@@ -27,7 +31,7 @@ public class JadeEnvironment {
         System.out.print("profile created\n");
 
         System.out.println("Launching a whole in-process platform..."+profile);
-        jade.wrapper.AgentContainer mainContainer = rt.createMainContainer(profile);
+        _mainContainer = rt.createMainContainer(profile);
 
        // now set the default Profile to start a container
         ProfileImpl pContainer = new ProfileImpl(null, 1200, null);
@@ -39,7 +43,7 @@ public class JadeEnvironment {
         System.out.println("containers created");
         System.out.println("Launching the rma agent on the main container ...");
 
-        AgentController rma = mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
         rma.start();
     }
 
@@ -48,4 +52,7 @@ public class JadeEnvironment {
         env.startContainer();
     }
 
+    public void registerAgent(Agent agent) throws StaleProxyException {
+        _mainContainer.acceptNewAgent(agent.getLocalName(), agent);
+    }
 }
