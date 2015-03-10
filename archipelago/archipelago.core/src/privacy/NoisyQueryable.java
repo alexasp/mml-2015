@@ -1,9 +1,12 @@
 package privacy;
 
+import learning.LabeledExample;
 import privacy.math.NoiseGenerator;
 
+import java.nio.channels.IllegalChannelGroupException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -50,5 +53,9 @@ public class NoisyQueryable<T> {
 
     public double sum(double epsilon) {
         return 0.0;
+    }
+
+    public List<NoisyQueryable<LabeledExample>> partition(int parts) {
+        throw new UnsupportedOperationException();
     }
 }
