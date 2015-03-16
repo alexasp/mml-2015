@@ -51,8 +51,17 @@ public class NoisyQueryable<T> {
         }
     }
 
-    public double sum(double epsilon) {
-        return 0.0;
+    /**
+     * Clamps output values of projection to [-1.0, +1.0]
+     * @param epsilon
+     * @param projection
+     * @return
+     */
+    public double sum(double epsilon, Function<T, Double> projection) {
+        return _data.stream().mapToDouble(record -> projection.apply(record))
+                .map(num -> num > 1.0 ? 1.0 : num)
+                .map(num -> num < -1.0 ? -1.0 : num)
+                .sum() + _noiseGenerator.fromLaplacian(1.0 / epsilon);
     }
 
     public List<NoisyQueryable<LabeledExample>> partition(int parts) {

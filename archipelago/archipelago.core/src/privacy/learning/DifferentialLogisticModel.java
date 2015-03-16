@@ -20,7 +20,7 @@ public class DifferentialLogisticModel implements Model {
     }
 
     private double gradientUpdate(NoisyQueryable<Double> errors, double parameter, double epsilon) {
-        return errors.project(error -> error * parameter).sum(epsilon);
+        return errors.sum(epsilon, error -> error * parameter);
     }
 
     public Double errorProjection(LabeledExample example) {

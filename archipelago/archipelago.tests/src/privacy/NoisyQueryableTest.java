@@ -1,5 +1,6 @@
 package privacy;
 
+import learning.LabeledExample;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.math.NoiseGenerator;
@@ -102,8 +103,21 @@ public class NoisyQueryableTest {
     }
 
     @Test
-    public void sum_NoNoise_ReturnsCorrectSum(){
+    public void sum_NoNoise_ReturnsClampedCorrectSum() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        _data.addAll(Arrays.asList(0.5, -0.2, -2.0, 5.0));
+        _queryable = breakConstructorPrivacy(_agent, _data, getNoiseLessNoiseGenerator());
 
+        Function<Double,Double> proj = x->x;
+        assertEquals(0.3, _queryable.sum(1.0, proj), 0.00001d);
+    }
+
+    @Test
+    public void sum_NoisyGenerator_AddsNoiseToSum(){
+        _data.addAll(Arrays.asList(0.5, -0.2, -2.0, 5.0));
+        when(_noiseGenerator.fromLaplacian(anyDouble())).thenReturn(5.0);
+
+        Function<Double,Double> proj = x -> x;
+        assertEquals(5.3, _queryable.sum(1.0, proj), 0.00001d);
     }
 
     private NoiseGenerator getNoiseLessNoiseGenerator() {

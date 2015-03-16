@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,12 +41,12 @@ public class DifferentialLogisticModelTest {
     @Test
     public void step_WithData_UpdatesByProjectingToErrorAndSumming(){
         NoisyQueryable<Double> errors = mock(NoisyQueryable.class);
-        NoisyQueryable<Double> parameterUpdate = mock(NoisyQueryable.class);
         when(_queryable.project(any(Function.class))).thenReturn(errors);
         when(_logisticModel.getParameters()).thenReturn(new double[]{2.0, 2.0, 2.0});
-        when(errors.project(any(Function.class))).thenReturn(parameterUpdate);
-        when(parameterUpdate.sum(_epsilon)).thenReturn(5.0);
+
+        when(errors.sum(eq(_epsilon), any(Function.class))).thenReturn(5.0);
         when(_logisticModel.getDimensionality()).thenReturn(3);
+
         _model.update(_epsilon, _queryable);
 
         verify(_logisticModel).gradientUpdate(new double[]{5.0, 5.0, 5.0});
