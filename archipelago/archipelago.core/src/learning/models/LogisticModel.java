@@ -2,6 +2,7 @@ package learning.models;
 
 import learning.LabeledExample;
 import learning.Model;
+import privacy.NoisyQueryable;
 
 import java.util.stream.IntStream;
 
@@ -35,5 +36,10 @@ public class LogisticModel implements Model {
 
     public int getDimensionality() {
         return _parameters.length;
+    }
+
+    @Override
+    public void update(double epsilon, NoisyQueryable queryable) {
+        throw new UnsupportedOperationException();
     }
 }

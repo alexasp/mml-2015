@@ -12,12 +12,14 @@ import privacy.NoisyQueryable;
  */
 public class PeerAgent extends Agent {
 
+    private final MessageFacade _messageFacade;
     private EnsembleModel _ensemble;
     private NoisyQueryable<LabeledExample> _data;
 
     public PeerAgent(NoisyQueryable<LabeledExample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacade messageFacade) {
         _ensemble = ensemble;
         _data = data;
+        _messageFacade = messageFacade;
         addBehaviour(behaviorFactory.getPeerUpdate(this, messageFacade));
     }
 
@@ -28,5 +30,13 @@ public class PeerAgent extends Agent {
     //todo: consider making this private or require a new agent, to avoid breaching differential privacy
     public NoisyQueryable<LabeledExample> getData() {
         return _data;
+    }
+
+    public double getUpdateCost() {
+        throw new UnsupportedOperationException();
+    }
+
+    public MessageFacade getMessageFacade() {
+        return _messageFacade;
     }
 }

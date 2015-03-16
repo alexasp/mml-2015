@@ -1,5 +1,6 @@
 package privacy.learning;
 
+import javafx.scene.control.Labeled;
 import learning.LabeledExample;
 import learning.Model;
 import learning.models.LogisticModel;
@@ -18,15 +19,6 @@ public class DifferentialLogisticModel implements Model {
         _logisticModel = logisticModel;
     }
 
-    public void step(double epsilon, NoisyQueryable<LabeledExample> queryable) {
-        NoisyQueryable<Double> errors = queryable.project(example -> errorProjection(example));
-        double[] parameters = _logisticModel.getParameters();
-        double[] gradient = IntStream.range(0, _logisticModel.getDimensionality())
-                .mapToDouble(i -> gradientUpdate(errors, parameters[i], epsilon))
-                .toArray();
-        _logisticModel.gradientUpdate(gradient);
-    }
-
     private double gradientUpdate(NoisyQueryable<Double> errors, double parameter, double epsilon) {
         return errors.project(error -> error * parameter).sum(epsilon);
     }
@@ -36,4 +28,13 @@ public class DifferentialLogisticModel implements Model {
     }
 
 
+    @Override
+    public void update(double epsilon, NoisyQueryable<LabeledExample> queryable) {
+        NoisyQueryable<Double> errors = queryable.project(example -> errorProjection( example));
+        double[] parameters = _logisticModel.getParameters();
+        double[] gradient = IntStream.range(0, _logisticModel.getDimensionality())
+                .mapToDouble(i -> gradientUpdate(errors, parameters[i], epsilon))
+                .toArray();
+        _logisticModel.gradientUpdate(gradient);
+    }
 }

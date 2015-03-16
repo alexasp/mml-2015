@@ -27,7 +27,7 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
             Message message = _messageFacade.nextMessage();
             _peerAgent.addModel(message.getModel());
 
-            _peerAgent.addBehaviour(_behaviorFactory.getModelPropegate(message.getModel()));
+            _peerAgent.addBehaviour(_behaviorFactory.getModelPropegate(_peerAgent, message.getModel()));
         }
     }
 

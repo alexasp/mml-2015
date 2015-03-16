@@ -53,9 +53,9 @@ public class PeerUpdateBehaviorTest {
     @Test
     public void action_NewMessage_AddsModelPropegatingBehavior(){
         Model model = mock(Model.class);
-        Message message = fakeMessage(model);
+        fakeMessage(model);
         Behaviour propegateBehavior = mock(PropegateBehavior.class);
-        when(_behaviorFactory.getModelPropegate(model)).thenReturn(propegateBehavior);
+        when(_behaviorFactory.getModelPropegate(_peerAgent, model)).thenReturn(propegateBehavior);
 
         _updateBehavior.action();
 

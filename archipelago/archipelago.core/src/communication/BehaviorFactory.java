@@ -14,7 +14,7 @@ public class BehaviorFactory {
         return new PeerUpdateBehavior(peerAgent, messageFacade, this);
     }
 
-    public Behaviour getModelPropegate(Model model) {
-        return new PropegateBehavior(model);
+    public Behaviour getModelPropegate(PeerAgent agent, Model model) {
+        return new PropegateBehavior(model, agent);
     }
 }

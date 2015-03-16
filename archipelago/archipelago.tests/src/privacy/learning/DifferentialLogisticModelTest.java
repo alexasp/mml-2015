@@ -47,8 +47,7 @@ public class DifferentialLogisticModelTest {
         when(errors.project(any(Function.class))).thenReturn(parameterUpdate);
         when(parameterUpdate.sum(_epsilon)).thenReturn(5.0);
         when(_logisticModel.getDimensionality()).thenReturn(3);
-
-        _model.step(_epsilon, _queryable);
+        _model.update(_epsilon, _queryable);
 
         verify(_logisticModel).gradientUpdate(new double[]{5.0, 5.0, 5.0});
     }
