@@ -5,7 +5,7 @@ import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import communication.peer.behaviours.PeerUpdateBehavior;
 import learning.EnsembleModel;
-import learning.LabeledExample;
+import learning.LabeledSample;
 import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class PeerAgentTest {
     private BehaviorFactory _behaviorFactory;
     private EnsembleModel _ensemble;
     private MessageFacade _messageFacade;
-    private NoisyQueryable<LabeledExample> _data;
+    private NoisyQueryable<LabeledSample> _data;
 
     @Before
     public void setUp(){
@@ -45,6 +45,11 @@ public class PeerAgentTest {
         verify(_behaviorFactory).getPeerUpdate(_peerAgent, _messageFacade);
     }
 
+    @Test
+    public void constructor_SchedulesInitialModelTraining(){
+        verify(_behaviorFactory.getModelCreation(_peerAgent));
+    }
+
 
     @Test
     public void addModel_AddsToEnsemble(){
@@ -54,5 +59,7 @@ public class PeerAgentTest {
 
         verify(_ensemble).add(model);
     }
+
+
 
 }

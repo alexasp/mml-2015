@@ -1,6 +1,5 @@
 package privacy;
 
-import learning.LabeledExample;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.math.NoiseGenerator;

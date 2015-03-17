@@ -1,6 +1,6 @@
 package learning.models;
 
-import learning.LabeledExample;
+import learning.LabeledSample;
 import learning.Model;
 import privacy.NoisyQueryable;
 
@@ -16,7 +16,7 @@ public class LogisticModel implements Model {
         return _parameters;
     }
 
-    public Double errorProjection(LabeledExample example) {
+    public Double errorProjection(LabeledSample example) {
         double error = (example.getLabel() + 1.0) / 2.0 - sigmoid(example.getFeatures(), _parameters);
         return error;
     }

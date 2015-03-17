@@ -27,14 +27,14 @@ public class JadeEnvironment {
         System.out.print("runtime created\n");
 
         // Create a default profile
-        Profile profile = new ProfileImpl(null, 1200, null);
+        Profile profile = new ProfileImpl(null, 1201, null);
         System.out.print("profile created\n");
 
         System.out.println("Launching a whole in-process platform..."+profile);
         _mainContainer = rt.createMainContainer(profile);
 
        // now set the default Profile to start a container
-        ProfileImpl pContainer = new ProfileImpl(null, 1200, null);
+        ProfileImpl pContainer = new ProfileImpl(null, 1201, null);
         System.out.println("Launching the agent container ..."+pContainer);
 
         jade.wrapper.AgentContainer cont = rt.createAgentContainer(pContainer);
@@ -44,12 +44,15 @@ public class JadeEnvironment {
         System.out.println("Launching the rma agent on the main container ...");
 
         AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+
         rma.start();
     }
 
     public static void main(String[] args) throws StaleProxyException {
         JadeEnvironment env = new JadeEnvironment();
         env.startContainer();
+
+
     }
 
     public void registerAgent(Agent agent) throws StaleProxyException {

@@ -1,7 +1,6 @@
 package privacy.learning;
 
-import javafx.scene.control.Labeled;
-import learning.LabeledExample;
+import learning.LabeledSample;
 import learning.Model;
 import learning.models.LogisticModel;
 import privacy.NoisyQueryable;
@@ -23,13 +22,13 @@ public class DifferentialLogisticModel implements Model {
         return errors.sum(epsilon, error -> error * parameter);
     }
 
-    public Double errorProjection(LabeledExample example) {
+    public Double errorProjection(LabeledSample example) {
         return _logisticModel.errorProjection(example);
     }
 
 
     @Override
-    public void update(double epsilon, NoisyQueryable<LabeledExample> queryable) {
+    public void update(double epsilon, NoisyQueryable<LabeledSample> queryable) {
         NoisyQueryable<Double> errors = queryable.project(example -> errorProjection( example));
         double[] parameters = _logisticModel.getParameters();
         double[] gradient = IntStream.range(0, _logisticModel.getDimensionality())

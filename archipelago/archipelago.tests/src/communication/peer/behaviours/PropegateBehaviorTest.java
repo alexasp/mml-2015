@@ -2,7 +2,7 @@ package communication.peer.behaviours;
 
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
-import learning.LabeledExample;
+import learning.LabeledSample;
 import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class PropegateBehaviorTest {
     private PropegateBehavior _propegateBehavior;
     private Model _model;
     private PeerAgent _peerAgent;
-    private NoisyQueryable<LabeledExample> _queryable;
+    private NoisyQueryable<LabeledSample> _queryable;
     private double _epsilon = 1.0;
 
     @Before
