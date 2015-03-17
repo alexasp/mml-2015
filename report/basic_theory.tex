@@ -20,11 +20,20 @@ The classic example for explaining a security breach is the case of Mr White: Su
 Formally, differential privacy is defined as follows:
 A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ differing on at most one row, and all $S\subseteq Range(M)$,
 \begin{eqnarray} \label{DiffPrivDef}
- Pr[M(D_1)\in S]\leq \mathrm{e}^{(\epsilon)}\times P[M(D_2)\in S]
+ Pr[M(D_1)\in S]\leq \mathrm{e}^{(\epsilon)}\times Pr[M(D_2)\in S]
  \end{eqnarray}
-What this means is that the risk to an individual's privacy should not be substantially increase as a result of participating in a statistical database, as the risk is bounded by the parameter $\epsilon$. Therefore an attacker should not be able to learn anything about any participant that they would not have learned if the participant had opted out of participating.
+What this means is that the risk to an individual's privacy should not be substantially increase as a result of participating in a statistical database, as the risk is bounded by the parameter $\epsilon$. Therefore an attacker should not be able to learn anything about any participant that they would not have learned if the participant had opted out of participating. To achieve this standard, privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanism, which will be explained in the following sections.  
 
 \todo[inline]{Must write about privacy budget and how that factors in the queries}
+\subsection{Privacy Budget}
+The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ is called the knowledge gain ratio, which measures the extent to which an attacker can ascertain the difference between the two datasets\cite{abowd2008protective}. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other. Sarathy and Muralidhar\cite{Sarathy2011evaluating} argues that the knowledge gain ratio $r$, should satisfy the following requirement: 
+\begin{eqnarray} \label{KnowledgeRatioBound}
+	r \leq 1+\epsilon
+ \end{eqnarray}
+ What this mean, is that when the $\epsilon$ is very small and close to zero, $e^\epsilon \approx 1+\epsilon$, we have achieved $\epsilon$-differential privacy. When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowledge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
+ 
+ Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the dataset. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 
+ 
 \subsection{Noise Mechanisms}
 This is guaranteed by applying noise to the result of an query to the dataset, by using the function $M$.There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
