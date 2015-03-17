@@ -19,20 +19,20 @@ The classic example for explaining a security breach is the case of Mr White: Su
 
 Formally, differential privacy is defined as follows:
 A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ differing on at most one row, and all $S\subseteq Range(M)$,
-
- $$Pr[M(D_1)\in S]\leq \mathrm{e}^{(\epsilon)}\times P[M(D_2)\in S]$$
- 
+\begin{eqnarray} \label{DiffPrivDef}
+ Pr[M(D_1)\in S]\leq \mathrm{e}^{(\epsilon)}\times P[M(D_2)\in S]
+ \end{eqnarray}
 What this means is that the risk to an individual's privacy should not be substantially increase as a result of participating in a statistical database, as the risk is bounded by the parameter $\epsilon$. Therefore an attacker should not be able to learn anything about any participant that they would not have learned if the participant had opted out of participating.
 
-
+\todo[inline]{Must write about privacy budget and how that factors in the queries}
 \subsection{Noise Mechanisms}
 This is guaranteed by applying noise to the result of an query to the dataset, by using the function $M$.There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
 \subsubsection{Laplace Mechanism}
 The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The most common question that needs to be answered before doing research with differentially private data, is how we should define our Laplace random variable, i.e how much noise needs to be added. The Laplace distribution centered around zero has only one parameter, its scale, and this is proportional to its standard deviation. The scale is naturally dependent on the privacy parameter $\epsilon$, and also on the risk of the most different individual having their private information leaked from the data. This risk is called the sensitivity of the query, and is defined mathematically as:
-
-$$\Delta \mathit{f}=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}$$
-
+\begin{eqnarray} \label{LaplaceMecDef}
+\Delta \mathit{f}=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
+ \end{eqnarray}
 This equation states that the maximum difference in the values that the query \textit{f} may take is on a pair of databases that differ on only one row. Dwork proved that adding a random Laplace variable, $(\Delta f/\epsilon)$, to a query you could guarantee $\epsilon$-differential privacy\cite{dwork2013algorithmic}. 
 
 \subsubsection{Exponential Mechanism}
@@ -40,6 +40,33 @@ The Exponential mechanism proposed by McSherry and Talwar \cite{mcsherry2007} is
 
 More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input dataset is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
 \textbf{Definition 4}: the sensitivity of score function $u_f$ is defined as
-$$S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||$$
+\begin{eqnarray} \label{ExpoMecDef}
+S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
+ \end{eqnarray}
+ 
+ \section{Programming Frameworks Used [Rename]}
+ 
+ \subsection{PINQ}
+ Privacy Integrated Queries (PINQ) is a platform for computing on privacy-sensitive datasets, while providing guarantees of differential privacy for the underlying records. It is powered by the LINQ declarative query language and it allows analysts to run SQL-like queries on datasets while protecting individual privacy. 
+ 
+ PINQ was developed as a prototype platform at Microsoft Research by lead researcher Frank McSherry\cite{mcsherry2009PINQ}, and is placed as a thin layer between the query engine and the analyst \todo[inline]{Consider adding the PINQ picture from Microsoft here}
+ \missingfigure[figwidth=6cm]{PINQ pic} \newline
+It does not manage data or execute queries, but instead it supplies differentially private implementations of common transformations and aggregations written in LINQ. 
 
+When a query is run through PINQ, it first evaluates the privacy guarantee to ensure that the privacy cost is within the range of the privacy budget. If the query is valid, the cost of the query is detracted from the privacy budget and passes the query to the database engine for execution. When the results in returned from LINQ, the last step of the process is to add the proper amount of noise based on the epsilon value \unsure{Is this right?} 
+ 
+\todo[inline]{Write how we adapted PINQ to Java 8 here.} 
+ \subsection{JADE}
+ The Java Agent framework for Distance learning Environments(JADE) is a middleware which facilitates the development of multi-agent systems. An application based on JADE is made of a set of components called Agents, where each one have an unique name. Agents execute tasks and interact by exchanging messages between each other. Agents execute on top of a Platform that provides them with basic services such as message delivery. A platform is composed of one or more Containers, where the Containers can be executed on different hosts thus achieving a distributed platform. The Main Container is a special container which exists in the platform, as it has two special properties. 1: It must be the first container to start in the platform, and all other containers must register to it. 2: Two special agents are included; the Agent Management Systen (AMS) which represents the single authority in the platform, and is an agent tasked with platform management actions such as starting and killing other agents. The other special agent is the Directory Facilitator (DF), which provides a directory which announces which agents are available on the platform. This acts like a yellow pages service where agents can publish the services they provide and find other agents providing services they need.
+ 
+ \begin{figure}[h!]
+ 	\centering
+	 	\includegraphics[width=\textwidth]{fig/jadeArchitecture}
+	 	\caption{JADE Architechture}
+	 	\label{fig:JADEarchitechture}
+	 	%Figure found at http://jade.tilab.com/doc/tutorials/JADEAdmin/jadeArchitecture.html
+	 	\todo[inline]{Consider remaking this figure so we don't have to cite it}
+ \end{figure}
+
+\todo[inline]{Write how we adapted the use of JADE here}
 \cleardoublepage
