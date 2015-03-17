@@ -3,7 +3,6 @@ package communication.peer;
 import communication.BehaviorFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
-import communication.peer.behaviours.PeerUpdateBehavior;
 import learning.LabeledSample;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +38,7 @@ public class PeerFactoryTest {
         mockData();
 
         _behaviorFactory = mock(BehaviorFactory.class);
-        when(_behaviorFactory.getPeerUpdate(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(PeerUpdateBehavior.class));
+        PeerAgentTest.stubBehaviourFactory(_behaviorFactory);
 
         _peerFactory = new PeerFactory(_behaviorFactory);
     }

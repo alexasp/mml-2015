@@ -33,7 +33,7 @@ public class NoisyQueryableTest {
 
     @Before
     public void PinqQueryable() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        _data = new ArrayList<Double>();
+        _data = new ArrayList<>();
         _agent = mock(BudgetedAgent.class);
         when(_agent.getEpsilon()).thenReturn(1.0);
 

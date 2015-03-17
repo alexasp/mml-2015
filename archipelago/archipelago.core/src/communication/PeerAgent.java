@@ -20,6 +20,7 @@ public class PeerAgent extends Agent {
         _ensemble = ensemble;
         _data = data;
         _messageFacade = messageFacade;
+        addBehaviour(behaviorFactory.getModelCreation(this));
         addBehaviour(behaviorFactory.getPeerUpdate(this, messageFacade));
     }
 
@@ -41,6 +42,5 @@ public class PeerAgent extends Agent {
     }
 
     public void run(int iterations) {
-
     }
 }

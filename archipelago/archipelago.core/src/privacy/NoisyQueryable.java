@@ -66,4 +66,8 @@ public class NoisyQueryable<T> {
     public List<NoisyQueryable<LabeledSample>> partition(int parts) {
         throw new UnsupportedOperationException();
     }
+
+    public List<NoisyQueryable<LabeledSample>> partition(double trainRatio) {
+        return null;
+    }
 }

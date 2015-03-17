@@ -8,6 +8,7 @@ import org.junit.Test;
 import privacy.NoisyQueryable;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -24,31 +25,42 @@ public class ExperimentTest {
 
     private PeerFactory _peerFactory;
     private NoisyQueryable<LabeledSample> _samples;
-    private Experiment _experiment;
-    private int _peers = 2;
+    private int _peerCount = 2;
+    private double _trainRatio;
+    private NoisyQueryable<LabeledSample> _train;
+    private NoisyQueryable<LabeledSample> _test;
+    private List<NoisyQueryable<LabeledSample>> parts;
 
     @Before
     public void setUp(){
         _samples = mock(NoisyQueryable.class);
         _peerFactory = mock(PeerFactory.class);
+        _trainRatio = 0.8;
 
-        _experiment = new Experiment(_samples, _peers, _peerFactory);
+        _train = mock(NoisyQueryable.class);
+        _test = mock(NoisyQueryable.class);
+        parts = Arrays.asList(_train, _test);
+        when(_samples.partition(_trainRatio)).thenReturn(parts);
     }
 
     @Test
     public void construct_CreatesCorrectPeerCount(){
-        int peers = 3;
+        int peerCount = 3;
 
-        new Experiment(any(NoisyQueryable.class), eq(peers), same(_peerFactory));
+        new Experiment(_samples, _trainRatio, peerCount, _peerFactory);
 
-        verify(_peerFactory).createPeers(_samples, peers);
+        verify(_peerFactory).createPeers(any(NoisyQueryable.class), eq(peerCount));
     }
 
     @Test
     public void construct_GivesPeersTrainingData(){
-        int peers = 3;
 
+
+        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory);
+
+        verify(_peerFactory).createPeers(_train, _peerCount);
     }
+
 
     @Test
     public void run_RunsPeersWithSpecifiedIterations(){
@@ -56,9 +68,9 @@ public class ExperimentTest {
         int peers = 2;
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_peerFactory.createPeers(_samples, peers)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_peerFactory.createPeers(_train, peers)).thenReturn(Arrays.asList(agent1, agent2));
 
-        _experiment.run(iterations);
+        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory).run(iterations);
 
         verify(agent1).run(iterations);
         verify(agent2).run(iterations);
