@@ -38,10 +38,16 @@ The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ is called the knowledge g
 This is guaranteed by applying noise to the result of an query to the dataset, by using the function $M$.There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
 \subsubsection{Laplace Mechanism}
-The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The most common question that needs to be answered before doing research with differentially private data, is how we should define our Laplace random variable, i.e how much noise needs to be added. The Laplace distribution centered around zero has only one parameter, its scale, and this is proportional to its standard deviation. The scale is naturally dependent on the privacy parameter $\epsilon$, and also on the risk of the most different individual having their private information leaked from the data. This risk is called the sensitivity of the query, and is defined mathematically as:
+The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The most common question that needs to be answered before doing research with differentially private data, is how we should define our Laplace random variable, i.e how much noise needs to be added. The Laplace distribution centered around zero has only one parameter, its scale $b$, and this is proportional to its standard deviation. 
+\begin{eqnarray} \label{LaplaceDisDef}
+Lap(x|b) = \frac{1}{2b} exp (−\frac{|x|}{b})
+\end{eqnarray}
+The scale is naturally dependent on the privacy parameter $\epsilon$, and also on the risk of the most different individual having their private information leaked from the data. This risk is called the sensitivity of the query, and is defined mathematically as:
 \begin{eqnarray} \label{LaplaceMecDef}
 \Delta \mathit{f}=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
  \end{eqnarray}
+ \missingfigure[figwidth=6cm]{Picture showing the laplacian distribution} \unsure{Not sure if we need the pic}]
+
 This equation states that the maximum difference in the values that the query \textit{f} may take is on a pair of databases that differ on only one row. Dwork proved that adding a random Laplace variable, $(\Delta f/\epsilon)$, to a query you could guarantee $\epsilon$-differential privacy\cite{dwork2013algorithmic}. 
 
 \subsubsection{Exponential Mechanism}
@@ -66,7 +72,7 @@ When a query is run through PINQ, it first evaluates the privacy guarantee to en
  
 \todo[inline]{Write how we adapted PINQ to Java 8 here.} 
  \subsection{JADE}
- The Java Agent framework for Distance learning Environments(JADE) is a middleware which facilitates the development of multi-agent systems. An application based on JADE is made of a set of components called Agents, where each one have an unique name. Agents execute tasks and interact by exchanging messages between each other. Agents execute on top of a Platform that provides them with basic services such as message delivery. A platform is composed of one or more Containers, where the Containers can be executed on different hosts thus achieving a distributed platform. The Main Container is a special container which exists in the platform, as it has two special properties. 1: It must be the first container to start in the platform, and all other containers must register to it. 2: Two special agents are included; the Agent Management Systen (AMS) which represents the single authority in the platform, and is an agent tasked with platform management actions such as starting and killing other agents. The other special agent is the Directory Facilitator (DF), which provides a directory which announces which agents are available on the platform. This acts like a yellow pages service where agents can publish the services they provide and find other agents providing services they need.
+ The Java Agent framework for Distance learning Environments(JADE) is a middleware which facilitates the development of multi-agent systems. An application based on JADE is made of a set of components called Agents, where each one have an unique name. Agents execute tasks and interact by exchanging messages between each other. Agents execute on top of a Platform that provides them with basic services such as message delivery. A platform is composed of one or more Containers, where the Containers can be executed on different hosts thus achieving a distributed platform. The Main Container is a special container which exists in the platform, as it has two special properties. 1: It must be the first container to start in the platform, and all other containers must register to it. 2: Two special agents are included; the Agent Management System (AMS) which represents the single authority in the platform, and is an agent tasked with platform management actions such as starting and killing other agents. The other special agent is the Directory Facilitator (DF), which provides a directory which announces which agents are available on the platform. This acts like a yellow pages service where agents can publish the services they provide and find other agents providing services they need.
  
  \begin{figure}[h!]
  	\centering
