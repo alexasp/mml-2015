@@ -4,7 +4,7 @@ import communication.BehaviorFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import learning.EnsembleModel;
-import learning.LabeledExample;
+import learning.LabeledSample;
 import privacy.NoisyQueryable;
 
 import java.util.ArrayList;
@@ -20,12 +20,12 @@ public class PeerFactory {
         _behaviorFactory = behaviorFactory;
     }
 
-    public List<PeerAgent> createPeers(NoisyQueryable<LabeledExample> data, int parts) {
-        List<NoisyQueryable<LabeledExample>> partitions = data.partition(parts);
+    public List<PeerAgent> createPeers(NoisyQueryable<LabeledSample> data, int parts) {
+        List<NoisyQueryable<LabeledSample>> partitions = data.partition(parts);
 
         List<PeerAgent> agents = new ArrayList<>();
 
-        for(NoisyQueryable<LabeledExample> partition : partitions){
+        for(NoisyQueryable<LabeledSample> partition : partitions){
             agents.add(new PeerAgent(partition, _behaviorFactory, new EnsembleModel(), new MessageFacade()));
         }
 

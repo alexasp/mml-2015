@@ -7,6 +7,6 @@ import learning.Model;
  */
 public class Message {
     public Model getModel() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

@@ -3,9 +3,11 @@ package communication;
 import communication.messaging.MessageFacade;
 import jade.core.Agent;
 import learning.EnsembleModel;
-import learning.LabeledExample;
+import learning.LabeledSample;
 import learning.Model;
 import privacy.NoisyQueryable;
+
+import java.util.List;
 
 /**
  * Created by alex on 3/5/15.
@@ -14,12 +16,13 @@ public class PeerAgent extends Agent {
 
     private final MessageFacade _messageFacade;
     private EnsembleModel _ensemble;
-    private NoisyQueryable<LabeledExample> _data;
+    private NoisyQueryable<LabeledSample> _data;
 
-    public PeerAgent(NoisyQueryable<LabeledExample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacade messageFacade) {
+    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacade messageFacade) {
         _ensemble = ensemble;
         _data = data;
         _messageFacade = messageFacade;
+        addBehaviour(behaviorFactory.getModelCreation(this));
         addBehaviour(behaviorFactory.getPeerUpdate(this, messageFacade));
     }
 
@@ -28,7 +31,7 @@ public class PeerAgent extends Agent {
     }
 
     //todo: consider making this private or require a new agent, to avoid breaching differential privacy
-    public NoisyQueryable<LabeledExample> getData() {
+    public NoisyQueryable<LabeledSample> getData() {
         return _data;
     }
 
@@ -38,5 +41,12 @@ public class PeerAgent extends Agent {
 
     public MessageFacade getMessageFacade() {
         return _messageFacade;
+    }
+
+    public void run(int iterations) {
+    }
+
+    public List<Double> labelData(NoisyQueryable<LabeledSample> test) {
+        throw new UnsupportedOperationException();
     }
 }

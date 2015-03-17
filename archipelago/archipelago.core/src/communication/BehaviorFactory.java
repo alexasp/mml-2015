@@ -17,4 +17,8 @@ public class BehaviorFactory {
     public Behaviour getModelPropegate(PeerAgent agent, Model model) {
         return new PropegateBehavior(model, agent);
     }
+
+    public Behaviour getModelCreation(PeerAgent agent) {
+        return new ModelCreationBehavior(agent);
+    }
 }

@@ -1,11 +1,10 @@
 package privacy.learning;
 
-import learning.LabeledExample;
+import learning.LabeledSample;
 import learning.models.LogisticModel;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
-import privacy.BudgetedAgent;
 
 import java.util.function.Function;
 
@@ -25,7 +24,7 @@ public class DifferentialLogisticModelTest {
 
     private double _epsilon;
     private DifferentialLogisticModel _model;
-    private NoisyQueryable<LabeledExample> _queryable;
+    private NoisyQueryable<LabeledSample> _queryable;
     private LogisticModel _logisticModel;
 
     @Before
@@ -54,7 +53,7 @@ public class DifferentialLogisticModelTest {
 
     @Test
     public void errorProjection_GetsExampleError(){
-        LabeledExample example = mock(LabeledExample.class);
+        LabeledSample example = mock(LabeledSample.class);
         when(example.getLabel()).thenReturn(-1.0);
         when(example.getFeatures()).thenReturn(new double[]{2.0, 3.0, 4.0});
         double expectedError = -0.4;

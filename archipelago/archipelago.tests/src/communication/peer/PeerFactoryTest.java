@@ -3,8 +3,7 @@ package communication.peer;
 import communication.BehaviorFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
-import communication.peer.behaviours.PeerUpdateBehavior;
-import learning.LabeledExample;
+import learning.LabeledSample;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
@@ -27,11 +26,11 @@ public class PeerFactoryTest {
     private PeerFactory _peerFactory;
 
     int _parts;
-    NoisyQueryable<LabeledExample> _data;
+    NoisyQueryable<LabeledSample> _data;
     private BehaviorFactory _behaviorFactory;
-    private NoisyQueryable<LabeledExample> _partition1;
-    private NoisyQueryable<LabeledExample> _partition2;
-    private NoisyQueryable<LabeledExample> _partition3;
+    private NoisyQueryable<LabeledSample> _partition1;
+    private NoisyQueryable<LabeledSample> _partition2;
+    private NoisyQueryable<LabeledSample> _partition3;
 
     @Before
     public void setUp(){
@@ -39,7 +38,7 @@ public class PeerFactoryTest {
         mockData();
 
         _behaviorFactory = mock(BehaviorFactory.class);
-        when(_behaviorFactory.getPeerUpdate(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(PeerUpdateBehavior.class));
+        PeerAgentTest.stubBehaviourFactory(_behaviorFactory);
 
         _peerFactory = new PeerFactory(_behaviorFactory);
     }
@@ -50,7 +49,7 @@ public class PeerFactoryTest {
         _partition2 = mock(NoisyQueryable.class);
         _partition3 = mock(NoisyQueryable.class);
 
-        List<NoisyQueryable<LabeledExample>> partitioned = new ArrayList<>(Arrays.asList(_partition1, _partition2, _partition3));
+        List<NoisyQueryable<LabeledSample>> partitioned = new ArrayList<>(Arrays.asList(_partition1, _partition2, _partition3));
         when(_data.partition(anyInt())).thenReturn(partitioned);
     }
 
