@@ -4,6 +4,10 @@ import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,6 +17,8 @@ import static org.mockito.Mockito.when;
 /**
  * Created by alex on 3/23/15.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(Agent.class)
 public class MessageFacadeTest {
 
 
@@ -23,7 +29,7 @@ public class MessageFacadeTest {
     @Before
     public void setUp(){
         _messageParser = mock(MessageParser.class);
-        _agent = mock(Agent.class);
+        _agent = PowerMockito.mock(Agent.class);
         _messaging = new MessageFacade(_agent, _messageParser);
     }
 

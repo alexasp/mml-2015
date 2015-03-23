@@ -21,7 +21,7 @@ public class MessageFacadeFactoryTest {
     public void getMessageFacade(){
         MessageParser parser = mock(MessageParser.class);
         MessageFacadeFactory factory = new MessageFacadeFactory(parser);
-        Agent agent = PowerMockito.mock(Agent.class);
+        Agent agent = mock(Agent.class);
 
         MessageFacade facade = factory.getFacade(agent);
 
