@@ -9,11 +9,11 @@ import learning.Model;
  */
 public class MessageFacade {
     private final Agent _agent;
-    private MessageParser _messageParser;
+    private ACLMessageParser _messageParser;
     private ACLMessage _nextMessage;
 
 
-    public MessageFacade(Agent agent, MessageParser messageParser) {
+    public MessageFacade(Agent agent, ACLMessageParser messageParser) {
         _agent = agent;
         _messageParser = messageParser;
     }

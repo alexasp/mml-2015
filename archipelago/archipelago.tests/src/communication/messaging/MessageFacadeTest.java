@@ -24,11 +24,11 @@ public class MessageFacadeTest {
 
     private MessageFacade _messaging;
     private Agent _agent;
-    private MessageParser _messageParser;
+    private ACLMessageParser _messageParser;
 
     @Before
     public void setUp(){
-        _messageParser = mock(MessageParser.class);
+        _messageParser = mock(ACLMessageParser.class);
         _agent = PowerMockito.mock(Agent.class);
         _messaging = new MessageFacade(_agent, _messageParser);
     }

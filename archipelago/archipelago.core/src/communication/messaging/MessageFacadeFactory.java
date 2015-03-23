@@ -8,9 +8,9 @@ import jade.core.Agent;
 public class MessageFacadeFactory {
 
 
-    private MessageParser messageParser;
+    private ACLMessageParser messageParser;
 
-    public MessageFacadeFactory(MessageParser messageParser) {
+    public MessageFacadeFactory(ACLMessageParser messageParser) {
         this.messageParser = messageParser;
     }
 

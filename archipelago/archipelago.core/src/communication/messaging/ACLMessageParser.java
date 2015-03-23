@@ -11,12 +11,12 @@ import java.util.stream.IntStream;
 /**
  * Created by alex on 3/23/15.
  */
-public class MessageParser {
+public class ACLMessageParser {
     private static final String DELIMITER = ",";
     private final ACLMessageReader _reader;
     private final ModelFactory _modelFactory;
 
-    public MessageParser(ACLMessageReader reader, ModelFactory modelFactory) {
+    public ACLMessageParser(ACLMessageReader reader, ModelFactory modelFactory) {
         _reader = reader;
         _modelFactory = modelFactory;
     }

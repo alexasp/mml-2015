@@ -3,7 +3,6 @@ package communication.messaging;
 import jade.core.Agent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -19,7 +18,7 @@ public class MessageFacadeFactoryTest {
 
     @Test
     public void getMessageFacade(){
-        MessageParser parser = mock(MessageParser.class);
+        ACLMessageParser parser = mock(ACLMessageParser.class);
         MessageFacadeFactory factory = new MessageFacadeFactory(parser);
         Agent agent = mock(Agent.class);
 

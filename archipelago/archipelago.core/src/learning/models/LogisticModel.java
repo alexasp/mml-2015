@@ -14,6 +14,7 @@ public class LogisticModel implements Model {
     private double[] _parameters;
 
     public LogisticModel(double[] parameters) {
+        if(parameters.length == 0){ throw new IllegalArgumentException("Parameter vector must have length greater than 0."); }
         _parameters = Arrays.copyOf(parameters, parameters.length);
     }
 
