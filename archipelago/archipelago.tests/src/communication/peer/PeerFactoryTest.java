@@ -3,6 +3,7 @@ package communication.peer;
 import communication.BehaviorFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
+import communication.messaging.MessageFacadeFactory;
 import learning.LabeledSample;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class PeerFactoryTest {
     private NoisyQueryable<LabeledSample> _partition1;
     private NoisyQueryable<LabeledSample> _partition2;
     private NoisyQueryable<LabeledSample> _partition3;
+    private MessageFacadeFactory _messageFacadeFactory;
 
     @Before
     public void setUp(){
@@ -38,9 +40,11 @@ public class PeerFactoryTest {
         mockData();
 
         _behaviorFactory = mock(BehaviorFactory.class);
+        _messageFacadeFactory = mock(MessageFacadeFactory.class);
         PeerAgentTest.stubBehaviourFactory(_behaviorFactory);
+        PeerAgentTest.stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerFactory = new PeerFactory(_behaviorFactory);
+        _peerFactory = new PeerFactory(_behaviorFactory, _messageFacadeFactory);
     }
 
     private void mockData() {

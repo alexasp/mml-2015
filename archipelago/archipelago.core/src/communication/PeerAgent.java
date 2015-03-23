@@ -1,6 +1,7 @@
 package communication;
 
 import communication.messaging.MessageFacade;
+import communication.messaging.MessageFacadeFactory;
 import jade.core.Agent;
 import learning.EnsembleModel;
 import learning.LabeledSample;
@@ -18,12 +19,12 @@ public class PeerAgent extends Agent {
     private EnsembleModel _ensemble;
     private NoisyQueryable<LabeledSample> _data;
 
-    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacade messageFacade) {
+    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory) {
         _ensemble = ensemble;
         _data = data;
-        _messageFacade = messageFacade;
+        _messageFacade = messageFacadeFactory.getFacade(this);
         addBehaviour(behaviorFactory.getModelCreation(this));
-        addBehaviour(behaviorFactory.getPeerUpdate(this, messageFacade));
+        addBehaviour(behaviorFactory.getPeerUpdate(this, _messageFacade));
     }
 
     public void addModel(Model model) {
