@@ -14,10 +14,10 @@ import java.util.function.Function;
 public class NoisyQueryable<T> {
 
     private Collection<T> _data;
-    private BudgetedAgent _agent;
+    private Budget _agent;
     private NoiseGenerator _noiseGenerator;
 
-    private NoisyQueryable(BudgetedAgent agent, Collection<T> data, NoiseGenerator noiseGenerator) {
+    private NoisyQueryable(Budget agent, Collection<T> data, NoiseGenerator noiseGenerator) {
         _data = data;
         _agent = agent;
         _noiseGenerator = noiseGenerator;
@@ -37,7 +37,7 @@ public class NoisyQueryable<T> {
         return new ArrayList<NewType>();
     }
 
-    public BudgetedAgent getAgent() {
+    public Budget getAgent() {
         return _agent;
     }
 

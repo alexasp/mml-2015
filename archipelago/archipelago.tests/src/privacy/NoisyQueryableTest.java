@@ -29,12 +29,12 @@ public class NoisyQueryableTest {
     private NoisyQueryable _queryable;
     private Collection<Double> _data;
     private NoiseGenerator _noiseGenerator;
-    private BudgetedAgent _agent;
+    private Budget _agent;
 
     @Before
     public void PinqQueryable() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         _data = new ArrayList<>();
-        _agent = mock(BudgetedAgent.class);
+        _agent = mock(Budget.class);
         when(_agent.getEpsilon()).thenReturn(1.0);
 
         _noiseGenerator = mock(NoiseGenerator.class);
@@ -42,7 +42,7 @@ public class NoisyQueryableTest {
         _queryable = breakConstructorPrivacy(_agent, _data, _noiseGenerator);
     }
 
-    private NoisyQueryable breakConstructorPrivacy(BudgetedAgent agent, Collection<Double> data, NoiseGenerator noiseGenerator) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    private NoisyQueryable breakConstructorPrivacy(Budget agent, Collection<Double> data, NoiseGenerator noiseGenerator) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<NoisyQueryable> constructor = (Constructor<NoisyQueryable>) NoisyQueryable.class.getDeclaredConstructors()[0];
         constructor.setAccessible(true);
         return constructor.newInstance(_agent, _data, _noiseGenerator);

@@ -3,11 +3,11 @@ package privacy;
 /**
  * Created by alex on 3/5/15.
  */
-public class BudgetedAgent {
+public class Budget {
 
     double _epsilon;
 
-    public BudgetedAgent(double epsilon) {
+    public Budget(double epsilon) {
         _epsilon = epsilon;
     }
 
