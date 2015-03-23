@@ -9,11 +9,13 @@ import learning.Model;
  */
 public class MessageFacade {
     private final Agent _agent;
+    private MessageParser _messageParser;
     private ACLMessage _nextMessage;
 
 
-    public MessageFacade(Agent agent) {
+    public MessageFacade(Agent agent, MessageParser messageParser) {
         _agent = agent;
+        _messageParser = messageParser;
     }
 
     public boolean hasMessage() {
@@ -24,7 +26,16 @@ public class MessageFacade {
     }
 
     public Message nextMessage() {
-        throw new UnsupportedOperationException("not implemented");
+        if(!hasMessage()){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
+
+        if(_nextMessage == null){
+            _nextMessage = _agent.receive();
+        }
+
+        Message parsedMessage = _messageParser.parse(_nextMessage);
+        _nextMessage = null;
+
+        return parsedMessage;
     }
 
     public void sendToRandomPeer(Model model) {

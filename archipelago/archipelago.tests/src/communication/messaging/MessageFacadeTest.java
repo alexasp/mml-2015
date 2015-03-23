@@ -22,8 +22,9 @@ public class MessageFacadeTest {
 
     @Before
     public void setUp(){
+        _messageParser = mock(MessageParser.class);
         _agent = mock(Agent.class);
-        _messaging = new MessageFacade(_agent);
+        _messaging = new MessageFacade(_agent, _messageParser);
     }
 
 
