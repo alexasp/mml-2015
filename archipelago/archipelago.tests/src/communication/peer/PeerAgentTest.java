@@ -1,9 +1,8 @@
 package communication.peer;
 
 import communication.BehaviorFactory;
-import communication.ModelCreationBehavior;
+import communication.peer.behaviours.ModelCreationBehavior;
 import communication.PeerAgent;
-import communication.messaging.Message;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import communication.peer.behaviours.PeerUpdateBehavior;

@@ -1,6 +1,7 @@
 package communication;
 
 import communication.messaging.MessageFacade;
+import communication.peer.behaviours.ModelCreationBehavior;
 import communication.peer.behaviours.PeerUpdateBehavior;
 import communication.peer.behaviours.PropegateBehavior;
 import jade.core.behaviours.Behaviour;

@@ -1,5 +1,6 @@
-package communication;
+package communication.peer.behaviours;
 
+import communication.PeerAgent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import learning.Model;

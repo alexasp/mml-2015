@@ -1,16 +1,13 @@
 package communication.peer.behaviours;
 
-import communication.ModelCreationBehavior;
 import communication.PeerAgent;
 import learning.LabeledSample;
 import learning.ModelFactory;
 import learning.models.LogisticModel;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import privacy.NoisyQueryable;
 
-import static org.mockito.Matchers.anyVararg;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
