@@ -4,6 +4,7 @@ import learning.LabeledSample;
 import learning.Model;
 import privacy.NoisyQueryable;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
@@ -11,6 +12,10 @@ import java.util.stream.IntStream;
  */
 public class LogisticModel implements Model {
     private double[] _parameters;
+
+    public LogisticModel(double[] parameters) {
+        _parameters = Arrays.copyOf(parameters, parameters.length);
+    }
 
     public double[] getParameters() {
         return _parameters;
