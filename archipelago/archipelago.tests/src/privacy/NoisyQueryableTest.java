@@ -10,6 +10,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -27,13 +28,15 @@ import static org.mockito.Mockito.when;
 public class NoisyQueryableTest {
 
 
-    private NoisyQueryable _queryable;
+    private NoisyQueryable<Double> _queryable;
     private Collection<Double> _data;
     private NoiseGenerator _noiseGenerator;
     private Budget _agent;
+    private double _cost;
 
     @Before
     public void PinqQueryable() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        _cost = 0.5;
         _data = new ArrayList<>();
         _agent = mock(Budget.class);
         when(_agent.getEpsilon()).thenReturn(1.0);
@@ -129,6 +132,50 @@ public class NoisyQueryableTest {
 
         Function<Double,Double> proj = x -> x;
         assertEquals(5.3, _queryable.sum(1.0, proj), 0.00001d);
+    }
+
+    @Test
+    public void noisyAverage_NoNoise_ReturnsAverageOfClampedValues(){
+
+    }
+
+    @Test
+    public void noisyAverage_EmptySet_ReturnsUniform(){
+        BiFunction<Double, Integer, Double> projection = (x,i) -> (double)i;
+        double expectedNoise = -0.023;
+        when(_noiseGenerator.uniform()).thenReturn(expectedNoise);
+
+        double average = _queryable.noisyAverage(_cost, projection);
+
+        assertEquals(expectedNoise, average, 0.00001d);
+    }
+
+    @Test
+    public void noisyAverage_NonEmptySetNoNoise_ReturnsClampedAverage() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<Double> data = Arrays.asList(-1.5, -0.5, 4.0, 0.3);
+        List<Double> clamped = Arrays.asList(-1.0, -0.5, 1.0, 0.3);
+        NoisyQueryable<Double> queryable = breakConstructorPrivacy(_agent, data, getNoiseLessNoiseGenerator());
+        BiFunction<Double, Integer, Double> projection = (x,i) -> x;
+
+        double average = queryable.noisyAverage(_cost, projection);
+
+        double expectedAverage = clamped.stream().mapToDouble(Double::doubleValue).sum()/data.size();
+        assertEquals(expectedAverage, average, 0.00001d);
+    }
+
+    @Test
+    public void noisyAverage_NonEmptySet_AddsNoise() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<Double> data = Arrays.asList(-1.5, -0.5, 4.0, 0.3);
+        List<Double> clamped = Arrays.asList(-1.0, -0.5, 1.0, 0.3);
+        BiFunction<Double, Integer, Double> projection = (x,i) -> x;
+        NoisyQueryable<Double> queryable = breakConstructorPrivacy(_agent, data, _noiseGenerator);
+        double noise = -0.01;
+        when(_noiseGenerator.fromLaplacian(2/_cost)).thenReturn(noise);
+
+        double average = queryable.noisyAverage(_cost, projection);
+
+        double expectedAverage = (clamped.stream().mapToDouble(Double::doubleValue).sum() + noise)/data.size();
+        assertEquals(expectedAverage, average, 0.00001d);
     }
 
     @Test(expected = IllegalStateException.class)

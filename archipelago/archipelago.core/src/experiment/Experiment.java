@@ -17,10 +17,12 @@ public class Experiment {
     private final PerformanceMetrics _performanceMetrics;
     private final NoisyQueryable<LabeledSample> _trainData;
     private final NoisyQueryable<LabeledSample> _testData;
+    private double _testCost;
 
-    public Experiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, PeerFactory peerFactory, PerformanceMetrics performanceMetrics) {
+    public Experiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, PeerFactory peerFactory, PerformanceMetrics performanceMetrics, double testCost) {
+        _testCost = testCost;
+
         List<NoisyQueryable<LabeledSample>> trainPartitioning = samples.partition(trainRatio);
-
         _trainData = trainPartitioning.get(0);
         _testData = trainPartitioning.get(1);
 
@@ -36,7 +38,7 @@ public class Experiment {
 
     public List<Double> test() {
         return _peers.stream()
-                .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData)))
+                .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData), _testCost))
                 .boxed()
                 .collect(Collectors.toList());
     }

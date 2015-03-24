@@ -33,6 +33,7 @@ public class ExperimentTest {
     private NoisyQueryable<LabeledSample> _test;
     private List<NoisyQueryable<LabeledSample>> parts;
     private PerformanceMetrics _performanceMetrics;
+    private double _testCost = 0.1;
 
     @Before
     public void setUp(){
@@ -51,7 +52,7 @@ public class ExperimentTest {
     public void construct_CreatesCorrectPeerCount(){
         int peerCount = 3;
 
-        new Experiment(_samples, _trainRatio, peerCount, _peerFactory, _performanceMetrics);
+        new Experiment(_samples, _trainRatio, peerCount, _peerFactory, _performanceMetrics, _testCost);
 
         verify(_peerFactory).createPeers(any(NoisyQueryable.class), eq(peerCount));
     }
@@ -60,7 +61,7 @@ public class ExperimentTest {
     public void construct_GivesPeersTrainingData(){
 
 
-        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics);
+        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost);
 
         verify(_peerFactory).createPeers(_train, _peerCount);
     }
@@ -74,7 +75,7 @@ public class ExperimentTest {
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_peerFactory.createPeers(_train, peers)).thenReturn(Arrays.asList(agent1, agent2));
 
-        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics).run(iterations);
+        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost).run(iterations);
 
         verify(agent1).run(iterations);
         verify(agent2).run(iterations);
@@ -88,9 +89,9 @@ public class ExperimentTest {
         when(_peerFactory.createPeers(_train, peers)).thenReturn(Arrays.asList(agent1, agent2));
         when(agent1.labelData(_test)).thenReturn(mock(List.class));
         when(agent2.labelData(_test)).thenReturn(mock(List.class));
-        when(_performanceMetrics.errorRate(same(_test), any(List.class))).thenReturn(0.15);
+        when(_performanceMetrics.errorRate(same(_test), any(List.class), eq(_testCost))).thenReturn(0.15);
 
-        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics);
+        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost);
         List<Double> errors = experiment.test();
 
         assertEquals(errors.get(0), 0.15, 0.0001d);

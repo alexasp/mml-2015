@@ -60,8 +60,24 @@ public class NoisyQueryable<T> {
         return ((double)_data.size()) + _noiseGenerator.fromLaplacian(1.0 / epsilon);
     }
 
-    public double noisyAverage(BiFunction<T, Integer, Double> projection) {
-        throw new UnsupportedOperationException();
+    public double noisyAverage(double cost, BiFunction<T, Integer, Double> projection) {
+        checkAgentBudget(cost);
+        double tally =  IntStream.range(0, _data.size())
+                .mapToDouble(i -> projection.apply(_data.get(i), i))
+                .map(NoisyQueryable::clamp)
+                .sum();
+        double count = _data.size();
+
+        if(count == 0){
+            return _noiseGenerator.uniform();
+        }
+
+        double candidate = (tally + _noiseGenerator.fromLaplacian(2.0 / cost)) / count;
+        while(candidate < -1.0 || candidate > 1.0){
+            candidate = (tally + _noiseGenerator.fromLaplacian(2.0 / cost)) / count;
+        }
+
+        return candidate;
     }
 
     /**
@@ -73,9 +89,14 @@ public class NoisyQueryable<T> {
     public double sum(double epsilon, Function<T, Double> projection) {
         checkAgentBudget(epsilon);
         return _data.stream().mapToDouble(record -> projection.apply(record))
-                .map(num -> num > 1.0 ? 1.0 : num)
-                .map(num -> num < -1.0 ? -1.0 : num)
+                .map(NoisyQueryable::clamp)
                 .sum() + _noiseGenerator.fromLaplacian(1.0 / epsilon);
+    }
+
+    private static double clamp(double value) {
+        if(value < -1) { value = -1; }
+        if(value > 1) { value = 1; }
+        return value;
     }
 
     private void checkAgentBudget(double epsilon) {

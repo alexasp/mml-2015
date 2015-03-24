@@ -5,6 +5,10 @@ package privacy.math;
  */
 public class NoiseGenerator {
     public double fromLaplacian(double epsilon) {
-        return 0.0;
+        throw new UnsupportedOperationException();
+    }
+
+    public double uniform() {
+        throw new UnsupportedOperationException();
     }
 }
