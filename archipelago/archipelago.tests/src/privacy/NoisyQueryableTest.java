@@ -10,6 +10,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
@@ -42,10 +43,10 @@ public class NoisyQueryableTest {
         _queryable = breakConstructorPrivacy(_agent, _data, _noiseGenerator);
     }
 
-    private NoisyQueryable breakConstructorPrivacy(Budget agent, Collection<Double> data, NoiseGenerator noiseGenerator) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static NoisyQueryable breakConstructorPrivacy(Budget budget, Collection<Double> data, NoiseGenerator noiseGenerator) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<NoisyQueryable> constructor = (Constructor<NoisyQueryable>) NoisyQueryable.class.getDeclaredConstructors()[0];
         constructor.setAccessible(true);
-        return constructor.newInstance(_agent, _data, _noiseGenerator);
+        return constructor.newInstance(budget, data, noiseGenerator);
     }
 
     @Test
@@ -72,6 +73,17 @@ public class NoisyQueryableTest {
         _data.addAll(Arrays.asList(5.0, 5.0, 5.0, 5.0));
 
         NoisyQueryable<Boolean> projection = _queryable.project(func);
+
+        assertEquals(_queryable.count(_agent.getEpsilon() * 0.1), projection.count(_agent.getEpsilon() * 0.1), 0.001);
+    }
+
+    @Test
+    public void projectIndexed_DoubleToBooleanNoNoise_SameSize() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        _queryable = breakConstructorPrivacy(_agent, _data, getNoiseLessNoiseGenerator());
+        BiFunction<Double, Integer, Boolean> func = (x, i) -> x > 0.0;
+        _data.addAll(Arrays.asList(5.0, 5.0, 5.0, 5.0));
+
+        NoisyQueryable<Boolean> projection = _queryable.projectIndexed(func);
 
         assertEquals(_queryable.count(_agent.getEpsilon() * 0.1), projection.count(_agent.getEpsilon() * 0.1), 0.001);
     }
@@ -119,7 +131,16 @@ public class NoisyQueryableTest {
         assertEquals(5.3, _queryable.sum(1.0, proj), 0.00001d);
     }
 
-    private NoiseGenerator getNoiseLessNoiseGenerator() {
+    @Test(expected = IllegalStateException.class)
+    public void sum_BudgetLow_Throws(){
+        when(_agent.getEpsilon()).thenReturn(0.0);
+
+        _queryable.sum(1.0, x -> 2.0);
+    }
+
+
+
+    public static NoiseGenerator getNoiseLessNoiseGenerator() {
         NoiseGenerator generator = mock(NoiseGenerator.class);
         return generator;
     }

@@ -22,6 +22,7 @@ public class LogisticModel implements Model {
         return _parameters;
     }
 
+    //TODO: use function from PerformanceMetrics?
     public Double errorProjection(LabeledSample example) {
         double error = (example.getLabel() + 1.0) / 2.0 - sigmoid(example.getFeatures(), _parameters);
         return error;

@@ -45,6 +45,7 @@ public class PeerAgent extends Agent {
     }
 
     public void run(int iterations) {
+        throw new UnsupportedOperationException();
     }
 
     public List<Double> labelData(NoisyQueryable<LabeledSample> test) {
