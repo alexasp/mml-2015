@@ -18,10 +18,12 @@ public class PeerAgent extends Agent {
     private final MessageFacade _messageFacade;
     private EnsembleModel _ensemble;
     private NoisyQueryable<LabeledSample> _data;
+    private int _iterations;
 
-    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory) {
+    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations) {
         _ensemble = ensemble;
         _data = data;
+        _iterations = iterations;
         _messageFacade = messageFacadeFactory.getFacade(this);
         addBehaviour(behaviorFactory.getModelCreation(this));
         addBehaviour(behaviorFactory.getPeerUpdate(this, _messageFacade));
@@ -50,5 +52,9 @@ public class PeerAgent extends Agent {
 
     public List<Double> labelData(NoisyQueryable<LabeledSample> test) {
         throw new UnsupportedOperationException();
+    }
+
+    public int getIterations() {
+        return _iterations;
     }
 }

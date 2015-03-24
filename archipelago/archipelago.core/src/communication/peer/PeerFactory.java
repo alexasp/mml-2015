@@ -2,7 +2,6 @@ package communication.peer;
 
 import communication.BehaviorFactory;
 import communication.PeerAgent;
-import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import learning.EnsembleModel;
 import learning.LabeledSample;
@@ -23,13 +22,13 @@ public class PeerFactory {
         _messageFacadeFactory = messageFacadeFactory;
     }
 
-    public List<PeerAgent> createPeers(NoisyQueryable<LabeledSample> data, int parts) {
+    public List<PeerAgent> createPeers(NoisyQueryable<LabeledSample> data, int parts, int iterations) {
         List<NoisyQueryable<LabeledSample>> partitions = data.partition(parts);
 
         List<PeerAgent> agents = new ArrayList<>();
 
         for(NoisyQueryable<LabeledSample> partition : partitions){
-            agents.add(new PeerAgent(partition, _behaviorFactory, new EnsembleModel(), _messageFacadeFactory));
+            agents.add(new PeerAgent(partition, _behaviorFactory, new EnsembleModel(), _messageFacadeFactory, iterations));
         }
 
         return agents;

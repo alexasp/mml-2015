@@ -29,6 +29,7 @@ public class PeerAgentTest {
     private EnsembleModel _ensemble;
     private NoisyQueryable<LabeledSample> _data;
     private MessageFacadeFactory _messageFacadeFactory;
+    private int _iterations = 5;
 
     @Before
     public void setUp(){
@@ -41,7 +42,7 @@ public class PeerAgentTest {
         stubBehaviourFactory(_behaviorFactory);
         stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerAgent = new PeerAgent(_data, _behaviorFactory, _ensemble, _messageFacadeFactory);
+        _peerAgent = new PeerAgent(_data, _behaviorFactory, _ensemble, _messageFacadeFactory, _iterations);
     }
 
     public static void stubMessageFacadeFactory(MessageFacadeFactory messageFacadeFactory) {

@@ -6,19 +6,21 @@ import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
+import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 
 /**
  * Created by alex on 3/10/15.
  */
-public class JadeEnvironment {
+public class Environment {
 
     private AgentContainer _mainContainer;
+    private AgentController _rma;
 
     /**
      * Based on code by James Malone here: http://jade.tilab.com/pipermail/jade-develop/2008q3/012874.html
      */
-    public void startContainer() throws StaleProxyException {
+    public void startContainer() throws ControllerException {
         // Get a hold on JADE runtime
         Runtime rt = Runtime.instance();
 
@@ -37,25 +39,31 @@ public class JadeEnvironment {
         ProfileImpl pContainer = new ProfileImpl(null, 1201, null);
         System.out.println("Launching the agent container ..."+pContainer);
 
-        jade.wrapper.AgentContainer cont = rt.createAgentContainer(pContainer);
-        System.out.println("Launching the agent container after ..."+pContainer);
+//        jade.wrapper.AgentContainer cont = rt.createAgentContainer(pContainer);
+//        System.out.println("Launching the agent container after ..."+pContainer);
 
         System.out.println("containers created");
         System.out.println("Launching the rma agent on the main container ...");
 
         AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
 
-        rma.start();
+        _mainContainer.suspend();
     }
 
-    public static void main(String[] args) throws StaleProxyException {
-        JadeEnvironment env = new JadeEnvironment();
+    public static void main(String[] args) throws ControllerException {
+        Environment env = new Environment();
         env.startContainer();
-
-
     }
 
     public void registerAgent(Agent agent) throws StaleProxyException {
         _mainContainer.acceptNewAgent(agent.getLocalName(), agent);
+    }
+
+    public void run() throws ControllerException {
+        _mainContainer.start();
+    }
+
+    public void stop() throws ControllerException {
+        _mainContainer.suspend();
     }
 }

@@ -2,7 +2,6 @@ package communication.peer;
 
 import communication.BehaviorFactory;
 import communication.PeerAgent;
-import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import learning.LabeledSample;
 import org.junit.Before;
@@ -33,6 +32,7 @@ public class PeerFactoryTest {
     private NoisyQueryable<LabeledSample> _partition2;
     private NoisyQueryable<LabeledSample> _partition3;
     private MessageFacadeFactory _messageFacadeFactory;
+    private int _iterations = 5;
 
     @Before
     public void setUp(){
@@ -60,18 +60,19 @@ public class PeerFactoryTest {
 
     @Test
     public void createPeers_OnePeerPerPartition(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations);
 
         assertEquals(_parts, peers.size());
     }
 
     @Test
     public void createPeers_PartitionsData(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations);
 
         assertEquals(_partition1, peers.get(0).getData());
         assertEquals(_partition2, peers.get(1).getData());
         assertEquals(_partition3, peers.get(2).getData());
+        assertEquals(peers.get(0).getIterations(), _iterations);
     }
 
 }
