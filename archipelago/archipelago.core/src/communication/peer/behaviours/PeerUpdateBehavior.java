@@ -14,11 +14,13 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
     private final PeerAgent _peerAgent;
     private final MessageFacade _messageFacade;
     private final BehaviorFactory _behaviorFactory;
+    private int _iteration;
 
     public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade, BehaviorFactory behaviorFactory) {
         _peerAgent = peerAgent;
         _messageFacade = messageFacade;
         _behaviorFactory = behaviorFactory;
+        _iteration = 0;
     }
 
     @Override
@@ -27,7 +29,10 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
             Message message = _messageFacade.nextMessage();
             _peerAgent.addModel(message.getModel());
 
-            _peerAgent.addBehaviour(_behaviorFactory.getModelPropegate(_peerAgent, message.getModel()));
+            if(_iteration < _peerAgent.getIterations() - 1) {
+                _peerAgent.addBehaviour(_behaviorFactory.getModelPropegate(_peerAgent, message.getModel()));
+                _iteration++;
+            }
         }
     }
 
