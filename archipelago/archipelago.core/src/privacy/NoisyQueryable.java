@@ -69,7 +69,7 @@ public class NoisyQueryable<T> {
         double count = _data.size();
 
         if(count == 0){
-            return _noiseGenerator.uniform();
+            return _noiseGenerator.uniform(-1, 1); //TODO: double check that this should be uniformly -1 and 1
         }
 
         double candidate = (tally + _noiseGenerator.fromLaplacian(2.0 / cost)) / count;

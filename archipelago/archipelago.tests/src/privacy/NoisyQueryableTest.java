@@ -143,7 +143,7 @@ public class NoisyQueryableTest {
     public void noisyAverage_EmptySet_ReturnsUniform(){
         BiFunction<Double, Integer, Double> projection = (x,i) -> (double)i;
         double expectedNoise = -0.023;
-        when(_noiseGenerator.uniform()).thenReturn(expectedNoise);
+        when(_noiseGenerator.uniform(-1, 1)).thenReturn(expectedNoise);
 
         double average = _queryable.noisyAverage(_cost, projection);
 

@@ -9,8 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -34,6 +39,7 @@ public class ExperimentFactoryTest {
     @Test
     public void getExperiment_ConfiguresExperiment() throws StaleProxyException {
         NoisyQueryable<LabeledSample> samples = mock(NoisyQueryable.class);
+        when(samples.partition(anyDouble())).thenReturn(Arrays.asList(mock(NoisyQueryable.class), mock(NoisyQueryable.class)));
         double trainRatio = 0.5;
         int peerCount = 10;
         double testCost = 0.1;
