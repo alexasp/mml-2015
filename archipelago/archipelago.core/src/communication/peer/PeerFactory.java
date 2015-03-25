@@ -1,5 +1,6 @@
 package communication.peer;
 
+import com.google.inject.Inject;
 import communication.BehaviorFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacadeFactory;
@@ -17,6 +18,7 @@ public class PeerFactory {
     private final MessageFacadeFactory _messageFacadeFactory;
     private BehaviorFactory _behaviorFactory;
 
+    @Inject
     public PeerFactory(BehaviorFactory behaviorFactory, MessageFacadeFactory messageFacadeFactory) {
         _behaviorFactory = behaviorFactory;
         _messageFacadeFactory = messageFacadeFactory;

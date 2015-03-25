@@ -1,5 +1,6 @@
 package privacy;
 
+import communication.PeerAgent;
 import learning.LabeledSample;
 import privacy.math.NoiseGenerator;
 
@@ -112,5 +113,7 @@ public class NoisyQueryable<T> {
     }
 
 
-
+    public static <T> NoisyQueryable<T> getQueryable(Budget budget, List<T> data, NoiseGenerator noiseGenerator) {
+        return new NoisyQueryable<>(budget, data, noiseGenerator);
+    }
 }

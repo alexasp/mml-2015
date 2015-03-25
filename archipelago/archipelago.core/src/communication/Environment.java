@@ -17,10 +17,14 @@ public class Environment {
     private AgentContainer _mainContainer;
     private AgentController _rma;
 
+    public Environment() throws ControllerException {
+        createContainer();
+    }
+
     /**
      * Based on code by James Malone here: http://jade.tilab.com/pipermail/jade-develop/2008q3/012874.html
      */
-    public void startContainer() throws ControllerException {
+    private void createContainer() throws ControllerException {
         // Get a hold on JADE runtime
         Runtime rt = Runtime.instance();
 
@@ -50,10 +54,10 @@ public class Environment {
         _mainContainer.suspend();
     }
 
-    public static void main(String[] args) throws ControllerException {
-        Environment env = new Environment();
-        env.startContainer();
-    }
+//    public static void main(String[] args) throws ControllerException {
+//        Environment env = new Environment();
+//        env.createContainer();
+//    }
 
     public void registerAgent(Agent agent) throws StaleProxyException {
         _mainContainer.acceptNewAgent(agent.getLocalName(), agent);

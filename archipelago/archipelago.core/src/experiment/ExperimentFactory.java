@@ -1,5 +1,6 @@
 package experiment;
 
+import com.google.inject.Inject;
 import communication.Environment;
 import communication.peer.PeerFactory;
 import jade.wrapper.StaleProxyException;
@@ -15,6 +16,7 @@ public class ExperimentFactory {
     private PerformanceMetrics _performanceMetrics;
     private Environment _environment;
 
+    @Inject
     public ExperimentFactory(PeerFactory peerFactory, PerformanceMetrics performanceMetrics, Environment environment) {
         _peerFactory = peerFactory;
         _performanceMetrics = performanceMetrics;

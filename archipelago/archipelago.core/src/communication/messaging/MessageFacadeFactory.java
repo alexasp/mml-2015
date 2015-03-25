@@ -1,5 +1,6 @@
 package communication.messaging;
 
+import com.google.inject.Inject;
 import jade.core.Agent;
 
 /**
@@ -10,6 +11,7 @@ public class MessageFacadeFactory {
 
     private ACLMessageParser messageParser;
 
+    @Inject
     public MessageFacadeFactory(ACLMessageParser messageParser) {
         this.messageParser = messageParser;
     }
