@@ -20,14 +20,22 @@ public class Experiment {
     private final PerformanceMetrics _performanceMetrics;
     private final NoisyQueryable<LabeledSample> _trainData;
     private final NoisyQueryable<LabeledSample> _testData;
+    private final NoisyQueryable<LabeledSample> _data;
     private double _testCost;
     private Environment _environment;
+    private double _trainRatio;
+    private int _peerCount;
+    private int _iterations;
 
     public Experiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, PeerFactory peerFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations) throws StaleProxyException {
         _testCost = testCost;
+        _trainRatio = trainRatio;
         _environment = environment;
+        _peerCount = peerCount;
+        _iterations = iterations;
 
         List<NoisyQueryable<LabeledSample>> trainPartitioning = samples.partition(trainRatio);
+        _data = samples;
         _trainData = trainPartitioning.get(0);
         _testData = trainPartitioning.get(1);
 
@@ -52,5 +60,25 @@ public class Experiment {
                 .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData), _testCost))
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public double getTrainRatio() {
+        return _trainRatio;
+    }
+
+    public NoisyQueryable<LabeledSample> getData() {
+        return _data;
+    }
+
+    public int getPeerCount() {
+        return _peerCount;
+    }
+
+    public double getTestCost() {
+        return _testCost;
+    }
+
+    public int getIterations() {
+        return _iterations;
     }
 }
