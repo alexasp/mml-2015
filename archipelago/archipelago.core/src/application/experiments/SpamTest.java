@@ -13,6 +13,7 @@ import privacy.Budget;
 import privacy.NoisyQueryable;
 import privacy.NoisyQueryableFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,9 +39,7 @@ public class SpamTest {
 
         Experiment experiment = experimentFactory.getExperiment(secureData, trainRatio, peerCount, testCost, iterations);
 
-        experiment.run();
-
-
+        experiment.run(completeExperiment -> System.out.println(completeExperiment.test()));
     }
 
 }

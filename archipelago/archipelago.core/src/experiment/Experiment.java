@@ -10,6 +10,8 @@ import learning.metrics.PerformanceMetrics;
 import privacy.NoisyQueryable;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +28,7 @@ public class Experiment {
     private double _trainRatio;
     private int _peerCount;
     private int _iterations;
+    private Consumer _complectionAction;
 
     public Experiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, PeerFactory peerFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations) throws StaleProxyException {
         _testCost = testCost;
@@ -51,7 +54,9 @@ public class Experiment {
         }
     }
 
-    public void run() throws ControllerException {
+    public void run(Consumer<Experiment> completionAction) throws ControllerException {
+        _complectionAction = completionAction;
+        _environment.registerAgent(new CompletionListeningAgent(completionAction));
         _environment.run();
     }
 
@@ -81,4 +86,5 @@ public class Experiment {
     public int getIterations() {
         return _iterations;
     }
+
 }

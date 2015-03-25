@@ -7,14 +7,17 @@ import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
+import org.apache.commons.math3.analysis.function.Exp;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
@@ -92,10 +95,13 @@ public class ExperimentTest {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_peerFactory.createPeers(_train, peers, iterations)).thenReturn(Arrays.asList(agent1, agent2));
+        Consumer<Experiment> completionListener = mock(Consumer.class);
 
-        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost, _environment, iterations).run();
+        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost, _environment, iterations);
+        experiment.run(completionListener);
 
-        _environment.run();
+        verify(completionListener).accept(experiment);
+        fail("This test should verify that the completionlisteningagent is registered");
     }
 
     @Test
