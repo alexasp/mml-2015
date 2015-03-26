@@ -51,7 +51,7 @@ public class MessageFacade {
         List<AID> peers = _peerGraph.getPeers(_agent);
         AID target = peers.get(_randomGenerator.uniform(0, peers.size() - 1));
         ACLMessage message = _messageParser.createMessage(model, target);
-        
+
         _agent.send(message);
     }
 }

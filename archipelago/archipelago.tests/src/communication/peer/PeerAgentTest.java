@@ -1,11 +1,13 @@
 package communication.peer;
 
 import communication.BehaviourFactory;
+import communication.messaging.PeerGraph;
 import communication.peer.behaviours.ModelCreationBehavior;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import communication.peer.behaviours.PeerUpdateBehavior;
+import jade.domain.FIPAException;
 import learning.EnsembleModel;
 import learning.LabeledSample;
 import learning.Model;
@@ -30,6 +32,7 @@ public class PeerAgentTest {
     private NoisyQueryable<LabeledSample> _data;
     private MessageFacadeFactory _messageFacadeFactory;
     private int _iterations = 5;
+    private PeerGraph _peerGraph;
 
     @Before
     public void setUp(){
@@ -38,11 +41,18 @@ public class PeerAgentTest {
 
         _messageFacadeFactory = mock(MessageFacadeFactory.class);
         _behaviourFactory = mock(BehaviourFactory.class);
+        _peerGraph = mock(PeerGraph.class);
 
         stubBehaviourFactory(_behaviourFactory);
         stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations);
+        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations, _peerGraph);
+    }
+
+
+    @Test
+    public void constructor_JoinsPeerGraph() throws FIPAException {
+        verify(_peerGraph).join(_peerAgent);
     }
 
     public static void stubMessageFacadeFactory(MessageFacadeFactory messageFacadeFactory) {
@@ -74,6 +84,7 @@ public class PeerAgentTest {
 
         verify(_ensemble).add(model);
     }
+
 
 
 }
