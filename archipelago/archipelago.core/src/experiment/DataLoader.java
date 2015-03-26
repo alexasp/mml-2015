@@ -4,6 +4,7 @@ import com.opencsv.CSVReader;
 import learning.LabeledSample;
 
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -41,6 +42,44 @@ public class DataLoader {
         }
         return listOfSamples;
 
+    }
+
+    public List<List<LabeledSample>> partition(int parts, List<LabeledSample> data) {
+        int recordsToEach = (int) Math.ceil((double)data.size()/(double)parts);
+
+        List<List<LabeledSample>> partitions = new ArrayList<>();
+
+        int current = 0;
+        List<LabeledSample> nextData = new ArrayList<>();
+        for(int i = 0; i < data.size(); i++){
+            if(current != i % recordsToEach){
+                current = i % recordsToEach;
+                partitions.add(nextData);
+            }
+        }
+
+        return partitions;
+    }
+
+    public List<List<LabeledSample>> partition(double trainRatio, List<LabeledSample> data) {
+        List<List<LabeledSample>> partitions = new ArrayList<>();
+        int target = (int)(trainRatio * (double)data.size());
+
+        List<LabeledSample> first = new ArrayList<>();
+        List<LabeledSample> second = new ArrayList<>();
+
+        for(int i = 0; i < data.size(); i++){
+            if(i < target){
+                first.add(data.get(i));
+            }
+            else {
+                second.add(data.get(i));
+            }
+        }
+        partitions.add(first);
+        partitions.add(second);
+
+        return partitions;
     }
 
        /*

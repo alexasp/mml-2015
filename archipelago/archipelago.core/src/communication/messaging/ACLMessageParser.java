@@ -1,5 +1,6 @@
 package communication.messaging;
 
+import com.google.inject.Inject;
 import communication.messaging.jade.ACLMessageReader;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
@@ -17,6 +18,7 @@ public class ACLMessageParser {
     private final ACLMessageReader _reader;
     private final ModelFactory _modelFactory;
 
+    @Inject
     public ACLMessageParser(ACLMessageReader reader, ModelFactory modelFactory) {
         _reader = reader;
         _modelFactory = modelFactory;

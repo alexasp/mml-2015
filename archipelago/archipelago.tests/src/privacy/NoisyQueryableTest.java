@@ -186,7 +186,6 @@ public class NoisyQueryableTest {
     }
 
 
-
     public static RandomGenerator getNoiseLessNoiseGenerator() {
         RandomGenerator generator = mock(RandomGenerator.class);
         return generator;

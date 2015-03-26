@@ -6,7 +6,10 @@ import communication.peer.AgentFactory;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
+import privacy.Budget;
 import privacy.NoisyQueryable;
+
+import java.util.List;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -15,15 +18,17 @@ public class ExperimentFactory {
     private AgentFactory _peerFactory;
     private PerformanceMetrics _performanceMetrics;
     private Environment _environment;
+    private DataLoader _dataLoader;
 
     @Inject
-    public ExperimentFactory(AgentFactory peerFactory, PerformanceMetrics performanceMetrics, Environment environment) {
+    public ExperimentFactory(AgentFactory peerFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader) {
         _peerFactory = peerFactory;
         _performanceMetrics = performanceMetrics;
         _environment = environment;
+        _dataLoader = dataLoader;
     }
 
-    public Experiment getExperiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, double testCost, int iterations) throws StaleProxyException {
-        return new Experiment(samples, trainRatio, peerCount, _peerFactory, _performanceMetrics, testCost, _environment, iterations);
+    public Experiment getExperiment(List<LabeledSample> samples, double trainRatio, int peerCount, double testCost, int iterations, double budget) throws StaleProxyException {
+        return new Experiment(samples, trainRatio, peerCount, _peerFactory, _performanceMetrics, testCost, _environment, iterations, _dataLoader, budget);
     }
 }

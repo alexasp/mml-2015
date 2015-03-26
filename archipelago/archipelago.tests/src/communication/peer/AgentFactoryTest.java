@@ -4,10 +4,13 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
+import experiment.DataLoader;
 import learning.LabeledSample;
 import org.junit.Before;
 import org.junit.Test;
+import privacy.Budget;
 import privacy.NoisyQueryable;
+import privacy.NoisyQueryableFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +19,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,54 +31,63 @@ public class AgentFactoryTest {
     private AgentFactory _peerFactory;
 
     int _parts;
-    NoisyQueryable<LabeledSample> _data;
+    List<LabeledSample> _data;
     private BehaviourFactory _behaviourFactory;
-    private NoisyQueryable<LabeledSample> _partition1;
-    private NoisyQueryable<LabeledSample> _partition2;
-    private NoisyQueryable<LabeledSample> _partition3;
+    private List<LabeledSample> _partition1;
+    private List<LabeledSample> _partition2;
     private MessageFacadeFactory _messageFacadeFactory;
     private int _iterations = 5;
     private PeerGraph _peerGraph;
+    private DataLoader _dataLoader;
+    private NoisyQueryableFactory _noisyQueryableFactory;
+    private double _budget = 2.0;
+    private NoisyQueryable<LabeledSample> _queryable1;
+    private NoisyQueryable<learning.LabeledSample> _queryable2;
 
     @Before
     public void setUp(){
-        _parts = 3;
+        _parts = 2;
+
+        _dataLoader = mock(DataLoader.class);
         mockData();
 
+        _noisyQueryableFactory = mock(NoisyQueryableFactory.class);
         _peerGraph = mock(PeerGraph.class);
         _behaviourFactory = mock(BehaviourFactory.class);
         _messageFacadeFactory = mock(MessageFacadeFactory.class);
         PeerAgentTest.stubBehaviourFactory(_behaviourFactory);
         PeerAgentTest.stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerFactory = new AgentFactory(_behaviourFactory, _messageFacadeFactory, _peerGraph);
+        when(_noisyQueryableFactory.getQueryable(any(Budget.class), same(_partition1))).thenReturn(_queryable1);
+        when(_noisyQueryableFactory.getQueryable(any(Budget.class), same(_partition2))).thenReturn(_queryable2);
+
+
+        _peerFactory = new AgentFactory(_behaviourFactory, _messageFacadeFactory, _peerGraph, _dataLoader, _noisyQueryableFactory);
     }
 
     private void mockData() {
-        _data = mock(NoisyQueryable.class);
-        _partition1 = mock(NoisyQueryable.class);
-        _partition2 = mock(NoisyQueryable.class);
-        _partition3 = mock(NoisyQueryable.class);
+        _data = mock(List.class);
+        _partition1 = mock(List.class);
+        _partition2 = mock(List.class);
 
-        List<NoisyQueryable<LabeledSample>> partitioned = new ArrayList<>(Arrays.asList(_partition1, _partition2, _partition3));
-        when(_data.partition(anyInt())).thenReturn(partitioned);
+        List<List<LabeledSample>> partitioned = new ArrayList<>(Arrays.asList(_partition1, _partition2));
+        when(_dataLoader.partition(anyInt(), same(_data))).thenReturn(partitioned);
     }
 
 
     @Test
     public void createPeers_OnePeerPerPartition(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget);
 
         assertEquals(_parts, peers.size());
     }
 
     @Test
     public void createPeers_PartitionsData(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget);
 
-        assertEquals(_partition1, peers.get(0).getData());
-        assertEquals(_partition2, peers.get(1).getData());
-        assertEquals(_partition3, peers.get(2).getData());
+        assertEquals(_queryable1, peers.get(0).getData());
+        assertEquals(_queryable2, peers.get(1).getData());
         assertEquals(peers.get(0).getIterations(), _iterations);
     }
 

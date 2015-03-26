@@ -15,7 +15,6 @@ import jade.wrapper.StaleProxyException;
 public class Environment {
 
     private AgentContainer _mainContainer;
-    private AgentController _rma;
 
     public Environment() throws ControllerException {
         createContainer();
@@ -40,7 +39,7 @@ public class Environment {
         _mainContainer = rt.createMainContainer(profile);
 
        // now set the default Profile to start a container
-        ProfileImpl pContainer = new ProfileImpl(null, 1201, null);
+        ProfileImpl pContainer = new ProfileImpl(null, 1202, null);
         System.out.println("Launching the agent container ..."+pContainer);
 
 //        jade.wrapper.AgentContainer cont = rt.createAgentContainer(pContainer);
@@ -51,7 +50,7 @@ public class Environment {
 
         AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
 
-        _mainContainer.suspend();
+//        _mainContainer.suspend();
     }
 
 //    public static void main(String[] args) throws ControllerException {

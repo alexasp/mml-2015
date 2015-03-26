@@ -1,6 +1,5 @@
 package privacy;
 
-import learning.LabeledSample;
 import privacy.math.RandomGenerator;
 
 import java.util.ArrayList;
@@ -16,12 +15,12 @@ import java.util.stream.IntStream;
 public class NoisyQueryable<T> {
 
     private List<T> _data;
-    private Budget _agent;
+    private Budget _budget;
     private RandomGenerator _randomGenerator;
 
-    private NoisyQueryable(Budget agent, List<T> data, RandomGenerator randomGenerator) {
+    private NoisyQueryable(Budget budget, List<T> data, RandomGenerator randomGenerator) {
         _data = data;
-        _agent = agent;
+        _budget = budget;
         _randomGenerator = randomGenerator;
     }
 
@@ -33,7 +32,7 @@ public class NoisyQueryable<T> {
             values.add(projection.apply(record));
         }
 
-        return new NoisyQueryable<Y>(_agent, values, _randomGenerator);
+        return new NoisyQueryable<Y>(_budget, values, _randomGenerator);
     }
 
     //TODO: Thesa projections allow for counting the exact number of records or exporting the samples. Problem?
@@ -41,7 +40,7 @@ public class NoisyQueryable<T> {
         List<Y> values = IntStream.range(0, _data.size())
                 .mapToObj(i -> projection.apply(_data.get(i), i))
                 .collect(Collectors.toList());
-        return new NoisyQueryable<Y>(_agent, values, _randomGenerator);
+        return new NoisyQueryable<Y>(_budget, values, _randomGenerator);
     }
 
     private <NewType> List<NewType> newDataContainer() {
@@ -49,13 +48,13 @@ public class NoisyQueryable<T> {
     }
 
     public Budget getAgent() {
-        return _agent;
+        return _budget;
     }
 
     public double count(double epsilon) {
         checkAgentBudget(epsilon);
 
-        _agent.apply(epsilon);
+        _budget.apply(epsilon);
         return ((double)_data.size()) + _randomGenerator.fromLaplacian(1.0 / epsilon);
     }
 
@@ -99,16 +98,10 @@ public class NoisyQueryable<T> {
     }
 
     private void checkAgentBudget(double epsilon) {
-        if(_agent.getEpsilon() < epsilon){ throw new IllegalStateException("Agent disclosure budget too low for query."); }
+        if(_budget.getEpsilon() < epsilon){ throw new IllegalStateException("Agent disclosure budget too low for query."); }
     }
 
-    public List<NoisyQueryable<LabeledSample>> partition(int parts) {
-        throw new UnsupportedOperationException();
-    }
-
-    public List<NoisyQueryable<LabeledSample>> partition(double trainRatio) {
-        return null;
-    }
+    
 
 
     public static <T> NoisyQueryable<T> getQueryable(Budget budget, List<T> data, RandomGenerator randomGenerator) {

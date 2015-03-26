@@ -1,5 +1,6 @@
 package communication;
 
+import com.google.inject.Inject;
 import communication.messaging.MessageFacade;
 import communication.peer.CompletionListeningAgent;
 import communication.peer.behaviours.CompletionListeningBehavior;
@@ -17,6 +18,7 @@ import learning.ModelFactory;
 public class BehaviourFactory {
     private ModelFactory _modelFactory;
 
+    @Inject
     public BehaviourFactory(ModelFactory modelFactory) {
         _modelFactory = modelFactory;
     }

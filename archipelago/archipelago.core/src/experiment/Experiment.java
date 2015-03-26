@@ -7,7 +7,7 @@ import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
-import privacy.NoisyQueryable;
+import privacy.Budget;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,17 +19,18 @@ import java.util.stream.Collectors;
 public class Experiment {
     private final List<PeerAgent> _peers;
     private final PerformanceMetrics _performanceMetrics;
-    private final NoisyQueryable<LabeledSample> _trainData;
-    private final NoisyQueryable<LabeledSample> _testData;
-    private final NoisyQueryable<LabeledSample> _data;
+    private final List<LabeledSample> _trainData;
+    private final List<LabeledSample> _testData;
+    private final List<LabeledSample> _data;
     private final AgentFactory _agentFactory;
+    private final double _budget;
     private double _testCost;
     private Environment _environment;
     private double _trainRatio;
     private int _peerCount;
     private int _iterations;
 
-    public Experiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations) throws StaleProxyException {
+    public Experiment(List<LabeledSample> samples, double trainRatio, int peerCount, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations, DataLoader _dataLoader, double budget) throws StaleProxyException {
         _testCost = testCost;
         _trainRatio = trainRatio;
         _environment = environment;
@@ -37,14 +38,15 @@ public class Experiment {
         _iterations = iterations;
 
         _agentFactory = agentFactory;
+        _budget = budget;
 
-        List<NoisyQueryable<LabeledSample>> trainPartitioning = samples.partition(trainRatio);
+        List<List<LabeledSample>> trainPartitioning = _dataLoader.partition(trainRatio, samples);
         _data = samples;
         _trainData = trainPartitioning.get(0);
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, peerCount, iterations);
+        _peers = agentFactory.createPeers(_trainData, peerCount, iterations, _budget);
 
 
         registerPeers(_peers);
@@ -72,7 +74,7 @@ public class Experiment {
         return _trainRatio;
     }
 
-    public NoisyQueryable<LabeledSample> getData() {
+    public List<LabeledSample> getData() {
         return _data;
     }
 

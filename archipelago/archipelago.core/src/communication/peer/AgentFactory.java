@@ -5,10 +5,15 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
+import experiment.DataLoader;
 import experiment.Experiment;
+import jade.tools.sniffer.AgentList;
 import learning.EnsembleModel;
 import learning.LabeledSample;
+import privacy.Budget;
 import privacy.NoisyQueryable;
+import privacy.NoisyQueryableFactory;
+import privacy.math.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,21 +26,26 @@ public class AgentFactory {
     private final MessageFacadeFactory _messageFacadeFactory;
     private BehaviourFactory _behaviourFactory;
     private PeerGraph _peerGraph;
+    private DataLoader _dataLoader;
+    private NoisyQueryableFactory _noisyQueryableFactory;
 
     @Inject
-    public AgentFactory(BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, PeerGraph peerGraph) {
+    public AgentFactory(BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, PeerGraph peerGraph, DataLoader dataLoader, NoisyQueryableFactory noisyQueryableFactory) {
         _behaviourFactory = behaviourFactory;
         _messageFacadeFactory = messageFacadeFactory;
         _peerGraph = peerGraph;
+        _dataLoader = dataLoader;
+        _noisyQueryableFactory = noisyQueryableFactory;
     }
 
-    public List<PeerAgent> createPeers(NoisyQueryable<LabeledSample> data, int parts, int iterations) {
-        List<NoisyQueryable<LabeledSample>> partitions = data.partition(parts);
+    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget) {
+        List<List<LabeledSample>> partitions = _dataLoader.partition(parts, data);
 
         List<PeerAgent> agents = new ArrayList<>();
 
-        for(NoisyQueryable<LabeledSample> partition : partitions){
-            agents.add(new PeerAgent(partition, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph));
+        for(List<LabeledSample> partition : partitions){
+            NoisyQueryable<LabeledSample> queryable = _noisyQueryableFactory.getQueryable(new Budget(budget), partition);
+            agents.add(new PeerAgent(queryable, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph));
         }
 
         return agents;
