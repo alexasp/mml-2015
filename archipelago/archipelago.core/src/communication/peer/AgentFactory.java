@@ -4,22 +4,25 @@ import com.google.inject.Inject;
 import communication.BehaviorFactory;
 import communication.PeerAgent;
 import communication.messaging.MessageFacadeFactory;
+import experiment.CompletionListeningAgent;
+import experiment.Experiment;
 import learning.EnsembleModel;
 import learning.LabeledSample;
 import privacy.NoisyQueryable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by alex on 3/10/15.
  */
-public class PeerFactory {
+public class AgentFactory {
     private final MessageFacadeFactory _messageFacadeFactory;
     private BehaviorFactory _behaviorFactory;
 
     @Inject
-    public PeerFactory(BehaviorFactory behaviorFactory, MessageFacadeFactory messageFacadeFactory) {
+    public AgentFactory(BehaviorFactory behaviorFactory, MessageFacadeFactory messageFacadeFactory) {
         _behaviorFactory = behaviorFactory;
         _messageFacadeFactory = messageFacadeFactory;
     }
@@ -34,5 +37,9 @@ public class PeerFactory {
         }
 
         return agents;
+    }
+
+    public CompletionListeningAgent getCompletionAgent(Consumer<Experiment> completionAction) {
+        return new CompletionListeningAgent(completionAction);
     }
 }

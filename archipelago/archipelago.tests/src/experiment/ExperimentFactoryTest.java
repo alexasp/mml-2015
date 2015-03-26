@@ -1,7 +1,7 @@
 package experiment;
 
 import communication.Environment;
-import communication.peer.PeerFactory;
+import communication.peer.AgentFactory;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
@@ -23,14 +23,14 @@ import static org.mockito.Mockito.when;
 public class ExperimentFactoryTest {
 
     private ExperimentFactory _experimentFactory;
-    private PeerFactory _peerFactory;
+    private AgentFactory _peerFactory;
     private PerformanceMetrics _performanceMetrics;
     private Environment _environment;
 
     @Before
     public void setUp(){
 
-        _peerFactory = mock(PeerFactory.class);
+        _peerFactory = mock(AgentFactory.class);
         _performanceMetrics = mock(PerformanceMetrics.class);
         _environment = mock(Environment.class);
         _experimentFactory = new ExperimentFactory(_peerFactory, _performanceMetrics, _environment);

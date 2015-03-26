@@ -21,9 +21,9 @@ import static org.mockito.Mockito.when;
 /**
  * Created by alex on 3/10/15.
  */
-public class PeerFactoryTest {
+public class AgentFactoryTest {
 
-    private PeerFactory _peerFactory;
+    private AgentFactory _peerFactory;
 
     int _parts;
     NoisyQueryable<LabeledSample> _data;
@@ -44,7 +44,7 @@ public class PeerFactoryTest {
         PeerAgentTest.stubBehaviourFactory(_behaviorFactory);
         PeerAgentTest.stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerFactory = new PeerFactory(_behaviorFactory, _messageFacadeFactory);
+        _peerFactory = new AgentFactory(_behaviorFactory, _messageFacadeFactory);
     }
 
     private void mockData() {

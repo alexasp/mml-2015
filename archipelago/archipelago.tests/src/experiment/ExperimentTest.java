@@ -2,12 +2,11 @@ package experiment;
 
 import communication.Environment;
 import communication.PeerAgent;
-import communication.peer.PeerFactory;
+import communication.peer.AgentFactory;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
-import org.apache.commons.math3.analysis.function.Exp;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
@@ -31,7 +30,7 @@ import static org.mockito.Mockito.when;
 public class ExperimentTest {
 
 
-    private PeerFactory _peerFactory;
+    private AgentFactory _agentFactory;
     private NoisyQueryable<LabeledSample> _samples;
     private int _peerCount = 2;
     private double _trainRatio;
@@ -47,7 +46,7 @@ public class ExperimentTest {
     @Before
     public void setUp(){
         _samples = mock(NoisyQueryable.class);
-        _peerFactory = mock(PeerFactory.class);
+        _agentFactory = mock(AgentFactory.class);
         _performanceMetrics = mock(PerformanceMetrics.class);
         _environment = mock(Environment.class);
         _trainRatio = 0.8;
@@ -63,18 +62,18 @@ public class ExperimentTest {
     public void construct_CreatesCorrectPeerCountAndGivesIterations() throws StaleProxyException {
         int peerCount = 3;
 
-        new Experiment(_samples, _trainRatio, peerCount, _peerFactory, _performanceMetrics, _testCost, _environment, iterations);
+        new Experiment(_samples, _trainRatio, peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations);
 
-        verify(_peerFactory).createPeers(any(NoisyQueryable.class), eq(peerCount), eq(_iterations));
+        verify(_agentFactory).createPeers(any(NoisyQueryable.class), eq(peerCount), eq(_iterations));
     }
 
     @Test
     public void construct_registersPeerWithRunEnvironment() throws StaleProxyException {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_peerFactory.createPeers(_train, _peerCount, _iterations)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, _peerCount, _iterations)).thenReturn(Arrays.asList(agent1, agent2));
 
-        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost, _environment, iterations);
+        new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations);
 
         verify(_environment).registerAgent(agent1);
         verify(_environment).registerAgent(agent2);
@@ -82,26 +81,28 @@ public class ExperimentTest {
 
     @Test
     public void construct_GivesPeersTrainingData() throws StaleProxyException {
-        new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost, _environment, iterations);
+        new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations);
 
-        verify(_peerFactory).createPeers(_train, _peerCount, _iterations);
+        verify(_agentFactory).createPeers(_train, _peerCount, _iterations);
     }
 
 
     @Test
-    public void run_RunsEnvironment() throws ControllerException {
+    public void run_RunsEnvironmentAndRegistersCompletionAgent() throws ControllerException {
         int iterations = 10;
         int peers = 2;
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_peerFactory.createPeers(_train, peers, iterations)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, peers, iterations)).thenReturn(Arrays.asList(agent1, agent2));
         Consumer<Experiment> completionListener = mock(Consumer.class);
+        CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
+        when(_agentFactory.getCompletionAgent(completionListener)).thenReturn(completionAgent);
 
-        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost, _environment, iterations);
+
+        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations);
         experiment.run(completionListener);
 
-        verify(completionListener).accept(experiment);
-        fail("This test should verify that the completionlisteningagent is registered");
+        verify(_environment).registerAgent(completionAgent);
     }
 
     @Test
@@ -109,12 +110,12 @@ public class ExperimentTest {
         int peers = 2;
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_peerFactory.createPeers(_train, peers, _iterations)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, peers, _iterations)).thenReturn(Arrays.asList(agent1, agent2));
         when(agent1.labelData(_test)).thenReturn(mock(List.class));
         when(agent2.labelData(_test)).thenReturn(mock(List.class));
         when(_performanceMetrics.errorRate(same(_test), any(List.class), eq(_testCost))).thenReturn(0.15);
 
-        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _peerFactory, _performanceMetrics, _testCost, _environment, iterations);
+        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations);
         List<Double> errors = experiment.test();
 
         assertEquals(errors.get(0), 0.15, 0.0001d);

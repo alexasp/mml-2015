@@ -2,7 +2,7 @@ package experiment;
 
 import com.google.inject.Inject;
 import communication.Environment;
-import communication.peer.PeerFactory;
+import communication.peer.AgentFactory;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
@@ -12,12 +12,12 @@ import privacy.NoisyQueryable;
  * Created by aspis on 25.03.2015.
  */
 public class ExperimentFactory {
-    private PeerFactory _peerFactory;
+    private AgentFactory _peerFactory;
     private PerformanceMetrics _performanceMetrics;
     private Environment _environment;
 
     @Inject
-    public ExperimentFactory(PeerFactory peerFactory, PerformanceMetrics performanceMetrics, Environment environment) {
+    public ExperimentFactory(AgentFactory peerFactory, PerformanceMetrics performanceMetrics, Environment environment) {
         _peerFactory = peerFactory;
         _performanceMetrics = performanceMetrics;
         _environment = environment;

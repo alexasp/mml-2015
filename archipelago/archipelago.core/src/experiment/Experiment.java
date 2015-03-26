@@ -2,7 +2,7 @@ package experiment;
 
 import communication.Environment;
 import communication.PeerAgent;
-import communication.peer.PeerFactory;
+import communication.peer.AgentFactory;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
@@ -11,7 +11,6 @@ import privacy.NoisyQueryable;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -23,19 +22,21 @@ public class Experiment {
     private final NoisyQueryable<LabeledSample> _trainData;
     private final NoisyQueryable<LabeledSample> _testData;
     private final NoisyQueryable<LabeledSample> _data;
+    private final AgentFactory _agentFactory;
     private double _testCost;
     private Environment _environment;
     private double _trainRatio;
     private int _peerCount;
     private int _iterations;
-    private Consumer _complectionAction;
 
-    public Experiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, PeerFactory peerFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations) throws StaleProxyException {
+    public Experiment(NoisyQueryable<LabeledSample> samples, double trainRatio, int peerCount, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations) throws StaleProxyException {
         _testCost = testCost;
         _trainRatio = trainRatio;
         _environment = environment;
         _peerCount = peerCount;
         _iterations = iterations;
+
+        _agentFactory = agentFactory;
 
         List<NoisyQueryable<LabeledSample>> trainPartitioning = samples.partition(trainRatio);
         _data = samples;
@@ -43,7 +44,8 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = peerFactory.createPeers(_trainData, peerCount, iterations);
+        _peers = agentFactory.createPeers(_trainData, peerCount, iterations);
+
 
         registerPeers(_peers);
     }
@@ -55,8 +57,7 @@ public class Experiment {
     }
 
     public void run(Consumer<Experiment> completionAction) throws ControllerException {
-        _complectionAction = completionAction;
-        _environment.registerAgent(new CompletionListeningAgent(completionAction));
+        _environment.registerAgent(_agentFactory.getCompletionAgent(completionAction));
         _environment.run();
     }
 
