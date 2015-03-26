@@ -57,7 +57,7 @@ public class Experiment {
     }
 
     public void run(Consumer<Experiment> completionAction) throws ControllerException {
-        _environment.registerAgent(_agentFactory.getCompletionAgent(completionAction));
+        _environment.registerAgent(_agentFactory.getCompletionAgent(completionAction, _peerCount, this));
         _environment.run();
     }
 

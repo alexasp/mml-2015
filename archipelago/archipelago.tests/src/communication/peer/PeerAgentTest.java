@@ -1,6 +1,6 @@
 package communication.peer;
 
-import communication.BehaviorFactory;
+import communication.BehaviourFactory;
 import communication.peer.behaviours.ModelCreationBehavior;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 public class PeerAgentTest {
 
     private PeerAgent _peerAgent;
-    private BehaviorFactory _behaviorFactory;
+    private BehaviourFactory _behaviourFactory;
     private EnsembleModel _ensemble;
     private NoisyQueryable<LabeledSample> _data;
     private MessageFacadeFactory _messageFacadeFactory;
@@ -37,12 +37,12 @@ public class PeerAgentTest {
         _ensemble = mock(EnsembleModel.class);
 
         _messageFacadeFactory = mock(MessageFacadeFactory.class);
-        _behaviorFactory = mock(BehaviorFactory.class);
+        _behaviourFactory = mock(BehaviourFactory.class);
 
-        stubBehaviourFactory(_behaviorFactory);
+        stubBehaviourFactory(_behaviourFactory);
         stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerAgent = new PeerAgent(_data, _behaviorFactory, _ensemble, _messageFacadeFactory, _iterations);
+        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations);
     }
 
     public static void stubMessageFacadeFactory(MessageFacadeFactory messageFacadeFactory) {
@@ -50,19 +50,19 @@ public class PeerAgentTest {
         when(messageFacadeFactory.getFacade(any(PeerAgent.class))).thenReturn(messageFacade);
     }
 
-    public static void stubBehaviourFactory(BehaviorFactory behaviorFactory) {
-        when(behaviorFactory.getPeerUpdate(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(PeerUpdateBehavior.class));
-        when(behaviorFactory.getModelCreation(any(PeerAgent.class))).thenReturn(mock(ModelCreationBehavior.class));
+    public static void stubBehaviourFactory(BehaviourFactory behaviourFactory) {
+        when(behaviourFactory.getPeerUpdate(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(PeerUpdateBehavior.class));
+        when(behaviourFactory.getModelCreation(any(PeerAgent.class))).thenReturn(mock(ModelCreationBehavior.class));
     }
 
     @Test
     public void contructor_AddsUpdatingBehavior(){
-        verify(_behaviorFactory).getPeerUpdate(same(_peerAgent), any(MessageFacade.class));
+        verify(_behaviourFactory).getPeerUpdate(same(_peerAgent), any(MessageFacade.class));
     }
 
     @Test
     public void constructor_SchedulesInitialModelTraining(){
-        verify(_behaviorFactory).getModelCreation(_peerAgent);
+        verify(_behaviourFactory).getModelCreation(_peerAgent);
     }
 
 

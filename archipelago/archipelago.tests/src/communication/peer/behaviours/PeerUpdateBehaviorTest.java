@@ -1,14 +1,12 @@
 package communication.peer.behaviours;
 
-import communication.BehaviorFactory;
+import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
-import jade.core.behaviours.Behaviour;
 import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
-import testutils.LambdaMatcher;
 
 import static org.mockito.Mockito.*;
 
@@ -20,7 +18,7 @@ public class PeerUpdateBehaviorTest {
     private PeerUpdateBehavior _updateBehavior;
     private MessageFacade _messageFacade;
     private PeerAgent _peerAgent;
-    private BehaviorFactory _behaviorFactory;
+    private BehaviourFactory _behaviourFactory;
     private Model _model;
     private PropegateBehavior _propegateBehavior;
 
@@ -28,15 +26,15 @@ public class PeerUpdateBehaviorTest {
     public void setUp(){
         _messageFacade = mock(MessageFacade.class);
         _peerAgent = mock(PeerAgent.class);
-        _behaviorFactory = mock(BehaviorFactory.class);
+        _behaviourFactory = mock(BehaviourFactory.class);
         when(_peerAgent.getIterations()).thenReturn(2);
 
         _propegateBehavior = mock(PropegateBehavior.class);
         _model = mock(Model.class);
-        when(_behaviorFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
+        when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
 
 
-        _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviorFactory);
+        _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);
     }
 
     private Message fakeMessage(Model model) {

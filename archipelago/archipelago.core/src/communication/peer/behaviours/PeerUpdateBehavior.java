@@ -1,6 +1,6 @@
 package communication.peer.behaviours;
 
-import communication.BehaviorFactory;
+import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
@@ -13,13 +13,13 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
 
     private final PeerAgent _peerAgent;
     private final MessageFacade _messageFacade;
-    private final BehaviorFactory _behaviorFactory;
+    private final BehaviourFactory _behaviourFactory;
     private int _iteration;
 
-    public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade, BehaviorFactory behaviorFactory) {
+    public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade, BehaviourFactory behaviourFactory) {
         _peerAgent = peerAgent;
         _messageFacade = messageFacade;
-        _behaviorFactory = behaviorFactory;
+        _behaviourFactory = behaviourFactory;
         _iteration = 0;
     }
 
@@ -30,7 +30,7 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
             _peerAgent.addModel(message.getModel());
 
             if(_iteration < _peerAgent.getIterations() - 1) {
-                _peerAgent.addBehaviour(_behaviorFactory.getModelPropegate(_peerAgent, message.getModel()));
+                _peerAgent.addBehaviour(_behaviourFactory.getModelPropegate(_peerAgent, message.getModel()));
                 _iteration++;
             }
         }

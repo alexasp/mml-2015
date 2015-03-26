@@ -1,9 +1,12 @@
 package communication;
 
 import communication.messaging.MessageFacade;
+import communication.peer.CompletionListeningAgent;
+import communication.peer.behaviours.CompletionListeningBehavior;
 import communication.peer.behaviours.ModelCreationBehavior;
 import communication.peer.behaviours.PeerUpdateBehavior;
 import communication.peer.behaviours.PropegateBehavior;
+import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import learning.Model;
 import learning.ModelFactory;
@@ -11,10 +14,10 @@ import learning.ModelFactory;
 /**
  * Created by alex on 3/9/15.
  */
-public class BehaviorFactory {
+public class BehaviourFactory {
     private ModelFactory _modelFactory;
 
-    public BehaviorFactory(ModelFactory modelFactory) {
+    public BehaviourFactory(ModelFactory modelFactory) {
         _modelFactory = modelFactory;
     }
 
@@ -28,5 +31,9 @@ public class BehaviorFactory {
 
     public Behaviour getModelCreation(PeerAgent agent) {
         return new ModelCreationBehavior(agent, _modelFactory);
+    }
+
+    public Behaviour getCompletionListening(CompletionListeningAgent agent, MessageFacade messageFacade) {
+        return new CompletionListeningBehavior(agent, messageFacade);
     }
 }

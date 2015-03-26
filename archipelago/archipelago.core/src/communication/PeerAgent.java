@@ -20,13 +20,13 @@ public class PeerAgent extends Agent {
     private NoisyQueryable<LabeledSample> _data;
     private int _iterations;
 
-    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviorFactory behaviorFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations) {
+    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations) {
         _ensemble = ensemble;
         _data = data;
         _iterations = iterations;
         _messageFacade = messageFacadeFactory.getFacade(this);
-        addBehaviour(behaviorFactory.getModelCreation(this));
-        addBehaviour(behaviorFactory.getPeerUpdate(this, _messageFacade));
+        addBehaviour(behaviourFactory.getModelCreation(this));
+        addBehaviour(behaviourFactory.getPeerUpdate(this, _messageFacade));
     }
 
     public void addModel(Model model) {

@@ -3,6 +3,7 @@ package experiment;
 import communication.Environment;
 import communication.PeerAgent;
 import communication.peer.AgentFactory;
+import communication.peer.CompletionListeningAgent;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
@@ -90,13 +91,13 @@ public class ExperimentTest {
     @Test
     public void run_RunsEnvironmentAndRegistersCompletionAgent() throws ControllerException {
         int iterations = 10;
-        int peers = 2;
+        int peerCount = 2;
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_agentFactory.createPeers(_train, peers, iterations)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, peerCount, iterations)).thenReturn(Arrays.asList(agent1, agent2));
         Consumer<Experiment> completionListener = mock(Consumer.class);
         CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
-        when(_agentFactory.getCompletionAgent(completionListener)).thenReturn(completionAgent);
+        when(_agentFactory.getCompletionAgent(same(completionListener), eq(peerCount), any(Experiment.class))).thenReturn(completionAgent);
 
 
         Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations);
