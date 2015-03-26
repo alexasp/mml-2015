@@ -1,11 +1,9 @@
 package privacy;
 
-import communication.PeerAgent;
 import learning.LabeledSample;
-import privacy.math.NoiseGenerator;
+import privacy.math.RandomGenerator;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -19,12 +17,12 @@ public class NoisyQueryable<T> {
 
     private List<T> _data;
     private Budget _agent;
-    private NoiseGenerator _noiseGenerator;
+    private RandomGenerator _randomGenerator;
 
-    private NoisyQueryable(Budget agent, List<T> data, NoiseGenerator noiseGenerator) {
+    private NoisyQueryable(Budget agent, List<T> data, RandomGenerator randomGenerator) {
         _data = data;
         _agent = agent;
-        _noiseGenerator = noiseGenerator;
+        _randomGenerator = randomGenerator;
     }
 
     //TODO: Thesa projections allow for counting the exact number of records or exporting the samples. Problem?
@@ -35,7 +33,7 @@ public class NoisyQueryable<T> {
             values.add(projection.apply(record));
         }
 
-        return new NoisyQueryable<Y>(_agent, values, _noiseGenerator);
+        return new NoisyQueryable<Y>(_agent, values, _randomGenerator);
     }
 
     //TODO: Thesa projections allow for counting the exact number of records or exporting the samples. Problem?
@@ -43,7 +41,7 @@ public class NoisyQueryable<T> {
         List<Y> values = IntStream.range(0, _data.size())
                 .mapToObj(i -> projection.apply(_data.get(i), i))
                 .collect(Collectors.toList());
-        return new NoisyQueryable<Y>(_agent, values, _noiseGenerator);
+        return new NoisyQueryable<Y>(_agent, values, _randomGenerator);
     }
 
     private <NewType> List<NewType> newDataContainer() {
@@ -58,7 +56,7 @@ public class NoisyQueryable<T> {
         checkAgentBudget(epsilon);
 
         _agent.apply(epsilon);
-        return ((double)_data.size()) + _noiseGenerator.fromLaplacian(1.0 / epsilon);
+        return ((double)_data.size()) + _randomGenerator.fromLaplacian(1.0 / epsilon);
     }
 
     public double noisyAverage(double cost, BiFunction<T, Integer, Double> projection) {
@@ -70,12 +68,12 @@ public class NoisyQueryable<T> {
         double count = _data.size();
 
         if(count == 0){
-            return _noiseGenerator.uniform(-1, 1); //TODO: double check that this should be uniformly -1 and 1
+            return _randomGenerator.uniform(-1.0, 1.0); //TODO: double check that this should be uniformly -1 and 1
         }
 
-        double candidate = (tally + _noiseGenerator.fromLaplacian(2.0 / cost)) / count;
+        double candidate = (tally + _randomGenerator.fromLaplacian(2.0 / cost)) / count;
         while(candidate < -1.0 || candidate > 1.0){
-            candidate = (tally + _noiseGenerator.fromLaplacian(2.0 / cost)) / count;
+            candidate = (tally + _randomGenerator.fromLaplacian(2.0 / cost)) / count;
         }
 
         return candidate;
@@ -91,7 +89,7 @@ public class NoisyQueryable<T> {
         checkAgentBudget(epsilon);
         return _data.stream().mapToDouble(record -> projection.apply(record))
                 .map(NoisyQueryable::clamp)
-                .sum() + _noiseGenerator.fromLaplacian(1.0 / epsilon);
+                .sum() + _randomGenerator.fromLaplacian(1.0 / epsilon);
     }
 
     private static double clamp(double value) {
@@ -113,7 +111,7 @@ public class NoisyQueryable<T> {
     }
 
 
-    public static <T> NoisyQueryable<T> getQueryable(Budget budget, List<T> data, NoiseGenerator noiseGenerator) {
-        return new NoisyQueryable<>(budget, data, noiseGenerator);
+    public static <T> NoisyQueryable<T> getQueryable(Budget budget, List<T> data, RandomGenerator randomGenerator) {
+        return new NoisyQueryable<>(budget, data, randomGenerator);
     }
 }

@@ -2,7 +2,7 @@ package privacy;
 
 import org.junit.Before;
 import org.junit.Test;
-import privacy.math.NoiseGenerator;
+import privacy.math.RandomGenerator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -30,7 +30,7 @@ public class NoisyQueryableTest {
 
     private NoisyQueryable<Double> _queryable;
     private Collection<Double> _data;
-    private NoiseGenerator _noiseGenerator;
+    private RandomGenerator _randomGenerator;
     private Budget _agent;
     private double _cost;
 
@@ -41,15 +41,15 @@ public class NoisyQueryableTest {
         _agent = mock(Budget.class);
         when(_agent.getEpsilon()).thenReturn(1.0);
 
-        _noiseGenerator = mock(NoiseGenerator.class);
+        _randomGenerator = mock(RandomGenerator.class);
 
-        _queryable = breakConstructorPrivacy(_agent, _data, _noiseGenerator);
+        _queryable = breakConstructorPrivacy(_agent, _data, _randomGenerator);
     }
 
-    public static NoisyQueryable breakConstructorPrivacy(Budget budget, Collection<Double> data, NoiseGenerator noiseGenerator) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static NoisyQueryable breakConstructorPrivacy(Budget budget, Collection<Double> data, RandomGenerator randomGenerator) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<NoisyQueryable> constructor = (Constructor<NoisyQueryable>) NoisyQueryable.class.getDeclaredConstructors()[0];
         constructor.setAccessible(true);
-        return constructor.newInstance(budget, data, noiseGenerator);
+        return constructor.newInstance(budget, data, randomGenerator);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class NoisyQueryableTest {
     @Test
     public void count_AddsLaplaceNoise(){
         _data.addAll(Arrays.asList(3.0, 4.0, 5.0));
-        when(_noiseGenerator.fromLaplacian(anyDouble())).thenReturn(-2.0);
+        when(_randomGenerator.fromLaplacian(anyDouble())).thenReturn(-2.0);
 
         assertEquals(1.0, _queryable.count(_agent.getEpsilon() * 0.1), 0.001);
     }
@@ -128,7 +128,7 @@ public class NoisyQueryableTest {
     @Test
     public void sum_NoisyGenerator_AddsNoiseToSum(){
         _data.addAll(Arrays.asList(0.5, -0.2, -2.0, 5.0));
-        when(_noiseGenerator.fromLaplacian(anyDouble())).thenReturn(5.0);
+        when(_randomGenerator.fromLaplacian(anyDouble())).thenReturn(5.0);
 
         Function<Double,Double> proj = x -> x;
         assertEquals(5.3, _queryable.sum(1.0, proj), 0.00001d);
@@ -143,7 +143,7 @@ public class NoisyQueryableTest {
     public void noisyAverage_EmptySet_ReturnsUniform(){
         BiFunction<Double, Integer, Double> projection = (x,i) -> (double)i;
         double expectedNoise = -0.023;
-        when(_noiseGenerator.uniform(-1, 1)).thenReturn(expectedNoise);
+        when(_randomGenerator.uniform(-1.0, 1.0)).thenReturn(expectedNoise);
 
         double average = _queryable.noisyAverage(_cost, projection);
 
@@ -168,9 +168,9 @@ public class NoisyQueryableTest {
         List<Double> data = Arrays.asList(-1.5, -0.5, 4.0, 0.3);
         List<Double> clamped = Arrays.asList(-1.0, -0.5, 1.0, 0.3);
         BiFunction<Double, Integer, Double> projection = (x,i) -> x;
-        NoisyQueryable<Double> queryable = breakConstructorPrivacy(_agent, data, _noiseGenerator);
+        NoisyQueryable<Double> queryable = breakConstructorPrivacy(_agent, data, _randomGenerator);
         double noise = -0.01;
-        when(_noiseGenerator.fromLaplacian(2/_cost)).thenReturn(noise);
+        when(_randomGenerator.fromLaplacian(2/_cost)).thenReturn(noise);
 
         double average = queryable.noisyAverage(_cost, projection);
 
@@ -187,8 +187,8 @@ public class NoisyQueryableTest {
 
 
 
-    public static NoiseGenerator getNoiseLessNoiseGenerator() {
-        NoiseGenerator generator = mock(NoiseGenerator.class);
+    public static RandomGenerator getNoiseLessNoiseGenerator() {
+        RandomGenerator generator = mock(RandomGenerator.class);
         return generator;
     }
 

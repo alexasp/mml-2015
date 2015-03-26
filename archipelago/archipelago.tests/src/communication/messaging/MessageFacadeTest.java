@@ -1,17 +1,25 @@
 package communication.messaging;
 
+import communication.PeerAgent;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
+import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import privacy.math.RandomGenerator;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -25,12 +33,16 @@ public class MessageFacadeTest {
     private MessageFacade _messaging;
     private Agent _agent;
     private ACLMessageParser _messageParser;
+    private PeerGraph _peerGraph;
+    private RandomGenerator _randomGenerator;
 
     @Before
     public void setUp(){
+        _peerGraph = mock(PeerGraph.class);
         _messageParser = mock(ACLMessageParser.class);
         _agent = PowerMockito.mock(Agent.class);
-        _messaging = new MessageFacade(_agent, _messageParser);
+        _randomGenerator = mock(RandomGenerator.class);
+        _messaging = new MessageFacade(_agent, _messageParser, _peerGraph, _randomGenerator);
     }
 
 
@@ -67,6 +79,22 @@ public class MessageFacadeTest {
         Message actualMessage = _messaging.nextMessage();
 
         assertEquals(parsedMessage, actualMessage);
+    }
+
+    @Test
+    public void sendToRandomPeer(){
+        AID agent1 = mock(AID.class);
+        AID agent2 = mock(AID.class);
+        Model model = mock(Model.class);
+        List<AID> agents = Arrays.asList(agent1, agent2);
+        when(_peerGraph.getPeers(_agent)).thenReturn(agents);
+        when(_randomGenerator.uniform(0, agents.size()-1)).thenReturn(1);
+        ACLMessage message = mock(ACLMessage.class);
+        when(_messageParser.createMessage(model, agent2)).thenReturn(message);
+
+        _messaging.sendToRandomPeer(model);
+
+        verify(_agent).send(message);
     }
 
     @Test(expected = IllegalStateException.class)

@@ -1,6 +1,7 @@
 package communication.messaging;
 
 import communication.messaging.jade.ACLMessageReader;
+import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import learning.Model;
 import learning.ModelFactory;
@@ -31,4 +32,7 @@ public class ACLMessageParser {
         return new Message(_modelFactory.getLogisticModel(parameters));
     }
 
+    public ACLMessage createMessage(Model model, AID agent2) {
+        throw new UnsupportedOperationException();
+    }
 }

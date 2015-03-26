@@ -1,8 +1,6 @@
 package privacy;
 
-import communication.PeerAgent;
-import learning.LabeledSample;
-import privacy.math.NoiseGenerator;
+import privacy.math.RandomGenerator;
 
 import java.util.List;
 
@@ -10,9 +8,9 @@ import java.util.List;
  * Created by aspis on 25.03.2015.
  */
 public class NoisyQueryableFactory {
-    private NoiseGenerator _noiseGenerator;
+    private RandomGenerator _randomGenerator;
 
     public <T> NoisyQueryable<T> getQueryable(Budget budget, List<T> data) {
-        return NoisyQueryable.getQueryable(budget, data, _noiseGenerator);
+        return NoisyQueryable.getQueryable(budget, data, _randomGenerator);
     }
 }

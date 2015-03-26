@@ -7,9 +7,6 @@ import communication.peer.behaviours.CompletionListeningBehavior;
 import experiment.Experiment;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.function.Consumer;
 
