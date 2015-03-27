@@ -7,13 +7,11 @@ import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import experiment.DataLoader;
 import experiment.Experiment;
-import jade.tools.sniffer.AgentList;
 import learning.EnsembleModel;
 import learning.LabeledSample;
 import privacy.Budget;
 import privacy.NoisyQueryable;
 import privacy.NoisyQueryableFactory;
-import privacy.math.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,14 +36,14 @@ public class AgentFactory {
         _noisyQueryableFactory = noisyQueryableFactory;
     }
 
-    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget) {
+    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters) {
         List<List<LabeledSample>> partitions = _dataLoader.partition(parts, data);
 
         List<PeerAgent> agents = new ArrayList<>();
 
         for(List<LabeledSample> partition : partitions){
             NoisyQueryable<LabeledSample> queryable = _noisyQueryableFactory.getQueryable(new Budget(budget), partition);
-            agents.add(new PeerAgent(queryable, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph));
+            agents.add(new PeerAgent(queryable, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph, parameters));
         }
 
         return agents;

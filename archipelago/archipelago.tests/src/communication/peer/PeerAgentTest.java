@@ -33,6 +33,7 @@ public class PeerAgentTest {
     private MessageFacadeFactory _messageFacadeFactory;
     private int _iterations = 5;
     private PeerGraph _peerGraph;
+    private int _parameters = 60;
 
     @Before
     public void setUp(){
@@ -43,10 +44,10 @@ public class PeerAgentTest {
         _behaviourFactory = mock(BehaviourFactory.class);
         _peerGraph = mock(PeerGraph.class);
 
-        stubBehaviourFactory(_behaviourFactory);
+        stubBehaviourFactory(_behaviourFactory, _parameters);
         stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations, _peerGraph);
+        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations, _peerGraph, _parameters);
     }
 
 
@@ -60,9 +61,9 @@ public class PeerAgentTest {
         when(messageFacadeFactory.getFacade(any(PeerAgent.class))).thenReturn(messageFacade);
     }
 
-    public static void stubBehaviourFactory(BehaviourFactory behaviourFactory) {
+    public static void stubBehaviourFactory(BehaviourFactory behaviourFactory, int parameters) {
         when(behaviourFactory.getPeerUpdate(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(PeerUpdateBehavior.class));
-        when(behaviourFactory.getModelCreation(any(PeerAgent.class))).thenReturn(mock(ModelCreationBehavior.class));
+        when(behaviourFactory.getModelCreation(any(PeerAgent.class), parameters)).thenReturn(mock(ModelCreationBehavior.class));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class PeerAgentTest {
 
     @Test
     public void constructor_SchedulesInitialModelTraining(){
-        verify(_behaviourFactory).getModelCreation(_peerAgent);
+        verify(_behaviourFactory).getModelCreation(_peerAgent, _parameters);
     }
 
 

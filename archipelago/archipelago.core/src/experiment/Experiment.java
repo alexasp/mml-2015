@@ -7,7 +7,6 @@ import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
-import privacy.Budget;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -30,7 +29,7 @@ public class Experiment {
     private int _peerCount;
     private int _iterations;
 
-    public Experiment(List<LabeledSample> samples, double trainRatio, int peerCount, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations, DataLoader _dataLoader, double budget) throws StaleProxyException {
+    public Experiment(List<LabeledSample> samples, double trainRatio, int peerCount, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations, DataLoader _dataLoader, double budget, int _parameters) throws StaleProxyException {
         _testCost = testCost;
         _trainRatio = trainRatio;
         _environment = environment;
@@ -46,7 +45,7 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, peerCount, iterations, _budget);
+        _peers = agentFactory.createPeers(_trainData, peerCount, iterations, _budget, _parameters);
 
 
         registerPeers(_peers);

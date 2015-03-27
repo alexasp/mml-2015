@@ -28,6 +28,7 @@ public class ExperimentFactoryTest {
     private PerformanceMetrics _performanceMetrics;
     private Environment _environment;
     private DataLoader _dataLoader;
+    private int _parameters = 30;
 
     @Before
     public void setUp(){
@@ -49,7 +50,7 @@ public class ExperimentFactoryTest {
         double testCost = 0.1;
         int iterations = 10;
 
-        Experiment experiment = _experimentFactory.getExperiment(samples, trainRatio, peerCount, testCost, iterations, 2.0);
+        Experiment experiment = _experimentFactory.getExperiment(samples, trainRatio, peerCount, testCost, iterations, 2.0, _parameters);
 
         assertEquals(samples, experiment.getData());
         assertEquals(trainRatio, experiment.getTrainRatio(), 0.0001d);

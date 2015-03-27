@@ -31,8 +31,8 @@ public class BehaviourFactory {
         return new PropegateBehavior(model, agent);
     }
 
-    public Behaviour getModelCreation(PeerAgent agent) {
-        return new ModelCreationBehavior(agent, _modelFactory);
+    public Behaviour getModelCreation(PeerAgent agent, int parameters) {
+        return new ModelCreationBehavior(agent, _modelFactory, parameters);
     }
 
     public Behaviour getCompletionListening(CompletionListeningAgent agent, MessageFacade messageFacade) {

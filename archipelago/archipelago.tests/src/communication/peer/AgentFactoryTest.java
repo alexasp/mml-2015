@@ -45,6 +45,7 @@ public class AgentFactoryTest {
     private NoisyQueryable<LabeledSample> _queryable1;
     private NoisyQueryable<learning.LabeledSample> _queryable2;
     private Environment _environment;
+    private int _parameters = 20;
 
     @Before
     public void setUp(){
@@ -58,7 +59,7 @@ public class AgentFactoryTest {
         _behaviourFactory = mock(BehaviourFactory.class);
         _messageFacadeFactory = mock(MessageFacadeFactory.class);
         _environment = mock(Environment.class);
-        PeerAgentTest.stubBehaviourFactory(_behaviourFactory);
+        PeerAgentTest.stubBehaviourFactory(_behaviourFactory, _parameters);
         PeerAgentTest.stubMessageFacadeFactory(_messageFacadeFactory);
 
         when(_noisyQueryableFactory.getQueryable(any(Budget.class), same(_partition1))).thenReturn(_queryable1);
@@ -80,18 +81,19 @@ public class AgentFactoryTest {
 
     @Test
     public void createPeers_OnePeerPerPartition(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters);
 
         assertEquals(_parts, peers.size());
     }
 
     @Test
     public void createPeers_PartitionsData(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters);
 
         assertEquals(_queryable1, peers.get(0).getData());
         assertEquals(_queryable2, peers.get(1).getData());
         assertEquals(peers.get(0).getIterations(), _iterations);
+        assertEquals(peers.get(0).getParameterLength(), _parameters);
     }
 
 }

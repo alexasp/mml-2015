@@ -6,8 +6,6 @@ import communication.peer.AgentFactory;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
-import privacy.Budget;
-import privacy.NoisyQueryable;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class ExperimentFactory {
         _dataLoader = dataLoader;
     }
 
-    public Experiment getExperiment(List<LabeledSample> samples, double trainRatio, int peerCount, double testCost, int iterations, double budget) throws StaleProxyException {
-        return new Experiment(samples, trainRatio, peerCount, _peerFactory, _performanceMetrics, testCost, _environment, iterations, _dataLoader, budget);
+    public Experiment getExperiment(List<LabeledSample> samples, double trainRatio, int peerCount, double testCost, int iterations, double budget, int parameters) throws StaleProxyException {
+        return new Experiment(samples, trainRatio, peerCount, _peerFactory, _performanceMetrics, testCost, _environment, iterations, _dataLoader, budget, parameters);
     }
 }

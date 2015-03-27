@@ -32,7 +32,7 @@ public class SpamTest {
         double testCost = 0.1;
         int iterations = 10;
 
-        Experiment experiment = experimentFactory.getExperiment(data, trainRatio, peerCount, testCost, iterations, 2.0);
+        Experiment experiment = experimentFactory.getExperiment(data, trainRatio, peerCount, testCost, iterations, 2.0, data.get(0).getFeatures().length);
 
         experiment.run(completeExperiment -> System.out.println(completeExperiment.test()));
     }

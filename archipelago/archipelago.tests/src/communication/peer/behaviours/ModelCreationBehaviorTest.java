@@ -4,10 +4,15 @@ import communication.PeerAgent;
 import learning.LabeledSample;
 import learning.ModelFactory;
 import learning.models.LogisticModel;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
+import testutils.LambdaMatcher;
 
+import java.util.function.Predicate;
+
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,18 +27,21 @@ public class ModelCreationBehaviorTest {
     private ModelFactory _modelFactory;
     private LogisticModel _model;
     private NoisyQueryable<LabeledSample> _queryable;
+    private int _parameters = 100;
 
     @Before
     public void setUp(){
         _agent = mock(PeerAgent.class);
         _modelFactory = mock(ModelFactory.class);
         _model = mock(LogisticModel.class);
-        when(_modelFactory.getLogisticModel()).thenReturn(_model);
+        Predicate<Double[]> predicate = x -> x.length == _parameters;
+
+        when(_modelFactory.getLogisticModel(org.mockito.Matchers.<double[]>argThat(new LambdaMatcher(predicate)))).thenReturn(_model);
         _queryable = mock(NoisyQueryable.class);
 
         when(_agent.getData()).thenReturn(_queryable);
 
-        _creationBehaviour = new ModelCreationBehavior(_agent, _modelFactory);
+        _creationBehaviour = new ModelCreationBehavior(_agent, _modelFactory, _parameters);
     }
 
     @Test

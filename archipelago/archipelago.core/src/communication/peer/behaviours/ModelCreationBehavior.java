@@ -12,15 +12,17 @@ import learning.ModelFactory;
 public class ModelCreationBehavior extends OneShotBehaviour {
     private final PeerAgent _agent;
     private final ModelFactory _modelFactory;
+    private int _parameters;
 
-    public ModelCreationBehavior(PeerAgent agent, ModelFactory modelFactory) {
+    public ModelCreationBehavior(PeerAgent agent, ModelFactory modelFactory, int parameters) {
         _agent = agent;
         _modelFactory = modelFactory;
+        _parameters = parameters;
     }
 
     @Override
     public void action() {
-        Model model = _modelFactory.getLogisticModel(); //TODO: add parameters
+        Model model = _modelFactory.getLogisticModel(_parameters); //TODO: add parameters
         model.update(_agent.getUpdateCost(), _agent.getData());
         _agent.addModel(model);
     }
