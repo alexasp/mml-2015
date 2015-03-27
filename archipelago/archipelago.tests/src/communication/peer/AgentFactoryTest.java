@@ -65,7 +65,7 @@ public class AgentFactoryTest {
         when(_noisyQueryableFactory.getQueryable(any(Budget.class), same(_partition2))).thenReturn(_queryable2);
 
 
-        _peerFactory = new AgentFactory(_behaviourFactory, _messageFacadeFactory, _peerGraph, _dataLoader, _noisyQueryableFactory, _environment);
+        _peerFactory = new AgentFactory(_behaviourFactory, _messageFacadeFactory, _peerGraph, _dataLoader, _noisyQueryableFactory);
     }
 
     private void mockData() {
