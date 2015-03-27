@@ -8,8 +8,6 @@ import experiment.Experiment;
 import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
 import learning.LabeledSample;
-import privacy.Budget;
-import privacy.NoisyQueryable;
 import privacy.NoisyQueryableFactory;
 
 import java.util.List;
@@ -27,7 +25,7 @@ public class SpamTest {
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         NoisyQueryableFactory queryableFactory = injector.getInstance(NoisyQueryableFactory.class);
 
-        List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase.csv");
+        List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase.csv","end",true);
 
         double trainRatio = 0.8;
         int peerCount = 5;
