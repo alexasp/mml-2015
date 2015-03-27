@@ -43,16 +43,6 @@ public class PeerGraph {
     }
 
     public void join(PeerAgent peerAgent) {
-        DFAgentDescription dfd = new DFAgentDescription();
-        dfd.setName( peerAgent.getAID() );
-        ServiceDescription sd  = new ServiceDescription();
-        sd.setType( SERVICE_NAME );
-        dfd.addServices(sd);
-
-        try {
-            DFService.register(peerAgent, dfd);
-        } catch (FIPAException e) {
-            throw new RuntimeException("Unable to search peer graph.");
-        }
+        //..
     }
 }

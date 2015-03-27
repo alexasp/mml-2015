@@ -1,6 +1,7 @@
 package communication.peer;
 
 import communication.BehaviourFactory;
+import communication.Environment;
 import communication.PeerAgent;
 import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
@@ -43,6 +44,7 @@ public class AgentFactoryTest {
     private double _budget = 2.0;
     private NoisyQueryable<LabeledSample> _queryable1;
     private NoisyQueryable<learning.LabeledSample> _queryable2;
+    private Environment _environment;
 
     @Before
     public void setUp(){
@@ -55,6 +57,7 @@ public class AgentFactoryTest {
         _peerGraph = mock(PeerGraph.class);
         _behaviourFactory = mock(BehaviourFactory.class);
         _messageFacadeFactory = mock(MessageFacadeFactory.class);
+        _environment = mock(Environment.class);
         PeerAgentTest.stubBehaviourFactory(_behaviourFactory);
         PeerAgentTest.stubMessageFacadeFactory(_messageFacadeFactory);
 
@@ -62,7 +65,7 @@ public class AgentFactoryTest {
         when(_noisyQueryableFactory.getQueryable(any(Budget.class), same(_partition2))).thenReturn(_queryable2);
 
 
-        _peerFactory = new AgentFactory(_behaviourFactory, _messageFacadeFactory, _peerGraph, _dataLoader, _noisyQueryableFactory);
+        _peerFactory = new AgentFactory(_behaviourFactory, _messageFacadeFactory, _peerGraph, _dataLoader, _noisyQueryableFactory, _environment);
     }
 
     private void mockData() {

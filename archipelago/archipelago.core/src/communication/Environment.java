@@ -4,6 +4,10 @@ import jade.core.Agent;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
+import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.ControllerException;
@@ -15,6 +19,9 @@ import jade.wrapper.StaleProxyException;
 public class Environment {
 
     private AgentContainer _mainContainer;
+    private static final String SERVICE_NAME = "peer";
+    private int _counter = 0;
+
 
     public Environment() throws ControllerException {
         createContainer();
@@ -49,7 +56,6 @@ public class Environment {
         System.out.println("Launching the rma agent on the main container ...");
 
         AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
-
 //        _mainContainer.suspend();
     }
 
@@ -59,7 +65,25 @@ public class Environment {
 //    }
 
     public void registerAgent(Agent agent) throws StaleProxyException {
-        _mainContainer.acceptNewAgent(agent.getLocalName(), agent);
+        AgentController agentWrapper = _mainContainer.acceptNewAgent("peerolini" + _counter, agent);
+        _counter++;
+        agentWrapper.start();
+//        joinDF(agent);
+    }
+
+    private void joinDF(Agent peerAgent) {
+        DFAgentDescription dfd = new DFAgentDescription();
+        dfd.setName(peerAgent.getAID() );
+        ServiceDescription sd  = new ServiceDescription();
+        sd.setName( peerAgent.getLocalName() );
+        sd.setType( SERVICE_NAME );
+        dfd.addServices(sd);
+
+        try {
+            DFService.register(peerAgent, dfd);
+        } catch (FIPAException e) {
+            throw new RuntimeException("Unable to search peer graph.", e);
+        }
     }
 
     public void run() throws ControllerException {
