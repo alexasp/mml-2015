@@ -20,7 +20,7 @@ public class ModelCreationBehavior extends OneShotBehaviour {
 
     @Override
     public void action() {
-        Model model = _modelFactory.getLogisticModel();
+        Model model = _modelFactory.getLogisticModel(); //TODO: add parameters
         model.update(_agent.getUpdateCost(), _agent.getData());
         _agent.addModel(model);
     }
