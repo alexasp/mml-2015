@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,7 +33,7 @@ public class ACLMessageParserTest {
         when(_reader.read(_aclMessage)).thenReturn(_modelString);
         _modelFactory = mock(ModelFactory.class);
         _model = mock(LogisticModel.class);
-        when(_modelFactory.getLogisticModel(2.0, 1.5, -2.5, -100.0)).thenReturn(_model);
+        when(_modelFactory.getLogisticModel(any(double[].class))).thenReturn(_model);
 
         _parser = new ACLMessageParser(_reader, _modelFactory);
     }
