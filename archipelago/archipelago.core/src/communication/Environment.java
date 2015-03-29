@@ -1,5 +1,6 @@
 package communication;
 
+import com.google.inject.Singleton;
 import jade.core.Agent;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -16,6 +17,7 @@ import jade.wrapper.StaleProxyException;
 /**
  * Created by alex on 3/10/15.
  */
+@Singleton
 public class Environment {
 
     private AgentContainer _mainContainer;

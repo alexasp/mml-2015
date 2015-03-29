@@ -52,10 +52,6 @@ public class PeerAgent extends Agent {
         return _messageFacade;
     }
 
-    public void run(int iterations) {
-        throw new UnsupportedOperationException();
-    }
-
     public List<Double> labelData(List<LabeledSample> test) {
         throw new UnsupportedOperationException();
     }

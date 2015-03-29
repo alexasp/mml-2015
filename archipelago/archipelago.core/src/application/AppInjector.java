@@ -1,6 +1,7 @@
 package application;
 
 import com.google.inject.AbstractModule;
+import communication.Environment;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -8,6 +9,7 @@ import com.google.inject.AbstractModule;
 public class AppInjector extends AbstractModule {
     @Override
     protected void configure() {
+
 
     }
 }
