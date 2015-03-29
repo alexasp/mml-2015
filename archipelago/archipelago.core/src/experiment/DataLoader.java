@@ -59,7 +59,7 @@ public class DataLoader {
         int current = 0;
         List<LabeledSample> nextData = new ArrayList<>();
         for(int i = 0; i < data.size(); i++){
-            if(current != i % recordsToEach){
+            if(current != recordsToEach){
                 current = i % recordsToEach;
                 partitions.add(nextData);
             }
