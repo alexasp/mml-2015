@@ -16,6 +16,7 @@ import org.junit.Test;
 import privacy.NoisyQueryable;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -63,7 +64,7 @@ public class PeerAgentTest {
 
     public static void stubBehaviourFactory(BehaviourFactory behaviourFactory, int parameters) {
         when(behaviourFactory.getPeerUpdate(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(PeerUpdateBehavior.class));
-        when(behaviourFactory.getModelCreation(any(PeerAgent.class), parameters)).thenReturn(mock(ModelCreationBehavior.class));
+        when(behaviourFactory.getModelCreation(any(PeerAgent.class), eq(parameters))).thenReturn(mock(ModelCreationBehavior.class));
     }
 
     @Test
