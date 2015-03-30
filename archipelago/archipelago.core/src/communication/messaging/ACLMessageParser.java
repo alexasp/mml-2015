@@ -37,4 +37,8 @@ public class ACLMessageParser {
     public ACLMessage createMessage(Model model, AID agent2) {
         throw new UnsupportedOperationException();
     }
+
+    public ACLMessage createCompletionMessage(AID agent1) {
+        return null;
+    }
 }

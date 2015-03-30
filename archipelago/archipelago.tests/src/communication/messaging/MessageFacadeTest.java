@@ -1,6 +1,5 @@
 package communication.messaging;
 
-import communication.PeerAgent;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
@@ -102,6 +101,17 @@ public class MessageFacadeTest {
         when(_agent.receive()).thenReturn(null);
 
         _messaging.nextMessage();
+    }
+
+    @Test
+    public void sendCompetionMessage(){
+        AID agent1 = mock(AID.class);
+        ACLMessage message = mock(ACLMessage.class);
+        when(_messageParser.createCompletionMessage(agent1)).thenReturn(message);
+
+        _messaging.sendCompletionMessage(agent1);
+
+        verify(_agent).send(message);
     }
 
 }

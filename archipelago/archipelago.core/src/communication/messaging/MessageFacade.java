@@ -54,4 +54,9 @@ public class MessageFacade {
 
         _agent.send(message);
     }
+
+    public void sendCompletionMessage(AID agent1) {
+        ACLMessage message = _messageParser.createCompletionMessage(agent1);
+        _agent.send(message);
+    }
 }

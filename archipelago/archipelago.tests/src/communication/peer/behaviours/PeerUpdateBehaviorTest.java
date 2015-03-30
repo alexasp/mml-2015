@@ -4,6 +4,7 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
+import jade.core.behaviours.Behaviour;
 import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,7 @@ public class PeerUpdateBehaviorTest {
     private BehaviourFactory _behaviourFactory;
     private Model _model;
     private PropegateBehavior _propegateBehavior;
+    private CompletionBehaviour _completionBehavior;
 
     @Before
     public void setUp(){
@@ -30,9 +32,9 @@ public class PeerUpdateBehaviorTest {
         when(_peerAgent.getIterations()).thenReturn(2);
 
         _propegateBehavior = mock(PropegateBehavior.class);
+        _completionBehavior = mock(CompletionBehaviour.class);
         _model = mock(Model.class);
         when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
-
 
         _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);
     }
@@ -76,6 +78,16 @@ public class PeerUpdateBehaviorTest {
         verify(_peerAgent, times(1)).addBehaviour(_propegateBehavior);
         _updateBehavior.action(); // final iteration
         verify(_peerAgent, times(1)).addBehaviour(any(PropegateBehavior.class));
+    }
+
+    @Test
+    public void action_NewMessageFinalIteration_AddsCompletionBehaviour() {
+        fakeMessage(_model);
+        when(_peerAgent.getIterations()).thenReturn(2);
+
+        _updateBehavior.action();
+        verify(_peerAgent, never()).addBehaviour(_completionBehavior);
+
     }
 
     @Test

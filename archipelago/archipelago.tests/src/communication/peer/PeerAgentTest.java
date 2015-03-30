@@ -88,6 +88,4 @@ public class PeerAgentTest {
         verify(_ensemble).add(model);
     }
 
-
-
 }
