@@ -33,18 +33,19 @@ public class ExperimentTest {
     private AgentFactory _agentFactory;
     private List<LabeledSample> _samples;
     private int _peerCount = 2;
-    private double _trainRatio;
+    private double _trainRatio = 0.8;
     private List<LabeledSample> _train;
     private List<LabeledSample> _test;
     private List<List<LabeledSample>> parts;
     private PerformanceMetrics _performanceMetrics;
     private double _testCost = 0.1;
-    private int _iterations;
+    private int _iterations = 5;
     private Environment _environment;
     private int iterations = 5;
     private DataLoader _dataLoader;
-    private double _budget;
+    private double _budget = 2.0;
     private int _parameters = 10;
+    private ExperimentConfiguration _configuration;
 
     @Before
     public void setUp(){
@@ -53,9 +54,8 @@ public class ExperimentTest {
         _performanceMetrics = mock(PerformanceMetrics.class);
         _environment = mock(Environment.class);
         _dataLoader = mock(DataLoader.class);
-        _budget = 2.0;
-        _trainRatio = 0.8;
-        _iterations = 5;
+
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters);
 
         _train = mock(List.class);
         _test = mock(List.class);
@@ -66,8 +66,9 @@ public class ExperimentTest {
     @Test
     public void construct_CreatesCorrectPeerCountAndGivesIterations() throws StaleProxyException {
         int peerCount = 3;
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters);
 
-        new Experiment(_samples, _trainRatio, peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations, _dataLoader, _budget, _parameters);
+        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
 
         verify(_agentFactory).createPeers(any(List.class), eq(peerCount), eq(_iterations), eq(_budget), eq(_parameters));
     }
@@ -78,7 +79,7 @@ public class ExperimentTest {
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_agentFactory.createPeers(_train, _peerCount, _iterations, _budget, _parameters)).thenReturn(Arrays.asList(agent1, agent2));
 
-        new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations, _dataLoader, _budget, _parameters);
+        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
 
         verify(_environment).registerAgent(agent1);
         verify(_environment).registerAgent(agent2);
@@ -86,7 +87,7 @@ public class ExperimentTest {
 
     @Test
     public void construct_GivesPeersTrainingData() throws StaleProxyException {
-        new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations, _dataLoader, _budget, _parameters);
+        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
 
         verify(_agentFactory).createPeers(_train, _peerCount, _iterations, _budget, _parameters);
     }
@@ -94,17 +95,15 @@ public class ExperimentTest {
 
     @Test
     public void run_RunsEnvironmentAndRegistersCompletionAgent() throws ControllerException {
-        int iterations = 10;
-        int peerCount = 2;
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_agentFactory.createPeers(_train, peerCount, iterations, _budget, _parameters)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, _peerCount, iterations, _budget, _parameters)).thenReturn(Arrays.asList(agent1, agent2));
         Consumer<Experiment> completionListener = mock(Consumer.class);
         CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
-        when(_agentFactory.getCompletionAgent(same(completionListener), eq(peerCount), any(Experiment.class))).thenReturn(completionAgent);
+        when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class))).thenReturn(completionAgent);
 
 
-        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations, _dataLoader, _budget, _parameters);
+        Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
         experiment.run(completionListener);
 
         verify(_environment).registerAgent(completionAgent);
@@ -120,7 +119,7 @@ public class ExperimentTest {
         when(agent2.labelData(_test)).thenReturn(mock(List.class));
         when(_performanceMetrics.errorRate(same(_test), any(List.class), eq(_testCost))).thenReturn(0.15);
 
-        Experiment experiment = new Experiment(_samples, _trainRatio, _peerCount, _agentFactory, _performanceMetrics, _testCost, _environment, iterations, _dataLoader, _budget, _parameters);
+        Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
         List<Double> errors = experiment.test();
 
         assertEquals(errors.get(0), 0.15, 0.0001d);

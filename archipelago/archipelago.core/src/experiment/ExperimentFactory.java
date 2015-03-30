@@ -13,20 +13,22 @@ import java.util.List;
  * Created by aspis on 25.03.2015.
  */
 public class ExperimentFactory {
-    private AgentFactory _peerFactory;
+    private AgentFactory _agentFactory;
     private PerformanceMetrics _performanceMetrics;
     private Environment _environment;
     private DataLoader _dataLoader;
 
     @Inject
     public ExperimentFactory(AgentFactory peerFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader) {
-        _peerFactory = peerFactory;
+        _agentFactory = peerFactory;
         _performanceMetrics = performanceMetrics;
         _environment = environment;
         _dataLoader = dataLoader;
     }
 
     public Experiment getExperiment(List<LabeledSample> samples, double trainRatio, int peerCount, double testCost, int iterations, double budget, int parameters) throws StaleProxyException {
-        return new Experiment(samples, trainRatio, peerCount, _peerFactory, _performanceMetrics, testCost, _environment, iterations, _dataLoader, budget, parameters);
+        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters);
+
+        return new Experiment(samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, configuration);
     }
 }

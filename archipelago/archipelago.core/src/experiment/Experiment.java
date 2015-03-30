@@ -22,30 +22,24 @@ public class Experiment {
     private final List<LabeledSample> _testData;
     private final List<LabeledSample> _data;
     private final AgentFactory _agentFactory;
-    private final double _budget;
-    private double _testCost;
+    private final ExperimentConfiguration _configuration;
+
     private Environment _environment;
-    private double _trainRatio;
-    private int _peerCount;
-    private int _iterations;
 
-    public Experiment(List<LabeledSample> samples, double trainRatio, int peerCount, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, double testCost, Environment environment, int iterations, DataLoader _dataLoader, double budget, int _parameters) throws StaleProxyException {
-        _testCost = testCost;
-        _trainRatio = trainRatio;
+
+    public Experiment(List<LabeledSample> samples, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, ExperimentConfiguration configuration) throws StaleProxyException {
         _environment = environment;
-        _peerCount = peerCount;
-        _iterations = iterations;
-
         _agentFactory = agentFactory;
-        _budget = budget;
 
-        List<List<LabeledSample>> trainPartitioning = _dataLoader.partition(trainRatio, samples);
+        _configuration = configuration;
+
+        List<List<LabeledSample>> trainPartitioning = dataLoader.partition(configuration.trainRatio, samples);
         _data = samples;
         _trainData = trainPartitioning.get(0);
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, peerCount, iterations, _budget, _parameters);
+        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters);
 
 
         registerPeers(_peers);
@@ -58,19 +52,19 @@ public class Experiment {
     }
 
     public void run(Consumer<Experiment> completionAction) throws ControllerException {
-        _environment.registerAgent(_agentFactory.getCompletionAgent(completionAction, _peerCount, this));
+        _environment.registerAgent(_agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this));
         _environment.run();
     }
 
     public List<Double> test() {
         return _peers.stream()
-                .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData), _testCost))
+                .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData), _configuration.testCost))
                 .boxed()
                 .collect(Collectors.toList());
     }
 
     public double getTrainRatio() {
-        return _trainRatio;
+        return _configuration.trainRatio;
     }
 
     public List<LabeledSample> getData() {
@@ -78,15 +72,15 @@ public class Experiment {
     }
 
     public int getPeerCount() {
-        return _peerCount;
+        return _configuration.peerCount;
     }
 
     public double getTestCost() {
-        return _testCost;
+        return _configuration.testCost;
     }
 
     public int getIterations() {
-        return _iterations;
+        return _configuration.iterations;
     }
 
 }
