@@ -31,7 +31,7 @@ public class ModelCreationBehavior extends OneShotBehaviour {
                 .mapToDouble(i -> _randomGenerator.uniform(-1.0, 1.0))
                 .toArray();
 
-        Model model = _modelFactory.getLogisticModel(parameterVector); //TODO: add parameters
+        Model model = _modelFactory.getPrivateLogisticModel(parameterVector); //TODO: add parameters
         model.update(_agent.getUpdateCost(), _agent.getData());
         _agent.addModel(model);
     }
