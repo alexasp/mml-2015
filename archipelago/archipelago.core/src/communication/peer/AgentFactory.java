@@ -36,14 +36,14 @@ public class AgentFactory {
         _noisyQueryableFactory = noisyQueryableFactory;
     }
 
-    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters) {
+    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters, double updateCost) {
         List<List<LabeledSample>> partitions = _dataLoader.partition(parts, data);
 
         List<PeerAgent> agents = new ArrayList<>();
 
         for(List<LabeledSample> partition : partitions){
             NoisyQueryable<LabeledSample> queryable = _noisyQueryableFactory.getQueryable(new Budget(budget), partition);
-            agents.add(new PeerAgent(queryable, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph, parameters));
+            agents.add(new PeerAgent(queryable, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph, parameters, updateCost));
         }
 
         return agents;

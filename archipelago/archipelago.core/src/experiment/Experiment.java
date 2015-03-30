@@ -39,7 +39,7 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters);
+        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters, configuration.updateCost);
 
 
         registerPeers(_peers);
@@ -63,24 +63,12 @@ public class Experiment {
                 .collect(Collectors.toList());
     }
 
-    public double getTrainRatio() {
-        return _configuration.trainRatio;
-    }
 
     public List<LabeledSample> getData() {
         return _data;
     }
 
-    public int getPeerCount() {
-        return _configuration.peerCount;
+    public ExperimentConfiguration getConfiguration() {
+        return _configuration;
     }
-
-    public double getTestCost() {
-        return _configuration.testCost;
-    }
-
-    public int getIterations() {
-        return _configuration.iterations;
-    }
-
 }

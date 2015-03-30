@@ -35,6 +35,7 @@ public class PeerAgentTest {
     private int _iterations = 5;
     private PeerGraph _peerGraph;
     private int _parameters = 60;
+    private double _updateCost = 0.1;
 
     @Before
     public void setUp(){
@@ -48,7 +49,7 @@ public class PeerAgentTest {
         stubBehaviourFactory(_behaviourFactory, _parameters);
         stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations, _peerGraph, _parameters);
+        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations, _peerGraph, _parameters, _updateCost);
     }
 
 

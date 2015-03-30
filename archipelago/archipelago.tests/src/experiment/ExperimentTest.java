@@ -46,6 +46,7 @@ public class ExperimentTest {
     private double _budget = 2.0;
     private int _parameters = 10;
     private ExperimentConfiguration _configuration;
+    private double _updateCost = 0.1;
 
     @Before
     public void setUp(){
@@ -55,7 +56,7 @@ public class ExperimentTest {
         _environment = mock(Environment.class);
         _dataLoader = mock(DataLoader.class);
 
-        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters);
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters, _updateCost);
 
         _train = mock(List.class);
         _test = mock(List.class);
@@ -66,18 +67,18 @@ public class ExperimentTest {
     @Test
     public void construct_CreatesCorrectPeerCountAndGivesIterations() throws StaleProxyException {
         int peerCount = 3;
-        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters);
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters, _updateCost);
 
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
 
-        verify(_agentFactory).createPeers(any(List.class), eq(peerCount), eq(_iterations), eq(_budget), eq(_parameters));
+        verify(_agentFactory).createPeers(any(List.class), eq(peerCount), eq(_iterations), eq(_budget), eq(_parameters), eq(_updateCost));
     }
 
     @Test
     public void construct_registersPeerWithRunEnvironment() throws StaleProxyException {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_agentFactory.createPeers(_train, _peerCount, _iterations, _budget, _parameters)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, _peerCount, _iterations, _budget, _parameters, 0)).thenReturn(Arrays.asList(agent1, agent2));
 
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
 
@@ -89,7 +90,7 @@ public class ExperimentTest {
     public void construct_GivesPeersTrainingData() throws StaleProxyException {
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
 
-        verify(_agentFactory).createPeers(_train, _peerCount, _iterations, _budget, _parameters);
+        verify(_agentFactory).createPeers(_train, _peerCount, _iterations, _budget, _parameters, 0);
     }
 
 
@@ -97,7 +98,7 @@ public class ExperimentTest {
     public void run_RunsEnvironmentAndRegistersCompletionAgent() throws ControllerException {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_agentFactory.createPeers(_train, _peerCount, iterations, _budget, _parameters)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, _peerCount, iterations, _budget, _parameters, 0)).thenReturn(Arrays.asList(agent1, agent2));
         Consumer<Experiment> completionListener = mock(Consumer.class);
         CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
         when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class))).thenReturn(completionAgent);
@@ -114,7 +115,7 @@ public class ExperimentTest {
         int peers = 2;
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
-        when(_agentFactory.createPeers(_train, peers, _iterations, _budget, _parameters)).thenReturn(Arrays.asList(agent1, agent2));
+        when(_agentFactory.createPeers(_train, peers, _iterations, _budget, _parameters, 0)).thenReturn(Arrays.asList(agent1, agent2));
         when(agent1.labelData(_test)).thenReturn(mock(List.class));
         when(agent2.labelData(_test)).thenReturn(mock(List.class));
         when(_performanceMetrics.errorRate(same(_test), any(List.class), eq(_testCost))).thenReturn(0.15);

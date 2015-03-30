@@ -81,14 +81,14 @@ public class AgentFactoryTest {
 
     @Test
     public void createPeers_OnePeerPerPartition(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters, 0);
 
         assertEquals(_parts, peers.size());
     }
 
     @Test
     public void createPeers_PartitionsData(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters, 0);
 
         assertEquals(_queryable1, peers.get(0).getData());
         assertEquals(_queryable2, peers.get(1).getData());
