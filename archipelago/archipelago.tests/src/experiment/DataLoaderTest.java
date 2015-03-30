@@ -49,6 +49,7 @@ public class DataLoaderTest {
         assertEquals(samples.get(2), partitions.get(0).get(2));
         assertEquals(samples.get(3), partitions.get(1).get(0));
         assertEquals(samples.get(4), partitions.get(1).get(1));
+        assertEquals(samples.get(4), partitions.get(1).get(2));
         assertEquals(samples.get(5), partitions.get(2).get(0));
         assertEquals(samples.get(6), partitions.get(2).get(1));
     }

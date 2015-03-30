@@ -1,5 +1,6 @@
 package experiment;
 
+import com.google.common.collect.Lists;
 import com.opencsv.CSVReader;
 import learning.LabeledSample;
 
@@ -53,19 +54,7 @@ public class DataLoader {
 
     public List<List<LabeledSample>> partition(int parts, List<LabeledSample> data) {
         int recordsToEach = (int) Math.ceil((double)data.size()/(double)parts);
-
-        List<List<LabeledSample>> partitions = new ArrayList<>();
-
-        int current = 0;
-        List<LabeledSample> nextData = new ArrayList<>();
-        for(int i = 0; i < data.size(); i++){
-            if(current != recordsToEach){
-                current = i % recordsToEach;
-                partitions.add(nextData);
-            }
-        }
-
-        return partitions;
+        return Lists.partition(data, recordsToEach);
     }
 
     public List<List<LabeledSample>> partition(double trainRatio, List<LabeledSample> data) {
