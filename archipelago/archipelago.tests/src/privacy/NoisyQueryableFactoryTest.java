@@ -3,6 +3,7 @@ package privacy;
 import javafx.scene.control.Labeled;
 import learning.LabeledSample;
 import org.junit.Test;
+import privacy.math.RandomGenerator;
 
 import java.util.List;
 
@@ -17,8 +18,9 @@ public class NoisyQueryableFactoryTest {
 
 
     @Test
-    public void buildNoisyQueryble(){
-        NoisyQueryableFactory factory = new NoisyQueryableFactory();
+    public void buildNoisyQueryble() {
+        RandomGenerator generator = mock(RandomGenerator.class);
+        NoisyQueryableFactory factory = new NoisyQueryableFactory(generator);
         Budget agent = mock(Budget.class);
         List<LabeledSample> data = mock(List.class);
 

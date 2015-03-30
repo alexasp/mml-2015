@@ -1,5 +1,6 @@
 package privacy;
 
+import com.google.inject.Inject;
 import privacy.math.RandomGenerator;
 
 import java.util.List;
@@ -9,6 +10,11 @@ import java.util.List;
  */
 public class NoisyQueryableFactory {
     private RandomGenerator _randomGenerator;
+
+    @Inject
+    public NoisyQueryableFactory(RandomGenerator randomGenerator) {
+        _randomGenerator = randomGenerator;
+    }
 
     public <T> NoisyQueryable<T> getQueryable(Budget budget, List<T> data) {
         return NoisyQueryable.getQueryable(budget, data, _randomGenerator);

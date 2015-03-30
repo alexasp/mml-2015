@@ -37,8 +37,10 @@ public class LogisticModel implements Model {
         return 1.0 / (1 + Math.exp(-dotProduct));
     }
 
-    public void gradientUpdate(double[] doubles) {
-        throw new UnsupportedOperationException();
+    public void gradientUpdate(double[] gradient) {
+        _parameters = IntStream.range(0, _parameters.length)
+                .mapToDouble(i -> _parameters[i] + gradient[i])
+                .toArray();
     }
 
     public int getDimensionality() {
