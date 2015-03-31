@@ -39,6 +39,10 @@ public class ACLMessageParser {
     }
 
     public ACLMessage createCompletionMessage(AID agent1) {
-        return null;
+        ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+        message.setContent(agent1.toString());
+        //todo get CompletionListeningAgent from DF service and add as recipient
+//        message.addReceiver();
+        return message;
     }
 }

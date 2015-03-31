@@ -20,5 +20,6 @@ public class CompletionBehaviour extends OneShotBehaviour{
     @Override
     public void action() {
         _messageFacade.sendCompletionMessage(_peerAgent.getAID());
+        System.out.println("FINISH!"  + _peerAgent.getAID());
     }
 }
