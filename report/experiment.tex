@@ -2,4 +2,61 @@
 
 \chapter{Experiment}
 
+Introduce the experiment
+
+\subsection{Dataset}
+This section will introduce the dataset(s) used. What features it contains, what we try to learn/classify, and why we chose to use it.
+
+\section{Algorithm}
+This section explain the logistic regression algorithm, how it is commonly used, and what modifications are needed when used in a distributed setting. Explanation on how it is used in a differentially private manner is explained in the architecture section. 
+
+
+\subsection{Distribution}
+Introduce notion of distributed machine learning. 
+
+Why did we choose to perform distributed learning?
+
+How does it fit with the notion of differential privacy?
+
+Can we guarantee differential privacy while doing it distributed
+
+Record-based differential privacy. Does it work?
+
+\todo[inline]{This section should maybe go somewhere else, but where?}
+
+\section{Architecture}
+
+In this section we will describe the architecture of Archipelago, our distributed machine learning system. 
+Using notions borrowed from PINQ, we designed a distributed system using the JADE framework. Consists of explanation of peers, NoisyQueryable, DataLoader
+
+ \missingfigure[figwidth=6cm]{Figure explaining our framework}
+
+\subsection{Communication}
+\subsubsection{Peer}
+How is each peer set up, and what behaviours do they implement? 
+How do they update then propagate the model being learned.
+How do they know when to stop?
+\subsubsection{messaging}
+How do the peers communicate with each other?
+What does a message look like?
+What is the PeerGraph?
+What controls the messages and determines where they should go?
+
+\subsection{Learning}
+How is a logistic model implemented in our framework?
+How is a model created and passed around the network?
+How does the ensemble learning choose the best model?
+What kind of performance metrics are used?
+
+\subsection{Privacy}
+How does our framework guarantee differential privacy?
+What concepts have been borrowed from PINQ?
+What is NoisyQueryable?
+
+\subsection{Experiment}
+How are the experiments set up?
+Explain the testing scheme.
+
+
+
 \cleardoublepage
