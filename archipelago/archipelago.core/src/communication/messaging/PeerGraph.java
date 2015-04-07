@@ -8,7 +8,6 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,8 +19,7 @@ public class PeerGraph {
     private static final String SERVICE_NAME = "peer";
 
     public List<AID> getPeers(Agent agent) {
-        DFAgentDescription description = createDescription();
-
+        DFAgentDescription description = createDescription(agent.getAID());
 
         try {
             DFAgentDescription[] descriptions = DFService.search(agent, description);
@@ -30,19 +28,30 @@ public class PeerGraph {
                     .collect(Collectors.toList());
 
         } catch (FIPAException e) {
-            throw new RuntimeException("Unable to search peer graph.");
+            throw new RuntimeException("Unable to search peer graph.", e);
         }
     }
 
-    private DFAgentDescription createDescription() {
+    private DFAgentDescription createDescription(AID aid) {
         DFAgentDescription dfd = new DFAgentDescription();
+        dfd.setName(aid);
         ServiceDescription sd  = new ServiceDescription();
+        sd.setName(SERVICE_NAME);
         sd.setType( SERVICE_NAME );
         dfd.addServices(sd);
         return dfd;
     }
 
     public void join(PeerAgent peerAgent) {
-        //..
+        DFAgentDescription description = createDescription(peerAgent.getAID());
+        try {
+            DFService.register(peerAgent, peerAgent.getAID(), description);
+        } catch (FIPAException e) {
+            throw new RuntimeException("Unable to register peer agent.", e);
+        }
+    }
+
+    public AID getMonitoringAgent() {
+        throw new UnsupportedOperationException();
     }
 }

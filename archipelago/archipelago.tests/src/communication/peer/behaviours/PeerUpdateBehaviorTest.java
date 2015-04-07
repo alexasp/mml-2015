@@ -41,8 +41,8 @@ public class PeerUpdateBehaviorTest {
 
     private Message fakeMessage(Model model) {
         Message message = mock(Message.class);
-        when(_messageFacade.hasMessage()).thenReturn(true);
-        when(_messageFacade.nextMessage()).thenReturn(message);
+        when(_messageFacade.hasMessage(PeerUpdateBehavior.UpdatePerformative)).thenReturn(true);
+        when(_messageFacade.nextMessage(PeerUpdateBehavior.UpdatePerformative)).thenReturn(message);
         when(message.getModel()).thenReturn(model);
 
         return message;
@@ -92,11 +92,11 @@ public class PeerUpdateBehaviorTest {
 
     @Test
     public void action_NoNewMessage_DoesNotFetchMessage(){
-        when(_messageFacade.hasMessage()).thenReturn(false);
+        when(_messageFacade.hasMessage(PeerUpdateBehavior.UpdatePerformative)).thenReturn(false);
 
         _updateBehavior.action();
 
-        verify(_messageFacade, never()).nextMessage();
+        verify(_messageFacade, never()).nextMessage(PeerUpdateBehavior.UpdatePerformative);
     }
 
 }

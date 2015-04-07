@@ -2,6 +2,7 @@ package experiment;
 
 import communication.Environment;
 import communication.PeerAgent;
+import communication.messaging.PeerGraph;
 import communication.peer.AgentFactory;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
@@ -22,14 +23,16 @@ public class Experiment {
     private final List<LabeledSample> _testData;
     private final List<LabeledSample> _data;
     private final AgentFactory _agentFactory;
+    private PeerGraph _peerGraph;
     private final ExperimentConfiguration _configuration;
 
     private Environment _environment;
 
 
-    public Experiment(List<LabeledSample> samples, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, ExperimentConfiguration configuration) throws StaleProxyException {
+    public Experiment(List<LabeledSample> samples, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, PeerGraph peerGraph, ExperimentConfiguration configuration) throws StaleProxyException {
         _environment = environment;
         _agentFactory = agentFactory;
+        _peerGraph = peerGraph;
 
         _configuration = configuration;
 
@@ -48,6 +51,7 @@ public class Experiment {
     private void registerPeers(List<PeerAgent> peers) throws StaleProxyException {
         for(PeerAgent peer : peers){
             _environment.registerAgent(peer);
+            _peerGraph.join(peer);
         }
     }
 

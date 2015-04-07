@@ -1,8 +1,11 @@
 package communication.messaging;
 
+import communication.PeerAgent;
+import communication.peer.behaviours.PeerUpdateBehavior;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +37,11 @@ public class MessageFacadeTest {
     private ACLMessageParser _messageParser;
     private PeerGraph _peerGraph;
     private RandomGenerator _randomGenerator;
+    private MessageTemplate _template;
 
     @Before
-    public void setUp(){
+    public void setUp() {
+        _template = mock(MessageTemplate.class);
         _peerGraph = mock(PeerGraph.class);
         _messageParser = mock(ACLMessageParser.class);
         _agent = PowerMockito.mock(Agent.class);
@@ -48,9 +53,9 @@ public class MessageFacadeTest {
     @Test
     public void hasMessage_MessageAvailable_ChecksJadeAgentMessages(){
         ACLMessage message = mock(ACLMessage.class);
-        when(_agent.receive()).thenReturn(message);
+        when(_agent.receive(_template)).thenReturn(message);
 
-        boolean hasMessage = _messaging.hasMessage();
+        boolean hasMessage = _messaging.hasMessage(_template);
 
         assertTrue(hasMessage);
     }
@@ -58,12 +63,12 @@ public class MessageFacadeTest {
     @Test
     public void hasMessage_MessageAvailable_DoesNotConsumeMessage(){
         ACLMessage message = mock(ACLMessage.class);
-        when(_agent.receive()).thenReturn(message);
+        when(_agent.receive(_template)).thenReturn(message);
         Message parsedMessage = mock(Message.class);
         when(_messageParser.parse(message)).thenReturn(parsedMessage);
 
-        boolean hasMessage = _messaging.hasMessage();
-        Message actualMessage = _messaging.nextMessage();
+        boolean hasMessage = _messaging.hasMessage(_template);
+        Message actualMessage = _messaging.nextMessage(_template);
 
         assertEquals(parsedMessage, actualMessage);
     }
@@ -71,11 +76,11 @@ public class MessageFacadeTest {
     @Test
     public void nextMessage_ACLMessageAvailable_GetsParsedMessage(){
         ACLMessage message = mock(ACLMessage.class);
-        when(_agent.receive()).thenReturn(message);
+        when(_agent.receive(_template)).thenReturn(message);
         Message parsedMessage = mock(Message.class);
         when(_messageParser.parse(message)).thenReturn(parsedMessage);
 
-        Message actualMessage = _messaging.nextMessage();
+        Message actualMessage = _messaging.nextMessage(_template);
 
         assertEquals(parsedMessage, actualMessage);
     }
@@ -98,13 +103,13 @@ public class MessageFacadeTest {
 
     @Test(expected = IllegalStateException.class)
     public void nextMessage_NoMessageAvailable_Throws(){
-        when(_agent.receive()).thenReturn(null);
+        when(_agent.receive(_template)).thenReturn(null);
 
-        _messaging.nextMessage();
+        _messaging.nextMessage(_template);
     }
 
     @Test
-    public void sendCompetionMessage(){
+    public void sendCompletionMessage_GetsACLMessage(){
         AID agent1 = mock(AID.class);
         ACLMessage message = mock(ACLMessage.class);
         when(_messageParser.createCompletionMessage(agent1)).thenReturn(message);
@@ -112,6 +117,20 @@ public class MessageFacadeTest {
         _messaging.sendCompletionMessage(agent1);
 
         verify(_agent).send(message);
+    }
+
+    @Test
+    public void sendCompletionMessage_AddsRecipient() {
+        AID completionAgent = mock(AID.class);
+        when(_peerGraph.getMonitoringAgent()).thenReturn(completionAgent);
+        AID agent1 = mock(AID.class);
+        ACLMessage message = mock(ACLMessage.class);
+        when(_messageParser.createCompletionMessage(agent1)).thenReturn(message);
+
+        _messaging.sendCompletionMessage(agent1);
+
+        verify(_agent).send(message);
+        verify(message).addReceiver(completionAgent);
     }
 
 }

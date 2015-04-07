@@ -2,6 +2,8 @@ package communication.messaging;
 
 import com.google.inject.Inject;
 import communication.messaging.jade.ACLMessageReader;
+import communication.peer.CompletionListeningAgent;
+import communication.peer.behaviours.CompletionListeningBehavior;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import learning.Model;
@@ -9,6 +11,8 @@ import learning.ModelFactory;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static communication.peer.behaviours.CompletionListeningBehavior.CompletionPerformative;
 
 /**
  * Created by alex on 3/23/15.
@@ -39,7 +43,7 @@ public class ACLMessageParser {
     }
 
     public ACLMessage createCompletionMessage(AID agent1) {
-        ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+        ACLMessage message = new ACLMessage(CompletionListeningBehavior.Performative);
         message.setContent(agent1.toString());
         //todo get CompletionListeningAgent from DF service and add as recipient
 //        message.addReceiver();

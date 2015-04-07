@@ -2,6 +2,7 @@ package experiment;
 
 import communication.Environment;
 import communication.PeerAgent;
+import communication.messaging.PeerGraph;
 import communication.peer.AgentFactory;
 import communication.peer.CompletionListeningAgent;
 import jade.wrapper.ControllerException;
@@ -47,6 +48,7 @@ public class ExperimentTest {
     private int _parameters = 10;
     private ExperimentConfiguration _configuration;
     private double _updateCost = 0.1;
+    private PeerGraph _peerGraph;
 
     @Before
     public void setUp(){
@@ -55,6 +57,7 @@ public class ExperimentTest {
         _performanceMetrics = mock(PerformanceMetrics.class);
         _environment = mock(Environment.class);
         _dataLoader = mock(DataLoader.class);
+        _peerGraph = mock(PeerGraph.class);
 
         _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters, _updateCost);
 
@@ -69,7 +72,7 @@ public class ExperimentTest {
         int peerCount = 3;
         _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters, _updateCost);
 
-        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
+        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 
         verify(_agentFactory).createPeers(any(List.class), eq(peerCount), eq(_iterations), eq(_budget), eq(_parameters), eq(_updateCost));
     }
@@ -80,15 +83,27 @@ public class ExperimentTest {
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_agentFactory.createPeers(_train, _peerCount, _iterations, _budget, _parameters, _updateCost)).thenReturn(Arrays.asList(agent1, agent2));
 
-        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
+        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 
         verify(_environment).registerAgent(agent1);
         verify(_environment).registerAgent(agent2);
     }
 
     @Test
+    public void construct_registersPeerWithGraph() throws StaleProxyException {
+        PeerAgent agent1 = mock(PeerAgent.class);
+        PeerAgent agent2 = mock(PeerAgent.class);
+        when(_agentFactory.createPeers(_train, _peerCount, _iterations, _budget, _parameters, _updateCost)).thenReturn(Arrays.asList(agent1, agent2));
+
+        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
+
+        verify(_peerGraph).join(agent1);
+        verify(_peerGraph).join(agent2);
+    }
+
+    @Test
     public void construct_GivesPeersTrainingData() throws StaleProxyException {
-        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
+        new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 
         verify(_agentFactory).createPeers(_train, _peerCount, _iterations, _budget, _parameters, _updateCost);
     }
@@ -104,7 +119,7 @@ public class ExperimentTest {
         when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class))).thenReturn(completionAgent);
 
 
-        Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
+        Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
         experiment.run(completionListener);
 
         verify(_environment).registerAgent(completionAgent);
@@ -120,7 +135,7 @@ public class ExperimentTest {
         when(agent2.labelData(_test)).thenReturn(mock(List.class));
         when(_performanceMetrics.errorRate(same(_test), any(List.class), eq(_testCost))).thenReturn(0.15);
 
-        Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _configuration);
+        Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
         List<Double> errors = experiment.test();
 
         assertEquals(errors.get(0), 0.15, 0.0001d);

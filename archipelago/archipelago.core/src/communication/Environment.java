@@ -70,7 +70,7 @@ public class Environment {
         AgentController agentWrapper = _mainContainer.acceptNewAgent("peerolini" + _counter, agent);
         _counter++;
         agentWrapper.start();
-//        joinDF(agent);
+        joinDF(agent);
     }
 
     private void joinDF(Agent peerAgent) {

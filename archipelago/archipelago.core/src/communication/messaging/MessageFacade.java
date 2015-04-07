@@ -4,6 +4,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import learning.Model;
 import privacy.math.RandomGenerator;
 
@@ -27,15 +28,15 @@ public class MessageFacade {
         _randomGenerator = randomGenerator;
     }
 
-    public boolean hasMessage() {
+    public boolean hasMessage(MessageTemplate template) {
         if(_nextMessage != null) { return true; }
 
-        _nextMessage = _agent.receive();
+        _nextMessage = _agent.receive(template);
         return _nextMessage != null;
     }
 
-    public Message nextMessage() {
-        if(!hasMessage()){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
+    public Message nextMessage(MessageTemplate template) {
+        if(!hasMessage(template)){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
 
         if(_nextMessage == null){
             _nextMessage = _agent.receive();
@@ -57,6 +58,7 @@ public class MessageFacade {
 
     public void sendCompletionMessage(AID agent1) {
         ACLMessage message = _messageParser.createCompletionMessage(agent1);
+        message.addReceiver(_peerGraph.getMonitoringAgent());
 
         _agent.send(message);
     }

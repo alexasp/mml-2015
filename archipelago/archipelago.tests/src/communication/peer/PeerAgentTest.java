@@ -53,10 +53,6 @@ public class PeerAgentTest {
     }
 
 
-    @Test
-    public void constructor_JoinsPeerGraph() throws FIPAException {
-        verify(_peerGraph).join(_peerAgent);
-    }
 
     public static void stubMessageFacadeFactory(MessageFacadeFactory messageFacadeFactory) {
         MessageFacade messageFacade = mock(MessageFacade.class);

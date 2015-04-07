@@ -31,8 +31,6 @@ public class PeerAgent extends Agent {
         _updateCost = updateCost;
         _messageFacade = messageFacadeFactory.getFacade(this);
 
-        _peerGraph.join(this);
-
         addBehaviour(behaviourFactory.getModelCreation(this, parameters));
         addBehaviour(behaviourFactory.getPeerUpdate(this, _messageFacade));
     }
