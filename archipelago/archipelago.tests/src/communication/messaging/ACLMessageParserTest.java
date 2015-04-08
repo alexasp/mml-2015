@@ -1,11 +1,13 @@
 package communication.messaging;
 
 import communication.messaging.jade.ACLMessageReader;
+import jade.content.onto.OntologyException;
+import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import learning.ModelFactory;
-import learning.models.LogisticModel;
 import org.junit.Before;
 import org.junit.Test;
+import privacy.learning.DifferentialLogisticModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -24,7 +26,7 @@ public class ACLMessageParserTest {
     private ACLMessage _aclMessage;
     private ModelFactory _modelFactory;
 
-    private LogisticModel _model;
+    private DifferentialLogisticModel _model;
 
     @Before
     public void setUp(){
@@ -32,17 +34,60 @@ public class ACLMessageParserTest {
         _aclMessage = mock(ACLMessage.class);
         when(_reader.read(_aclMessage)).thenReturn(_modelString);
         _modelFactory = mock(ModelFactory.class);
-        _model = mock(LogisticModel.class);
-        when(_modelFactory.getLogisticModel(_modelString)).thenReturn(_model);
+        _model = mock(DifferentialLogisticModel.class);
+        when(_modelFactory.getPrivateLogisticModel(_modelString)).thenReturn(_model);
 
         _parser = new ACLMessageParser(_reader, _modelFactory);
     }
 
     @Test
-    public void parse_MessageWithModel(){
+    public void parse_MessageWithModel() throws OntologyException {
+        when(_aclMessage.getOntology()).thenReturn(Ontologies.Model.name());
         Message parsedMessage = _parser.parse(_aclMessage);
 
         assertEquals(_model, parsedMessage.getModel());
     }
+
+    @Test
+    public void parse_MessageOnly() throws OntologyException {
+        String message = "hello";
+        when(_reader.read(_aclMessage)).thenReturn(message);
+        when(_aclMessage.getOntology()).thenReturn(Ontologies.Message.name());
+        Message parsedMessage = _parser.parse(_aclMessage);
+
+        assertEquals(message, parsedMessage.getContent());
+    }
+
+    @Test
+    public void createMessage_SetsContent() {
+        String content = "yo";
+        AID aid = mock(AID.class);
+        when(_model.serialize()).thenReturn(content);
+
+        ACLMessage message = _parser.createModelMessage(_model, aid);
+
+        assertEquals(content, message.getContent());
+    }
+
+    @Test
+    public void createModelMessage_SetsModelOntology() {
+        String content = "yo";
+        AID aid = mock(AID.class);
+        when(_model.serialize()).thenReturn(content);
+
+        ACLMessage message = _parser.createModelMessage(_model, aid);
+
+        assertEquals(Ontologies.Model.name(), message.getOntology());
+    }
+
+    @Test
+    public void createCompletionMessage_SetsModelOntology() {
+        AID aid = mock(AID.class);
+
+        ACLMessage message = _parser.createCompletionMessage(aid);
+
+        assertEquals(Ontologies.Message.name(), message.getOntology());
+    }
+
 
 }

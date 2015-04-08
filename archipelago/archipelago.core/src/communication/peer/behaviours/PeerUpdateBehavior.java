@@ -39,6 +39,9 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
             if(_iteration < _peerAgent.getIterations() - 1) {
                 _peerAgent.addBehaviour(_behaviourFactory.getModelPropegate(_peerAgent, message.getModel()));
                 _iteration++;
+            } else {
+                _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade));
+                _peerAgent.removeBehaviour(this);
             }
         }
         else{

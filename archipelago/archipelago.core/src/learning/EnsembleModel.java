@@ -33,4 +33,8 @@ public class EnsembleModel implements Model{
     public String serialize() {
         throw new UnsupportedOperationException();
     }
+
+    public ArrayList<Model> getModels() {
+        return _ensemble;
+    }
 }

@@ -1,8 +1,8 @@
 package communication.messaging;
 
+import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.Agent;
-import jade.domain.DFService;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import learning.Model;
@@ -42,7 +42,12 @@ public class MessageFacade {
             _nextMessage = _agent.receive();
         }
 
-        Message parsedMessage = _messageParser.parse(_nextMessage);
+        Message parsedMessage = null;
+        try {
+            parsedMessage = _messageParser.parse(_nextMessage);
+        } catch (OntologyException e) {
+            throw new RuntimeException("Error when parsing message");
+        }
         _nextMessage = null;
 
         return parsedMessage;
@@ -55,7 +60,7 @@ public class MessageFacade {
             return;
 
         AID target = peers.get(_randomGenerator.uniform(0, peers.size() - 1));
-        ACLMessage message = _messageParser.createMessage(model, target);
+        ACLMessage message = _messageParser.createModelMessage(model, target);
 
         _agent.send(message);
     }

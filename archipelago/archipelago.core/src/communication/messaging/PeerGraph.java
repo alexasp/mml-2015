@@ -1,6 +1,7 @@
 package communication.messaging;
 
 import communication.PeerAgent;
+import communication.peer.CompletionListeningAgent;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
@@ -66,13 +67,15 @@ public class PeerGraph {
         return dfd;
     }
 
-    public void join(PeerAgent peerAgent) {
-        peerAgent.addBehaviour(new OneShotBehaviour() {
+
+
+    public void join(Agent agent, String serviceName) {
+        agent.addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
-                DFAgentDescription description = createDescription(peerAgent.getAID(), PEER_SERVICE);
+                DFAgentDescription description = createDescription(agent.getAID(), serviceName);
                 try {
-                    DFService.register(peerAgent, description);
+                    DFService.register(agent, description);
                     System.out.println("Registered peer.");
                 } catch (FIPAException e) {
                     throw new RuntimeException("Unable to register peer agent.", e);
@@ -80,8 +83,4 @@ public class PeerGraph {
             }
         });
     }
-
-
-
-
 }

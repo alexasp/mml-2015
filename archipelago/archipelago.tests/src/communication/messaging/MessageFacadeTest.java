@@ -1,7 +1,6 @@
 package communication.messaging;
 
-import communication.PeerAgent;
-import communication.peer.behaviours.PeerUpdateBehavior;
+import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
@@ -61,7 +60,7 @@ public class MessageFacadeTest {
     }
 
     @Test
-    public void hasMessage_MessageAvailable_DoesNotConsumeMessage(){
+    public void hasMessage_MessageAvailable_DoesNotConsumeMessage() throws OntologyException {
         ACLMessage message = mock(ACLMessage.class);
         when(_agent.receive(_template)).thenReturn(message);
         Message parsedMessage = mock(Message.class);
@@ -74,7 +73,7 @@ public class MessageFacadeTest {
     }
 
     @Test
-    public void nextMessage_ACLMessageAvailable_GetsParsedMessage(){
+    public void nextMessage_ACLMessageAvailable_GetsParsedMessage() throws OntologyException {
         ACLMessage message = mock(ACLMessage.class);
         when(_agent.receive(_template)).thenReturn(message);
         Message parsedMessage = mock(Message.class);
@@ -94,7 +93,7 @@ public class MessageFacadeTest {
         when(_peerGraph.getPeers(_agent)).thenReturn(agents);
         when(_randomGenerator.uniform(0, agents.size()-1)).thenReturn(1);
         ACLMessage message = mock(ACLMessage.class);
-        when(_messageParser.createMessage(model, agent2)).thenReturn(message);
+        when(_messageParser.createModelMessage(model, agent2)).thenReturn(message);
 
         _messaging.sendToRandomPeer(model);
 

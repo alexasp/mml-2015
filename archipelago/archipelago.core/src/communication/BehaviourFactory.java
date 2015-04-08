@@ -3,10 +3,7 @@ package communication;
 import com.google.inject.Inject;
 import communication.messaging.MessageFacade;
 import communication.peer.CompletionListeningAgent;
-import communication.peer.behaviours.CompletionListeningBehavior;
-import communication.peer.behaviours.ModelCreationBehavior;
-import communication.peer.behaviours.PeerUpdateBehavior;
-import communication.peer.behaviours.PropegateBehavior;
+import communication.peer.behaviours.*;
 import jade.core.behaviours.Behaviour;
 import learning.Model;
 import learning.ModelFactory;
@@ -39,5 +36,9 @@ public class BehaviourFactory {
 
     public Behaviour getCompletionListening(CompletionListeningAgent agent, MessageFacade messageFacade) {
         return new CompletionListeningBehavior(agent, messageFacade);
+    }
+
+    public Behaviour getCompletionBehavior(PeerAgent peerAgent, MessageFacade facade) {
+        return new CompletionBehaviour(peerAgent, facade);
     }
 }

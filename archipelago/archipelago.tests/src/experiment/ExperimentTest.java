@@ -97,9 +97,10 @@ public class ExperimentTest {
 
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 
-        verify(_peerGraph).join(agent1);
-        verify(_peerGraph).join(agent2);
+        verify(_peerGraph).join(agent1, PeerAgent.SERVICE_NAME);
+        verify(_peerGraph).join(agent2, PeerAgent.SERVICE_NAME);
     }
+
 
     @Test
     public void construct_GivesPeersTrainingData() throws StaleProxyException {
@@ -118,12 +119,14 @@ public class ExperimentTest {
         CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
         when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class))).thenReturn(completionAgent);
 
-
         Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
         experiment.run(completionListener);
 
         verify(_environment).registerAgent(completionAgent);
+        verify(_peerGraph).join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
     }
+
+
 
     @Test
     public void test_GetsResultForEachAgent() throws StaleProxyException {

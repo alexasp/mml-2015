@@ -4,6 +4,7 @@ import communication.Environment;
 import communication.PeerAgent;
 import communication.messaging.PeerGraph;
 import communication.peer.AgentFactory;
+import communication.peer.CompletionListeningAgent;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
@@ -51,12 +52,14 @@ public class Experiment {
     private void registerPeers(List<PeerAgent> peers) throws StaleProxyException {
         for(PeerAgent peer : peers){
             _environment.registerAgent(peer);
-            _peerGraph.join(peer);
+            _peerGraph.join(peer, PeerAgent.SERVICE_NAME);
         }
     }
 
     public void run(Consumer<Experiment> completionAction) throws ControllerException {
-        _environment.registerAgent(_agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this));
+        CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this);
+        _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
+        _environment.registerAgent(completionAgent);
         _environment.run();
     }
 

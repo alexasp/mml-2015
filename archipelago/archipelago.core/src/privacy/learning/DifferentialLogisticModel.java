@@ -47,4 +47,5 @@ public class DifferentialLogisticModel implements Model {
     public String serialize() {
         return _logisticModel.serialize();
     }
+
 }

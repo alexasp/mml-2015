@@ -81,4 +81,5 @@ public class LogisticModel implements Model {
 
         return builder.toString();
     }
+
 }

@@ -35,6 +35,7 @@ public class PeerUpdateBehaviorTest {
         _completionBehavior = mock(CompletionBehaviour.class);
         _model = mock(Model.class);
         when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
+        when(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade)).thenReturn(_completionBehavior);
 
         _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);
     }
@@ -77,7 +78,8 @@ public class PeerUpdateBehaviorTest {
         _updateBehavior.action(); // iteration 0
         verify(_peerAgent, times(1)).addBehaviour(_propegateBehavior);
         _updateBehavior.action(); // final iteration
-        verify(_peerAgent, times(1)).addBehaviour(any(PropegateBehavior.class));
+        verify(_peerAgent, times(2)).addBehaviour(any(PropegateBehavior.class));
+        verify(_peerAgent).removeBehaviour(_updateBehavior);
     }
 
     @Test
@@ -87,7 +89,8 @@ public class PeerUpdateBehaviorTest {
 
         _updateBehavior.action();
         verify(_peerAgent, never()).addBehaviour(_completionBehavior);
-
+        _updateBehavior.action();
+        verify(_peerAgent).addBehaviour(_completionBehavior);
     }
 
     @Test

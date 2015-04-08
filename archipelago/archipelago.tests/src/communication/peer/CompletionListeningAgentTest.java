@@ -3,6 +3,7 @@ package communication.peer;
 import communication.BehaviourFactory;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
+import communication.messaging.PeerGraph;
 import communication.peer.behaviours.CompletionListeningBehavior;
 import experiment.Experiment;
 import org.junit.Before;
@@ -29,7 +30,7 @@ public class CompletionListeningAgentTest {
     private jade.core.behaviours.Behaviour _completionListeningBehavior;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         _behaviourFactory = mock(BehaviourFactory.class);
         _completionAction = mock(Consumer.class);
         _experiment = mock(Experiment.class);

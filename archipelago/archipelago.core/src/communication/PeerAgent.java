@@ -9,6 +9,7 @@ import learning.LabeledSample;
 import learning.Model;
 import privacy.NoisyQueryable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ import java.util.List;
  */
 public class PeerAgent extends Agent {
 
+    public static final String SERVICE_NAME = "peer";
     private final MessageFacade _messageFacade;
     private EnsembleModel _ensemble;
     private NoisyQueryable<LabeledSample> _data;
@@ -63,5 +65,9 @@ public class PeerAgent extends Agent {
 
     public int getParameterLength() {
         return _parameters;
+    }
+
+    public ArrayList<Model> getModels() {
+        return _ensemble.getModels();
     }
 }
