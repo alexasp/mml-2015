@@ -13,10 +13,18 @@ import java.util.stream.IntStream;
 public class LogisticModel implements Model {
     private double[] _parameters;
 
+    public static final String DELIMITER = ",";
+
     public LogisticModel(double[] parameters) {
         if(parameters.length == 0){ throw new IllegalArgumentException("Parameter vector must have length greater than 0."); }
         _parameters = Arrays.copyOf(parameters, parameters.length);
     }
+
+    public LogisticModel(String modelString) {
+        deserialize(modelString);
+    }
+
+
 
     public double[] getParameters() {
         return _parameters;
@@ -50,5 +58,27 @@ public class LogisticModel implements Model {
     @Override
     public void update(double epsilon, NoisyQueryable queryable) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void deserialize(String modelString) {
+        String[] parts = modelString.split(DELIMITER);
+
+        _parameters = IntStream.range(0, parts.length)
+                .mapToDouble(i -> Double.parseDouble(parts[i]))
+                .toArray();
+    }
+
+    @Override
+    public String serialize() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(Double.toString(_parameters[0]));
+
+        for(int i = 1; i < _parameters.length; i++){
+            builder.append(",");
+            builder.append(Double.toString(_parameters[i]));
+        }
+
+        return builder.toString();
     }
 }

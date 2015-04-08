@@ -1,9 +1,11 @@
 package communication.messaging;
 
 import com.google.inject.Inject;
+import communication.PeerAgent;
 import communication.messaging.jade.ACLMessageReader;
 import communication.peer.CompletionListeningAgent;
 import communication.peer.behaviours.CompletionListeningBehavior;
+import communication.peer.behaviours.PeerUpdateBehavior;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import learning.Model;
@@ -18,7 +20,7 @@ import static communication.peer.behaviours.CompletionListeningBehavior.Completi
  * Created by alex on 3/23/15.
  */
 public class ACLMessageParser {
-    private static final String DELIMITER = ",";
+
     private final ACLMessageReader _reader;
     private final ModelFactory _modelFactory;
 
@@ -30,16 +32,16 @@ public class ACLMessageParser {
 
     public Message parse(ACLMessage message) {
         String content = _reader.read(message);
-        String[] parts = content.split(DELIMITER);
-        double[] parameters = IntStream.range(0, parts.length)
-                .mapToDouble(i -> Double.parseDouble(parts[i]))
-                .toArray();
 
-        return new Message(_modelFactory.getLogisticModel(parameters));
+        return new Message(_modelFactory.getPrivateLogisticModel(content));
     }
 
     public ACLMessage createMessage(Model model, AID agent2) {
-            throw new UnsupportedOperationException();
+        ACLMessage message = new ACLMessage(PeerUpdateBehavior.Performative);
+        message.setContent(model.serialize());
+        message.addReceiver(agent2);
+
+        return message;
     }
 
     public ACLMessage createCompletionMessage(AID agent1) {

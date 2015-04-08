@@ -41,8 +41,6 @@ public class ModelCreationBehavior extends OneShotBehaviour {
         model.update(_agent.getUpdateCost(), _agent.getData());
         _agent.addModel(model);
 
-//        _agent.addBehaviour(_behaviorFactory.getModelPropegate(_agent, model));
-
-        _agent.getMessageFacade().sendToRandomPeer(model);
+        _agent.addBehaviour(_behaviorFactory.getModelPropegate(_agent, model));
     }
 }

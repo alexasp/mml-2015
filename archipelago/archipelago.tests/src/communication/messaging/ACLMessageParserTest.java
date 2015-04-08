@@ -33,7 +33,7 @@ public class ACLMessageParserTest {
         when(_reader.read(_aclMessage)).thenReturn(_modelString);
         _modelFactory = mock(ModelFactory.class);
         _model = mock(LogisticModel.class);
-        when(_modelFactory.getLogisticModel(any(double[].class))).thenReturn(_model);
+        when(_modelFactory.getLogisticModel(_modelString)).thenReturn(_model);
 
         _parser = new ACLMessageParser(_reader, _modelFactory);
     }

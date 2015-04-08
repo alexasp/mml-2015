@@ -72,7 +72,8 @@ public class PeerGraph {
             public void action() {
                 DFAgentDescription description = createDescription(peerAgent.getAID(), PEER_SERVICE);
                 try {
-                    DFService.register(peerAgent, peerAgent.getAID(), description);
+                    DFService.register(peerAgent, description);
+                    System.out.println("Registered peer.");
                 } catch (FIPAException e) {
                     throw new RuntimeException("Unable to register peer agent.", e);
                 }

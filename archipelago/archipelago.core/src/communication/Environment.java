@@ -58,6 +58,7 @@ public class Environment {
         System.out.println("Launching the rma agent on the main container ...");
 
         AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+        rma.start();
 //        _mainContainer.suspend();
     }
 
@@ -70,23 +71,11 @@ public class Environment {
         AgentController agentWrapper = _mainContainer.acceptNewAgent("peerolini" + _counter, agent);
         _counter++;
         agentWrapper.start();
-        joinDF(agent);
+//        agentWrapper.suspend();
+//        joinDF(agent);
     }
 
-    private void joinDF(Agent peerAgent) {
-        DFAgentDescription dfd = new DFAgentDescription();
-        dfd.setName(peerAgent.getAID() );
-        ServiceDescription sd  = new ServiceDescription();
-        sd.setName( peerAgent.getLocalName() );
-        sd.setType( SERVICE_NAME );
-        dfd.addServices(sd);
 
-        try {
-            DFService.register(peerAgent, dfd);
-        } catch (FIPAException e) {
-            throw new RuntimeException("Unable to search peer graph.", e);
-        }
-    }
 
     public void run() throws ControllerException {
         _mainContainer.start();

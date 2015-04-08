@@ -17,7 +17,8 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
     private final MessageFacade _messageFacade;
     private final BehaviourFactory _behaviourFactory;
     private int _iteration;
-    public static final MessageTemplate UpdatePerformative = MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE);
+    public static final int Performative = ACLMessage.PROPAGATE;
+    public static final MessageTemplate UpdatePerformative = MessageTemplate.MatchPerformative(Performative);
 
     public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade, BehaviourFactory behaviourFactory) {
         _peerAgent = peerAgent;

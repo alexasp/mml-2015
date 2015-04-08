@@ -23,4 +23,14 @@ public class EnsembleModel implements Model{
     public void update(double epsilon, NoisyQueryable queryable) {
 
     }
+
+    @Override
+    public void deserialize(String modelString) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public String serialize() {
+        throw new UnsupportedOperationException();
+    }
 }

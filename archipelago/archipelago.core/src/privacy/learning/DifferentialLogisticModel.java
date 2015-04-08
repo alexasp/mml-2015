@@ -34,6 +34,17 @@ public class DifferentialLogisticModel implements Model {
         double[] gradient = IntStream.range(0, _logisticModel.getDimensionality())
                 .mapToDouble(i -> gradientUpdate(errors, parameters[i], epsilon))
                 .toArray();
+
         _logisticModel.gradientUpdate(gradient);
+    }
+
+    @Override
+    public void deserialize(String modelString) {
+        _logisticModel.deserialize(modelString);
+    }
+
+    @Override
+    public String serialize() {
+        return _logisticModel.serialize();
     }
 }
