@@ -18,14 +18,13 @@ public class PropegateBehavior extends OneShotBehaviour {
         _peerAgent = peerAgent;
     }
 
-    public Model getModel() {
-        return null;
-    }
-
 
     @Override
     public void action() {
         _model.update(_peerAgent.getUpdateCost(), _peerAgent.getData());
         _peerAgent.getMessageFacade().sendToRandomPeer(_model);
+
+        System.out.println(_peerAgent.getName() + " propegated model.");
     }
+
 }

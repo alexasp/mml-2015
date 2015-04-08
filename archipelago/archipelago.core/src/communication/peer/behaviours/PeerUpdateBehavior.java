@@ -40,6 +40,9 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
                 _iteration++;
             }
         }
+        else{
+            block(); //this method call ensures that this behavior is marked as inactive until a new message arrives.
+        }
     }
 
 }

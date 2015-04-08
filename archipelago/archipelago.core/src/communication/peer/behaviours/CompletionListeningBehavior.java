@@ -26,5 +26,8 @@ public class CompletionListeningBehavior extends CyclicBehaviour {
             _messageFacade.nextMessage(CompletionPerformative);
             _agent.anAgentCompleted();
         }
+        else{
+            block();
+        }
     }
 }

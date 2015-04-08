@@ -17,10 +17,11 @@ import java.util.stream.IntStream;
  * Created by alex on 3/26/15.
  */
 public class PeerGraph {
-    private static final String SERVICE_NAME = "peer";
+    private static final String PEER_SERVICE = "peer";
+    private static final String COMPLETION_SERVICE = "completion";
 
     public List<AID> getPeers(Agent agent) {
-        DFAgentDescription description = createDescription(agent.getAID());
+        DFAgentDescription description = createDescription(PEER_SERVICE);
 
         try {
             DFAgentDescription[] descriptions = DFService.search(agent, description);
@@ -33,12 +34,34 @@ public class PeerGraph {
         }
     }
 
-    private DFAgentDescription createDescription(AID aid) {
+    public AID getMonitoringAgent(Agent agent) {
+        DFAgentDescription description = createDescription(COMPLETION_SERVICE);
+
+        try {
+            DFAgentDescription[] descriptions = DFService.search(agent, description);
+            return IntStream.range(0, descriptions.length)
+                    .mapToObj(i -> descriptions[i].getName())
+                    .findFirst().get();
+
+        } catch (FIPAException e) {
+            throw new RuntimeException("Unable to search peer graph.", e);
+        }
+    }
+
+    private DFAgentDescription createDescription(AID aid, String serviceName) {
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(aid);
         ServiceDescription sd  = new ServiceDescription();
-        sd.setName(SERVICE_NAME);
-        sd.setType( SERVICE_NAME );
+        sd.setName(serviceName);
+        sd.setType( serviceName );
+        dfd.addServices(sd);
+        return dfd;
+    }
+
+    private DFAgentDescription createDescription(String serviceName) {
+        DFAgentDescription dfd = new DFAgentDescription();
+        ServiceDescription sd  = new ServiceDescription();
+        sd.setType( serviceName );
         dfd.addServices(sd);
         return dfd;
     }
@@ -47,7 +70,7 @@ public class PeerGraph {
         peerAgent.addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
-                DFAgentDescription description = createDescription(peerAgent.getAID());
+                DFAgentDescription description = createDescription(peerAgent.getAID(), PEER_SERVICE);
                 try {
                     DFService.register(peerAgent, peerAgent.getAID(), description);
                 } catch (FIPAException e) {
@@ -57,7 +80,7 @@ public class PeerGraph {
         });
     }
 
-    public AID getMonitoringAgent() {
-        throw new UnsupportedOperationException();
-    }
+
+
+
 }

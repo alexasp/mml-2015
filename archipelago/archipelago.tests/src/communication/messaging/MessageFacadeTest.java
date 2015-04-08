@@ -122,7 +122,7 @@ public class MessageFacadeTest {
     @Test
     public void sendCompletionMessage_AddsRecipient() {
         AID completionAgent = mock(AID.class);
-        when(_peerGraph.getMonitoringAgent()).thenReturn(completionAgent);
+        when(_peerGraph.getMonitoringAgent(_agent)).thenReturn(completionAgent);
         AID agent1 = mock(AID.class);
         ACLMessage message = mock(ACLMessage.class);
         when(_messageParser.createCompletionMessage(agent1)).thenReturn(message);

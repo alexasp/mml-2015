@@ -1,6 +1,8 @@
 package communication.peer.behaviours;
 
+import communication.BehaviourFactory;
 import communication.PeerAgent;
+import jade.core.behaviours.Behaviour;
 import learning.LabeledSample;
 import learning.ModelFactory;
 import learning.models.LogisticModel;
@@ -32,22 +34,31 @@ public class ModelCreationBehaviorTest {
     private NoisyQueryable<LabeledSample> _queryable;
     private int _parameters = 3;
     private RandomGenerator _randomGenerator;
+    private BehaviourFactory _behaviorFactory;
+    private Behaviour _propegateBehavior;
 
     @Before
-    public void setUp(){
+    public void setUp() {
+        _behaviorFactory = mock(BehaviourFactory.class);
         _agent = mock(PeerAgent.class);
         _modelFactory = mock(ModelFactory.class);
         _model = mock(DifferentialLogisticModel.class);
         _randomGenerator = mock(RandomGenerator.class);
         when(_randomGenerator.uniform(-1.0, 1.0)).thenReturn(0.1, 0.2, 0.3);
+        when(_behaviorFactory.getModelPropegate(_agent, _model)).thenReturn(_propegateBehavior);
 
-        Predicate<double[]> predicate = x -> {assertEquals(0.1, x[0], 0.0001d); assertEquals(0.2, x[1], 0.0001d); assertEquals(0.3, x[2], 0.0001d); return true;};
-                when(_modelFactory.getPrivateLogisticModel(org.mockito.Matchers.argThat(new LambdaMatcher<>(predicate)))).thenReturn(_model);
+        Predicate<double[]> predicate = x -> {
+            assertEquals(0.1, x[0], 0.0001d);
+            assertEquals(0.2, x[1], 0.0001d);
+            assertEquals(0.3, x[2], 0.0001d);
+            return true;
+        };
+        when(_modelFactory.getPrivateLogisticModel(org.mockito.Matchers.argThat(new LambdaMatcher<>(predicate)))).thenReturn(_model);
         _queryable = mock(NoisyQueryable.class);
 
         when(_agent.getData()).thenReturn(_queryable);
 
-        _creationBehaviour = new ModelCreationBehavior(_agent, _modelFactory, _randomGenerator, _parameters);
+        _creationBehaviour = new ModelCreationBehavior(_agent, _modelFactory, _randomGenerator, _behaviorFactory, _parameters);
     }
 
     @Test
@@ -56,6 +67,13 @@ public class ModelCreationBehaviorTest {
 
         verify(_model).update(_agent.getUpdateCost(), _queryable);
         verify(_agent).addModel(_model);
+    }
+
+    @Test
+    public void action_addsPropegateBehavior() {
+        _creationBehaviour.action();
+
+        verify(_agent).addBehaviour(_propegateBehavior);
     }
 
 }

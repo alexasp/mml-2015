@@ -39,14 +39,12 @@ public class ACLMessageParser {
     }
 
     public ACLMessage createMessage(Model model, AID agent2) {
-        throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException();
     }
 
     public ACLMessage createCompletionMessage(AID agent1) {
         ACLMessage message = new ACLMessage(CompletionListeningBehavior.Performative);
         message.setContent(agent1.toString());
-        //todo get CompletionListeningAgent from DF service and add as recipient
-//        message.addReceiver();
         return message;
     }
 }

@@ -50,6 +50,10 @@ public class MessageFacade {
 
     public void sendToRandomPeer(Model model) {
         List<AID> peers = _peerGraph.getPeers(_agent);
+
+        if(peers.size() == 0)
+            return;
+
         AID target = peers.get(_randomGenerator.uniform(0, peers.size() - 1));
         ACLMessage message = _messageParser.createMessage(model, target);
 
@@ -58,7 +62,7 @@ public class MessageFacade {
 
     public void sendCompletionMessage(AID agent1) {
         ACLMessage message = _messageParser.createCompletionMessage(agent1);
-        message.addReceiver(_peerGraph.getMonitoringAgent());
+        message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
 
         _agent.send(message);
     }
