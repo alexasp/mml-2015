@@ -27,6 +27,9 @@ public class ModelCreationBehavior extends OneShotBehaviour {
 
     @Override
     public void action() {
+
+        System.out.println(_agent.getName() + " created model.");
+
         double[] parameterVector = IntStream.range(0, _parameters)
                 .mapToDouble(i -> _randomGenerator.uniform(-1.0, 1.0))
                 .toArray();

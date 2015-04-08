@@ -3,6 +3,7 @@ package communication.messaging;
 import communication.PeerAgent;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
@@ -43,12 +44,17 @@ public class PeerGraph {
     }
 
     public void join(PeerAgent peerAgent) {
-        DFAgentDescription description = createDescription(peerAgent.getAID());
-        try {
-            DFService.register(peerAgent, peerAgent.getAID(), description);
-        } catch (FIPAException e) {
-            throw new RuntimeException("Unable to register peer agent.", e);
-        }
+        peerAgent.addBehaviour(new OneShotBehaviour() {
+            @Override
+            public void action() {
+                DFAgentDescription description = createDescription(peerAgent.getAID());
+                try {
+                    DFService.register(peerAgent, peerAgent.getAID(), description);
+                } catch (FIPAException e) {
+                    throw new RuntimeException("Unable to register peer agent.", e);
+                }
+            }
+        });
     }
 
     public AID getMonitoringAgent() {

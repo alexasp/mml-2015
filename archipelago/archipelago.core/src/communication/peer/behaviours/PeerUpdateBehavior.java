@@ -29,6 +29,9 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
     @Override
     public void action() {
         if(_messageFacade.hasMessage(UpdatePerformative)){
+
+            System.out.println(_peerAgent.getName() + " received a model.");
+
             Message message = _messageFacade.nextMessage(UpdatePerformative);
             _peerAgent.addModel(message.getModel());
 
