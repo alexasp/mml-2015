@@ -5,6 +5,7 @@ import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import jade.core.Agent;
 import learning.EnsembleModel;
+import learning.IQueryable;
 import learning.LabeledSample;
 import learning.Model;
 import privacy.NoisyQueryable;
@@ -42,7 +43,7 @@ public class PeerAgent extends Agent {
     }
 
     //todo: consider making this private or require a new agent, to avoid breaching differential privacy
-    public NoisyQueryable<LabeledSample> getData() {
+    public IQueryable<LabeledSample> getData() {
         return _data;
     }
 

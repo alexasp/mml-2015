@@ -1,5 +1,6 @@
 package learning.models;
 
+import learning.IQueryable;
 import learning.LabeledSample;
 import learning.Model;
 import privacy.NoisyQueryable;
@@ -56,7 +57,7 @@ public class LogisticModel implements Model {
     }
 
     @Override
-    public void update(double epsilon, NoisyQueryable queryable) {
+    public void update(double epsilon, IQueryable queryable) {
         throw new UnsupportedOperationException();
     }
 

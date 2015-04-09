@@ -1,9 +1,9 @@
 package privacy.learning;
 
+import learning.IQueryable;
 import learning.LabeledSample;
 import learning.Model;
 import learning.models.LogisticModel;
-import privacy.NoisyQueryable;
 
 import java.util.stream.IntStream;
 
@@ -18,7 +18,7 @@ public class DifferentialLogisticModel implements Model {
         _logisticModel = logisticModel;
     }
 
-    private double gradientUpdate(NoisyQueryable<Double> errors, double parameter, double epsilon) {
+    private double gradientUpdate(IQueryable<Double> errors, double parameter, double epsilon) {
         return errors.sum(epsilon, error -> error * parameter);
     }
 
@@ -28,8 +28,8 @@ public class DifferentialLogisticModel implements Model {
 
 
     @Override
-    public void update(double epsilon, NoisyQueryable<LabeledSample> queryable) {
-        NoisyQueryable<Double> errors = queryable.project(example -> errorProjection( example));
+    public void update(double epsilon, IQueryable<LabeledSample> queryable) {
+        IQueryable<Double> errors = queryable.project(example -> errorProjection( example));
         double[] parameters = _logisticModel.getParameters();
         double[] gradient = IntStream.range(0, _logisticModel.getDimensionality())
                 .mapToDouble(i -> gradientUpdate(errors, parameters[i], epsilon))

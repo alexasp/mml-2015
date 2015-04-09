@@ -1,5 +1,6 @@
 package privacy;
 
+import learning.IQueryable;
 import privacy.math.RandomGenerator;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.stream.IntStream;
 /**
  * Created by alex on 3/5/15.
  */
-public class NoisyQueryable<T> {
+public class NoisyQueryable<T> implements IQueryable<T> {
 
     private List<T> _data;
     private Budget _budget;
