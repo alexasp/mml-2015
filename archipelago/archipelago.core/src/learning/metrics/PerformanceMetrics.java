@@ -14,11 +14,13 @@ import java.util.stream.IntStream;
 public class PerformanceMetrics {
     public double errorRate(List<LabeledSample> test, List<Double> predictions, double cost) {
         BiFunction<LabeledSample, Integer, Double> errorFunction =
-                (sample, index) -> (sample.getLabel() + 1.0) / 2.0 - predictions.get(index);
+                (sample, index) -> Math.abs((sample.getLabel() + 1.0) / 2.0 - (predictions.get(index) + 1.0)/2.0);
 
-        return IntStream.range(0, test.size())
+        double errorRate = IntStream.range(0, test.size())
                 .mapToDouble(i -> errorFunction.apply(test.get(i), i))
-                .sum() / (double)test.size();
+                .sum() / (double) test.size();
+
+        return errorRate;
     }
 
 }

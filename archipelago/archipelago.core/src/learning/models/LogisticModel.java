@@ -6,6 +6,7 @@ import learning.Model;
 import privacy.NoisyQueryable;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 /**
@@ -33,17 +34,17 @@ public class LogisticModel implements Model {
 
     //TODO: use function from PerformanceMetrics?
     public Double errorProjection(LabeledSample example) {
-        double error = (example.getLabel() + 1.0) / 2.0 - sigmoid(example.getFeatures(), _parameters);
+        double prediction = sigmoid(example.getFeatures(), _parameters);
+        double error = (example.getLabel() + 1.0) / 2.0 - prediction;
         return error;
     }
 
-    private static double sigmoid(double[] features, double[] parameters) {
+    public static double sigmoid(double[] features, double[] parameters) {
         double dotProduct = IntStream.range(0, features.length)
-                .parallel()
                 .mapToDouble(i -> features[i] * parameters[i])
                 .sum();
 
-        return 1.0 / (1 + Math.exp(-dotProduct));
+        return 1.0 / (1.0 + Math.exp(-dotProduct));
     }
 
     public void gradientUpdate(double[] gradient) {
@@ -81,6 +82,16 @@ public class LogisticModel implements Model {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public List<Double> label(List<LabeledSample> test) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public double label(double[] test) {
+        throw new UnsupportedOperationException();
     }
 
 }

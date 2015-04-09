@@ -55,7 +55,7 @@ public class PeerAgent extends Agent {
     }
 
     public List<Double> labelData(List<LabeledSample> test) {
-        throw new UnsupportedOperationException();
+        return _ensemble.label(test);
     }
 
     public int getIterations() {
