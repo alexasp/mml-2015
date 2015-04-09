@@ -24,7 +24,7 @@ public class SpamTest {
 
         DataLoader loader = injector.getInstance(DataLoader.class);
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
-        IQueryableFactory queryableFactory = injector.getInstance(QueryableFactory.class);
+        IQueryableFactory queryableFactory = injector.getInstance(IQueryableFactory.class);
 
         List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase.csv","end",true);
 
