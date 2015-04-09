@@ -7,8 +7,9 @@ import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
+import learning.IQueryableFactory;
 import learning.LabeledSample;
-import privacy.NoisyQueryableFactory;
+import learning.QueryableFactory;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class SpamTest {
 
         DataLoader loader = injector.getInstance(DataLoader.class);
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
-        NoisyQueryableFactory queryableFactory = injector.getInstance(NoisyQueryableFactory.class);
+        IQueryableFactory queryableFactory = injector.getInstance(QueryableFactory.class);
 
         List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase.csv","end",true);
 

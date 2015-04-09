@@ -6,6 +6,7 @@ import communication.PeerAgent;
 import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import experiment.DataLoader;
+import learning.IQueryableFactory;
 import learning.LabeledSample;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class AgentFactoryTest {
     private int _iterations = 5;
     private PeerGraph _peerGraph;
     private DataLoader _dataLoader;
-    private NoisyQueryableFactory _noisyQueryableFactory;
+    private IQueryableFactory _noisyQueryableFactory;
     private double _budget = 2.0;
     private NoisyQueryable<LabeledSample> _queryable1;
     private NoisyQueryable<learning.LabeledSample> _queryable2;

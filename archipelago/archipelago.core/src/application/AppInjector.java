@@ -1,10 +1,9 @@
 package application;
 
+import learning.QueryableFactory;
 import com.google.inject.AbstractModule;
-import communication.Environment;
-import learning.LogisticModelFactory;
+import learning.IQueryableFactory;
 import learning.ModelFactory;
-import learning.models.LogisticModel;
 import learning.models.PrivateLogisticModelFactory;
 
 /**
@@ -14,5 +13,6 @@ public class AppInjector extends AbstractModule {
     @Override
     protected void configure() {
         bind(ModelFactory.class).to(PrivateLogisticModelFactory.class);
+        bind(IQueryableFactory.class).to(QueryableFactory.class);
     }
 }

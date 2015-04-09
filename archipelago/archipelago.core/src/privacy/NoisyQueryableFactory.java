@@ -1,6 +1,7 @@
 package privacy;
 
 import com.google.inject.Inject;
+import learning.IQueryableFactory;
 import privacy.math.RandomGenerator;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by aspis on 25.03.2015.
  */
-public class NoisyQueryableFactory {
+public class NoisyQueryableFactory implements IQueryableFactory{
     private RandomGenerator _randomGenerator;
 
     @Inject

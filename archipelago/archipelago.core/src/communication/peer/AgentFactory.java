@@ -7,7 +7,10 @@ import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import experiment.DataLoader;
 import experiment.Experiment;
+import javafx.scene.control.Labeled;
 import learning.EnsembleModel;
+import learning.IQueryable;
+import learning.IQueryableFactory;
 import learning.LabeledSample;
 import privacy.Budget;
 import privacy.NoisyQueryable;
@@ -25,15 +28,15 @@ public class AgentFactory {
     private BehaviourFactory _behaviourFactory;
     private PeerGraph _peerGraph;
     private DataLoader _dataLoader;
-    private NoisyQueryableFactory _noisyQueryableFactory;
+    private IQueryableFactory _queryableFactory;
 
     @Inject
-    public AgentFactory(BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, PeerGraph peerGraph, DataLoader dataLoader, NoisyQueryableFactory noisyQueryableFactory) {
+    public AgentFactory(BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, PeerGraph peerGraph, DataLoader dataLoader, IQueryableFactory queryableFactory) {
         _behaviourFactory = behaviourFactory;
         _messageFacadeFactory = messageFacadeFactory;
         _peerGraph = peerGraph;
         _dataLoader = dataLoader;
-        _noisyQueryableFactory = noisyQueryableFactory;
+        _queryableFactory = queryableFactory;
     }
 
     public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters, double updateCost) {
@@ -42,7 +45,7 @@ public class AgentFactory {
         List<PeerAgent> agents = new ArrayList<>();
 
         for(List<LabeledSample> partition : partitions){
-            NoisyQueryable<LabeledSample> queryable = _noisyQueryableFactory.getQueryable(new Budget(budget), partition);
+            IQueryable<LabeledSample> queryable = _queryableFactory.getQueryable(new Budget(budget), partition);
             agents.add(new PeerAgent(queryable, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph, parameters, updateCost));
         }
 

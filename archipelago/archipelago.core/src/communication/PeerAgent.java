@@ -8,7 +8,6 @@ import learning.EnsembleModel;
 import learning.IQueryable;
 import learning.LabeledSample;
 import learning.Model;
-import privacy.NoisyQueryable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +20,12 @@ public class PeerAgent extends Agent {
     public static final String SERVICE_NAME = "peer";
     private final MessageFacade _messageFacade;
     private EnsembleModel _ensemble;
-    private NoisyQueryable<LabeledSample> _data;
+    private IQueryable<LabeledSample> _data;
     private int _iterations;
     private int _parameters;
     private double _updateCost;
 
-    public PeerAgent(NoisyQueryable<LabeledSample> data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
+    public PeerAgent(IQueryable<LabeledSample> data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
         _ensemble = ensemble;
         _data = data;
         _iterations = iterations;
