@@ -17,8 +17,8 @@ public class BehaviourFactory {
     private RandomGenerator _randomGenerator;
 
     @Inject
-    public BehaviourFactory(ModelFactory modelFactory, RandomGenerator randomGenerator) {
-        _modelFactory = modelFactory;
+    public BehaviourFactory(ModelFactory logisticModelFactory, RandomGenerator randomGenerator) {
+        _modelFactory = logisticModelFactory;
         _randomGenerator = randomGenerator;
     }
 

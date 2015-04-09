@@ -4,11 +4,11 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import jade.core.behaviours.Behaviour;
 import learning.LabeledSample;
+import learning.LogisticModelFactory;
 import learning.ModelFactory;
-import learning.models.LogisticModel;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import privacy.NoisyQueryable;
 import privacy.learning.DifferentialLogisticModel;
 import privacy.math.RandomGenerator;
@@ -17,7 +17,6 @@ import testutils.LambdaMatcher;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -53,7 +52,7 @@ public class ModelCreationBehaviorTest {
             assertEquals(0.3, x[2], 0.0001d);
             return true;
         };
-        when(_modelFactory.getPrivateLogisticModel(org.mockito.Matchers.argThat(new LambdaMatcher<>(predicate)))).thenReturn(_model);
+        when(_modelFactory.getModel(Matchers.argThat(new LambdaMatcher<>(predicate)))).thenReturn(_model);
         _queryable = mock(NoisyQueryable.class);
 
         when(_agent.getData()).thenReturn(_queryable);

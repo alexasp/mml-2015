@@ -1,25 +1,13 @@
 package learning;
 
-import learning.models.LogisticModel;
-import privacy.learning.DifferentialLogisticModel;
-
 /**
- * Created by alex on 3/23/15.
+ * Created by alex on 4/9/15.
  */
-public class ModelFactory {
-    private LogisticModel getLogisticModel(double[] parameters) {
-        return new LogisticModel(parameters);
-    }
+public interface ModelFactory {
 
-    private LogisticModel getLogisticModel(String modelString) {
-        return new LogisticModel(modelString);
-    }
+    public Model getModel(double[] parameters);
 
-    public DifferentialLogisticModel getPrivateLogisticModel(double[] parameters) {
-        return new DifferentialLogisticModel(getLogisticModel(parameters));
-    }
+    public Model getModel(int size);
 
-    public DifferentialLogisticModel getPrivateLogisticModel(String modelString) {
-        return new DifferentialLogisticModel(getLogisticModel(modelString));
-    }
+    public Model getModel(String serializedModel);
 }

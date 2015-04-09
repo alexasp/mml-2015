@@ -67,7 +67,7 @@ public class PeerAgent extends Agent {
         return _parameters;
     }
 
-    public ArrayList<Model> getModels() {
+    public List<Model> getModels() {
         return _ensemble.getModels();
     }
 }

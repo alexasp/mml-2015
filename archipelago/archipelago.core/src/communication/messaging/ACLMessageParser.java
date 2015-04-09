@@ -1,22 +1,15 @@
 package communication.messaging;
 
 import com.google.inject.Inject;
-import communication.PeerAgent;
 import communication.messaging.jade.ACLMessageReader;
-import communication.peer.CompletionListeningAgent;
 import communication.peer.behaviours.CompletionListeningBehavior;
 import communication.peer.behaviours.PeerUpdateBehavior;
-import jade.content.onto.Ontology;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import learning.Model;
+import learning.LogisticModelFactory;
 import learning.ModelFactory;
-
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static communication.peer.behaviours.CompletionListeningBehavior.CompletionPerformative;
 
 /**
  * Created by alex on 3/23/15.
@@ -39,7 +32,7 @@ public class ACLMessageParser {
             return new Message(content);
         }
         else if(message.getOntology().equals(Ontologies.Model.name())){
-            return new Message(_modelFactory.getPrivateLogisticModel(content));
+            return new Message(_modelFactory.getModel(content));
         }
         else {
             throw new OntologyException("Ontology not recognized.");

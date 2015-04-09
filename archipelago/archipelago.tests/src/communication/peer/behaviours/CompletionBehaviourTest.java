@@ -3,12 +3,15 @@ package communication.peer.behaviours;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import jade.core.AID;
+import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.util.Arrays;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -30,6 +33,7 @@ public class CompletionBehaviourTest {
         _aid = mock(AID.class);
         when(_peerAgent.getAID()).thenReturn(_aid);
         when(_peerAgent.getMessageFacade()).thenReturn(_messageFacade);
+        when(_peerAgent.getModels()).thenReturn(Arrays.asList(mock(Model.class)));
 
         _behaviour = new CompletionBehaviour(_peerAgent, _messageFacade);
     }

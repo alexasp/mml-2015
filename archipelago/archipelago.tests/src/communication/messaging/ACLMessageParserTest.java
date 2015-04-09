@@ -4,7 +4,7 @@ import communication.messaging.jade.ACLMessageReader;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
-import learning.ModelFactory;
+import learning.LogisticModelFactory;
 import org.junit.Before;
 import org.junit.Test;
 import privacy.learning.DifferentialLogisticModel;
@@ -24,7 +24,7 @@ public class ACLMessageParserTest {
     private String _modelString = "2.0,1.5,-2.5,-100.0";
     private ACLMessageReader _reader;
     private ACLMessage _aclMessage;
-    private ModelFactory _modelFactory;
+    private LogisticModelFactory _Logistic_modelFactory;
 
     private DifferentialLogisticModel _model;
 
@@ -33,11 +33,11 @@ public class ACLMessageParserTest {
         _reader = mock(ACLMessageReader.class);
         _aclMessage = mock(ACLMessage.class);
         when(_reader.read(_aclMessage)).thenReturn(_modelString);
-        _modelFactory = mock(ModelFactory.class);
+        _Logistic_modelFactory = mock(LogisticModelFactory.class);
         _model = mock(DifferentialLogisticModel.class);
-        when(_modelFactory.getPrivateLogisticModel(_modelString)).thenReturn(_model);
+        when(_Logistic_modelFactory.getModel(_modelString)).thenReturn(_model);
 
-        _parser = new ACLMessageParser(_reader, _modelFactory);
+        _parser = new ACLMessageParser(_reader, _Logistic_modelFactory);
     }
 
     @Test

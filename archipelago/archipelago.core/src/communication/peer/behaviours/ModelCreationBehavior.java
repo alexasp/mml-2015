@@ -2,9 +2,9 @@ package communication.peer.behaviours;
 
 import communication.BehaviourFactory;
 import communication.PeerAgent;
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import learning.Model;
+import learning.LogisticModelFactory;
 import learning.ModelFactory;
 import privacy.math.RandomGenerator;
 
@@ -37,7 +37,7 @@ public class ModelCreationBehavior extends OneShotBehaviour {
                 .mapToDouble(i -> _randomGenerator.uniform(-1.0, 1.0))
                 .toArray();
 
-        Model model = _modelFactory.getPrivateLogisticModel(parameterVector); //TODO: add parameters
+        Model model = _modelFactory.getModel(parameterVector); //TODO: add parameters
         model.update(_agent.getUpdateCost(), _agent.getData());
         _agent.addModel(model);
 
