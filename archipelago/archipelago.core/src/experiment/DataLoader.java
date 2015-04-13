@@ -33,7 +33,7 @@ public class DataLoader {
                     numericLabel = label == "M" ? 1.0 : -1.0;
                 }
                 else{
-                    numericLabel = Double.parseDouble(label);
+                    numericLabel = Double.parseDouble(label) * 2.0 - 1.0;
                 }
 
                 double[] vector = new double[nextLine.length-1];

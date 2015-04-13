@@ -21,7 +21,7 @@ public class Experiment {
     private final List<PeerAgent> _peers;
     private final PerformanceMetrics _performanceMetrics;
     private final List<LabeledSample> _trainData;
-    private final List<LabeledSample> _testData;
+    private List<LabeledSample> _testData;
     private final List<LabeledSample> _data;
     private final AgentFactory _agentFactory;
     private PeerGraph _peerGraph;
@@ -41,6 +41,7 @@ public class Experiment {
         _data = samples;
         _trainData = trainPartitioning.get(0);
         _testData = trainPartitioning.get(1);
+        _testData = _trainData;
 
         _performanceMetrics = performanceMetrics;
         _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters, configuration.updateCost);

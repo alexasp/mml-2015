@@ -11,6 +11,7 @@ import learning.IQueryableFactory;
 import learning.LabeledSample;
 import learning.QueryableFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,11 +28,12 @@ public class SpamTest {
         IQueryableFactory queryableFactory = injector.getInstance(IQueryableFactory.class);
 
         List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase.csv","end",true);
+        Collections.shuffle(data);
 
         double trainRatio = 0.8;
-        int peerCount = 5;
+        int peerCount = 1;
         double testCost = 0.1;
-        int iterations = 10;
+        int iterations = 1;
 
         Experiment experiment = experimentFactory.getExperiment(data, trainRatio, peerCount, testCost, iterations, 2.0, data.get(0).getFeatures().length, 0.01);
 
