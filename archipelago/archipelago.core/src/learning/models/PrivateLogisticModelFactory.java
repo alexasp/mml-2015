@@ -10,16 +10,16 @@ import privacy.learning.DifferentialLogisticModel;
 public class PrivateLogisticModelFactory implements ModelFactory {
     @Override
     public Model getModel(double[] parameters) {
-        return new DifferentialLogisticModel(new LogisticModel(parameters));
+        return new DifferentialLogisticModel(parameters);
     }
 
     @Override
     public Model getModel(int size) {
-        return new DifferentialLogisticModel(new LogisticModel(new double[size]));
+        return new DifferentialLogisticModel(new double[size]);
     }
 
     @Override
     public Model getModel(String serializedModel) {
-        return new DifferentialLogisticModel(new LogisticModel(serializedModel));
+        return new DifferentialLogisticModel(serializedModel);
     }
 }

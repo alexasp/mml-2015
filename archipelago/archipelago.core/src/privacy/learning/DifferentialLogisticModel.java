@@ -1,12 +1,14 @@
 package privacy.learning;
 
+import com.google.common.collect.Lists;
+import com.sun.deploy.util.ArrayUtil;
+import experiment.DataLoader;
 import learning.IQueryable;
 import learning.LabeledSample;
 import learning.Model;
-import learning.models.LogisticModel;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -14,60 +16,94 @@ import java.util.stream.IntStream;
  */
 public class DifferentialLogisticModel implements Model {
 
-    private LogisticModel _logisticModel;
+    private static final java.lang.String DELIMITER = ",";
+    private double[] _parameters;
 
-    public DifferentialLogisticModel(LogisticModel logisticModel) {
-        _logisticModel = logisticModel;
+    public DifferentialLogisticModel(double[] parameters) {
+        _parameters = parameters;
     }
 
-
-    public Double errorProjection(LabeledSample example) {
-        double prediction = sigmoid(example.getFeatures(), _logisticModel.getParameters());
-        double error = (example.getLabel() + 1.0) / 2.0 - prediction;
-        return error;
+    public DifferentialLogisticModel(String serializedModel) {
+        deserialize(serializedModel);
     }
+
 
     public static double sigmoid(double[] features, double[] parameters) {
-        double dotProduct = IntStream.range(0, features.length)
-                .mapToDouble(i -> features[i] * parameters[i])
-                .sum();
+        double dotProduct = 0;
+
+        for(int i = 0; i < parameters.length; i++){
+            dotProduct += parameters[i] * features[i];
+        }
 
         return 1.0 / (1.0 + Math.exp(-dotProduct));
     }
 
 
+    public SampleError errorProjection(LabeledSample example) {
+        double prediction = sigmoid(example.getFeatures(), _parameters);
+
+        double error = (example.getLabel() + 1.0) / 2.0 - prediction;
+        return new SampleError(example.getFeatures(), error);
+    }
+
     @Override
     public void update(double epsilon, IQueryable<LabeledSample> queryable) {
-        IQueryable<Double> errors = queryable.project(example -> errorProjection( example));
-        double[] parameters = _logisticModel.getParameters();
-        double[] gradient = IntStream.range(0, _logisticModel.getDimensionality())
-                .mapToDouble(i -> errors.sum(epsilon, error -> error * parameters[i]))
-                .toArray();
 
-        _logisticModel.gradientUpdate(gradient);
+        for(int iteration = 0; iteration < 100; iteration++) {
+
+            IQueryable<SampleError> errors = queryable.project(example -> errorProjection(example));
+
+            double[] gradient = new double[_parameters.length];
+
+            for(int i = 0; i < gradient.length; i++){
+                final int finalI = i;
+                gradient[i] = errors.sum(epsilon, error -> error.error * error.features[finalI]);
+            }
+
+            for(int d = 0; d < _parameters.length; d++){
+                _parameters[d] += 0.07*(gradient[d] - 2.0*0.001*_parameters[d]);
+//                _parameters[d] += 0.07*(gradient[d]);
+            }
+
+        }
     }
 
     @Override
     public void deserialize(String modelString) {
-        _logisticModel.deserialize(modelString);
+        String[] parts = modelString.split(DELIMITER);
+
+        _parameters = IntStream.range(0, parts.length)
+                .mapToDouble(i -> Double.parseDouble(parts[i]))
+                .toArray();
     }
 
     @Override
     public String serialize() {
-        return _logisticModel.serialize();
+        StringBuilder builder = new StringBuilder();
+        builder.append(Double.toString(_parameters[0]));
+
+        for(int i = 1; i < _parameters.length; i++){
+            builder.append(",");
+            builder.append(Double.toString(_parameters[i]));
+        }
+
+        return builder.toString();
     }
 
     @Override
     public List<Double> label(List<LabeledSample> test) {
-        return test.stream()
-                .mapToDouble(sample -> label(sample.getFeatures()))
-                .boxed()
-                .collect(Collectors.toList());
+        List<Double> labels = new ArrayList<>();
+        for(LabeledSample sample : test){
+            labels.add(label(sample.getFeatures()));
+        }
+
+        return labels;
     }
 
     @Override
     public double label(double[] features) {
-        return Math.round(LogisticModel.sigmoid(features, _logisticModel.getParameters()))*2.0 - 1.0;
+        double sigmoidValue = sigmoid(features, _parameters);
+        return Math.round(sigmoidValue)*2.0 - 1.0;
     }
 
 }

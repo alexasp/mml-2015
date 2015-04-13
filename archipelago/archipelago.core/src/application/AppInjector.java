@@ -1,6 +1,5 @@
 package application;
 
-import learning.LogisticModelFactory;
 import learning.QueryableFactory;
 import com.google.inject.AbstractModule;
 import learning.IQueryableFactory;
