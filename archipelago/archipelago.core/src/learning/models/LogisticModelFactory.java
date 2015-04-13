@@ -2,24 +2,24 @@ package learning.models;
 
 import learning.Model;
 import learning.ModelFactory;
-import privacy.learning.DifferentialLogisticModel;
+import privacy.learning.LogisticModel;
 
 /**
  * Created by alex on 4/9/15.
  */
-public class PrivateLogisticModelFactory implements ModelFactory {
+public class LogisticModelFactory implements ModelFactory {
     @Override
     public Model getModel(double[] parameters) {
-        return new DifferentialLogisticModel(parameters);
+        return new LogisticModel(parameters);
     }
 
     @Override
     public Model getModel(int size) {
-        return new DifferentialLogisticModel(new double[size]);
+        return new LogisticModel(new double[size]);
     }
 
     @Override
     public Model getModel(String serializedModel) {
-        return new DifferentialLogisticModel(serializedModel);
+        return new LogisticModel(serializedModel);
     }
 }

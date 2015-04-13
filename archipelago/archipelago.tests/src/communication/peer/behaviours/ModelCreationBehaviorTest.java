@@ -4,13 +4,12 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import jade.core.behaviours.Behaviour;
 import learning.LabeledSample;
-import learning.LogisticModelFactory;
 import learning.ModelFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import privacy.NoisyQueryable;
-import privacy.learning.DifferentialLogisticModel;
+import privacy.learning.LogisticModel;
 import privacy.math.RandomGenerator;
 import testutils.LambdaMatcher;
 
@@ -29,7 +28,7 @@ public class ModelCreationBehaviorTest {
     private ModelCreationBehavior _creationBehaviour;
     private PeerAgent _agent;
     private ModelFactory _modelFactory;
-    private DifferentialLogisticModel _model;
+    private LogisticModel _model;
     private NoisyQueryable<LabeledSample> _queryable;
     private int _parameters = 3;
     private RandomGenerator _randomGenerator;
@@ -41,7 +40,7 @@ public class ModelCreationBehaviorTest {
         _behaviorFactory = mock(BehaviourFactory.class);
         _agent = mock(PeerAgent.class);
         _modelFactory = mock(ModelFactory.class);
-        _model = mock(DifferentialLogisticModel.class);
+        _model = mock(LogisticModel.class);
         _randomGenerator = mock(RandomGenerator.class);
         when(_randomGenerator.uniform(-1.0, 1.0)).thenReturn(0.1, 0.2, 0.3);
         when(_behaviorFactory.getModelPropegate(_agent, _model)).thenReturn(_propegateBehavior);

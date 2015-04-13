@@ -1,8 +1,6 @@
 package communication.messaging;
 
 import learning.Model;
-import learning.models.LogisticModel;
-import privacy.learning.DifferentialLogisticModel;
 
 /**
  * Created by alex on 3/9/15.

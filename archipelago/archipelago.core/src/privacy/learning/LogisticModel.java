@@ -14,16 +14,16 @@ import java.util.stream.IntStream;
 /**
  * Created by alex on 3/5/15.
  */
-public class DifferentialLogisticModel implements Model {
+public class LogisticModel implements Model {
 
     private static final java.lang.String DELIMITER = ",";
     private double[] _parameters;
 
-    public DifferentialLogisticModel(double[] parameters) {
+    public LogisticModel(double[] parameters) {
         _parameters = parameters;
     }
 
-    public DifferentialLogisticModel(String serializedModel) {
+    public LogisticModel(String serializedModel) {
         deserialize(serializedModel);
     }
 
@@ -57,7 +57,7 @@ public class DifferentialLogisticModel implements Model {
 
             for(int i = 0; i < gradient.length; i++){
                 final int finalI = i;
-                gradient[i] = errors.sum(epsilon, error -> error.error * error.features[finalI]);
+                gradient[i] = errors.sum(epsilon, error -> error.error * error.features[finalI])/errors.count(epsilon);
             }
 
             for(int d = 0; d < _parameters.length; d++){
@@ -106,4 +106,7 @@ public class DifferentialLogisticModel implements Model {
         return Math.round(sigmoidValue)*2.0 - 1.0;
     }
 
+    public double[] getParameters() {
+        return _parameters;
+    }
 }
