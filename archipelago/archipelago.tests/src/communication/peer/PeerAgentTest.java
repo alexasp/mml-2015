@@ -7,13 +7,13 @@ import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import communication.peer.behaviours.PeerUpdateBehavior;
-import jade.domain.FIPAException;
 import learning.EnsembleModel;
 import learning.LabeledSample;
 import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
-import privacy.NoisyQueryable;
+
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -30,16 +30,16 @@ public class PeerAgentTest {
     private PeerAgent _peerAgent;
     private BehaviourFactory _behaviourFactory;
     private EnsembleModel _ensemble;
-    private NoisyQueryable<LabeledSample> _data;
     private MessageFacadeFactory _messageFacadeFactory;
     private int _iterations = 5;
     private PeerGraph _peerGraph;
     private int _parameters = 60;
     private double _updateCost = 0.1;
+    private List _data;
 
     @Before
     public void setUp(){
-        _data = mock(NoisyQueryable.class);
+        _data = mock(List.class);
         _ensemble = mock(EnsembleModel.class);
 
         _messageFacadeFactory = mock(MessageFacadeFactory.class);

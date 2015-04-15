@@ -25,7 +25,7 @@ public class EnsembleModel implements Model{
     }
 
     @Override
-    public void update(double epsilon, IQueryable<LabeledSample> queryable) {
+    public void update(double epsilon, List<LabeledSample> data) {
 
     }
 

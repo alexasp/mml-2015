@@ -39,30 +39,28 @@ public class LogisticModel implements Model {
     }
 
 
-    public SampleError errorProjection(LabeledSample example) {
+    public double errorProjection(LabeledSample example) {
         double prediction = sigmoid(example.getFeatures(), _parameters);
 
         double error = (example.getLabel() + 1.0) / 2.0 - prediction;
-        return new SampleError(example.getFeatures(), error);
+        return error;
     }
 
     @Override
-    public void update(double epsilon, IQueryable<LabeledSample> queryable) {
+    public void update(double epsilon, List<LabeledSample> data) {
 
         for(int iteration = 0; iteration < 100; iteration++) {
 
-            IQueryable<SampleError> errors = queryable.project(example -> errorProjection(example));
 
             double[] gradient = new double[_parameters.length];
 
             for(int i = 0; i < gradient.length; i++){
                 final int finalI = i;
-                gradient[i] = errors.sum(epsilon, error -> error.error * error.features[finalI])/errors.count(epsilon);
+                gradient[i] = data.stream().mapToDouble(sample -> errorProjection(sample) * sample.getFeatures()[finalI]).sum();
             }
 
             for(int d = 0; d < _parameters.length; d++){
                 _parameters[d] += 0.07*(gradient[d] - 2.0*0.001*_parameters[d]);
-//                _parameters[d] += 0.07*(gradient[d]);
             }
 
         }

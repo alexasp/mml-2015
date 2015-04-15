@@ -31,12 +31,11 @@ public class AgentFactory {
     private IQueryableFactory _queryableFactory;
 
     @Inject
-    public AgentFactory(BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, PeerGraph peerGraph, DataLoader dataLoader, IQueryableFactory queryableFactory) {
+    public AgentFactory(BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, PeerGraph peerGraph, DataLoader dataLoader) {
         _behaviourFactory = behaviourFactory;
         _messageFacadeFactory = messageFacadeFactory;
         _peerGraph = peerGraph;
         _dataLoader = dataLoader;
-        _queryableFactory = queryableFactory;
     }
 
     public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters, double updateCost) {
@@ -45,8 +44,7 @@ public class AgentFactory {
         List<PeerAgent> agents = new ArrayList<>();
 
         for(List<LabeledSample> partition : partitions){
-            IQueryable<LabeledSample> queryable = _queryableFactory.getQueryable(new Budget(budget), partition);
-            agents.add(new PeerAgent(queryable, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph, parameters, updateCost));
+            agents.add(new PeerAgent(partition, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph, parameters, updateCost));
         }
 
         return agents;

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by alex on 3/9/15.
  */
 public interface Model {
-    void update(double epsilon, IQueryable<LabeledSample> queryable);
+    void update(double epsilon, List<LabeledSample> data);
 
     void deserialize(String modelString);
 

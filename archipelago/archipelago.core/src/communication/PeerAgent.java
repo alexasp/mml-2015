@@ -20,12 +20,12 @@ public class PeerAgent extends Agent {
     public static final String SERVICE_NAME = "peer";
     private final MessageFacade _messageFacade;
     private EnsembleModel _ensemble;
-    private IQueryable<LabeledSample> _data;
+    private List _data;
     private int _iterations;
     private int _parameters;
     private double _updateCost;
 
-    public PeerAgent(IQueryable<LabeledSample> data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
+    public PeerAgent(List data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
         _ensemble = ensemble;
         _data = data;
         _iterations = iterations;
@@ -42,7 +42,7 @@ public class PeerAgent extends Agent {
     }
 
     //todo: consider making this private or require a new agent, to avoid breaching differential privacy
-    public IQueryable<LabeledSample> getData() {
+    public List getData() {
         return _data;
     }
 
