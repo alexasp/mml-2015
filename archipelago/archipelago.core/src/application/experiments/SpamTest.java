@@ -27,10 +27,10 @@ public class SpamTest {
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         IQueryableFactory queryableFactory = injector.getInstance(IQueryableFactory.class);
 
-        List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase.csv","end",true);
+        List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase_centered.csv","start",true); //this is test leakage. Centering should be performed based on train data only
         Collections.shuffle(data);
 
-        double trainRatio = 0.8;
+        double trainRatio = 0.08;
         int peerCount = 1;
         double testCost = 0.1;
         int iterations = 1;

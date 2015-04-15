@@ -4,7 +4,6 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import jade.core.behaviours.OneShotBehaviour;
 import learning.Model;
-import learning.LogisticModelFactory;
 import learning.ModelFactory;
 import privacy.math.RandomGenerator;
 
@@ -34,8 +33,9 @@ public class ModelCreationBehavior extends OneShotBehaviour {
         System.out.println(_agent.getName() + " created model.");
 
         double[] parameterVector = IntStream.range(0, _parameters)
-                .mapToDouble(i -> _randomGenerator.uniform(-1.0, 1.0))
+                .mapToDouble(i -> 0)
                 .toArray();
+
 
         Model model = _modelFactory.getModel(parameterVector); //TODO: add parameters
         model.update(_agent.getUpdateCost(), _agent.getData());

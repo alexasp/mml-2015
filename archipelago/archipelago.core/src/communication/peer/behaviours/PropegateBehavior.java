@@ -24,7 +24,7 @@ public class PropegateBehavior extends OneShotBehaviour {
         _model.update(_peerAgent.getUpdateCost(), _peerAgent.getData());
         _peerAgent.getMessageFacade().sendToRandomPeer(_model);
 
-        System.out.println(_peerAgent.getName() + " propegated model.");
+//        System.out.println(_peerAgent.getName() + " propegated model.");
     }
 
 }

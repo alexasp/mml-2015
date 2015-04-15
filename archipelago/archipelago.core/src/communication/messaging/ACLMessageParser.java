@@ -8,7 +8,6 @@ import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import learning.Model;
-import learning.LogisticModelFactory;
 import learning.ModelFactory;
 
 /**

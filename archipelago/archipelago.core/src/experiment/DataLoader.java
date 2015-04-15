@@ -36,11 +36,14 @@ public class DataLoader {
                     numericLabel = Double.parseDouble(label) * 2.0 - 1.0;
                 }
 
-                double[] vector = new double[nextLine.length-1];
+                double[] vector = new double[nextLine.length-1 +1];
                 for (int i = 1; i < nextLine.length; i++)
                 {
                     vector[i-1]= Double.parseDouble(nextLine[i]);
                 }
+
+                vector[vector.length-1] = 1.0; //bias term
+
                 LabeledSample sample = new LabeledSample(numericLabel,vector);
                 listOfSamples.add(sample);
             }

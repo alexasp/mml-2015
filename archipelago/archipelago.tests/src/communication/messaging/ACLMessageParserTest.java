@@ -4,10 +4,10 @@ import communication.messaging.jade.ACLMessageReader;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
-import learning.LogisticModelFactory;
+import learning.models.LogisticModelFactory;
 import org.junit.Before;
 import org.junit.Test;
-import privacy.learning.DifferentialLogisticModel;
+import privacy.learning.LogisticModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -26,7 +26,7 @@ public class ACLMessageParserTest {
     private ACLMessage _aclMessage;
     private LogisticModelFactory _Logistic_modelFactory;
 
-    private DifferentialLogisticModel _model;
+    private LogisticModel _model;
 
     @Before
     public void setUp(){
@@ -34,7 +34,7 @@ public class ACLMessageParserTest {
         _aclMessage = mock(ACLMessage.class);
         when(_reader.read(_aclMessage)).thenReturn(_modelString);
         _Logistic_modelFactory = mock(LogisticModelFactory.class);
-        _model = mock(DifferentialLogisticModel.class);
+        _model = mock(LogisticModel.class);
         when(_Logistic_modelFactory.getModel(_modelString)).thenReturn(_model);
 
         _parser = new ACLMessageParser(_reader, _Logistic_modelFactory);

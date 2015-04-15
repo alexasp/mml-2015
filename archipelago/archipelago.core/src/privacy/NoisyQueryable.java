@@ -52,6 +52,7 @@ public class NoisyQueryable<T> implements IQueryable<T> {
         return _budget;
     }
 
+    @Override
     public double count(double epsilon) {
         checkAgentBudget(epsilon);
 

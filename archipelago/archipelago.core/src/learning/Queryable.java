@@ -30,8 +30,18 @@ public class Queryable<T> implements IQueryable<T> {
 
     @Override
     public double sum(double epsilon, Function<T, Double> projection) {
-        return _data.stream().mapToDouble(record -> projection.apply(record))
-                .sum();
+        double value = 0.0;
+
+        for(T t : _data) {
+            value += projection.apply(t);
+        }
+
+        return value;
+    }
+
+    @Override
+    public double count(double epsilon) {
+        return _data.size();
     }
 
     private <NewType> List<NewType> newDataContainer() {

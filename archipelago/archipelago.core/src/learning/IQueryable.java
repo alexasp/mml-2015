@@ -11,4 +11,5 @@ public interface IQueryable<T> {
 
     public double sum(double epsilon, Function<T, Double> projection);
 
+    double count(double epsilon);
 }

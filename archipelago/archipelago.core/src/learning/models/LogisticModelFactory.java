@@ -1,13 +1,13 @@
-package learning;
+package learning.models;
 
-import learning.models.LogisticModel;
-import privacy.learning.DifferentialLogisticModel;
+import learning.Model;
+import learning.ModelFactory;
+import privacy.learning.LogisticModel;
 
 /**
- * Created by alex on 3/23/15.
+ * Created by alex on 4/9/15.
  */
-public class LogisticModelFactory implements ModelFactory{
-
+public class LogisticModelFactory implements ModelFactory {
     @Override
     public Model getModel(double[] parameters) {
         return new LogisticModel(parameters);

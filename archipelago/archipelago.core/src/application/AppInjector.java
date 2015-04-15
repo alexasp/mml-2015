@@ -1,11 +1,10 @@
 package application;
 
-import learning.LogisticModelFactory;
 import learning.QueryableFactory;
 import com.google.inject.AbstractModule;
 import learning.IQueryableFactory;
 import learning.ModelFactory;
-import learning.models.PrivateLogisticModelFactory;
+import learning.models.LogisticModelFactory;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -13,7 +12,7 @@ import learning.models.PrivateLogisticModelFactory;
 public class AppInjector extends AbstractModule {
     @Override
     protected void configure() {
-        bind(ModelFactory.class).to(PrivateLogisticModelFactory.class);
+        bind(ModelFactory.class).to(LogisticModelFactory.class);
         bind(IQueryableFactory.class).to(QueryableFactory.class);
     }
 }

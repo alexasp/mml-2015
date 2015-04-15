@@ -20,6 +20,8 @@ public class EnsembleModel implements Model{
 
     public void add(Model model) {
         _ensemble.add(model);
+//        if(_ensemble.size() > 10)
+//            _ensemble.remove(0);
     }
 
     @Override
