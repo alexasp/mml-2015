@@ -65,7 +65,7 @@ public class Experiment {
 
     public List<Double> test() {
         return _peers.stream()
-                .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData), _configuration.testCost))
+                .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData)))
                 .boxed()
                 .collect(Collectors.toList());
     }

@@ -14,12 +14,10 @@ import privacy.math.RandomGenerator;
  */
 public class BehaviourFactory {
     private ModelFactory _modelFactory;
-    private RandomGenerator _randomGenerator;
 
     @Inject
-    public BehaviourFactory(ModelFactory logisticModelFactory, RandomGenerator randomGenerator) {
+    public BehaviourFactory(ModelFactory logisticModelFactory) {
         _modelFactory = logisticModelFactory;
-        _randomGenerator = randomGenerator;
     }
 
     public Behaviour getPeerUpdate(PeerAgent peerAgent, MessageFacade messageFacade) {
@@ -31,7 +29,7 @@ public class BehaviourFactory {
     }
 
     public Behaviour getModelCreation(PeerAgent agent, int parameters) {
-        return new ModelCreationBehavior(agent, _modelFactory, _randomGenerator, this, parameters);
+        return new ModelCreationBehavior(agent, _modelFactory, this, parameters);
     }
 
     public Behaviour getCompletionListening(CompletionListeningAgent agent, MessageFacade messageFacade) {

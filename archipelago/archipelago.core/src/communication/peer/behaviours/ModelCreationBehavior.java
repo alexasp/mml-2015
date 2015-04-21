@@ -15,14 +15,12 @@ import java.util.stream.IntStream;
 public class ModelCreationBehavior extends OneShotBehaviour {
     private final PeerAgent _agent;
     private final ModelFactory _modelFactory;
-    private RandomGenerator _randomGenerator;
     private BehaviourFactory _behaviorFactory;
     private int _parameters;
 
-    public ModelCreationBehavior(PeerAgent agent, ModelFactory modelFactory, RandomGenerator randomGenerator, BehaviourFactory behaviorFactory, int parameters) {
+    public ModelCreationBehavior(PeerAgent agent, ModelFactory modelFactory, BehaviourFactory behaviorFactory, int parameters) {
         _agent = agent;
         _modelFactory = modelFactory;
-        _randomGenerator = randomGenerator;
         _behaviorFactory = behaviorFactory;
         _parameters = parameters;
     }

@@ -12,16 +12,16 @@ import java.util.stream.IntStream;
  * Created by alex on 3/17/15.
  */
 public class PerformanceMetrics {
-    public double errorRate(List<LabeledSample> test, List<Double> predictions, double cost) {
+    public double errorRate(List<LabeledSample> test, List<Double> predictions) {
 
-        double correct = 0.0;
+        double wrong = 0.0;
 
         for(int i = 0; i < test.size(); i++){
-            if(((int)test.get(i).getLabel()) == ((int) predictions.get(i).doubleValue()) ){
-                correct++;
+            if(((int)test.get(i).getLabel()) != ((int) predictions.get(i).doubleValue()) ){
+                wrong++;
             }
         }
-        double errorRate = (test.size() - correct) / (double) test.size();
+        double errorRate = wrong / (double) test.size();
 
         return errorRate;
     }
