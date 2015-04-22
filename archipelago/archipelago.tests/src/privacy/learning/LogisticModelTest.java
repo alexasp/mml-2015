@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import privacy.NoisyQueryable;
 
+import java.util.List;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
@@ -23,7 +24,7 @@ public class LogisticModelTest {
 
     private double _epsilon;
     private LogisticModel _model;
-    private NoisyQueryable<LabeledSample> _queryable;
+    private List<LabeledSample> _data;
     private LogisticModel _logisticModel;
 
     @Before
@@ -31,21 +32,9 @@ public class LogisticModelTest {
         _epsilon = 1.0;
 
         _logisticModel = mock(LogisticModel.class);
-        _queryable = mock(NoisyQueryable.class);
+        _data = mock(List.class);
     }
 
-
-    @Test
-    public void step_WithData_UpdatesByProjectingToErrorAndSumming(){
-        NoisyQueryable<Double> errors = mock(NoisyQueryable.class);
-        _model = new LogisticModel(new double[]{2.0, 2.0, 2.0});
-
-        when(errors.sum(eq(_epsilon), any(Function.class))).thenReturn(5.0);
-        _model.update(_epsilon, _queryable);
-
-//        verify(_logisticModel).gradientUpdate(new double[]{5.0, 5.0, 5.0});
-        fail();
-    }
-
+    
 
 }

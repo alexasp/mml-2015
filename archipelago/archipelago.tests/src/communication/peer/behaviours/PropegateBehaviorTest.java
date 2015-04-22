@@ -6,7 +6,8 @@ import learning.LabeledSample;
 import learning.Model;
 import org.junit.Before;
 import org.junit.Test;
-import privacy.NoisyQueryable;
+
+import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -22,19 +23,19 @@ public class PropegateBehaviorTest {
     private PropegateBehavior _propegateBehavior;
     private Model _model;
     private PeerAgent _peerAgent;
-    private NoisyQueryable<LabeledSample> _queryable;
+    private List<LabeledSample> _data;
     private double _epsilon = 1.0;
 
     @Before
     public void setUp(){
         _model = mock(Model.class);
-        _queryable = mock(NoisyQueryable.class);
+        _data = mock(List.class);
         _peerAgent = mock(PeerAgent.class);
         _messaging = mock(MessageFacade.class);
         when(_peerAgent.getMessageFacade()).thenReturn(_messaging);
         when(_peerAgent.getUpdateCost()).thenReturn(_epsilon);
 
-        when(_peerAgent.getData()).thenReturn(_queryable);
+        when(_peerAgent.getData()).thenReturn(_data);
 
         _propegateBehavior = new PropegateBehavior(_model, _peerAgent);
     }
@@ -43,7 +44,7 @@ public class PropegateBehaviorTest {
     public void action_UpdatesModel(){
         _propegateBehavior.action();
 
-        verify(_model).update(_epsilon, _queryable);
+        verify(_model).update(_epsilon, _data);
     }
 
 

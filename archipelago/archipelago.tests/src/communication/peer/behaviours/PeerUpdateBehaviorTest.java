@@ -68,8 +68,9 @@ public class PeerUpdateBehaviorTest {
         verify(_peerAgent).addBehaviour(_propegateBehavior);
     }
 
+
     @Test
-    public void action_NewMessage_DoesNotAddModelPropegateAfterFinalIteration(){
+    public void action_NewMessage_AddsModelPropegateAfterFinalIteration(){
         fakeMessage(_model);
 
         when(_peerAgent.getIterations()).thenReturn(2);
@@ -79,18 +80,19 @@ public class PeerUpdateBehaviorTest {
         verify(_peerAgent, times(1)).addBehaviour(_propegateBehavior);
         _updateBehavior.action(); // final iteration
         verify(_peerAgent, times(2)).addBehaviour(any(PropegateBehavior.class));
-        verify(_peerAgent).removeBehaviour(_updateBehavior);
     }
 
     @Test
-    public void action_NewMessageFinalIteration_AddsCompletionBehaviour() {
+    public void action_NewMessageFinalIteration_AddsCompletionBehaviourOnlyOnce() {
         fakeMessage(_model);
         when(_peerAgent.getIterations()).thenReturn(2);
 
         _updateBehavior.action();
         verify(_peerAgent, never()).addBehaviour(_completionBehavior);
         _updateBehavior.action();
-        verify(_peerAgent).addBehaviour(_completionBehavior);
+        verify(_peerAgent, times(1)).addBehaviour(_completionBehavior);
+        _updateBehavior.action();
+        verify(_peerAgent, times(1)).addBehaviour(_completionBehavior);
     }
 
     @Test

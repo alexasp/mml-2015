@@ -36,11 +36,12 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
 
             if(_iteration < _peerAgent.getIterations() - 1) {
                 _peerAgent.addBehaviour(_behaviourFactory.getModelPropegate(_peerAgent, message.getModel()));
-                _iteration++;
-            } else {
+            } else if (_iteration == _peerAgent.getIterations() - 1){
                 _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade));
-                _peerAgent.removeBehaviour(this);
             }
+
+            _iteration++;
+
         }
         else{
             block(); //this method call ensures that this behavior is marked as inactive until a new message arrives.
