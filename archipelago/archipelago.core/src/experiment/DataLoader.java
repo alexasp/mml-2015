@@ -6,6 +6,7 @@ import learning.LabeledSample;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -56,8 +57,22 @@ public class DataLoader {
     }
 
     public List<List<LabeledSample>> partition(int parts, List<LabeledSample> data) {
-        int recordsToEach = (int) Math.ceil((double)data.size()/(double)parts);
-        return Lists.partition(data, recordsToEach);
+        int recordsToEach = (int) Math.floor((double) data.size() / (double) parts);
+
+        List<List<LabeledSample>> partitions = new ArrayList<>();
+        int index = 0;
+        for (int i = 0; i < data.size(); i += recordsToEach) {
+            if(data.subList(i, i + Math.min(recordsToEach, data.size() - i)).size() == recordsToEach) {
+                partitions.add(new ArrayList<>(data.subList(i, i + Math.min(recordsToEach, data.size() - i))));
+            }
+            index = i;
+        }
+
+        for(int i = index; i < data.size(); i++){
+            partitions.get((i - index)).add(data.get(index));
+        }
+
+        return partitions;
     }
 
     public List<List<LabeledSample>> partition(double trainRatio, List<LabeledSample> data) {

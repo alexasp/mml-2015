@@ -35,18 +35,6 @@ public class LogisticModelTest {
         _data = mock(List.class);
     }
 
-
-    @Test
-    public void step_WithData_UpdatesByProjectingToErrorAndSumming(){
-        NoisyQueryable<Double> errors = mock(NoisyQueryable.class);
-        _model = new LogisticModel(new double[]{2.0, 2.0, 2.0});
-
-        when(errors.sum(eq(_epsilon), any(Function.class))).thenReturn(5.0);
-        _model.update(_epsilon, _data);
-
-//        verify(_logisticModel).gradientUpdate(new double[]{5.0, 5.0, 5.0});
-        fail();
-    }
-
+    
 
 }

@@ -25,7 +25,6 @@ public class SpamTest {
 
         DataLoader loader = injector.getInstance(DataLoader.class);
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
-        IQueryableFactory queryableFactory = injector.getInstance(IQueryableFactory.class);
 
         List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase_centered.csv","start",true); //this is test leakage. Centering should be performed based on train data only
         Collections.shuffle(data);
