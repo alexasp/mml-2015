@@ -2,6 +2,7 @@ package communication.messaging;
 
 import com.google.inject.Inject;
 import communication.messaging.jade.ACLMessageReader;
+import communication.peer.AggregationPerformative;
 import communication.peer.behaviours.CompletionListeningBehavior;
 import communication.peer.behaviours.PeerUpdateBehavior;
 import jade.content.onto.OntologyException;
@@ -38,11 +39,11 @@ public class ACLMessageParser {
         }
     }
 
-    public ACLMessage createModelMessage(Model model, AID agent2) {
+    public ACLMessage createModelMessage(Model model, AID agent, AggregationPerformative performative) {
         ACLMessage message = new ACLMessage(PeerUpdateBehavior.Performative);
         message.setContent(model.serialize());
         message.setOntology(Ontologies.Model.name());
-        message.addReceiver(agent2);
+        message.addReceiver(agent);
 
         return message;
     }
@@ -52,5 +53,9 @@ public class ACLMessageParser {
         message.setOntology(Ontologies.Message.name());
         message.setContent(agent1.toString());
         return message;
+    }
+
+    public ACLMessage createModelMessage(Model model, AID agent2) {
+        return createModelMessage(model, agent2, null);
     }
 }

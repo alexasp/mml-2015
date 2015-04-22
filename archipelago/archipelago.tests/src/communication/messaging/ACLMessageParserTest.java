@@ -10,6 +10,7 @@ import org.junit.Test;
 import privacy.learning.LogisticModel;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -87,6 +88,13 @@ public class ACLMessageParserTest {
         ACLMessage message = _parser.createCompletionMessage(aid);
 
         assertEquals(Ontologies.Message.name(), message.getOntology());
+    }
+
+    @Test
+    public void createModelMessage_PerformativeIsNull_BuildsMessageWithoutPerformative(){
+        ACLMessage message = _parser.createModelMessage(_model, mock(AID.class), null);
+
+        assertNotNull(message);
     }
 
 

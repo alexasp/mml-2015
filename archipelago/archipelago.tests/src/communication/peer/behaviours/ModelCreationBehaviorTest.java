@@ -63,7 +63,7 @@ public class ModelCreationBehaviorTest {
         _creationBehaviour.action();
 
         verify(_model).update(_agent.getUpdateCost(), _data);
-        verify(_agent).addModel(_model);
+        verify(_agent).setLocalModel(_model);
     }
 
     @Test

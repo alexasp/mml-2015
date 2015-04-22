@@ -1,5 +1,6 @@
 package communication.messaging;
 
+import communication.peer.AggregationPerformative;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.Agent;
@@ -19,6 +20,9 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,11 +40,11 @@ public class MessageFacadeTest {
     private ACLMessageParser _messageParser;
     private PeerGraph _peerGraph;
     private RandomGenerator _randomGenerator;
-    private MessageTemplate _template;
+    private Model _model;
 
     @Before
     public void setUp() {
-        _template = mock(MessageTemplate.class);
+        _model = mock(Model.class);
         _peerGraph = mock(PeerGraph.class);
         _messageParser = mock(ACLMessageParser.class);
         _agent = PowerMockito.mock(Agent.class);
@@ -52,9 +56,9 @@ public class MessageFacadeTest {
     @Test
     public void hasMessage_MessageAvailable_ChecksJadeAgentMessages(){
         ACLMessage message = mock(ACLMessage.class);
-        when(_agent.receive(_template)).thenReturn(message);
+        when(_agent.receive(any(MessageTemplate.class))).thenReturn(message);
 
-        boolean hasMessage = _messaging.hasMessage(_template);
+        boolean hasMessage = _messaging.hasMessage(0);
 
         assertTrue(hasMessage);
     }
@@ -62,12 +66,12 @@ public class MessageFacadeTest {
     @Test
     public void hasMessage_MessageAvailable_DoesNotConsumeMessage() throws OntologyException {
         ACLMessage message = mock(ACLMessage.class);
-        when(_agent.receive(_template)).thenReturn(message);
+        when(_agent.receive(any(MessageTemplate.class))).thenReturn(message);
         Message parsedMessage = mock(Message.class);
         when(_messageParser.parse(message)).thenReturn(parsedMessage);
 
-        boolean hasMessage = _messaging.hasMessage(_template);
-        Message actualMessage = _messaging.nextMessage(_template);
+        boolean hasMessage = _messaging.hasMessage(0);
+        Message actualMessage = _messaging.nextMessage(0);
 
         assertEquals(parsedMessage, actualMessage);
     }
@@ -75,11 +79,11 @@ public class MessageFacadeTest {
     @Test
     public void nextMessage_ACLMessageAvailable_GetsParsedMessage() throws OntologyException {
         ACLMessage message = mock(ACLMessage.class);
-        when(_agent.receive(_template)).thenReturn(message);
+        when(_agent.receive(any(MessageTemplate.class))).thenReturn(message);
         Message parsedMessage = mock(Message.class);
         when(_messageParser.parse(message)).thenReturn(parsedMessage);
 
-        Message actualMessage = _messaging.nextMessage(_template);
+        Message actualMessage = _messaging.nextMessage(0);
 
         assertEquals(parsedMessage, actualMessage);
     }
@@ -88,23 +92,22 @@ public class MessageFacadeTest {
     public void sendToRandomPeer(){
         AID agent1 = mock(AID.class);
         AID agent2 = mock(AID.class);
-        Model model = mock(Model.class);
         List<AID> agents = Arrays.asList(agent1, agent2);
         when(_peerGraph.getPeers(_agent)).thenReturn(agents);
         when(_randomGenerator.uniform(0, agents.size()-1)).thenReturn(1);
         ACLMessage message = mock(ACLMessage.class);
-        when(_messageParser.createModelMessage(model, agent2)).thenReturn(message);
+        when(_messageParser.createModelMessage(_model, agent2)).thenReturn(message);
 
-        _messaging.sendToRandomPeer(model);
+        _messaging.sendToRandomPeer(_model);
 
         verify(_agent).send(message);
     }
 
     @Test(expected = IllegalStateException.class)
     public void nextMessage_NoMessageAvailable_Throws(){
-        when(_agent.receive(_template)).thenReturn(null);
+        when(_agent.receive(any(MessageTemplate.class))).thenReturn(null);
 
-        _messaging.nextMessage(_template);
+        _messaging.nextMessage(0);
     }
 
     @Test
@@ -130,6 +133,17 @@ public class MessageFacadeTest {
 
         verify(_agent).send(message);
         verify(message).addReceiver(completionAgent);
+    }
+
+    @Test
+    public void sendToPeer(){
+        AID agent = mock(AID.class);
+        ACLMessage message = mock(ACLMessage.class);
+        when(_messageParser.createModelMessage(same(_model), same(agent), any(AggregationPerformative.class))).thenReturn(message);
+
+        _messaging.sendToPeer(agent, _model, AggregationPerformative.AggregationGroupRequest);
+
+        verify(_agent).send(message);
     }
 
 }

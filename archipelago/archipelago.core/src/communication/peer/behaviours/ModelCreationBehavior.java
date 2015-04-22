@@ -37,7 +37,7 @@ public class ModelCreationBehavior extends OneShotBehaviour {
 
         Model model = _modelFactory.getModel(parameterVector); //TODO: add parameters
         model.update(_agent.getUpdateCost(), _agent.getData());
-        _agent.addModel(model);
+        _agent.setLocalModel(model);
 
         _agent.addBehaviour(_behaviorFactory.getModelPropegate(_agent, model));
     }

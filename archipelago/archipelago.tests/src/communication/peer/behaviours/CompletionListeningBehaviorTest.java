@@ -26,13 +26,13 @@ public class CompletionListeningBehaviorTest {
         _messageFacade = mock(MessageFacade.class);
         _agent = mock(CompletionListeningAgent.class);
 
-        when(_messageFacade.hasMessage(CompletionListeningBehavior.CompletionPerformative)).thenReturn(true);
+        when(_messageFacade.hasMessage(CompletionListeningBehavior.Performative)).thenReturn(true);
         _behavior = new CompletionListeningBehavior(_agent, _messageFacade);
     }
 
     @Test
     public void action_NewMessage_NotifiesAgentAboutCompletion() throws Exception {
-        when(_messageFacade.nextMessage(CompletionListeningBehavior.CompletionPerformative)).thenReturn(new Message());
+        when(_messageFacade.nextMessage(CompletionListeningBehavior.Performative)).thenReturn(new Message());
         
         _behavior.action();
         
@@ -41,11 +41,11 @@ public class CompletionListeningBehaviorTest {
 
     @Test
     public void action_NoMessage_NotifiesAgentAboutCompletion() throws Exception {
-        when(_messageFacade.hasMessage(CompletionListeningBehavior.CompletionPerformative)).thenReturn(false);
+        when(_messageFacade.hasMessage(CompletionListeningBehavior.Performative)).thenReturn(false);
 
         _behavior.action();
 
-        verify(_messageFacade, never()).nextMessage(CompletionListeningBehavior.CompletionPerformative);
+        verify(_messageFacade, never()).nextMessage(CompletionListeningBehavior.Performative);
         verify(_agent, never()).anAgentCompleted();
     }
 }

@@ -1,5 +1,6 @@
 package communication.messaging;
 
+import communication.peer.AggregationPerformative;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.Agent;
@@ -28,15 +29,15 @@ public class MessageFacade {
         _randomGenerator = randomGenerator;
     }
 
-    public boolean hasMessage(MessageTemplate template) {
+    public boolean hasMessage(int performative) {
         if(_nextMessage != null) { return true; }
 
-        _nextMessage = _agent.receive(template);
+        _nextMessage = _agent.receive(MessageTemplate.MatchPerformative(performative));
         return _nextMessage != null;
     }
 
-    public Message nextMessage(MessageTemplate template) {
-        if(!hasMessage(template)){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
+    public Message nextMessage(int performative) {
+        if(!hasMessage(performative)){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
 
         if(_nextMessage == null){
             _nextMessage = _agent.receive();
@@ -68,6 +69,21 @@ public class MessageFacade {
     public void sendCompletionMessage(AID agent1) {
         ACLMessage message = _messageParser.createCompletionMessage(agent1);
         message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
+
+        _agent.send(message);
+    }
+
+    public void requestAggregationGroup() {
+        throw new UnsupportedOperationException();
+    }
+
+    public List<AID> nextGroupMessage() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void sendToPeer(AID curator, Model model, AggregationPerformative performative) {
+        ACLMessage message = _messageParser.createModelMessage(model, curator, performative);
+        message.addReceiver(curator);
 
         _agent.send(message);
     }
