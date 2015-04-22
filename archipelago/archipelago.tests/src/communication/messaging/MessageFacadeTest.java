@@ -141,6 +141,8 @@ public class MessageFacadeTest {
         ACLMessage message = mock(ACLMessage.class);
         when(_messageParser.createModelMessage(same(_model), same(agent), any(AggregationPerformative.class))).thenReturn(message);
 
+        _messaging.sendToPeer(agent, _model, AggregationPerformative.AggregationGroupRequest);
+
         verify(_agent).send(message);
     }
 
