@@ -39,4 +39,8 @@ public class BehaviourFactory {
     public Behaviour getCompletionBehavior(PeerAgent peerAgent, MessageFacade facade) {
         return new CompletionBehaviour(peerAgent, facade);
     }
+
+    public ModelAggregationBehavior getModelAggregation() {
+        return new ModelAggregationBehavior();
+    }
 }

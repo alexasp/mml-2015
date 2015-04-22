@@ -29,21 +29,21 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
 
     @Override
     public void action() {
+        if(_iteration <= _peerAgent.getIterations() - 1) {
+            _peerAgent.addBehaviour(_behaviourFactory.getModelAggregation());
+        }
+        if (_iteration == _peerAgent.getIterations() - 1){
+            _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade));
+        }
+
+        _iteration++;
+
         if(_messageFacade.hasMessage(UpdatePerformative)){
 
             Message message = _messageFacade.nextMessage(UpdatePerformative);
             _peerAgent.addModel(message.getModel());
-
-            if(_iteration < _peerAgent.getIterations() - 1) {
-                _peerAgent.addBehaviour(_behaviourFactory.getModelPropegate(_peerAgent, message.getModel()));
-            } else if (_iteration == _peerAgent.getIterations() - 1){
-                _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade));
-            }
-
-            _iteration++;
-
         }
-        else{
+        else if(_iteration >= _peerAgent.getIterations()){
             block(); //this method call ensures that this behavior is marked as inactive until a new message arrives.
         }
     }

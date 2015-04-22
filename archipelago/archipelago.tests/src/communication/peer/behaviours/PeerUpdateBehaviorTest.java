@@ -23,6 +23,7 @@ public class PeerUpdateBehaviorTest {
     private Model _model;
     private PropegateBehavior _propegateBehavior;
     private CompletionBehaviour _completionBehavior;
+    private ModelAggregationBehavior _modelAggregationBehavior;
 
     @Before
     public void setUp(){
@@ -36,6 +37,7 @@ public class PeerUpdateBehaviorTest {
         _model = mock(Model.class);
         when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
         when(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade)).thenReturn(_completionBehavior);
+        when(_behaviourFactory.getModelAggregation()).thenReturn(_modelAggregationBehavior);
 
         _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);
     }
@@ -59,33 +61,10 @@ public class PeerUpdateBehaviorTest {
         verify(_peerAgent).addModel(_model);
     }
 
-    @Test
-    public void action_NewMessage_AddsModelPropegatingBehavior(){
-        fakeMessage(_model);
-
-        _updateBehavior.action();
-
-        verify(_peerAgent).addBehaviour(_propegateBehavior);
-    }
-
-
-    @Test
-    public void action_NewMessage_AddsModelPropegateAfterFinalIteration(){
-        fakeMessage(_model);
-
-        when(_peerAgent.getIterations()).thenReturn(2);
-
-        verify(_peerAgent, never()).addBehaviour(_propegateBehavior);
-        _updateBehavior.action(); // iteration 0
-        verify(_peerAgent, times(1)).addBehaviour(_propegateBehavior);
-        _updateBehavior.action(); // final iteration
-        verify(_peerAgent, times(2)).addBehaviour(any(PropegateBehavior.class));
-    }
 
     @Test
     public void action_NewMessageFinalIteration_AddsCompletionBehaviourOnlyOnce() {
         fakeMessage(_model);
-        when(_peerAgent.getIterations()).thenReturn(2);
 
         _updateBehavior.action();
         verify(_peerAgent, never()).addBehaviour(_completionBehavior);
@@ -93,6 +72,23 @@ public class PeerUpdateBehaviorTest {
         verify(_peerAgent, times(1)).addBehaviour(_completionBehavior);
         _updateBehavior.action();
         verify(_peerAgent, times(1)).addBehaviour(_completionBehavior);
+    }
+
+    @Test
+    public void action_IterationsNotFinished_AddsModelAggregationBehavior(){
+        _updateBehavior.action();
+        verify(_peerAgent).addBehaviour(_modelAggregationBehavior);
+    }
+
+    @Test
+    public void action_IterationsFinished_DoesNotAddModelAggregationBehavior(){
+        _updateBehavior.action();
+        _updateBehavior.action();
+        verify(_peerAgent, times(2)).addBehaviour(_modelAggregationBehavior);
+
+        _updateBehavior.action();
+
+        verify(_peerAgent, times(2)).addBehaviour(_modelAggregationBehavior);
     }
 
     @Test
