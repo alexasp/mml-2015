@@ -62,7 +62,9 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  
  \section{Logistic Regression}
  
- \begin{eqnarray}
+ Logistic regression is a popular probability model developed by D.R Cox in 1958. The most basic form is used to predict a binary response based on a set of features.
+ 
+ \begin{eqnarray} 
  h_{\theta}(x) = \theta^Tx = \sum_{i=0}^n \theta_i x_i, \nonumber
  \end{eqnarray}
  
@@ -91,4 +93,18 @@ When a query is run through PINQ, it first evaluates the privacy guarantee to en
  \end{figure}
 
 \todo[inline]{Write how we adapted the use of JADE here}
+
+
+\section{Homomorphic Encryption}
+Homomorphic encryption is an encryption scheme which allows computations to be carried out on ciphertext, meaning plaintext that have been encrypted using a cipher. The result of the computations is also encrypted, and can be deciphered back to plaintext using a key $K$. This has long been considered as crypthography's holy grail \cite{Micciancio2011HomoEnc}, as this would allowing operating on encrypted text without knowing the decryption key. For example, given ciphertexts $C_1=Enc_K(Data1)$ and $C_2=Enc_K(Data2)$, an additively homomorphic encryption scheme would allow to combine $C_1$ and $C_2$ to obtain $Enc_K(Data1+Data2)$. More concretely this means that if you encrypt your data using such an encryption scheme, you can transfer your data to an untrusted server which can perform some arbitrary computations on that data without being able to decrypt the data itself.
+
+Up until recently, all published homomorphic encryption schemes only supported one basic operation, most commonly addition. These schemes could only be called partially homomorphic, as they did not provide any extensive functionality. The notion of a  fully homomorphic encryption schemes was first proposed by Rivest, Adleman, and Dertouzos in 1978 \cite{rivest1978data}, but it wasn't until 2009 that Craig Gentry published a doctoral thesis where he proved that he had constructed a fully homomorphic scheme\cite{gentry2009FHEpaper}. Gentry's solution was based on "ideal lattices" as well as a method to double-encrypt the data in such a way that the errors could be handled "behind the scenes". By periodically unlocking the inner layer of encryption underneath an outer layer of scrambling, the computer could hide and recover from errors without ever analyzing the secret data. 
+
+
+
+In the previous example, only a single operation was performed, making the scheme only a partially homomorphic cryptosystem. To be truly considered useful, a scheme needs to be fully homomorphic and support enough operations to  
+
+
+
+
 \cleardoublepage
