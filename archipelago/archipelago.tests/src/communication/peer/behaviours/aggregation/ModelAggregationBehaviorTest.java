@@ -5,8 +5,6 @@ import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import communication.peer.behaviours.ModelAggregationBehavior;
-import communication.peer.behaviours.aggregation.ContributorBehavior;
-import communication.peer.behaviours.aggregation.CuratorBehavior;
 import jade.core.AID;
 import jade.core.behaviours.OneShotBehaviour;
 import learning.Model;
@@ -59,7 +57,7 @@ public class ModelAggregationBehaviorTest {
         _behaviorFactory = mock(BehaviourFactory.class);
         _contributorBehavior = mock(ContributorBehavior.class);
         _curatorBehavior = mock(CuratorBehavior.class);
-        when(_behaviorFactory.getContributorBehavior(any(PeerAgent.class), any(AID.class))).thenReturn(_contributorBehavior);
+        when(_behaviorFactory.getContributorBehavior(any(PeerAgent.class), any(AID.class), any(MessageFacade.class))).thenReturn(_contributorBehavior);
         when(_behaviorFactory.getCuratorBehavior()).thenReturn(_curatorBehavior);
     }
 

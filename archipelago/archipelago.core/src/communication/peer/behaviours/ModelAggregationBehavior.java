@@ -5,11 +5,7 @@ import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import jade.core.AID;
-import jade.core.behaviours.Behaviour;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
-import jade.domain.introspection.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 
 import java.util.List;
 
@@ -19,13 +15,13 @@ import java.util.List;
 public class ModelAggregationBehavior extends OneShotBehaviour{
 
     private PeerAgent _peerAgent;
-    private MessageFacade _messaging;
+    private MessageFacade _messageFacade;
     private boolean groupRequested;
     private BehaviourFactory _behaviorFactory;
 
     public ModelAggregationBehavior(PeerAgent peerAgent, MessageFacade messaging, BehaviourFactory behaviorFactory) {
         _peerAgent = peerAgent;
-        _messaging = messaging;
+        _messageFacade = messaging;
         _behaviorFactory = behaviorFactory;
 
         groupRequested = false;
@@ -34,15 +30,15 @@ public class ModelAggregationBehavior extends OneShotBehaviour{
     @Override
     public void action() {
         if(!groupRequested) {
-            _messaging.requestAggregationGroup();
+            _messageFacade.requestAggregationGroup();
             groupRequested = true;
             block();
         }
 
-        if(_messaging.hasMessage(AggregationPerformative.GroupFormation.ordinal())){
-            List<AID> group = _messaging.nextGroupMessage();
+        if(_messageFacade.hasMessage(AggregationPerformative.GroupFormation.ordinal())){
+            List<AID> group = _messageFacade.nextGroupMessage();
             if(group.indexOf(_peerAgent.getAID()) > 0) {
-                _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, group.get(0)));
+                _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, group.get(0), _messageFacade));
             }
             else {
                 _peerAgent.addBehaviour(_behaviorFactory.getCuratorBehavior());

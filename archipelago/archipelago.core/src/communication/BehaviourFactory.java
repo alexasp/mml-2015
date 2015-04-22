@@ -46,7 +46,7 @@ public class BehaviourFactory {
         return new ModelAggregationBehavior(agent, messageFacade, this);
     }
 
-    public Behaviour getContributorBehavior(PeerAgent agent, AID curator) {
+    public Behaviour getContributorBehavior(PeerAgent agent, AID curator, MessageFacade messageFacade) {
         return new ContributorBehavior(agent, curator, messageFacade);
     }
 

@@ -27,6 +27,7 @@ public class ContributorBehavior extends CyclicBehaviour{
 
         if(!modelSent){
             _messageFacade.sendToPeer(_curator, _peerAgent.getLocalModel(), AggregationPerformative.ModelContribution);
+            modelSent = true;
         }
 
     }

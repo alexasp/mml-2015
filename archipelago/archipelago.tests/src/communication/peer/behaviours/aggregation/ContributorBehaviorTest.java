@@ -22,6 +22,7 @@ public class ContributorBehaviorTest {
 
     @Before
     public void setUp() {
+        _curator = mock(AID.class);
         _messageFacade = mock(MessageFacade.class);
         _peerAgent = mock(PeerAgent.class);
         _model = mock(Model.class);
