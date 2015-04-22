@@ -4,10 +4,12 @@ import com.google.inject.Inject;
 import communication.messaging.MessageFacade;
 import communication.peer.CompletionListeningAgent;
 import communication.peer.behaviours.*;
+import communication.peer.behaviours.aggregation.ContributorBehavior;
+import communication.peer.behaviours.aggregation.CuratorBehavior;
+import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import learning.Model;
 import learning.ModelFactory;
-import privacy.math.RandomGenerator;
 
 /**
  * Created by alex on 3/9/15.
@@ -41,6 +43,14 @@ public class BehaviourFactory {
     }
 
     public ModelAggregationBehavior getModelAggregation(PeerAgent agent, MessageFacade messageFacade) {
-        return new ModelAggregationBehavior(agent, messageFacade);
+        return new ModelAggregationBehavior(agent, messageFacade, this);
+    }
+
+    public Behaviour getContributorBehavior(PeerAgent agent, AID curator) {
+        return new ContributorBehavior(agent, curator, messageFacade);
+    }
+
+    public Behaviour getCuratorBehavior() {
+        return new CuratorBehavior();
     }
 }
