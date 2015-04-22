@@ -1,6 +1,7 @@
 package communication.peer.behaviours.aggregation;
 
 import communication.PeerAgent;
+import communication.messaging.Message;
 import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import jade.core.AID;
@@ -28,6 +29,8 @@ public class ContributorBehaviorTest {
         _model = mock(Model.class);
         when(_peerAgent.getLocalModel()).thenReturn(_model);
         _contributorBehavior = new ContributorBehavior(_peerAgent, _curator, _messageFacade);
+
+        when(_messageFacade.hasMessage(anyInt())).thenReturn(false);
     }
 
     @Test
@@ -43,6 +46,18 @@ public class ContributorBehaviorTest {
 
         _contributorBehavior.action();
         verify(_messageFacade, times(1)).sendToPeer(_curator, _model, AggregationPerformative.ModelContribution);
+    }
+
+    @Test
+    public void action_ResultResponse_AddsModel() {
+        _contributorBehavior.action();
+        when(_messageFacade.hasMessage(AggregationPerformative.AggregatedResult.ordinal())).thenReturn(true);
+        when(_messageFacade.nextMessage(AggregationPerformative.AggregatedResult.ordinal())).thenReturn(new Message(_model));
+
+        _contributorBehavior.action();
+
+        verify(_peerAgent).addModel(_model);
+        verify(_peerAgent).removeBehaviour(_contributorBehavior);
     }
 
 

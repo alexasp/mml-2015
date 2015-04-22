@@ -1,6 +1,7 @@
 package communication.peer.behaviours.aggregation;
 
 import communication.PeerAgent;
+import communication.messaging.Message;
 import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import jade.core.AID;
@@ -25,7 +26,12 @@ public class ContributorBehavior extends CyclicBehaviour{
     @Override
     public void action() {
 
-        if(!modelSent){
+        if (_messageFacade.hasMessage(AggregationPerformative.AggregatedResult.ordinal())) {
+            Message message = _messageFacade.nextMessage(AggregationPerformative.AggregatedResult.ordinal());
+            _peerAgent.addModel(message.getModel());
+            _peerAgent.removeBehaviour(this);
+        }
+        else if (!modelSent) {
             _messageFacade.sendToPeer(_curator, _peerAgent.getLocalModel(), AggregationPerformative.ModelContribution);
             modelSent = true;
         }

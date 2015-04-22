@@ -8,5 +8,6 @@ import jade.lang.acl.MessageTemplate;
 public enum AggregationPerformative {
     ModelContribution,
     AggregationGroupRequest,
-    GroupFormation;
+    GroupFormation,
+    AggregatedResult;
 }
