@@ -12,4 +12,9 @@ public class CuratorBehaviorTest {
         assertTrue(new CuratorBehavior() instanceof CyclicBehaviour);
     }
 
+    @Test
+    public void action_AllParticipantsResponded_PublishesNoisyAveragedModel(){
+        fail();
+    }
+
 }
