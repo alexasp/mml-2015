@@ -8,6 +8,7 @@ import learning.EnsembleModel;
 import learning.IQueryable;
 import learning.LabeledSample;
 import learning.Model;
+import privacy.learning.LogisticModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class PeerAgent extends Agent {
     private int _iterations;
     private int _parameters;
     private double _updateCost;
+    private Model _trainedModel;
 
     public PeerAgent(List data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
         _ensemble = ensemble;
@@ -69,5 +71,13 @@ public class PeerAgent extends Agent {
 
     public List<Model> getModels() {
         return _ensemble.getModels();
+    }
+
+    public Model getLocalModel() {
+        return _trainedModel;
+    }
+
+    public void setLocalModel(Model model) {
+        _trainedModel = model;
     }
 }

@@ -40,7 +40,7 @@ public class BehaviourFactory {
         return new CompletionBehaviour(peerAgent, facade);
     }
 
-    public ModelAggregationBehavior getModelAggregation() {
-        return new ModelAggregationBehavior();
+    public ModelAggregationBehavior getModelAggregation(PeerAgent agent, MessageFacade messageFacade) {
+        return new ModelAggregationBehavior(agent, messageFacade);
     }
 }

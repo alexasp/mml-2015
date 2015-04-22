@@ -13,12 +13,12 @@ import jade.lang.acl.MessageTemplate;
  */
 public class PeerUpdateBehavior extends CyclicBehaviour {
 
+
     private final PeerAgent _peerAgent;
     private final MessageFacade _messageFacade;
     private final BehaviourFactory _behaviourFactory;
     private int _iteration;
     public static final int Performative = ACLMessage.PROPAGATE;
-    public static final MessageTemplate UpdatePerformative = MessageTemplate.MatchPerformative(Performative);
 
     public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade, BehaviourFactory behaviourFactory) {
         _peerAgent = peerAgent;
@@ -30,7 +30,7 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
     @Override
     public void action() {
         if(_iteration <= _peerAgent.getIterations() - 1) {
-            _peerAgent.addBehaviour(_behaviourFactory.getModelAggregation());
+            _peerAgent.addBehaviour(_behaviourFactory.getModelAggregation(_peerAgent, _messageFacade));
         }
         if (_iteration == _peerAgent.getIterations() - 1){
             _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade));
@@ -38,9 +38,9 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
 
         _iteration++;
 
-        if(_messageFacade.hasMessage(UpdatePerformative)){
+        if(_messageFacade.hasMessage(Performative)){
 
-            Message message = _messageFacade.nextMessage(UpdatePerformative);
+            Message message = _messageFacade.nextMessage(Performative);
             _peerAgent.addModel(message.getModel());
         }
         else if(_iteration >= _peerAgent.getIterations()){

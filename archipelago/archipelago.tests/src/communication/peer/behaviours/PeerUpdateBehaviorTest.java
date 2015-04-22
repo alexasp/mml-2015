@@ -37,15 +37,15 @@ public class PeerUpdateBehaviorTest {
         _model = mock(Model.class);
         when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
         when(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade)).thenReturn(_completionBehavior);
-        when(_behaviourFactory.getModelAggregation()).thenReturn(_modelAggregationBehavior);
+        when(_behaviourFactory.getModelAggregation(_peerAgent, _messageFacade)).thenReturn(_modelAggregationBehavior);
 
         _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);
     }
 
     private Message fakeMessage(Model model) {
         Message message = mock(Message.class);
-        when(_messageFacade.hasMessage(PeerUpdateBehavior.UpdatePerformative)).thenReturn(true);
-        when(_messageFacade.nextMessage(PeerUpdateBehavior.UpdatePerformative)).thenReturn(message);
+        when(_messageFacade.hasMessage(PeerUpdateBehavior.Performative)).thenReturn(true);
+        when(_messageFacade.nextMessage(PeerUpdateBehavior.Performative)).thenReturn(message);
         when(message.getModel()).thenReturn(model);
 
         return message;
@@ -93,11 +93,11 @@ public class PeerUpdateBehaviorTest {
 
     @Test
     public void action_NoNewMessage_DoesNotFetchMessage(){
-        when(_messageFacade.hasMessage(PeerUpdateBehavior.UpdatePerformative)).thenReturn(false);
+        when(_messageFacade.hasMessage(PeerUpdateBehavior.Performative)).thenReturn(false);
 
         _updateBehavior.action();
 
-        verify(_messageFacade, never()).nextMessage(PeerUpdateBehavior.UpdatePerformative);
+        verify(_messageFacade, never()).nextMessage(PeerUpdateBehavior.Performative);
     }
 
 }
