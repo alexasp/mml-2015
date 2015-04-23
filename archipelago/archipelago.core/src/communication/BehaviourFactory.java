@@ -1,6 +1,7 @@
 package communication;
 
 import com.google.inject.Inject;
+import communication.grouping.behaviors.GroupFormingBehaviour;
 import communication.messaging.MessageFacade;
 import communication.peer.CompletionListeningAgent;
 import communication.peer.behaviours.*;
@@ -63,5 +64,9 @@ public class BehaviourFactory {
 
     public Behaviour getCuratorBehavior(List<AID> parties, MessageFacade messageFacade, PeerAgent peerAgent) {
         return new CuratorBehavior(parties, peerAgent, messageFacade, _modelMerger, _randomGenerator, _configuration);
+    }
+
+    public Behaviour getGroupFormingBehaviour() {
+        return new GroupFormingBehaviour();
     }
 }

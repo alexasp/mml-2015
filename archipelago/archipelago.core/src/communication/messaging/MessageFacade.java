@@ -30,20 +30,36 @@ public class MessageFacade {
     }
 
     public boolean hasMessage(int performative) {
+        return hasMessage(MessageTemplate.MatchPerformative(performative));
+    }
+
+    public boolean hasMessage(int performative, AID sender) {
+        return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative), MessageTemplate.MatchSender(sender)));
+    }
+
+    private boolean hasMessage(MessageTemplate template){
         if(_nextMessage != null) { return true; }
 
-        _nextMessage = _agent.receive(MessageTemplate.MatchPerformative(performative));
+        _nextMessage = _agent.receive(template);
         return _nextMessage != null;
     }
 
+    public Message nextMessage(int performative, AID sender) {
+        return nextMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative), MessageTemplate.MatchSender(sender)));
+    }
+
     public Message nextMessage(int performative) {
-        if(!hasMessage(performative)){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
+        return nextMessage(MessageTemplate.MatchPerformative(performative));
+    }
+
+    public Message nextMessage(MessageTemplate template){
+        if(!hasMessage(template)){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
 
         if(_nextMessage == null){
             _nextMessage = _agent.receive();
         }
 
-        Message parsedMessage = null;
+        Message parsedMessage;
         try {
             parsedMessage = _messageParser.parse(_nextMessage);
         } catch (OntologyException e) {
@@ -86,5 +102,10 @@ public class MessageFacade {
         message.addReceiver(agentId);
 
         _agent.send(message);
+    }
+
+
+    public AID nextGroupRequestMessage() {
+        throw new UnsupportedOperationException();
     }
 }

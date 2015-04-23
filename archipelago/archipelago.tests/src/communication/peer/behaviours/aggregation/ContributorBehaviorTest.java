@@ -51,8 +51,8 @@ public class ContributorBehaviorTest {
     @Test
     public void action_ResultResponse_AddsModel() {
         _contributorBehavior.action();
-        when(_messageFacade.hasMessage(AggregationPerformative.AggregatedResult.ordinal())).thenReturn(true);
-        when(_messageFacade.nextMessage(AggregationPerformative.AggregatedResult.ordinal())).thenReturn(new Message(_model));
+        when(_messageFacade.hasMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator)).thenReturn(true);
+        when(_messageFacade.nextMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator)).thenReturn(new Message(_model));
 
         _contributorBehavior.action();
 

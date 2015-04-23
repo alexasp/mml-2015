@@ -6,6 +6,7 @@ import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import communication.peer.behaviours.ModelAggregationBehavior;
 import jade.core.AID;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import learning.ParametricModel;
 import org.junit.Before;
@@ -63,14 +64,7 @@ public class ModelAggregationBehaviorTest {
 
     @Test
     public void isType() {
-        assertTrue(_aggregationBehavior instanceof OneShotBehaviour);
-    }
-
-    @Test
-    public void action_RequestsAggregationGroup() {
-        _aggregationBehavior.action();
-
-        verify(_messageFacade).requestAggregationGroup();
+        assertTrue(_aggregationBehavior instanceof CyclicBehaviour);
     }
 
 
