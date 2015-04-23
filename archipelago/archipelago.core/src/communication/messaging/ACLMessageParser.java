@@ -8,7 +8,7 @@ import communication.peer.behaviours.PeerUpdateBehavior;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
-import learning.Model;
+import learning.ParametricModel;
 import learning.ModelFactory;
 
 /**
@@ -39,7 +39,7 @@ public class ACLMessageParser {
         }
     }
 
-    public ACLMessage createModelMessage(Model model, AID agent, AggregationPerformative performative) {
+    public ACLMessage createModelMessage(ParametricModel model, AID agent, AggregationPerformative performative) {
         ACLMessage message = new ACLMessage(PeerUpdateBehavior.Performative);
         message.setContent(model.serialize());
         message.setOntology(Ontologies.Model.name());
@@ -55,7 +55,7 @@ public class ACLMessageParser {
         return message;
     }
 
-    public ACLMessage createModelMessage(Model model, AID agent2) {
+    public ACLMessage createModelMessage(ParametricModel model, AID agent2) {
         return createModelMessage(model, agent2, null);
     }
 }

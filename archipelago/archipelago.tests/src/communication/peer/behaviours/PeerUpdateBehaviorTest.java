@@ -4,8 +4,7 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
-import jade.core.behaviours.Behaviour;
-import learning.Model;
+import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +19,7 @@ public class PeerUpdateBehaviorTest {
     private MessageFacade _messageFacade;
     private PeerAgent _peerAgent;
     private BehaviourFactory _behaviourFactory;
-    private Model _model;
+    private ParametricModel _model;
     private PropegateBehavior _propegateBehavior;
     private CompletionBehaviour _completionBehavior;
     private ModelAggregationBehavior _modelAggregationBehavior;
@@ -34,7 +33,7 @@ public class PeerUpdateBehaviorTest {
 
         _propegateBehavior = mock(PropegateBehavior.class);
         _completionBehavior = mock(CompletionBehaviour.class);
-        _model = mock(Model.class);
+        _model = mock(ParametricModel.class);
         when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
         when(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade)).thenReturn(_completionBehavior);
         when(_behaviourFactory.getModelAggregation(_peerAgent, _messageFacade)).thenReturn(_modelAggregationBehavior);
@@ -42,7 +41,7 @@ public class PeerUpdateBehaviorTest {
         _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);
     }
 
-    private Message fakeMessage(Model model) {
+    private Message fakeMessage(ParametricModel model) {
         Message message = mock(Message.class);
         when(_messageFacade.hasMessage(PeerUpdateBehavior.Performative)).thenReturn(true);
         when(_messageFacade.nextMessage(PeerUpdateBehavior.Performative)).thenReturn(message);

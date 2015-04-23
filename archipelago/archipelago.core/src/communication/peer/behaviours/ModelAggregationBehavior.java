@@ -41,7 +41,8 @@ public class ModelAggregationBehavior extends OneShotBehaviour{
                 _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, group.get(0), _messageFacade));
             }
             else {
-                _peerAgent.addBehaviour(_behaviorFactory.getCuratorBehavior());
+                group.remove(0);
+                _peerAgent.addBehaviour(_behaviorFactory.getCuratorBehavior(group, _messageFacade, _peerAgent));
             }
         }
     }

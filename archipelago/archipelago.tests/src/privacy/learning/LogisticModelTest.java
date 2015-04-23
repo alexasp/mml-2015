@@ -2,19 +2,8 @@ package privacy.learning;
 
 import learning.LabeledSample;
 import org.junit.Before;
-import org.junit.Test;
-import privacy.NoisyQueryable;
-
 import java.util.List;
-import java.util.function.Function;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 
 /**
  * Created by alex on 3/5/15.

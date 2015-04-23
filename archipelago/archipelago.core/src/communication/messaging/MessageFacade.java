@@ -6,7 +6,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import learning.Model;
+import learning.ParametricModel;
 import privacy.math.RandomGenerator;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public class MessageFacade {
         return parsedMessage;
     }
 
-    public void sendToRandomPeer(Model model) {
+    public void sendToRandomPeer(ParametricModel model) {
         List<AID> peers = _peerGraph.getPeers(_agent);
 
         if(peers.size() == 0)
@@ -81,9 +81,9 @@ public class MessageFacade {
         throw new UnsupportedOperationException();
     }
 
-    public void sendToPeer(AID curator, Model model, AggregationPerformative performative) {
-        ACLMessage message = _messageParser.createModelMessage(model, curator, performative);
-        message.addReceiver(curator);
+    public void sendToPeer(AID agentId, ParametricModel model, AggregationPerformative performative) {
+        ACLMessage message = _messageParser.createModelMessage(model, agentId, performative);
+        message.addReceiver(agentId);
 
         _agent.send(message);
     }

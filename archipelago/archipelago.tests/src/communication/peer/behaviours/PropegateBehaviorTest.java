@@ -3,7 +3,7 @@ package communication.peer.behaviours;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import learning.LabeledSample;
-import learning.Model;
+import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,19 +21,19 @@ public class PropegateBehaviorTest {
 
     private MessageFacade _messaging;
     private PropegateBehavior _propegateBehavior;
-    private Model _model;
+    private ParametricModel _model;
     private PeerAgent _peerAgent;
     private List<LabeledSample> _data;
     private double _epsilon = 1.0;
 
     @Before
     public void setUp(){
-        _model = mock(Model.class);
+        _model = mock(ParametricModel.class);
         _data = mock(List.class);
         _peerAgent = mock(PeerAgent.class);
         _messaging = mock(MessageFacade.class);
         when(_peerAgent.getMessageFacade()).thenReturn(_messaging);
-        when(_peerAgent.getUpdateCost()).thenReturn(_epsilon);
+        when(_peerAgent.getEpsilon()).thenReturn(_epsilon);
 
         when(_peerAgent.getData()).thenReturn(_data);
 

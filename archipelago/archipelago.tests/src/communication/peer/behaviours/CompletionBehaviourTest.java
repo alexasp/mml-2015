@@ -3,7 +3,7 @@ package communication.peer.behaviours;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import jade.core.AID;
-import learning.Model;
+import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +33,7 @@ public class CompletionBehaviourTest {
         _aid = mock(AID.class);
         when(_peerAgent.getAID()).thenReturn(_aid);
         when(_peerAgent.getMessageFacade()).thenReturn(_messageFacade);
-        when(_peerAgent.getModels()).thenReturn(Arrays.asList(mock(Model.class)));
+        when(_peerAgent.getModels()).thenReturn(Arrays.asList(mock(ParametricModel.class)));
 
         _behaviour = new CompletionBehaviour(_peerAgent, _messageFacade);
     }

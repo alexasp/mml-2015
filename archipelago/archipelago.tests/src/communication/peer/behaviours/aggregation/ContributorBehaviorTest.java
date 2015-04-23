@@ -6,7 +6,7 @@ import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
-import learning.Model;
+import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,14 +19,14 @@ public class ContributorBehaviorTest {
     private ContributorBehavior _contributorBehavior;
     private MessageFacade _messageFacade;
     private PeerAgent _peerAgent;
-    private Model _model;
+    private ParametricModel _model;
 
     @Before
     public void setUp() {
         _curator = mock(AID.class);
         _messageFacade = mock(MessageFacade.class);
         _peerAgent = mock(PeerAgent.class);
-        _model = mock(Model.class);
+        _model = mock(ParametricModel.class);
         when(_peerAgent.getLocalModel()).thenReturn(_model);
         _contributorBehavior = new ContributorBehavior(_peerAgent, _curator, _messageFacade);
 

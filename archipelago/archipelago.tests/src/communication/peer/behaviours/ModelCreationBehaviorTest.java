@@ -62,7 +62,7 @@ public class ModelCreationBehaviorTest {
     public void action_createsInitialModel(){
         _creationBehaviour.action();
 
-        verify(_model).update(_agent.getUpdateCost(), _data);
+        verify(_model).update(_agent.getEpsilon(), _data);
         verify(_agent).setLocalModel(_model);
     }
 

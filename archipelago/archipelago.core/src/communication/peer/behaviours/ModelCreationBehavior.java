@@ -3,9 +3,8 @@ package communication.peer.behaviours;
 import communication.BehaviourFactory;
 import communication.PeerAgent;
 import jade.core.behaviours.OneShotBehaviour;
-import learning.Model;
+import learning.ParametricModel;
 import learning.ModelFactory;
-import privacy.math.RandomGenerator;
 
 import java.util.stream.IntStream;
 
@@ -35,8 +34,8 @@ public class ModelCreationBehavior extends OneShotBehaviour {
                 .toArray();
 
 
-        Model model = _modelFactory.getModel(parameterVector); //TODO: add parameters
-        model.update(_agent.getUpdateCost(), _agent.getData());
+        ParametricModel model = _modelFactory.getModel(parameterVector); //TODO: add parameters
+        model.update(_agent.getEpsilon(), _agent.getData());
         _agent.setLocalModel(model);
 
         _agent.addBehaviour(_behaviorFactory.getModelPropegate(_agent, model));

@@ -1,6 +1,6 @@
 package learning.models;
 
-import learning.Model;
+import learning.ParametricModel;
 import learning.ModelFactory;
 import privacy.learning.LogisticModel;
 
@@ -9,17 +9,17 @@ import privacy.learning.LogisticModel;
  */
 public class LogisticModelFactory implements ModelFactory {
     @Override
-    public Model getModel(double[] parameters) {
+    public ParametricModel getModel(double[] parameters) {
         return new LogisticModel(parameters);
     }
 
     @Override
-    public Model getModel(int size) {
+    public ParametricModel getModel(int size) {
         return new LogisticModel(new double[size]);
     }
 
     @Override
-    public Model getModel(String serializedModel) {
+    public ParametricModel getModel(String serializedModel) {
         return new LogisticModel(serializedModel);
     }
 }

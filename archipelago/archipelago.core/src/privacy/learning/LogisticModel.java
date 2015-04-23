@@ -1,11 +1,7 @@
 package privacy.learning;
 
-import com.google.common.collect.Lists;
-import com.sun.deploy.util.ArrayUtil;
-import experiment.DataLoader;
-import learning.IQueryable;
 import learning.LabeledSample;
-import learning.Model;
+import learning.ParametricModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +10,7 @@ import java.util.stream.IntStream;
 /**
  * Created by alex on 3/5/15.
  */
-public class LogisticModel implements Model {
+public class LogisticModel implements ParametricModel {
 
     private static final java.lang.String DELIMITER = ",";
     private double[] _parameters;
@@ -106,5 +102,12 @@ public class LogisticModel implements Model {
 
     public double[] getParameters() {
         return _parameters;
+    }
+
+    @Override
+    public void addTerm(double[] term) {
+        for (int i = 0; i < _parameters.length; i++) {
+            _parameters[i] += term[i];
+        }
     }
 }

@@ -5,12 +5,9 @@ import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import jade.core.Agent;
 import learning.EnsembleModel;
-import learning.IQueryable;
 import learning.LabeledSample;
-import learning.Model;
-import privacy.learning.LogisticModel;
+import learning.ParametricModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +22,7 @@ public class PeerAgent extends Agent {
     private int _iterations;
     private int _parameters;
     private double _updateCost;
-    private Model _trainedModel;
+    private ParametricModel _trainedModel;
 
     public PeerAgent(List data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
         _ensemble = ensemble;
@@ -39,7 +36,7 @@ public class PeerAgent extends Agent {
         addBehaviour(behaviourFactory.getPeerUpdate(this, _messageFacade));
     }
 
-    public void addModel(Model model) {
+    public void addModel(ParametricModel model) {
         _ensemble.add(model);
     }
 
@@ -48,7 +45,7 @@ public class PeerAgent extends Agent {
         return _data;
     }
 
-    public double getUpdateCost() {
+    public double getEpsilon() {
         return _updateCost;
     }
 
@@ -69,15 +66,15 @@ public class PeerAgent extends Agent {
         return _parameters;
     }
 
-    public List<Model> getModels() {
+    public List<ParametricModel> getModels() {
         return _ensemble.getModels();
     }
 
-    public Model getLocalModel() {
+    public ParametricModel getLocalModel() {
         return _trainedModel;
     }
 
-    public void setLocalModel(Model model) {
+    public void setLocalModel(ParametricModel model) {
         _trainedModel = model;
     }
 }
