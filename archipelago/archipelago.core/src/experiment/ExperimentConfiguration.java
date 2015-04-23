@@ -5,15 +5,16 @@ package experiment;
  */
 public class ExperimentConfiguration {
 
-    public final int iterations;
-    public final double budget;
-    public final double trainRatio;
-    public final int peerCount;
-    public final double testCost;
-    public final int parameters;
-    public final double updateCost;
+    public int iterations;
+    public double budget;
+    public double trainRatio;
+    public int peerCount;
+    public double testCost;
+    public int parameters;
+    public double updateCost;
+    public double regularization;
 
-    public ExperimentConfiguration(int iterations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double updateCost) {
+    public ExperimentConfiguration(int iterations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double updateCost, double regularization) {
         this.iterations = iterations;
         this.budget = budget;
         this.trainRatio = trainRatio;
@@ -21,5 +22,6 @@ public class ExperimentConfiguration {
         this.testCost = testCost;
         this.parameters = parameters;
         this.updateCost = updateCost;
+        this.regularization = regularization;
     }
 }

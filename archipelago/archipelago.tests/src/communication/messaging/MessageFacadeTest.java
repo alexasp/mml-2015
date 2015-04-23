@@ -6,7 +6,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import learning.Model;
+import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -40,11 +39,11 @@ public class MessageFacadeTest {
     private ACLMessageParser _messageParser;
     private PeerGraph _peerGraph;
     private RandomGenerator _randomGenerator;
-    private Model _model;
+    private ParametricModel _model;
 
     @Before
     public void setUp() {
-        _model = mock(Model.class);
+        _model = mock(ParametricModel.class);
         _peerGraph = mock(PeerGraph.class);
         _messageParser = mock(ACLMessageParser.class);
         _agent = PowerMockito.mock(Agent.class);

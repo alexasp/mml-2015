@@ -13,6 +13,17 @@ public class RandomGenerator {
         return distribution.sample();
     }
 
+    public double[] fromLaplacian(double beta, int vectorLength) {
+        double[] values = new double[vectorLength];
+        LaplaceDistribution distribution = new LaplaceDistribution(0, beta);
+
+        for(int i = 0; i < vectorLength; i++) {
+            values[i] = distribution.sample();
+        }
+
+        return values;
+    }
+
     public double uniform(double lower, double upper) {
         UniformRealDistribution distribution = new UniformRealDistribution(lower, upper);
         return distribution.sample();

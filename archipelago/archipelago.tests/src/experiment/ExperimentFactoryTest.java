@@ -29,7 +29,7 @@ public class ExperimentFactoryTest {
     private Environment _environment;
     private DataLoader _dataLoader;
     private int _parameters = 30;
-    private double _updateCost;
+    private double _updateCost = 2.0;
 
     @Before
     public void setUp(){
@@ -50,8 +50,9 @@ public class ExperimentFactoryTest {
         int peerCount = 10;
         double testCost = 0.1;
         int iterations = 10;
+        double regularization = 1.0;
 
-        Experiment experiment = _experimentFactory.getExperiment(samples, trainRatio, peerCount, testCost, iterations, 2.0, _parameters, _updateCost);
+        Experiment experiment = _experimentFactory.getExperiment(samples, trainRatio, peerCount, testCost, iterations, 2.0, _parameters, _updateCost, regularization);
 
         assertEquals(samples, experiment.getData());
         assertEquals(trainRatio, experiment.getConfiguration().trainRatio, 0.0001d);
@@ -59,6 +60,7 @@ public class ExperimentFactoryTest {
         assertEquals(testCost, experiment.getConfiguration().testCost, 0.0001d);
         assertEquals(iterations, experiment.getConfiguration().iterations);
         assertEquals(_updateCost, experiment.getConfiguration().updateCost, 0.0001d);
+        assertEquals(regularization, experiment.getConfiguration().regularization, 0.0001d);
     }
 
 }

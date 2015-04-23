@@ -1,15 +1,15 @@
 package communication.messaging;
 
-import learning.Model;
+import learning.ParametricModel;
 
 /**
  * Created by alex on 3/9/15.
  */
 public class Message {
-    private Model _model;
+    private ParametricModel _model;
     private String _content;
 
-    public Message(Model model) {
+    public Message(ParametricModel model) {
         _model = model;
     }
 
@@ -21,7 +21,7 @@ public class Message {
 
     }
 
-    public Model getModel() {
+    public ParametricModel getModel() {
         return _model;
     }
 

@@ -27,8 +27,8 @@ public class ExperimentFactory {
         _dataLoader = dataLoader;
     }
 
-    public Experiment getExperiment(List<LabeledSample> samples, double trainRatio, int peerCount, double testCost, int iterations, double budget, int parameters, double updateCost) throws StaleProxyException {
-        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, updateCost);
+    public Experiment getExperiment(List<LabeledSample> samples, double trainRatio, int peerCount, double testCost, int iterations, double budget, int parameters, double updateCost, double regularization) throws StaleProxyException {
+        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, updateCost, regularization);
 
         return new Experiment(samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, new PeerGraph(), configuration);
     }

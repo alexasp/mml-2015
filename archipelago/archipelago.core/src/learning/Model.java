@@ -1,14 +1,12 @@
 package learning;
 
-import privacy.NoisyQueryable;
-
-import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by alex on 3/9/15.
+ * Created by alex on 4/23/15.
  */
 public interface Model {
+
     void update(double epsilon, List<LabeledSample> data);
 
     void deserialize(String modelString);
@@ -18,4 +16,5 @@ public interface Model {
     List<Double> label(List<LabeledSample> test);
 
     double label(double[] test);
+
 }

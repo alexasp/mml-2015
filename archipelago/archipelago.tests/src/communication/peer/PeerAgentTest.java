@@ -8,8 +8,7 @@ import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import communication.peer.behaviours.PeerUpdateBehavior;
 import learning.EnsembleModel;
-import learning.LabeledSample;
-import learning.Model;
+import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,7 +76,7 @@ public class PeerAgentTest {
 
     @Test
     public void addModel_AddsToEnsemble(){
-        Model model = mock(Model.class);
+        ParametricModel model = mock(ParametricModel.class);
 
         _peerAgent.addModel(model);
 

@@ -7,9 +7,7 @@ import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
-import learning.IQueryableFactory;
 import learning.LabeledSample;
-import learning.QueryableFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,8 +31,9 @@ public class SpamTest {
         int peerCount = 1;
         double testCost = 0.1;
         int iterations = 1;
+        double regularization = 1.0;
 
-        Experiment experiment = experimentFactory.getExperiment(data, trainRatio, peerCount, testCost, iterations, 2.0, data.get(0).getFeatures().length, 0.01);
+        Experiment experiment = experimentFactory.getExperiment(data, trainRatio, peerCount, testCost, iterations, 2.0, data.get(0).getFeatures().length, 0.01, regularization);
 
         experiment.run(completeExperiment -> System.out.println(completeExperiment.test()));
     }

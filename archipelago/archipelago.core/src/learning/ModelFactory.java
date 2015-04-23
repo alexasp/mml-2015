@@ -5,9 +5,9 @@ package learning;
  */
 public interface ModelFactory {
 
-    public Model getModel(double[] parameters);
+    public ParametricModel getModel(double[] parameters);
 
-    public Model getModel(int size);
+    public ParametricModel getModel(int size);
 
-    public Model getModel(String serializedModel);
+    public ParametricModel getModel(String serializedModel);
 }
