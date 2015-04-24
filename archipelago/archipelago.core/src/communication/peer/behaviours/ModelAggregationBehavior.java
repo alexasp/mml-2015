@@ -2,12 +2,13 @@ package communication.peer.behaviours;
 
 import communication.BehaviourFactory;
 import communication.PeerAgent;
+import communication.messaging.GroupMessage;
 import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,13 +30,14 @@ public class ModelAggregationBehavior extends CyclicBehaviour{
     public void action() {
 
         if(_messageFacade.hasMessage(AggregationPerformative.GroupFormation.ordinal())){
-            List<AID> group = _messageFacade.nextGroupMessage();
-            if(group.indexOf(_peerAgent.getAID()) > 0) {
-                _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, group.get(0), _messageFacade));
+            GroupMessage message = _messageFacade.nextGroupMessage();
+            if(message.agents.indexOf(_peerAgent.getAID()) > 0) {
+                _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, message.agents.get(0), _messageFacade, message.conversationId));
             }
             else {
-                group.remove(0);
-                _peerAgent.addBehaviour(_behaviorFactory.getCuratorBehavior(group, _messageFacade, _peerAgent));
+                ArrayList<AID> parties = new ArrayList<>(message.agents);
+                parties.remove(0);
+                _peerAgent.addBehaviour(_behaviorFactory.getCuratorBehavior(parties, _messageFacade, _peerAgent, message.conversationId));
             }
         }
         else{

@@ -42,6 +42,7 @@ public class CuratorBehaviorTest {
     private int _dataLength1 = 17;
     private int _dataLength2 = 30;
     private ExperimentConfiguration _configuration;
+    private String _conversationId = "id";
 
     @Before
     public void setUp(){
@@ -58,7 +59,7 @@ public class CuratorBehaviorTest {
         when(_randomGenerator.fromLaplacian(AdditionalMatchers.eq(beta, 0.0001d), eq(3)))
                 .thenReturn(_noise);
 
-        _curatorBehavior = new CuratorBehavior(_parties, _peerAgent, _messageFacade, _modelMerger, _randomGenerator, _configuration);
+        _curatorBehavior = new CuratorBehavior(_parties, _conversationId, _peerAgent, _messageFacade, _modelMerger, _randomGenerator, _configuration);
     }
 
     private void setUpModels() {
@@ -102,8 +103,8 @@ public class CuratorBehaviorTest {
         _curatorBehavior.action();
 
         verify(_model3).addTerm(_noise);
-        verify(_messageFacade).sendToPeer(_agent1, _model3, AggregationPerformative.AggregatedResult);
-        verify(_messageFacade).sendToPeer(_agent2, _model3, AggregationPerformative.AggregatedResult);
+        verify(_messageFacade).sendToPeer(_agent1, _model3, AggregationPerformative.AggregatedResult, _conversationId);
+        verify(_messageFacade).sendToPeer(_agent2, _model3, AggregationPerformative.AggregatedResult, _conversationId);
     }
 
 

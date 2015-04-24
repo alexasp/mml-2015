@@ -20,6 +20,7 @@ public class ContributorBehaviorTest {
     private MessageFacade _messageFacade;
     private PeerAgent _peerAgent;
     private ParametricModel _model;
+    private String _conversationId;
 
     @Before
     public void setUp() {
@@ -28,7 +29,7 @@ public class ContributorBehaviorTest {
         _peerAgent = mock(PeerAgent.class);
         _model = mock(ParametricModel.class);
         when(_peerAgent.getLocalModel()).thenReturn(_model);
-        _contributorBehavior = new ContributorBehavior(_peerAgent, _curator, _messageFacade);
+        _contributorBehavior = new ContributorBehavior(_peerAgent, _curator, _conversationId, _messageFacade);
 
         when(_messageFacade.hasMessage(anyInt())).thenReturn(false);
     }
@@ -42,17 +43,17 @@ public class ContributorBehaviorTest {
     public void action_SendsLocalModelToCuratorOnlyOnce() {
         _contributorBehavior.action();
 
-        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, AggregationPerformative.ModelContribution);
+        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, AggregationPerformative.ModelContribution, _conversationId);
 
         _contributorBehavior.action();
-        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, AggregationPerformative.ModelContribution);
+        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, AggregationPerformative.ModelContribution, _conversationId);
     }
 
     @Test
     public void action_ResultResponse_AddsModel() {
         _contributorBehavior.action();
-        when(_messageFacade.hasMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator)).thenReturn(true);
-        when(_messageFacade.nextMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator)).thenReturn(new Message(_model));
+        when(_messageFacade.hasMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator, _conversationId)).thenReturn(true);
+        when(_messageFacade.nextMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator, _conversationId)).thenReturn(new Message(_model));
 
         _contributorBehavior.action();
 

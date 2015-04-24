@@ -1,6 +1,7 @@
 package communication.peer;
 
 import communication.BehaviourFactory;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -12,7 +13,7 @@ public class GroupLocatorAgentTest {
     private GroupLocatorAgent _agent;
     private BehaviourFactory _behaviorFactory;
 
-    @Test
+    @Before
     public void setUp() {
         _behaviorFactory = mock(BehaviourFactory.class);
         _agent = new GroupLocatorAgent();

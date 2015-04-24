@@ -2,12 +2,12 @@ package communication.peer.behaviours.aggregation;
 
 import communication.BehaviourFactory;
 import communication.PeerAgent;
+import communication.messaging.GroupMessage;
 import communication.messaging.MessageFacade;
 import communication.peer.AggregationPerformative;
 import communication.peer.behaviours.ModelAggregationBehavior;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +39,7 @@ public class ModelAggregationBehaviorTest {
     private BehaviourFactory _behaviorFactory;
     private AID _aid;
     private CuratorBehavior _curatorBehavior;
+    private String _conversationId = "id";
 
     @Before
     public void setUp() {
@@ -58,8 +59,8 @@ public class ModelAggregationBehaviorTest {
         _behaviorFactory = mock(BehaviourFactory.class);
         _contributorBehavior = mock(ContributorBehavior.class);
         _curatorBehavior = mock(CuratorBehavior.class);
-        when(_behaviorFactory.getContributorBehavior(any(PeerAgent.class), any(AID.class), any(MessageFacade.class))).thenReturn(_contributorBehavior);
-        when(_behaviorFactory.getCuratorBehavior(anyListOf(AID.class), any(MessageFacade.class), any(PeerAgent.class))).thenReturn(_curatorBehavior);
+        when(_behaviorFactory.getContributorBehavior(any(PeerAgent.class), any(AID.class), any(MessageFacade.class), eq(_conversationId))).thenReturn(_contributorBehavior);
+        when(_behaviorFactory.getCuratorBehavior(anyListOf(AID.class), any(MessageFacade.class), any(PeerAgent.class), eq(_conversationId))).thenReturn(_curatorBehavior);
     }
 
     @Test
@@ -90,7 +91,8 @@ public class ModelAggregationBehaviorTest {
 
     private void setUpGroupConfirmationMessage(List<AID> agents) {
         when(_messageFacade.hasMessage(AggregationPerformative.GroupFormation.ordinal())).thenReturn(true);
-        when(_messageFacade.nextGroupMessage()).thenReturn(agents);
+        GroupMessage message = new GroupMessage(agents, _conversationId);
+        when(_messageFacade.nextGroupMessage()).thenReturn(message);
     }
 
 }

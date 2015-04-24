@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class CuratorBehavior extends CyclicBehaviour{
     private final List<AID> _parties;
+    private String _conversationId;
     private PeerAgent _peerAgent;
     private final MessageFacade _messageFacade;
     private ModelMerger _modelMerger;
@@ -27,8 +28,9 @@ public class CuratorBehavior extends CyclicBehaviour{
     private List<ParametricModel> _models;
     private double _smallestSet = Double.MAX_VALUE;
 
-    public CuratorBehavior(List<AID> parties, PeerAgent peerAgent, MessageFacade messageFacade, ModelMerger modelMerger, RandomGenerator randomGenerator, ExperimentConfiguration configuration) {
+    public CuratorBehavior(List<AID> parties, String conversationId, PeerAgent peerAgent, MessageFacade messageFacade, ModelMerger modelMerger, RandomGenerator randomGenerator, ExperimentConfiguration configuration) {
         _parties = parties;
+        _conversationId = conversationId;
         _peerAgent = peerAgent;
         _messageFacade = messageFacade;
         _modelMerger = modelMerger;
@@ -63,7 +65,7 @@ public class CuratorBehavior extends CyclicBehaviour{
 
     private void publishModel(ParametricModel mergedModel) {
         for (AID agentId : _parties) {
-            _messageFacade.sendToPeer(agentId, mergedModel, AggregationPerformative.AggregatedResult);
+            _messageFacade.sendToPeer(agentId, mergedModel, AggregationPerformative.AggregatedResult, _conversationId);
         }
     }
 }

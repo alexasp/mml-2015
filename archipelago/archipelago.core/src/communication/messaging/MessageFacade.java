@@ -37,6 +37,11 @@ public class MessageFacade {
         return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative), MessageTemplate.MatchSender(sender)));
     }
 
+    public boolean hasMessage(int performative, AID sender, String conversationId) {
+        return false;
+    }
+
+
     private boolean hasMessage(MessageTemplate template){
         if(_nextMessage != null) { return true; }
 
@@ -44,6 +49,11 @@ public class MessageFacade {
         return _nextMessage != null;
     }
 
+    public Message nextMessage(int performative, AID sender, String conversationId) {
+        return nextMessage(MessageTemplate.and(
+                MessageTemplate.and(MessageTemplate.MatchSender(sender), MessageTemplate.MatchConversationId(conversationId)),
+                MessageTemplate.MatchPerformative(performative)));
+    }
     public Message nextMessage(int performative, AID sender) {
         return nextMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative), MessageTemplate.MatchSender(sender)));
     }
@@ -93,13 +103,21 @@ public class MessageFacade {
         throw new UnsupportedOperationException();
     }
 
-    public List<AID> nextGroupMessage() {
+    public GroupMessage nextGroupMessage() {
         throw new UnsupportedOperationException();
     }
 
-    public void sendToPeer(AID agentId, ParametricModel model, AggregationPerformative performative) {
-        ACLMessage message = _messageParser.createModelMessage(model, agentId, performative);
-        message.addReceiver(agentId);
+    public void sendToPeer(AID receiver, ParametricModel model, AggregationPerformative performative, String conversationId) {
+        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
+        message.addReceiver(receiver);
+        message.setConversationId(conversationId);
+
+        _agent.send(message);
+    }
+
+    public void sendToPeer(AID receiver, ParametricModel model, AggregationPerformative performative) {
+        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
+        message.addReceiver(receiver);
 
         _agent.send(message);
     }
@@ -108,4 +126,7 @@ public class MessageFacade {
     public AID nextGroupRequestMessage() {
         throw new UnsupportedOperationException();
     }
+
+
+
 }

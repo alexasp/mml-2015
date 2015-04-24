@@ -58,12 +58,12 @@ public class BehaviourFactory {
         return new ModelAggregationBehavior(agent, messageFacade, this);
     }
 
-    public Behaviour getContributorBehavior(PeerAgent agent, AID curator, MessageFacade messageFacade) {
-        return new ContributorBehavior(agent, curator, messageFacade);
+    public Behaviour getContributorBehavior(PeerAgent agent, AID curator, MessageFacade messageFacade, String conversationId) {
+        return new ContributorBehavior(agent, curator, conversationId, messageFacade);
     }
 
-    public Behaviour getCuratorBehavior(List<AID> parties, MessageFacade messageFacade, PeerAgent peerAgent) {
-        return new CuratorBehavior(parties, peerAgent, messageFacade, _modelMerger, _randomGenerator, _configuration);
+    public Behaviour getCuratorBehavior(List<AID> parties, MessageFacade messageFacade, PeerAgent peerAgent, String conversationId) {
+        return new CuratorBehavior(parties, conversationId, peerAgent, messageFacade, _modelMerger, _randomGenerator, _configuration);
     }
 
     public Behaviour getGroupFormingBehaviour() {
