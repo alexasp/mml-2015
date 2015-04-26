@@ -30,7 +30,8 @@ public class GroupFormingBehaviourTest {
         _messageFacade = mock(MessageFacade.class);
         when(_messageFacade.hasMessage(AggregationPerformative.AggregationGroupRequest.ordinal())).thenReturn(true);
 
-        _behaviour = new GroupFormingBehaviour();
+        int iterations = 2;
+        _behaviour = new GroupFormingBehaviour(iterations);
     }
 
     @Test
@@ -39,10 +40,11 @@ public class GroupFormingBehaviourTest {
     }
 
     @Test
-    public void action_NewMessage_AddsSenderToListOfPreparedAgents(){
-        when(_messageFacade.nextGroupRequestMessage()).thenReturn(_agent1);
+    public void action_NotFinishedIterations_FormsARandomGroup() {
 
         _behaviour.action();
+
+        fail();
     }
 
 }
