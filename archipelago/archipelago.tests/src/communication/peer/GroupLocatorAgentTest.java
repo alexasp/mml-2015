@@ -1,11 +1,13 @@
 package communication.peer;
 
 import communication.BehaviourFactory;
+import communication.grouping.behaviors.GroupFormingBehaviour;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class GroupLocatorAgentTest {
 
@@ -16,9 +18,9 @@ public class GroupLocatorAgentTest {
     @Before
     public void setUp() {
         _behaviorFactory = mock(BehaviourFactory.class);
-        _agent = new GroupLocatorAgent();
+        when(_behaviorFactory.getGroupFormingBehaviour()).thenReturn(mock(GroupFormingBehaviour.class));
+        _agent = new GroupLocatorAgent(_behaviorFactory);
     }
-
 
     @Test
     public void construction_GetsGroupingBehavior(){

@@ -1,5 +1,6 @@
 package communication.peer;
 
+import communication.BehaviourFactory;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -9,7 +10,8 @@ import jade.lang.acl.MessageTemplate;
  */
 public class GroupLocatorAgent extends Agent {
 
-
-
+    public GroupLocatorAgent(BehaviourFactory behaviorFactory){
+        addBehaviour(behaviorFactory.getGroupFormingBehaviour());
+    }
 
 }
