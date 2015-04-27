@@ -13,6 +13,7 @@ public class ExperimentConfiguration {
     public int parameters;
     public double updateCost;
     public double regularization;
+    public int groupSize;
 
     public ExperimentConfiguration(int iterations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double updateCost, double regularization) {
         this.iterations = iterations;

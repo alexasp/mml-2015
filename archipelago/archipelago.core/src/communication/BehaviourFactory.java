@@ -9,6 +9,7 @@ import communication.peer.behaviours.aggregation.ContributorBehavior;
 import communication.peer.behaviours.aggregation.CuratorBehavior;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
+import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import learning.ModelMerger;
 import learning.ParametricModel;
@@ -66,7 +67,7 @@ public class BehaviourFactory {
         return new CuratorBehavior(parties, conversationId, peerAgent, messageFacade, _modelMerger, _randomGenerator, _configuration);
     }
 
-    public Behaviour getGroupFormingBehaviour() {
-        return new GroupFormingBehaviour();
+    public Behaviour getGroupFormingBehaviour(Agent groupAgent, List<AID> _agents, ExperimentConfiguration configuration, MessageFacade messageFacade) {
+        return new GroupFormingBehaviour(groupAgent, _agents, configuration, _randomGenerator, messageFacade);
     }
 }

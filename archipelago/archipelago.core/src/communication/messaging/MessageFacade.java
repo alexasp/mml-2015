@@ -99,7 +99,7 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void requestAggregationGroup() {
+    public void publishAggregationGroup(List<AID> group) {
         throw new UnsupportedOperationException();
     }
 
