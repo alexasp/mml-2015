@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import privacy.learning.LogisticModel;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
@@ -96,6 +99,16 @@ public class ACLMessageParserTest {
 
         assertNotNull(message);
     }
+
+    @Test
+    public void createGroupMessage_SetsOntology() {
+        List<AID> group = Arrays.asList(mock(AID.class), mock(AID.class));
+
+        ACLMessage message = _parser.createGroupMessage(group);
+
+        assertEquals(Ontologies.Grouping.name(), message.getOntology());
+    }
+
 
 
 }

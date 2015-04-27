@@ -5,5 +5,6 @@ package communication.messaging;
  */
 public enum Ontologies {
     Model,
-    Message;
+    Message,
+    Grouping;
 }
