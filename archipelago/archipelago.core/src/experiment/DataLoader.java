@@ -6,6 +6,7 @@ import learning.LabeledSample;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -57,6 +58,10 @@ public class DataLoader {
     }
 
     public List<List<LabeledSample>> partition(int parts, List<LabeledSample> data) {
+        if(parts == 1){
+            return new ArrayList<>(Arrays.asList(data));
+        }
+
         int recordsToEach = (int) Math.floor((double) data.size() / (double) parts);
 
         List<List<LabeledSample>> partitions = new ArrayList<>();

@@ -51,8 +51,9 @@ public class ExperimentFactoryTest {
         double testCost = 0.1;
         int iterations = 10;
         double regularization = 1.0;
+        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, 0.0, trainRatio, peerCount, testCost, _parameters, _updateCost, regularization);
 
-        Experiment experiment = _experimentFactory.getExperiment(samples, trainRatio, peerCount, testCost, iterations, 2.0, _parameters, _updateCost, regularization);
+        Experiment experiment = _experimentFactory.getExperiment(samples, configuration);
 
         assertEquals(samples, experiment.getData());
         assertEquals(trainRatio, experiment.getConfiguration().trainRatio, 0.0001d);

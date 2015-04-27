@@ -4,6 +4,7 @@ import application.AppInjector;
 import application.ConfigurationModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.util.Modules;
 import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentConfiguration;
@@ -23,11 +24,8 @@ public class SpamTest {
     public static void main(String[] args) throws ControllerException {
         Injector injector = Guice.createInjector(new AppInjector());
 
-
         DataLoader loader = injector.getInstance(DataLoader.class);
-        ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
-
-        List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase_centered.csv","start",true); //this is test leakage. Centering should be performed based on train data only
+        List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
         Collections.shuffle(data);
 
         double trainRatio = 0.08;
@@ -40,7 +38,9 @@ public class SpamTest {
         double updateCost = 0.01;
 
         ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, updateCost, regularization);
-        injector.createChildInjector(new ConfigurationModule(configuration));
+        injector = injector.createChildInjector(new ConfigurationModule(configuration));
+
+        ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
         experiment.run(completeExperiment -> System.out.println(completeExperiment.test()));
