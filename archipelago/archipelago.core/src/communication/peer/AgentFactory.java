@@ -9,6 +9,7 @@ import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
+import jade.core.Agent;
 import javafx.scene.control.Labeled;
 import learning.EnsembleModel;
 import learning.IQueryable;
@@ -21,6 +22,7 @@ import privacy.NoisyQueryableFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Created by alex on 3/10/15.
@@ -54,6 +56,11 @@ public class AgentFactory {
 
     public CompletionListeningAgent getCompletionAgent(Consumer<Experiment> completionAction, int totalPeerCount, Experiment experiment) {
         return new CompletionListeningAgent(completionAction, totalPeerCount, _behaviourFactory, _messageFacadeFactory, experiment);
+    }
+
+    public GroupLocatorAgent getGroupLocatingAgentWithAgents(List<PeerAgent> agents, ExperimentConfiguration configuration) {
+        List<AID> aids = agents.stream().map(agent -> agent.getAID()).collect(Collectors.toList());
+        return getGroupLocatingAgent(aids, configuration);
     }
 
     public GroupLocatorAgent getGroupLocatingAgent(List<AID> agents, ExperimentConfiguration configuration) {

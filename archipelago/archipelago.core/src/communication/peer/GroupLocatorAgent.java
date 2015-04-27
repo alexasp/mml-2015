@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class GroupLocatorAgent extends Agent {
 
+    public static final String SERVICE_NAME = "GROUP_LOCATOR";
+
     public GroupLocatorAgent(List<AID> agents, BehaviourFactory behaviorFactory, ExperimentConfiguration configuration, MessageFacadeFactory messageFacadeFactory){
         addBehaviour(behaviorFactory.getGroupFormingBehaviour(this, agents, configuration, messageFacadeFactory.getFacade(this)));
     }

@@ -50,7 +50,6 @@ public class ExperimentTest {
     private PeerGraph _peerGraph;
     private double _regularization = 1.0;
     private int _groupSize = 1;
-    private GroupLocatorAgent _groupAgent;
 
     @Before
     public void setUp(){
@@ -121,12 +120,13 @@ public class ExperimentTest {
         CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
         GroupLocatorAgent groupAgent = mock(GroupLocatorAgent.class);
         when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class))).thenReturn(completionAgent);
-        when(_agentFactory.getGroupLocatingAgent(anyList(), same(_configuration))).thenReturn(groupAgent);
+        when(_agentFactory.getGroupLocatingAgentWithAgents(anyList(), same(_configuration))).thenReturn(groupAgent);
 
         Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
         experiment.run(completionListener);
 
         verify(_environment).registerAgent(completionAgent);
+        verify(_environment).registerAgent(groupAgent);
         verify(_peerGraph).join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
     }
 

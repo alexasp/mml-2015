@@ -36,11 +36,12 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
     public void action() {
         List<AID> group = IntStream.range(0, _configuration.groupSize)
                 .mapToObj(i ->
-                                _agents.get(_randomGenerator.uniform(0, _agents.size()))
+                                _agents.get(_randomGenerator.uniform(0, _agents.size()-1))
                 )
                 .collect(Collectors.toList());
 
         _messageFacade.publishAggregationGroup(group, Integer.toString(_iteration));
+        System.out.println("Formed a new group to aggregate a model.");
         _iteration++;
 
         if(_iteration == _configuration.iterations) {
