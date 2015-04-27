@@ -4,6 +4,7 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
+import communication.peer.ArchipelagoPerformatives;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -18,7 +19,7 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
     private final MessageFacade _messageFacade;
     private final BehaviourFactory _behaviourFactory;
     private int _iteration;
-    public static final int Performative = ACLMessage.PROPAGATE;
+    public static final ArchipelagoPerformatives Performative = ArchipelagoPerformatives.ModelPropegation;
 
     public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade, BehaviourFactory behaviourFactory) {
         _peerAgent = peerAgent;

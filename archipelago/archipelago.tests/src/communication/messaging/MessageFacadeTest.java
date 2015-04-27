@@ -1,6 +1,6 @@
 package communication.messaging;
 
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.Agent;
@@ -17,10 +17,14 @@ import privacy.math.RandomGenerator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -40,9 +44,14 @@ public class MessageFacadeTest {
     private PeerGraph _peerGraph;
     private RandomGenerator _randomGenerator;
     private ParametricModel _model;
+    private int _peerCount = 5;
+    private ACLMessage _aclMessage;
+    private GroupMessage _message;
 
     @Before
     public void setUp() {
+        _aclMessage = mock(ACLMessage.class);
+        _message = mock(GroupMessage.class);
         _model = mock(ParametricModel.class);
         _peerGraph = mock(PeerGraph.class);
         _messageParser = mock(ACLMessageParser.class);
@@ -57,7 +66,7 @@ public class MessageFacadeTest {
         ACLMessage message = mock(ACLMessage.class);
         when(_agent.receive(any(MessageTemplate.class))).thenReturn(message);
 
-        boolean hasMessage = _messaging.hasMessage(0);
+        boolean hasMessage = _messaging.hasMessage(ArchipelagoPerformatives.AggregatedResult);
 
         assertTrue(hasMessage);
     }
@@ -69,8 +78,8 @@ public class MessageFacadeTest {
         Message parsedMessage = mock(Message.class);
         when(_messageParser.parse(message)).thenReturn(parsedMessage);
 
-        boolean hasMessage = _messaging.hasMessage(0);
-        Message actualMessage = _messaging.nextMessage(0);
+        boolean hasMessage = _messaging.hasMessage(ArchipelagoPerformatives.AggregatedResult);
+        Message actualMessage = _messaging.nextMessage(ArchipelagoPerformatives.AggregatedResult);
 
         assertEquals(parsedMessage, actualMessage);
     }
@@ -82,7 +91,7 @@ public class MessageFacadeTest {
         Message parsedMessage = mock(Message.class);
         when(_messageParser.parse(message)).thenReturn(parsedMessage);
 
-        Message actualMessage = _messaging.nextMessage(0);
+        Message actualMessage = _messaging.nextMessage(ArchipelagoPerformatives.AggregatedResult);
 
         assertEquals(parsedMessage, actualMessage);
     }
@@ -106,7 +115,7 @@ public class MessageFacadeTest {
     public void nextMessage_NoMessageAvailable_Throws(){
         when(_agent.receive(any(MessageTemplate.class))).thenReturn(null);
 
-        _messaging.nextMessage(0);
+        _messaging.nextMessage(ArchipelagoPerformatives.AggregatedResult);
     }
 
     @Test
@@ -138,11 +147,48 @@ public class MessageFacadeTest {
     public void sendToPeer(){
         AID agent = mock(AID.class);
         ACLMessage message = mock(ACLMessage.class);
-        when(_messageParser.createModelMessage(same(_model), same(agent), any(AggregationPerformative.class))).thenReturn(message);
+        when(_messageParser.createModelMessage(same(_model), same(agent), any(ArchipelagoPerformatives.class))).thenReturn(message);
 
-        _messaging.sendToPeer(agent, _model, AggregationPerformative.AggregationGroupRequest);
+        _messaging.sendToPeer(agent, _model, ArchipelagoPerformatives.AggregationGroupRequest);
 
         verify(_agent).send(message);
+    }
+
+    @Test
+    public void publishAggregationGroup_SendsGroupMessageToPeers() {
+        List<AID> group = createMockGroup();
+        when(_messageParser.createGroupMessage(group)).thenReturn(_aclMessage);
+
+        _messaging.publishAggregationGroup(group, "0");
+
+        group.stream().forEach(aid -> verify(_aclMessage).addReceiver(aid));
+        verify(_agent).send(_aclMessage);
+    }
+
+    private List<AID> createMockGroup() {
+        return IntStream.range(0, _peerCount)
+                .mapToObj(i -> {
+                    AID aid = mock(AID.class);
+                    return aid;
+                })
+        .collect(Collectors.toList());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void nextAggregationGroupMessage_NoMessageAvailable_Throws() {
+        when(_agent.receive(any(MessageTemplate.class))).thenReturn(null);
+
+        _messaging.nextAggregationGroupMessage();
+    }
+
+    @Test
+    public void nextAggregationGroupMessage_HasMessage_ReturnsParsed() {
+        when(_messageParser.parseGroupMessage(_aclMessage)).thenReturn(_message);
+        when(_agent.receive(any(MessageTemplate.class))).thenReturn(_aclMessage);
+
+        GroupMessage message = _messaging.nextAggregationGroupMessage();
+
+        assertEquals(_message, message);
     }
 
 }

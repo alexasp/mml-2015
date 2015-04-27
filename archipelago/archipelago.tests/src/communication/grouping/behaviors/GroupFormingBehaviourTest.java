@@ -1,7 +1,7 @@
 package communication.grouping.behaviors;
 
 import communication.messaging.MessageFacade;
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import jade.core.Agent;
@@ -37,7 +37,7 @@ public class GroupFormingBehaviourTest {
         _agents = IntStream.range(0, _agentCount).mapToObj(i -> mock(AID.class)).collect(Collectors.toList());
 
         _messageFacade = mock(MessageFacade.class);
-        when(_messageFacade.hasMessage(AggregationPerformative.AggregationGroupRequest.ordinal())).thenReturn(true);
+        when(_messageFacade.hasMessage(ArchipelagoPerformatives.AggregationGroupRequest)).thenReturn(true);
 
         _randomGenerator = mock(RandomGenerator.class);
 
@@ -60,9 +60,21 @@ public class GroupFormingBehaviourTest {
                 .thenReturn(first).thenReturn(second).thenReturn(third);
 
         _behaviour.action();
-        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)));
+        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
         _behaviour.action();
-        verify(_messageFacade, times(2)).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)));
+        verify(_messageFacade, times(2)).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
+    }
+
+    @Test
+    public void action_NotFinishedIterations_IncrementsId(){
+        when(_randomGenerator.uniform(0, _agentCount))
+                .thenReturn(1).thenReturn(2).thenReturn(3)
+                .thenReturn(4).thenReturn(5).thenReturn(6);
+
+        _behaviour.action();
+        verify(_messageFacade).publishAggregationGroup(anyList(), eq("0"));
+        _behaviour.action();
+        verify(_messageFacade).publishAggregationGroup(anyList(), eq("1"));
     }
 
     @Test

@@ -3,7 +3,7 @@ package communication.peer.behaviours.aggregation;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import jade.core.behaviours.Behaviour;
@@ -81,7 +81,7 @@ public class CuratorBehaviorTest {
     private void setUpMessages() {
         setUpModels();
 
-        when(_messageFacade.hasMessage(AggregationPerformative.ModelContribution.ordinal())).thenReturn(true);
+        when(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(true);
         _message1 = mock(Message.class);
         when(_message1.getModel()).thenReturn(_model1);
         when(_message1.getContent()).thenReturn(String.valueOf(_dataLength1));
@@ -97,20 +97,20 @@ public class CuratorBehaviorTest {
 
     @Test
     public void action_AllParticipantsResponded_PublishesNoisyAveragedModel() {
-        when(_messageFacade.nextMessage(AggregationPerformative.ModelContribution.ordinal())).thenReturn(_message1);
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(_message1);
         _curatorBehavior.action();
-        when(_messageFacade.nextMessage(AggregationPerformative.ModelContribution.ordinal())).thenReturn(_message2);
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(_message2);
         _curatorBehavior.action();
 
         verify(_model3).addTerm(_noise);
-        verify(_messageFacade).sendToPeer(_agent1, _model3, AggregationPerformative.AggregatedResult, _conversationId);
-        verify(_messageFacade).sendToPeer(_agent2, _model3, AggregationPerformative.AggregatedResult, _conversationId);
+        verify(_messageFacade).sendToPeer(_agent1, _model3, ArchipelagoPerformatives.AggregatedResult, _conversationId);
+        verify(_messageFacade).sendToPeer(_agent2, _model3, ArchipelagoPerformatives.AggregatedResult, _conversationId);
     }
 
 
     @Test
     public void aciton_AllParticipantsResponded_RemovesBehavior(){
-        when(_messageFacade.nextMessage(AggregationPerformative.ModelContribution.ordinal())).thenReturn(_message1);
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(_message1);
 
         _curatorBehavior.action();
         verify(_peerAgent, never()).removeBehaviour(any(Behaviour.class));

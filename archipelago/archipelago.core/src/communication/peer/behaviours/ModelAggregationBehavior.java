@@ -4,12 +4,11 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.GroupMessage;
 import communication.messaging.MessageFacade;
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by alex on 4/22/15.
@@ -29,8 +28,8 @@ public class ModelAggregationBehavior extends CyclicBehaviour{
     @Override
     public void action() {
 
-        if(_messageFacade.hasMessage(AggregationPerformative.GroupFormation.ordinal())){
-            GroupMessage message = _messageFacade.nextGroupMessage();
+        if(_messageFacade.hasMessage(ArchipelagoPerformatives.GroupFormation)){
+            GroupMessage message = _messageFacade.nextAggregationGroupMessage();
             if(message.agents.indexOf(_peerAgent.getAID()) > 0) {
                 _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, message.agents.get(0), _messageFacade, message.conversationId));
             }

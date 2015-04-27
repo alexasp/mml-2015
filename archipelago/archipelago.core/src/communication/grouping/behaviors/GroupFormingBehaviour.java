@@ -4,14 +4,12 @@ import communication.messaging.MessageFacade;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
 import privacy.math.RandomGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Created by alex on 4/23/15.
@@ -42,7 +40,7 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
                 )
                 .collect(Collectors.toList());
 
-        _messageFacade.publishAggregationGroup(group);
+        _messageFacade.publishAggregationGroup(group, Integer.toString(_iteration));
         _iteration++;
 
         if(_iteration == _configuration.iterations) {
