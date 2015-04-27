@@ -45,6 +45,7 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
 
         if(_iteration == _configuration.iterations) {
             _groupAgent.removeBehaviour(this);
+            _messageFacade.sendCompletionMessage(_groupAgent.getAID());
         }
     }
 

@@ -51,7 +51,9 @@ public class ExperimentFactoryTest {
         double testCost = 0.1;
         int iterations = 10;
         double regularization = 1.0;
-        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, 0.0, trainRatio, peerCount, testCost, _parameters, _updateCost, regularization);
+        int groupSize = 3;
+
+        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, 0.0, trainRatio, peerCount, testCost, _parameters, _updateCost, regularization, groupSize);
 
         Experiment experiment = _experimentFactory.getExperiment(samples, configuration);
 
@@ -62,6 +64,7 @@ public class ExperimentFactoryTest {
         assertEquals(iterations, experiment.getConfiguration().iterations);
         assertEquals(_updateCost, experiment.getConfiguration().updateCost, 0.0001d);
         assertEquals(regularization, experiment.getConfiguration().regularization, 0.0001d);
+        assertEquals(groupSize, experiment.getConfiguration().groupSize);
     }
 
 }

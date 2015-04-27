@@ -6,8 +6,6 @@ import communication.messaging.Message;
 import communication.messaging.MessageFacade;
 import communication.peer.ArchipelagoPerformatives;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 
 /**
  * Created by alex on 3/9/15.
@@ -25,7 +23,6 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
         _peerAgent = peerAgent;
         _messageFacade = messageFacade;
         _behaviourFactory = behaviourFactory;
-        _iteration = 0;
     }
 
     @Override
@@ -34,7 +31,7 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
             _peerAgent.addBehaviour(_behaviourFactory.getModelAggregation(_peerAgent, _messageFacade));
         }
         if (_iteration == _peerAgent.getIterations() - 1){
-            _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade));
+//            _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade)); TODO: What is the correct way to propegate?
         }
 
         _iteration++;

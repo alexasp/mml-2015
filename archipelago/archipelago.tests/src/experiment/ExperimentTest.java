@@ -50,6 +50,7 @@ public class ExperimentTest {
     private double _updateCost = 0.1;
     private PeerGraph _peerGraph;
     private double _regularization = 1.0;
+    private int _groupSize = 1;
 
     @Before
     public void setUp(){
@@ -60,7 +61,7 @@ public class ExperimentTest {
         _dataLoader = mock(DataLoader.class);
         _peerGraph = mock(PeerGraph.class);
 
-        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters, _updateCost, _regularization);
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters, _updateCost, _regularization, _groupSize);
 
         _train = mock(List.class);
         _test = mock(List.class);
@@ -71,7 +72,7 @@ public class ExperimentTest {
     @Test
     public void construct_CreatesCorrectPeerCountAndGivesIterations() throws StaleProxyException {
         int peerCount = 3;
-        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters, _updateCost, _regularization);
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters, _updateCost, _regularization, _groupSize);
 
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 

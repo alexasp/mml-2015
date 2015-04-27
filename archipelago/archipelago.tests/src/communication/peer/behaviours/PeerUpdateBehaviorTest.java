@@ -60,19 +60,6 @@ public class PeerUpdateBehaviorTest {
         verify(_peerAgent).addModel(_model);
     }
 
-
-    @Test
-    public void action_NewMessageFinalIteration_AddsCompletionBehaviourOnlyOnce() {
-        fakeMessage(_model);
-
-        _updateBehavior.action();
-        verify(_peerAgent, never()).addBehaviour(_completionBehavior);
-        _updateBehavior.action();
-        verify(_peerAgent, times(1)).addBehaviour(_completionBehavior);
-        _updateBehavior.action();
-        verify(_peerAgent, times(1)).addBehaviour(_completionBehavior);
-    }
-
     @Test
     public void action_IterationsNotFinished_AddsModelAggregationBehavior(){
         _updateBehavior.action();

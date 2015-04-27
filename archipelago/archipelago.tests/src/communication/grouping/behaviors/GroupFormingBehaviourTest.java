@@ -8,7 +8,11 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import privacy.math.RandomGenerator;
 
 import java.util.List;
@@ -19,8 +23,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.*;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(Agent.class)
 public class GroupFormingBehaviourTest {
-
 
     private GroupFormingBehaviour _behaviour;
     private MessageFacade _messageFacade;
@@ -32,7 +37,8 @@ public class GroupFormingBehaviourTest {
 
     @Before
     public void setUp() {
-        _groupAgent = mock(Agent.class);
+        _groupAgent = PowerMockito.mock(Agent.class);
+        when(_groupAgent.getAID()).thenReturn(mock(AID.class));
 
         _agents = IntStream.range(0, _agentCount).mapToObj(i -> mock(AID.class)).collect(Collectors.toList());
 
@@ -88,6 +94,19 @@ public class GroupFormingBehaviourTest {
         _behaviour.action();
 
         verify(_groupAgent).removeBehaviour(_behaviour);
+    }
+
+    @Test
+    public void action_FinishedIterations_NotifiesCompletionListeningAgent(){
+        int first = 4, second = 2, third = 7;
+        when(_randomGenerator.uniform(0, _agentCount))
+                .thenReturn(first).thenReturn(second).thenReturn(third)
+                .thenReturn(first).thenReturn(second).thenReturn(third);
+
+        _behaviour.action();
+        _behaviour.action();
+
+        verify(_messageFacade).sendCompletionMessage(_groupAgent.getAID());
     }
 
 

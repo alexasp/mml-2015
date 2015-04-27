@@ -42,4 +42,5 @@ public class GroupLocatorAgentTest {
         verify(_behaviorFactory).getGroupFormingBehaviour(_agent, _agents, _configuration, _messageFacade);
     }
 
+
 }
