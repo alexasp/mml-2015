@@ -7,6 +7,8 @@ import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import experiment.DataLoader;
 import experiment.Experiment;
+import experiment.ExperimentConfiguration;
+import jade.core.AID;
 import javafx.scene.control.Labeled;
 import learning.EnsembleModel;
 import learning.IQueryable;
@@ -52,5 +54,9 @@ public class AgentFactory {
 
     public CompletionListeningAgent getCompletionAgent(Consumer<Experiment> completionAction, int totalPeerCount, Experiment experiment) {
         return new CompletionListeningAgent(completionAction, totalPeerCount, _behaviourFactory, _messageFacadeFactory, experiment);
+    }
+
+    public GroupLocatorAgent getGroupLocatingAgent(List<AID> agents, ExperimentConfiguration configuration) {
+        return new GroupLocatorAgent(agents, _behaviourFactory, configuration, _messageFacadeFactory);
     }
 }

@@ -5,6 +5,7 @@ import communication.PeerAgent;
 import communication.messaging.PeerGraph;
 import communication.peer.AgentFactory;
 import communication.peer.CompletionListeningAgent;
+import communication.peer.GroupLocatorAgent;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
@@ -18,9 +19,7 @@ import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.same;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,6 +50,7 @@ public class ExperimentTest {
     private PeerGraph _peerGraph;
     private double _regularization = 1.0;
     private int _groupSize = 1;
+    private GroupLocatorAgent _groupAgent;
 
     @Before
     public void setUp(){
@@ -113,13 +113,15 @@ public class ExperimentTest {
 
 
     @Test
-    public void run_RunsEnvironmentAndRegistersCompletionAgent() throws ControllerException {
+    public void run_RunsEnvironmentAndRegistersCompletionAndGroupLocatingAgent() throws ControllerException {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_agentFactory.createPeers(_train, _peerCount, iterations, _budget, _parameters, _updateCost)).thenReturn(Arrays.asList(agent1, agent2));
         Consumer<Experiment> completionListener = mock(Consumer.class);
         CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
+        GroupLocatorAgent groupAgent = mock(GroupLocatorAgent.class);
         when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class))).thenReturn(completionAgent);
+        when(_agentFactory.getGroupLocatingAgent(anyList(), same(_configuration))).thenReturn(groupAgent);
 
         Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
         experiment.run(completionListener);

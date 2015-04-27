@@ -3,6 +3,7 @@ package communication.peer;
 import communication.BehaviourFactory;
 import communication.grouping.behaviors.GroupFormingBehaviour;
 import communication.messaging.MessageFacade;
+import communication.messaging.MessageFacadeFactory;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import org.junit.Before;
@@ -23,18 +24,21 @@ public class GroupLocatorAgentTest {
     private BehaviourFactory _behaviorFactory;
     private ExperimentConfiguration _configuration;
     private List<AID> _agents;
+    private MessageFacadeFactory _messageFacadeFactory;
     private MessageFacade _messageFacade;
 
     @Before
     public void setUp() {
         _messageFacade = mock(MessageFacade.class);
+        _messageFacadeFactory = mock(MessageFacadeFactory.class);
+        when(_messageFacadeFactory.getFacade(any(GroupLocatorAgent.class))).thenReturn(_messageFacade);
         _configuration = mock(ExperimentConfiguration.class);
         _behaviorFactory = mock(BehaviourFactory.class);
         _agents = mock(List.class);
         when(_behaviorFactory.getGroupFormingBehaviour(any(GroupLocatorAgent.class), same(_agents), same(_configuration), same(_messageFacade)))
                 .thenReturn(mock(GroupFormingBehaviour.class));
 
-        _agent = new GroupLocatorAgent(_agents, _behaviorFactory, _configuration, _messageFacade);
+        _agent = new GroupLocatorAgent(_agents, _behaviorFactory, _configuration, _messageFacadeFactory);
     }
 
     @Test

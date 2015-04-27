@@ -50,12 +50,7 @@ public class CompletionListeningAgentTest {
     }
 
     @Test
-    public void allPeersCompleted_RunsAction(){
-        for(int i = 0; i < _totalPeerCount - 1; i++) {
-            _completionListeningAgent.anAgentCompleted();
-            verify(_completionAction, never()).accept(any(Experiment.class));
-        }
-
+    public void onePeerCompleted_RunsAction(){
         _completionListeningAgent.anAgentCompleted();
 
         verify(_completionAction).accept(any(Experiment.class));

@@ -60,7 +60,7 @@ public class Experiment {
         CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this);
         _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
         _environment.registerAgent(completionAgent);
-        _environment.run();
+//        _environment.run();
     }
 
     public List<Double> test() {
