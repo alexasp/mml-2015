@@ -1,10 +1,12 @@
 package application.experiments;
 
 import application.AppInjector;
+import application.ConfigurationModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import experiment.DataLoader;
 import experiment.Experiment;
+import experiment.ExperimentConfiguration;
 import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
 import learning.LabeledSample;
@@ -21,6 +23,7 @@ public class SpamTest {
     public static void main(String[] args) throws ControllerException {
         Injector injector = Guice.createInjector(new AppInjector());
 
+
         DataLoader loader = injector.getInstance(DataLoader.class);
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
 
@@ -32,8 +35,13 @@ public class SpamTest {
         double testCost = 0.1;
         int iterations = 1;
         double regularization = 1.0;
+        double budget = 1.0;
+        int parameters = data.get(0).getFeatures().length;
+        double updateCost = 0.01;
 
-        Experiment experiment = experimentFactory.getExperiment(data, trainRatio, peerCount, testCost, iterations, 2.0, data.get(0).getFeatures().length, 0.01, regularization);
+        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, updateCost, regularization);
+        injector.createChildInjector(new ConfigurationModule(configuration));
+        Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
         experiment.run(completeExperiment -> System.out.println(completeExperiment.test()));
     }
