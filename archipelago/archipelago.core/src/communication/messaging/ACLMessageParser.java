@@ -62,10 +62,29 @@ public class ACLMessageParser {
     }
 
     public ACLMessage createGroupMessage(List<AID> group) {
-        throw new UnsupportedOperationException();
+        ACLMessage message = new ACLMessage(ArchipelagoPerformatives.GroupFormation.ordinal());
+        for (AID aid : group) {
+            message.addReceiver(aid);
+        }
+        message.setContent(serializeGroup(group));
+        return message;
+    }
+
+    private String serializeGroup(List<AID> group) {
+        throw new UnsupportedClassVersionError();
     }
 
     public GroupMessage parseGroupMessage(ACLMessage message) {
+        List<AID> agents = deserializeGroup(message.getContent());
+        String conversationId = deserializeId(message.getContent());
+        return new GroupMessage(agents, conversationId);
+    }
+
+    private String deserializeId(String content) {
+        throw new UnsupportedOperationException();
+    }
+
+    private List<AID> deserializeGroup(String content) {
         throw new UnsupportedOperationException();
     }
 }

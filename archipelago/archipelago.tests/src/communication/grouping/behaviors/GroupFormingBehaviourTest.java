@@ -66,7 +66,7 @@ public class GroupFormingBehaviourTest {
                 .thenReturn(first).thenReturn(second).thenReturn(third);
 
         _behaviour.action();
-        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
+z        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
         _behaviour.action();
         verify(_messageFacade, times(2)).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
     }
