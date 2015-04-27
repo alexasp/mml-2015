@@ -1,10 +1,9 @@
 package communication.peer.behaviours;
 
 import communication.messaging.MessageFacade;
+import communication.peer.ArchipelagoPerformatives;
 import communication.peer.CompletionListeningAgent;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 
 /**
  * Created by aspis on 26.03.2015.
@@ -12,7 +11,7 @@ import jade.lang.acl.MessageTemplate;
 public class CompletionListeningBehavior extends CyclicBehaviour {
     private CompletionListeningAgent _agent;
     private MessageFacade _messageFacade;
-    public static final int Performative = ACLMessage.INFORM;
+    public static final ArchipelagoPerformatives Performative = ArchipelagoPerformatives.IterationsCompleted;
 
     public CompletionListeningBehavior(CompletionListeningAgent agent, MessageFacade messageFacade) {
         _agent = agent;

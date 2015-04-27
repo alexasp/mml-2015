@@ -33,8 +33,8 @@ public class CompletionListeningAgent extends Agent {
     public void anAgentCompleted() {
         _completedPeers++;
 
-        if(_completedPeers == _totalPeerCount){
+//        if(_completedPeers == _totalPeerCount){
             _completionAction.accept(_experiment);
-        }
+//        }
     }
 }

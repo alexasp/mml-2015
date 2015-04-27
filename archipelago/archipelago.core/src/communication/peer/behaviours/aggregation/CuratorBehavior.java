@@ -3,7 +3,7 @@ package communication.peer.behaviours.aggregation;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -43,8 +43,8 @@ public class CuratorBehavior extends CyclicBehaviour{
     @Override
     public void action() {
 
-        if(_messageFacade.hasMessage(AggregationPerformative.ModelContribution.ordinal())) {
-            Message message = _messageFacade.nextMessage(AggregationPerformative.ModelContribution.ordinal());
+        if(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution)) {
+            Message message = _messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution);
             _models.add(message.getModel());
             int dataSetSize = Integer.parseInt(message.getContent());
             if(dataSetSize < _smallestSet){ _smallestSet = dataSetSize; }
@@ -65,7 +65,7 @@ public class CuratorBehavior extends CyclicBehaviour{
 
     private void publishModel(ParametricModel mergedModel) {
         for (AID agentId : _parties) {
-            _messageFacade.sendToPeer(agentId, mergedModel, AggregationPerformative.AggregatedResult, _conversationId);
+            _messageFacade.sendToPeer(agentId, mergedModel, ArchipelagoPerformatives.AggregatedResult, _conversationId);
         }
     }
 }

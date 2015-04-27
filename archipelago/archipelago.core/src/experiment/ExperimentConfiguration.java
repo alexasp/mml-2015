@@ -13,8 +13,9 @@ public class ExperimentConfiguration {
     public int parameters;
     public double updateCost;
     public double regularization;
+    public int groupSize;
 
-    public ExperimentConfiguration(int iterations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double updateCost, double regularization) {
+    public ExperimentConfiguration(int iterations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double updateCost, double regularization, int groupSize) {
         this.iterations = iterations;
         this.budget = budget;
         this.trainRatio = trainRatio;
@@ -23,5 +24,6 @@ public class ExperimentConfiguration {
         this.parameters = parameters;
         this.updateCost = updateCost;
         this.regularization = regularization;
+        this.groupSize = groupSize;
     }
 }

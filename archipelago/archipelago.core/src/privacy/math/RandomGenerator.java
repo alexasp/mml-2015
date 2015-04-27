@@ -29,6 +29,9 @@ public class RandomGenerator {
         return distribution.sample();
     }
 
+    /**
+     * Returns a number in range [lower, upper], both inclusive.
+     */
     public int uniform(int lower, int upper){
         UniformIntegerDistribution distribution = new UniformIntegerDistribution(lower, upper);
         return distribution.sample();

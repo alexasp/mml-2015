@@ -4,7 +4,7 @@ import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.GroupMessage;
 import communication.messaging.MessageFacade;
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import communication.peer.behaviours.ModelAggregationBehavior;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -90,9 +90,9 @@ public class ModelAggregationBehaviorTest {
     }
 
     private void setUpGroupConfirmationMessage(List<AID> agents) {
-        when(_messageFacade.hasMessage(AggregationPerformative.GroupFormation.ordinal())).thenReturn(true);
+        when(_messageFacade.hasMessage(ArchipelagoPerformatives.GroupFormation)).thenReturn(true);
         GroupMessage message = new GroupMessage(agents, _conversationId);
-        when(_messageFacade.nextGroupMessage()).thenReturn(message);
+        when(_messageFacade.nextAggregationGroupMessage()).thenReturn(message);
     }
 
 }

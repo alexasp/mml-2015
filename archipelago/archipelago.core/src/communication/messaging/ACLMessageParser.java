@@ -2,7 +2,7 @@ package communication.messaging;
 
 import com.google.inject.Inject;
 import communication.messaging.jade.ACLMessageReader;
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import communication.peer.behaviours.CompletionListeningBehavior;
 import communication.peer.behaviours.PeerUpdateBehavior;
 import jade.content.onto.OntologyException;
@@ -10,6 +10,8 @@ import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import learning.ParametricModel;
 import learning.ModelFactory;
+
+import java.util.List;
 
 /**
  * Created by alex on 3/23/15.
@@ -39,8 +41,8 @@ public class ACLMessageParser {
         }
     }
 
-    public ACLMessage createModelMessage(ParametricModel model, AID agent, AggregationPerformative performative) {
-        ACLMessage message = new ACLMessage(PeerUpdateBehavior.Performative);
+    public ACLMessage createModelMessage(ParametricModel model, AID agent, ArchipelagoPerformatives performative) {
+        ACLMessage message = new ACLMessage(PeerUpdateBehavior.Performative.ordinal());
         message.setContent(model.serialize());
         message.setOntology(Ontologies.Model.name());
         message.addReceiver(agent);
@@ -49,7 +51,7 @@ public class ACLMessageParser {
     }
 
     public ACLMessage createCompletionMessage(AID agent1) {
-        ACLMessage message = new ACLMessage(CompletionListeningBehavior.Performative);
+        ACLMessage message = new ACLMessage(CompletionListeningBehavior.Performative.ordinal());
         message.setOntology(Ontologies.Message.name());
         message.setContent(agent1.toString());
         return message;
@@ -57,5 +59,13 @@ public class ACLMessageParser {
 
     public ACLMessage createModelMessage(ParametricModel model, AID agent2) {
         return createModelMessage(model, agent2, null);
+    }
+
+    public ACLMessage createGroupMessage(List<AID> group) {
+        throw new UnsupportedOperationException();
+    }
+
+    public GroupMessage parseGroupMessage(ACLMessage message) {
+        throw new UnsupportedOperationException();
     }
 }

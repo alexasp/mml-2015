@@ -1,5 +1,7 @@
 package learning;
 
+import com.google.inject.Inject;
+
 import java.util.List;
 
 /**
@@ -9,6 +11,7 @@ public class ModelMerger {
 
     private final ModelFactory _modelFactory;
 
+    @Inject
     public ModelMerger(ModelFactory modelFactory){
         _modelFactory = modelFactory;
     }

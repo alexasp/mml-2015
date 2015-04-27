@@ -37,5 +37,17 @@ public class DataLoaderTest {
         assertEquals(2, partitions.get(2).size());
     }
 
+    @Test
+    public void partition_SinglePartition_ReturnsData(){
+        List<LabeledSample> samples = IntStream.range(0, 10)
+                .mapToObj(i -> mock(LabeledSample.class))
+                .collect(Collectors.toList());
+
+        List<List<LabeledSample>> partitioned = _dataLoader.partition(1, samples);
+
+        assertEquals(samples, partitioned.get(0));
+        assertEquals(1, partitioned.size());
+    }
+
 
 }

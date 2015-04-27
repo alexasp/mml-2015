@@ -1,6 +1,6 @@
 package communication.messaging;
 
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.Agent;
@@ -29,15 +29,15 @@ public class MessageFacade {
         _randomGenerator = randomGenerator;
     }
 
-    public boolean hasMessage(int performative) {
-        return hasMessage(MessageTemplate.MatchPerformative(performative));
+    public boolean hasMessage(ArchipelagoPerformatives performative) {
+        return hasMessage(MessageTemplate.MatchPerformative(performative.ordinal()));
     }
 
     public boolean hasMessage(int performative, AID sender) {
         return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative), MessageTemplate.MatchSender(sender)));
     }
 
-    public boolean hasMessage(int performative, AID sender, String conversationId) {
+    public boolean hasMessage(ArchipelagoPerformatives performative, AID sender, String conversationId) {
         return false;
     }
 
@@ -49,17 +49,14 @@ public class MessageFacade {
         return _nextMessage != null;
     }
 
-    public Message nextMessage(int performative, AID sender, String conversationId) {
+    public Message nextMessage(ArchipelagoPerformatives performative, AID sender, String conversationId) {
         return nextMessage(MessageTemplate.and(
                 MessageTemplate.and(MessageTemplate.MatchSender(sender), MessageTemplate.MatchConversationId(conversationId)),
-                MessageTemplate.MatchPerformative(performative)));
-    }
-    public Message nextMessage(int performative, AID sender) {
-        return nextMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative), MessageTemplate.MatchSender(sender)));
+                MessageTemplate.MatchPerformative(performative.ordinal())));
     }
 
-    public Message nextMessage(int performative) {
-        return nextMessage(MessageTemplate.MatchPerformative(performative));
+    public Message nextMessage(ArchipelagoPerformatives performative) {
+        return nextMessage(MessageTemplate.MatchPerformative(performative.ordinal()));
     }
 
     public Message nextMessage(MessageTemplate template){
@@ -99,15 +96,24 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void requestAggregationGroup() {
-        throw new UnsupportedOperationException();
+    public void publishAggregationGroup(List<AID> group, String eq) {
+        ACLMessage message = _messageParser.createGroupMessage(group);
+        for (AID aid : group) {
+            message.addReceiver(aid);
+        }
+        _agent.send(message);
     }
 
-    public GroupMessage nextGroupMessage() {
-        throw new UnsupportedOperationException();
+    public GroupMessage nextAggregationGroupMessage() {
+        if(!hasMessage(ArchipelagoPerformatives.GroupFormation)) {
+            throw new IllegalStateException("Requested a group message when it is not available.");
+        }
+
+        ACLMessage aclMessage = _agent.receive(MessageTemplate.MatchPerformative(ArchipelagoPerformatives.GroupFormation.ordinal()));
+        return _messageParser.parseGroupMessage(aclMessage);
     }
 
-    public void sendToPeer(AID receiver, ParametricModel model, AggregationPerformative performative, String conversationId) {
+    public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative, String conversationId) {
         ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
         message.addReceiver(receiver);
         message.setConversationId(conversationId);
@@ -115,16 +121,11 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void sendToPeer(AID receiver, ParametricModel model, AggregationPerformative performative) {
+    public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative) {
         ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
         message.addReceiver(receiver);
 
         _agent.send(message);
-    }
-
-
-    public AID nextGroupRequestMessage() {
-        throw new UnsupportedOperationException();
     }
 
 

@@ -3,7 +3,7 @@ package communication.peer.behaviours.aggregation;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
-import communication.peer.AggregationPerformative;
+import communication.peer.ArchipelagoPerformatives;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 
@@ -28,13 +28,13 @@ public class ContributorBehavior extends CyclicBehaviour{
     @Override
     public void action() {
 
-        if (_messageFacade.hasMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator, _conversationId)) {
-            Message message = _messageFacade.nextMessage(AggregationPerformative.AggregatedResult.ordinal(), _curator, _conversationId);
+        if (_messageFacade.hasMessage(ArchipelagoPerformatives.AggregatedResult, _curator, _conversationId)) {
+            Message message = _messageFacade.nextMessage(ArchipelagoPerformatives.AggregatedResult, _curator, _conversationId);
             _peerAgent.addModel(message.getModel());
             _peerAgent.removeBehaviour(this);
         }
         else if (!modelSent) {
-            _messageFacade.sendToPeer(_curator, _peerAgent.getLocalModel(), AggregationPerformative.ModelContribution, _conversationId);
+            _messageFacade.sendToPeer(_curator, _peerAgent.getLocalModel(), ArchipelagoPerformatives.ModelContribution, _conversationId);
             modelSent = true;
         }
 
