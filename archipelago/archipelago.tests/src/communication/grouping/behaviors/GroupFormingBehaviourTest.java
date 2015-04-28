@@ -96,18 +96,6 @@ public class GroupFormingBehaviourTest {
         verify(_groupAgent).removeBehaviour(_behaviour);
     }
 
-    @Test
-    public void action_FinishedIterations_NotifiesCompletionListeningAgent(){
-        int first = 4, second = 2, third = 7;
-        when(_randomGenerator.uniform(0, _agentCount))
-                .thenReturn(first).thenReturn(second).thenReturn(third)
-                .thenReturn(first).thenReturn(second).thenReturn(third);
-
-        _behaviour.action();
-        _behaviour.action();
-
-        verify(_messageFacade).sendCompletionMessage(_groupAgent.getAID());
-    }
 
 
     private class MatchesAgentSubset extends ArgumentMatcher<List<AID>> {

@@ -14,13 +14,16 @@ public class LogisticModel implements ParametricModel {
 
     private static final java.lang.String DELIMITER = ",";
     private double[] _parameters;
+    private double _regularization;
 
-    public LogisticModel(double[] parameters) {
+    public LogisticModel(double[] parameters, double regularization) {
         _parameters = parameters;
+        _regularization = regularization;
     }
 
-    public LogisticModel(String serializedModel) {
+    public LogisticModel(String serializedModel, double regularization) {
         deserialize(serializedModel);
+        _regularization = regularization;
     }
 
 
@@ -97,7 +100,7 @@ public class LogisticModel implements ParametricModel {
     @Override
     public double label(double[] features) {
         double sigmoidValue = sigmoid(features, _parameters);
-        return Math.round(sigmoidValue)*2.0 - 1.0;
+        return Math.round(sigmoidValue);
     }
 
     public double[] getParameters() {

@@ -62,7 +62,7 @@ public class ExperimentFactoryTest {
         assertEquals(peerCount, experiment.getConfiguration().peerCount);
         assertEquals(testCost, experiment.getConfiguration().testCost, 0.0001d);
         assertEquals(iterations, experiment.getConfiguration().iterations);
-        assertEquals(_updateCost, experiment.getConfiguration().updateCost, 0.0001d);
+        assertEquals(_updateCost, experiment.getConfiguration().epsilon, 0.0001d);
         assertEquals(regularization, experiment.getConfiguration().regularization, 0.0001d);
         assertEquals(groupSize, experiment.getConfiguration().groupSize);
     }

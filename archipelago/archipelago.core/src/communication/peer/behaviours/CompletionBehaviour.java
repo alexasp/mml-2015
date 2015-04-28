@@ -8,18 +8,18 @@ import jade.core.behaviours.OneShotBehaviour;
  * Created by Alexander on 3/30/2015.
  */
 public class CompletionBehaviour extends OneShotBehaviour{
-    private final PeerAgent _peerAgent;
+    private String _conversationId;
     private final MessageFacade _messageFacade;
 
-    public CompletionBehaviour(PeerAgent peerAgent, MessageFacade messageFacade) {
-        _peerAgent = peerAgent;
+    public CompletionBehaviour(String conversationId, MessageFacade messageFacade) {
+        _conversationId = conversationId;
 
         _messageFacade = messageFacade;
     }
 
     @Override
     public void action() {
-        _messageFacade.sendCompletionMessage(_peerAgent.getAID());
-        System.out.println("FINISH!"  + _peerAgent.getAID() + " " + _peerAgent.getModels().get(0).serialize());
+        _messageFacade.sendCompletionMessage(_conversationId);
+        System.out.println("FINISH!"  + _conversationId + " ");
     }
 }

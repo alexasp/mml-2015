@@ -29,16 +29,16 @@ public class SpamTest {
         Collections.shuffle(data);
 
         double trainRatio = 0.08;
-        int peerCount = 10;
-        int groupSize = 3;
+        int peerCount = 50;
+        int groupSize = 5;
         double testCost = 0.1;
-        int iterations = 10;
+        int iterations = 100;
         double regularization = 1.0;
         double budget = 1.0;
         int parameters = data.get(0).getFeatures().length;
-        double updateCost = 0.01;
+        double epsilon = 0.1;
 
-        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, updateCost, regularization, groupSize);
+        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
         injector = injector.createChildInjector(new ConfigurationModule(configuration));
 
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
