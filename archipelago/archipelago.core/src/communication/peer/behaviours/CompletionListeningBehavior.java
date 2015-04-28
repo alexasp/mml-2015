@@ -22,7 +22,7 @@ public class CompletionListeningBehavior extends CyclicBehaviour {
     public void action() {
         if(_messageFacade.hasMessage(Performative)){
             _messageFacade.nextMessage(Performative);
-            _agent.anAgentCompleted();
+//            _agent.anAgentCompleted();
         }
         else{
             block();
