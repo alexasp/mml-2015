@@ -31,6 +31,7 @@ public class ACLMessageParserTest {
     private LogisticModelFactory _Logistic_modelFactory;
 
     private LogisticModel _model;
+    private String _conversationId = "id";
 
     @Before
     public void setUp(){
@@ -104,7 +105,7 @@ public class ACLMessageParserTest {
     public void createGroupMessage_SetsOntology() {
         List<AID> group = Arrays.asList(mock(AID.class), mock(AID.class));
 
-        ACLMessage message = _parser.createGroupMessage(group);
+        ACLMessage message = _parser.createGroupMessage(group, _conversationId);
 
         assertEquals(Ontologies.Grouping.name(), message.getOntology());
     }

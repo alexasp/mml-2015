@@ -11,13 +11,17 @@ import jade.lang.acl.ACLMessage;
 import learning.ParametricModel;
 import learning.ModelFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Created by alex on 3/23/15.
  */
 public class ACLMessageParser {
 
+    private static final java.lang.String DELIMITER = ","   ;
     private final ACLMessageReader _reader;
     private final ModelFactory _modelFactory;
 
@@ -61,17 +65,20 @@ public class ACLMessageParser {
         return createModelMessage(model, agent2, null);
     }
 
-    public ACLMessage createGroupMessage(List<AID> group) {
+    public ACLMessage createGroupMessage(List<AID> group, String conversationId) {
         ACLMessage message = new ACLMessage(ArchipelagoPerformatives.GroupFormation.ordinal());
+        message.setOntology(Ontologies.Grouping.name());
         for (AID aid : group) {
             message.addReceiver(aid);
         }
-        message.setContent(serializeGroup(group));
+        message.setContent(conversationId + DELIMITER + serializeGroup(group));
         return message;
     }
 
     private String serializeGroup(List<AID> group) {
-        throw new UnsupportedClassVersionError();
+        return group.stream()
+                .map(aid -> aid.toString())
+                .collect(Collectors.joining(","));
     }
 
     public GroupMessage parseGroupMessage(ACLMessage message) {
@@ -81,10 +88,15 @@ public class ACLMessageParser {
     }
 
     private String deserializeId(String content) {
-        throw new UnsupportedOperationException();
+        return content.split(DELIMITER)[0];
     }
 
     private List<AID> deserializeGroup(String content) {
-        throw new UnsupportedOperationException();
+        ArrayList<AID> group = new ArrayList<AID>();
+        String[] splitLine = content.split(DELIMITER);
+        for (int i = 1; i < splitLine.length; i++) {
+            group.add(new AID(splitLine[i], false));
+        }
+        return group;
     }
 }

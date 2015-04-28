@@ -96,8 +96,8 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void publishAggregationGroup(List<AID> group, String eq) {
-        ACLMessage message = _messageParser.createGroupMessage(group);
+    public void publishAggregationGroup(List<AID> group, String conversationId) {
+        ACLMessage message = _messageParser.createGroupMessage(group, conversationId);
         for (AID aid : group) {
             message.addReceiver(aid);
         }
