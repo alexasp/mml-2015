@@ -66,11 +66,5 @@ public class ModelCreationBehaviorTest {
         verify(_agent).setLocalModel(_model);
     }
 
-    @Test
-    public void action_addsPropegateBehavior() {
-        _creationBehaviour.action();
-
-        verify(_agent).addBehaviour(_propegateBehavior);
-    }
 
 }

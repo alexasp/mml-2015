@@ -6,9 +6,13 @@ import communication.messaging.MessageFacade;
 import communication.peer.ArchipelagoPerformatives;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
+import learning.LabeledSample;
 import learning.ParametricModel;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -21,12 +25,15 @@ public class ContributorBehaviorTest {
     private PeerAgent _peerAgent;
     private ParametricModel _model;
     private String _conversationId;
+    private List<LabeledSample> _data;
 
     @Before
     public void setUp() {
         _curator = mock(AID.class);
         _messageFacade = mock(MessageFacade.class);
         _peerAgent = mock(PeerAgent.class);
+        _data = Arrays.asList(mock(LabeledSample.class), mock(LabeledSample.class));
+        when(_peerAgent.getData()).thenReturn(_data);
         _model = mock(ParametricModel.class);
         when(_peerAgent.getLocalModel()).thenReturn(_model);
         _contributorBehavior = new ContributorBehavior(_peerAgent, _curator, _conversationId, _messageFacade);
@@ -43,10 +50,10 @@ public class ContributorBehaviorTest {
     public void action_SendsLocalModelToCuratorOnlyOnce() {
         _contributorBehavior.action();
 
-        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, ArchipelagoPerformatives.ModelContribution, _conversationId);
+        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, ArchipelagoPerformatives.ModelContribution, _conversationId, _data.size());
 
         _contributorBehavior.action();
-        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, ArchipelagoPerformatives.ModelContribution, _conversationId);
+        verify(_messageFacade, times(1)).sendToPeer(_curator, _model, ArchipelagoPerformatives.ModelContribution, _conversationId, _data.size());
     }
 
     @Test

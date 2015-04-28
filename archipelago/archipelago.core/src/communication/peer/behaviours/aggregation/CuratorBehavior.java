@@ -43,10 +43,10 @@ public class CuratorBehavior extends CyclicBehaviour{
     @Override
     public void action() {
 
-        if(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution)) {
-            Message message = _messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution);
+        if(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)) {
+            Message message = _messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId);
             _models.add(message.getModel());
-            int dataSetSize = Integer.parseInt(message.getContent());
+            int dataSetSize = message.getDatasetSize();
             if(dataSetSize < _smallestSet){ _smallestSet = dataSetSize; }
 
             if(_models.size() >= _parties.size()){
@@ -54,6 +54,7 @@ public class CuratorBehavior extends CyclicBehaviour{
                 double beta = 2.0/(_smallestSet*_peerAgent.getEpsilon()*_configuration.regularization);
                 mergedModel.addTerm(_randomGenerator.fromLaplacian(beta, message.getModel().getParameters().length));
                 publishModel(mergedModel);
+                _messageFacade.sendCompletionMessage(_conversationId);
                 _peerAgent.removeBehaviour(this);
             }
         }

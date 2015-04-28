@@ -20,10 +20,12 @@ public class CompletionListeningAgent extends Agent {
     private final MessageFacade _messageFacade;
     private int _completedPeers = 0;
     private Experiment _experiment;
+    private int _iterations;
 
-    public CompletionListeningAgent(Consumer<Experiment> completionAction, int totalPeerCount, BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, Experiment experiment) {
+    public CompletionListeningAgent(Consumer<Experiment> completionAction, int totalPeerCount, BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, Experiment experiment, int iterations) {
         _completionAction = completionAction;
         _totalPeerCount = totalPeerCount;
+        _iterations = iterations;
         _messageFacade = messageFacadeFactory.getFacade(this);
         _experiment = experiment;
 
@@ -33,8 +35,8 @@ public class CompletionListeningAgent extends Agent {
     public void anAgentCompleted() {
         _completedPeers++;
 
-//        if(_completedPeers == _totalPeerCount){
+        if(_completedPeers == _iterations){
             _completionAction.accept(_experiment);
-//        }
+        }
     }
 }

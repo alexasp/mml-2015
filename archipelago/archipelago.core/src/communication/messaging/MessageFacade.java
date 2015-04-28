@@ -19,7 +19,6 @@ public class MessageFacade {
     private ACLMessageParser _messageParser;
     private PeerGraph _peerGraph;
     private RandomGenerator _randomGenerator;
-    private ACLMessage _nextMessage;
 
 
     public MessageFacade(Agent agent, ACLMessageParser messageParser, PeerGraph peerGraph, RandomGenerator randomGenerator) {
@@ -38,15 +37,25 @@ public class MessageFacade {
     }
 
     public boolean hasMessage(ArchipelagoPerformatives performative, AID sender, String conversationId) {
-        return false;
+        return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()),
+                MessageTemplate.and(MessageTemplate.MatchSender(sender), MessageTemplate.MatchConversationId(conversationId))));
     }
 
 
-    private boolean hasMessage(MessageTemplate template){
-        if(_nextMessage != null) { return true; }
+    public Boolean hasMessage(ArchipelagoPerformatives performative, String conversationId) {
+        return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()), MessageTemplate.MatchConversationId(conversationId)));
+    }
 
-        _nextMessage = _agent.receive(template);
-        return _nextMessage != null;
+
+    private boolean hasMessage(MessageTemplate template) {
+        ACLMessage message = _agent.receive(template);
+
+        boolean hasMessage = message != null;
+        if(hasMessage) {
+            _agent.putBack(message);
+        }
+
+        return hasMessage;
     }
 
     public Message nextMessage(ArchipelagoPerformatives performative, AID sender, String conversationId) {
@@ -59,20 +68,20 @@ public class MessageFacade {
         return nextMessage(MessageTemplate.MatchPerformative(performative.ordinal()));
     }
 
+    public Message nextMessage(ArchipelagoPerformatives performative, String conversationId) {
+        return nextMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()), MessageTemplate.MatchConversationId(conversationId)));
+    }
+
     public Message nextMessage(MessageTemplate template){
         if(!hasMessage(template)){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
 
-        if(_nextMessage == null){
-            _nextMessage = _agent.receive();
-        }
-
+        ACLMessage message = _agent.receive(template);
         Message parsedMessage;
         try {
-            parsedMessage = _messageParser.parse(_nextMessage);
+            parsedMessage = _messageParser.parse(message);
         } catch (OntologyException e) {
             throw new RuntimeException("Error when parsing message");
         }
-        _nextMessage = null;
 
         return parsedMessage;
     }
@@ -89,15 +98,8 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void sendCompletionMessage(AID agent1) {
-        ACLMessage message = _messageParser.createCompletionMessage(agent1);
-        message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
-
-        _agent.send(message);
-    }
-
-    public void publishAggregationGroup(List<AID> group, String eq) {
-        ACLMessage message = _messageParser.createGroupMessage(group);
+    public void publishAggregationGroup(List<AID> group, String conversationId) {
+        ACLMessage message = _messageParser.createGroupMessage(group, conversationId);
         for (AID aid : group) {
             message.addReceiver(aid);
         }
@@ -113,6 +115,14 @@ public class MessageFacade {
         return _messageParser.parseGroupMessage(aclMessage);
     }
 
+    public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative, String conversationId, int datasetSize) {
+        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative, datasetSize);
+        message.addReceiver(receiver);
+        message.setConversationId(conversationId);
+
+        _agent.send(message);
+    }
+
     public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative, String conversationId) {
         ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
         message.addReceiver(receiver);
@@ -121,13 +131,16 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative) {
-        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
-        message.addReceiver(receiver);
+    public void sendCompletionMessage(AID agent1) {
+        ACLMessage message = _messageParser.createCompletionMessage(agent1);
+        message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
 
         _agent.send(message);
     }
 
+    public void sendCompletionMessage(String conversationId) {
+        ACLMessage message = _messageParser.createCompletionMessage(conversationId);
+        message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
 
-
+    }
 }

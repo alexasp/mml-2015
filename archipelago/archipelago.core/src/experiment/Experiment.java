@@ -58,7 +58,7 @@ public class Experiment {
     }
 
     public void run(Consumer<Experiment> completionAction) throws ControllerException {
-        CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this);
+        CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.iterations);
         GroupLocatorAgent groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
         _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
         _environment.registerAgent(completionAgent);

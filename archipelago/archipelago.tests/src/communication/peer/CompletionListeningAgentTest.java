@@ -3,13 +3,13 @@ package communication.peer;
 import communication.BehaviourFactory;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
-import communication.messaging.PeerGraph;
 import communication.peer.behaviours.CompletionListeningBehavior;
 import experiment.Experiment;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
@@ -28,6 +28,7 @@ public class CompletionListeningAgentTest {
     private MessageFacadeFactory _messageFacadeFactory;
     private MessageFacade _messageFacade;
     private jade.core.behaviours.Behaviour _completionListeningBehavior;
+    private int _iterations = 20;
 
     @Before
     public void setUp() {
@@ -41,7 +42,7 @@ public class CompletionListeningAgentTest {
         when(_behaviourFactory.getCompletionListening(any(CompletionListeningAgent.class), same(_messageFacade))).thenReturn(_completionListeningBehavior);
 
 
-        _completionListeningAgent = new CompletionListeningAgent(_completionAction, _totalPeerCount, _behaviourFactory, _messageFacadeFactory, _experiment);
+        _completionListeningAgent = new CompletionListeningAgent(_completionAction, _totalPeerCount, _behaviourFactory, _messageFacadeFactory, _experiment, _iterations);
     }
 
     @Test
@@ -50,7 +51,10 @@ public class CompletionListeningAgentTest {
     }
 
     @Test
-    public void onePeerCompleted_RunsAction(){
+    public void allIterationsCompleted_RunsAction(){
+
+        IntStream.iterate(0, i -> i+1).limit(_iterations-1).forEach(i -> _completionListeningAgent.anAgentCompleted());
+        verify(_completionAction, never()).accept(any(Experiment.class));
         _completionListeningAgent.anAgentCompleted();
 
         verify(_completionAction).accept(any(Experiment.class));

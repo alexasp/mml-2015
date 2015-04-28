@@ -81,13 +81,13 @@ public class CuratorBehaviorTest {
     private void setUpMessages() {
         setUpModels();
 
-        when(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(true);
+        when(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(true);
         _message1 = mock(Message.class);
         when(_message1.getModel()).thenReturn(_model1);
-        when(_message1.getContent()).thenReturn(String.valueOf(_dataLength1));
+        when(_message1.getDatasetSize()).thenReturn(_dataLength1);
         _message2 = mock(Message.class);
         when(_message2.getModel()).thenReturn(_model2);
-        when(_message2.getContent()).thenReturn(String.valueOf(_dataLength2));
+        when(_message2.getDatasetSize()).thenReturn(_dataLength2);
     }
 
     @Test
@@ -97,9 +97,9 @@ public class CuratorBehaviorTest {
 
     @Test
     public void action_AllParticipantsResponded_PublishesNoisyAveragedModel() {
-        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(_message1);
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(_message1);
         _curatorBehavior.action();
-        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(_message2);
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(_message2);
         _curatorBehavior.action();
 
         verify(_model3).addTerm(_noise);
@@ -110,13 +110,24 @@ public class CuratorBehaviorTest {
 
     @Test
     public void aciton_AllParticipantsResponded_RemovesBehavior(){
-        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution)).thenReturn(_message1);
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(_message1);
 
         _curatorBehavior.action();
         verify(_peerAgent, never()).removeBehaviour(any(Behaviour.class));
 
         _curatorBehavior.action();
         verify(_peerAgent).removeBehaviour(_curatorBehavior);
+    }
+
+    @Test
+    public void action_AllParticipantsResponded_SendsCompletionMessage(){
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(_message1);
+
+        _curatorBehavior.action();
+        verify(_messageFacade, never()).sendCompletionMessage(anyString());
+
+        _curatorBehavior.action();
+        verify(_messageFacade).sendCompletionMessage(_conversationId);
     }
 
 }

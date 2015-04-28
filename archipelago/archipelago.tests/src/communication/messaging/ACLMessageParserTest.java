@@ -14,7 +14,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,6 +30,7 @@ public class ACLMessageParserTest {
     private LogisticModelFactory _Logistic_modelFactory;
 
     private LogisticModel _model;
+    private String _conversationId = "id";
 
     @Before
     public void setUp(){
@@ -95,7 +95,7 @@ public class ACLMessageParserTest {
 
     @Test
     public void createModelMessage_PerformativeIsNull_BuildsMessageWithoutPerformative(){
-        ACLMessage message = _parser.createModelMessage(_model, mock(AID.class), null);
+        ACLMessage message = _parser.createModelMessage(_model, mock(AID.class), null, 0);
 
         assertNotNull(message);
     }
@@ -104,7 +104,7 @@ public class ACLMessageParserTest {
     public void createGroupMessage_SetsOntology() {
         List<AID> group = Arrays.asList(mock(AID.class), mock(AID.class));
 
-        ACLMessage message = _parser.createGroupMessage(group);
+        ACLMessage message = _parser.createGroupMessage(group, _conversationId);
 
         assertEquals(Ontologies.Grouping.name(), message.getOntology());
     }

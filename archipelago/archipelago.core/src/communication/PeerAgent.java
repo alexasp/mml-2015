@@ -34,6 +34,7 @@ public class PeerAgent extends Agent {
 
         addBehaviour(behaviourFactory.getModelCreation(this, parameters));
         addBehaviour(behaviourFactory.getPeerUpdate(this, _messageFacade));
+        addBehaviour(behaviourFactory.getModelAggregation(this, _messageFacade));
     }
 
     public void addModel(ParametricModel model) {

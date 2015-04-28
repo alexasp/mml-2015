@@ -24,7 +24,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,7 +33,7 @@ import static org.mockito.Mockito.when;
  * Created by alex on 3/23/15.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Agent.class)
+@PrepareForTest({Agent.class})
 public class MessageFacadeTest {
 
 
@@ -47,10 +46,11 @@ public class MessageFacadeTest {
     private int _peerCount = 5;
     private ACLMessage _aclMessage;
     private GroupMessage _message;
+    private String _conversationId = "id";
 
     @Before
     public void setUp() {
-        _aclMessage = mock(ACLMessage.class);
+        _aclMessage = PowerMockito.mock(ACLMessage.class);
         _message = mock(GroupMessage.class);
         _model = mock(ParametricModel.class);
         _peerGraph = mock(PeerGraph.class);
@@ -143,23 +143,13 @@ public class MessageFacadeTest {
         verify(message).addReceiver(completionAgent);
     }
 
-    @Test
-    public void sendToPeer(){
-        AID agent = mock(AID.class);
-        ACLMessage message = mock(ACLMessage.class);
-        when(_messageParser.createModelMessage(same(_model), same(agent), any(ArchipelagoPerformatives.class))).thenReturn(message);
-
-        _messaging.sendToPeer(agent, _model, ArchipelagoPerformatives.AggregationGroupRequest);
-
-        verify(_agent).send(message);
-    }
 
     @Test
     public void publishAggregationGroup_SendsGroupMessageToPeers() {
         List<AID> group = createMockGroup();
-        when(_messageParser.createGroupMessage(group)).thenReturn(_aclMessage);
+        when(_messageParser.createGroupMessage(group, _conversationId)).thenReturn(_aclMessage);
 
-        _messaging.publishAggregationGroup(group, "0");
+        _messaging.publishAggregationGroup(group, _conversationId);
 
         group.stream().forEach(aid -> verify(_aclMessage).addReceiver(aid));
         verify(_agent).send(_aclMessage);

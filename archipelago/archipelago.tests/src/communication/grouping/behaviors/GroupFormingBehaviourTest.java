@@ -61,19 +61,19 @@ public class GroupFormingBehaviourTest {
     @Test
     public void action_NotFinishedIterations_FormsARandomGroup() {
         int first = 4, second = 2, third = 7;
-        when(_randomGenerator.uniform(0, _agentCount))
+        when(_randomGenerator.uniform(0, _agentCount-1))
                 .thenReturn(first).thenReturn(second).thenReturn(third)
                 .thenReturn(first).thenReturn(second).thenReturn(third);
 
         _behaviour.action();
-z        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
+        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
         _behaviour.action();
         verify(_messageFacade, times(2)).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
     }
 
     @Test
     public void action_NotFinishedIterations_IncrementsId(){
-        when(_randomGenerator.uniform(0, _agentCount))
+        when(_randomGenerator.uniform(0, _agentCount-1))
                 .thenReturn(1).thenReturn(2).thenReturn(3)
                 .thenReturn(4).thenReturn(5).thenReturn(6);
 

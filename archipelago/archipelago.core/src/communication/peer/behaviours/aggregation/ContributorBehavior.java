@@ -34,7 +34,7 @@ public class ContributorBehavior extends CyclicBehaviour{
             _peerAgent.removeBehaviour(this);
         }
         else if (!modelSent) {
-            _messageFacade.sendToPeer(_curator, _peerAgent.getLocalModel(), ArchipelagoPerformatives.ModelContribution, _conversationId);
+            _messageFacade.sendToPeer(_curator, _peerAgent.getLocalModel(), ArchipelagoPerformatives.ModelContribution, _conversationId, _peerAgent.getData().size());
             modelSent = true;
         }
 
