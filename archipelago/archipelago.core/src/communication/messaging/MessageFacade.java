@@ -19,7 +19,6 @@ public class MessageFacade {
     private ACLMessageParser _messageParser;
     private PeerGraph _peerGraph;
     private RandomGenerator _randomGenerator;
-    private ACLMessage _nextMessage;
 
 
     public MessageFacade(Agent agent, ACLMessageParser messageParser, PeerGraph peerGraph, RandomGenerator randomGenerator) {
@@ -38,15 +37,20 @@ public class MessageFacade {
     }
 
     public boolean hasMessage(ArchipelagoPerformatives performative, AID sender, String conversationId) {
-        return false;
+        return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()),
+                MessageTemplate.and(MessageTemplate.MatchSender(sender), MessageTemplate.MatchConversationId(conversationId))));
     }
 
 
-    private boolean hasMessage(MessageTemplate template){
-        if(_nextMessage != null) { return true; }
+    private boolean hasMessage(MessageTemplate template) {
+        ACLMessage message = _agent.receive(template);
 
-        _nextMessage = _agent.receive(template);
-        return _nextMessage != null;
+        boolean hasMessage = message != null;
+        if(hasMessage) {
+            _agent.putBack(message);
+        }
+
+        return hasMessage;
     }
 
     public Message nextMessage(ArchipelagoPerformatives performative, AID sender, String conversationId) {
@@ -62,17 +66,13 @@ public class MessageFacade {
     public Message nextMessage(MessageTemplate template){
         if(!hasMessage(template)){ throw new IllegalStateException("No messages available, but nextMessage was called."); }
 
-        if(_nextMessage == null){
-            _nextMessage = _agent.receive();
-        }
-
+        ACLMessage message = _agent.receive(template);
         Message parsedMessage;
         try {
-            parsedMessage = _messageParser.parse(_nextMessage);
+            parsedMessage = _messageParser.parse(message);
         } catch (OntologyException e) {
             throw new RuntimeException("Error when parsing message");
         }
-        _nextMessage = null;
 
         return parsedMessage;
     }
