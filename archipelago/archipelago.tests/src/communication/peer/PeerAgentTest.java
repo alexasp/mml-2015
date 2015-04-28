@@ -2,21 +2,23 @@ package communication.peer;
 
 import communication.BehaviourFactory;
 import communication.messaging.PeerGraph;
+import communication.peer.behaviours.ModelAggregationBehavior;
 import communication.peer.behaviours.ModelCreationBehavior;
 import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import communication.peer.behaviours.PeerUpdateBehavior;
+import experiment.ExperimentConfiguration;
+import jade.core.Agent;
 import learning.EnsembleModel;
 import learning.ParametricModel;
+import org.apache.commons.math3.analysis.function.Exp;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.same;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -61,7 +63,14 @@ public class PeerAgentTest {
     public static void stubBehaviourFactory(BehaviourFactory behaviourFactory, int parameters) {
         when(behaviourFactory.getPeerUpdate(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(PeerUpdateBehavior.class));
         when(behaviourFactory.getModelCreation(any(PeerAgent.class), eq(parameters))).thenReturn(mock(ModelCreationBehavior.class));
+        when(behaviourFactory.getModelAggregation(any(PeerAgent.class), any(MessageFacade.class))).thenReturn(mock(ModelAggregationBehavior.class));
     }
+
+    @Test
+    public void construction_GetsBehaviors() {
+        verify(_behaviourFactory).getModelAggregation(same(_peerAgent), any(MessageFacade.class));
+    }
+
 
     @Test
     public void contructor_AddsUpdatingBehavior(){

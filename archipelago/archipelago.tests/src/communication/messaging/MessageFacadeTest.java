@@ -143,16 +143,6 @@ public class MessageFacadeTest {
         verify(message).addReceiver(completionAgent);
     }
 
-    @Test
-    public void sendToPeer(){
-        AID agent = mock(AID.class);
-        ACLMessage message = mock(ACLMessage.class);
-        when(_messageParser.createModelMessage(same(_model), same(agent), any(ArchipelagoPerformatives.class))).thenReturn(message);
-
-        _messaging.sendToPeer(agent, _model, ArchipelagoPerformatives.AggregationGroupRequest);
-
-        verify(_agent).send(message);
-    }
 
     @Test
     public void publishAggregationGroup_SendsGroupMessageToPeers() {

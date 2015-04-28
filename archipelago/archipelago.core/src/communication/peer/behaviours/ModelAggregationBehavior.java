@@ -30,7 +30,8 @@ public class ModelAggregationBehavior extends CyclicBehaviour{
 
         if(_messageFacade.hasMessage(ArchipelagoPerformatives.GroupFormation)){
             GroupMessage message = _messageFacade.nextAggregationGroupMessage();
-            if(message.agents.indexOf(_peerAgent.getAID()) > 0) {
+            int peerIndex = message.agents.indexOf(_peerAgent.getAID());
+            if(peerIndex > 0) {
                 _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, message.agents.get(0), _messageFacade, message.conversationId));
             }
             else {

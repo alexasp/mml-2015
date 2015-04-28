@@ -43,8 +43,8 @@ public class CuratorBehavior extends CyclicBehaviour{
     @Override
     public void action() {
 
-        if(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution)) {
-            Message message = _messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution);
+        if(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)) {
+            Message message = _messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId);
             _models.add(message.getModel());
             int dataSetSize = Integer.parseInt(message.getContent());
             if(dataSetSize < _smallestSet){ _smallestSet = dataSetSize; }

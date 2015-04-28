@@ -14,7 +14,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -96,7 +95,7 @@ public class ACLMessageParserTest {
 
     @Test
     public void createModelMessage_PerformativeIsNull_BuildsMessageWithoutPerformative(){
-        ACLMessage message = _parser.createModelMessage(_model, mock(AID.class), null);
+        ACLMessage message = _parser.createModelMessage(_model, mock(AID.class), null, 0);
 
         assertNotNull(message);
     }

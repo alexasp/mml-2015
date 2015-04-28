@@ -42,6 +42,11 @@ public class MessageFacade {
     }
 
 
+    public Boolean hasMessage(ArchipelagoPerformatives performative, String conversationId) {
+        return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()), MessageTemplate.MatchContent(conversationId)));
+    }
+
+
     private boolean hasMessage(MessageTemplate template) {
         ACLMessage message = _agent.receive(template);
 
@@ -61,6 +66,10 @@ public class MessageFacade {
 
     public Message nextMessage(ArchipelagoPerformatives performative) {
         return nextMessage(MessageTemplate.MatchPerformative(performative.ordinal()));
+    }
+
+    public Message nextMessage(ArchipelagoPerformatives performative, String conversationId) {
+        return nextMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()), MessageTemplate.MatchConversationId(conversationId)));
     }
 
     public Message nextMessage(MessageTemplate template){
@@ -113,6 +122,14 @@ public class MessageFacade {
         return _messageParser.parseGroupMessage(aclMessage);
     }
 
+    public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative, String conversationId, int datasetSize) {
+        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative, datasetSize);
+        message.addReceiver(receiver);
+        message.setConversationId(conversationId);
+
+        _agent.send(message);
+    }
+
     public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative, String conversationId) {
         ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
         message.addReceiver(receiver);
@@ -120,14 +137,5 @@ public class MessageFacade {
 
         _agent.send(message);
     }
-
-    public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative) {
-        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
-        message.addReceiver(receiver);
-
-        _agent.send(message);
-    }
-
-
 
 }
