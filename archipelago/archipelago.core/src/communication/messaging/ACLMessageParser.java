@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class ACLMessageParser {
 
     private static final java.lang.String DELIMITER = ","   ;
+    private static final String SIZE_DELIMITER = "_";
     private final ACLMessageReader _reader;
     private final ModelFactory _modelFactory;
 
@@ -36,7 +37,9 @@ public class ACLMessageParser {
             return new Message(content);
         }
         else if(message.getOntology().equals(Ontologies.Model.name())){
-            return new Message(_modelFactory.getModel(content));
+            String[] split = content.split(SIZE_DELIMITER);
+            String datasetSize = split.length > 1 ? split[1] : null;
+            return new Message(_modelFactory.getModel(split[0]), datasetSize);
         }
         else {
             throw new OntologyException("Ontology not recognized.");
@@ -45,7 +48,7 @@ public class ACLMessageParser {
 
     public ACLMessage createModelMessage(ParametricModel model, AID agent, ArchipelagoPerformatives performative, int datasetSize) {
         ACLMessage message = createModelMessage(model, agent, performative);
-        message.setContent(message.getContent() + DELIMITER + datasetSize);
+        message.setContent(message.getContent() + SIZE_DELIMITER + datasetSize);
 
         return message;
     }
@@ -71,6 +74,13 @@ public class ACLMessageParser {
     }
 
 
+
+    public ACLMessage createCompletionMessage(String conversationId) {
+        ACLMessage message = new ACLMessage(CompletionListeningBehavior.Performative.ordinal());
+        message.setOntology(Ontologies.Message.name());
+        message.setContent(conversationId);
+        return message;
+    }
 
     public ACLMessage createGroupMessage(List<AID> group, String conversationId) {
         ACLMessage message = new ACLMessage(ArchipelagoPerformatives.GroupFormation.ordinal());

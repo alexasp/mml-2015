@@ -43,7 +43,7 @@ public class MessageFacade {
 
 
     public Boolean hasMessage(ArchipelagoPerformatives performative, String conversationId) {
-        return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()), MessageTemplate.MatchContent(conversationId)));
+        return hasMessage(MessageTemplate.and(MessageTemplate.MatchPerformative(performative.ordinal()), MessageTemplate.MatchConversationId(conversationId)));
     }
 
 
@@ -98,13 +98,6 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void sendCompletionMessage(AID agent1) {
-        ACLMessage message = _messageParser.createCompletionMessage(agent1);
-        message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
-
-        _agent.send(message);
-    }
-
     public void publishAggregationGroup(List<AID> group, String conversationId) {
         ACLMessage message = _messageParser.createGroupMessage(group, conversationId);
         for (AID aid : group) {
@@ -138,4 +131,16 @@ public class MessageFacade {
         _agent.send(message);
     }
 
+    public void sendCompletionMessage(AID agent1) {
+        ACLMessage message = _messageParser.createCompletionMessage(agent1);
+        message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
+
+        _agent.send(message);
+    }
+
+    public void sendCompletionMessage(String conversationId) {
+        ACLMessage message = _messageParser.createCompletionMessage(conversationId);
+        message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
+
+    }
 }

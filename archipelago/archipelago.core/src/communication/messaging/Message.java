@@ -7,10 +7,17 @@ import learning.ParametricModel;
  */
 public class Message {
     private ParametricModel _model;
+    private int _datasetSize;
     private String _content;
 
     public Message(ParametricModel model) {
         _model = model;
+    }
+    public Message(ParametricModel model, String datasetSize) {
+        _model = model;
+        if(datasetSize != null) {
+            _datasetSize = Integer.parseInt(datasetSize);
+        }
     }
 
     public Message(String content) {
@@ -27,5 +34,9 @@ public class Message {
 
     public String getContent() {
         return _content;
+    }
+
+    public int getDatasetSize(){
+        return _datasetSize;
     }
 }

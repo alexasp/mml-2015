@@ -84,10 +84,10 @@ public class CuratorBehaviorTest {
         when(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(true);
         _message1 = mock(Message.class);
         when(_message1.getModel()).thenReturn(_model1);
-        when(_message1.getContent()).thenReturn(String.valueOf(_dataLength1));
+        when(_message1.getDatasetSize()).thenReturn(_dataLength1);
         _message2 = mock(Message.class);
         when(_message2.getModel()).thenReturn(_model2);
-        when(_message2.getContent()).thenReturn(String.valueOf(_dataLength2));
+        when(_message2.getDatasetSize()).thenReturn(_dataLength2);
     }
 
     @Test
@@ -117,6 +117,17 @@ public class CuratorBehaviorTest {
 
         _curatorBehavior.action();
         verify(_peerAgent).removeBehaviour(_curatorBehavior);
+    }
+
+    @Test
+    public void action_AllParticipantsResponded_SendsCompletionMessage(){
+        when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(_message1);
+
+        _curatorBehavior.action();
+        verify(_messageFacade, never()).sendCompletionMessage(anyString());
+
+        _curatorBehavior.action();
+        verify(_messageFacade).sendCompletionMessage(_conversationId);
     }
 
 }

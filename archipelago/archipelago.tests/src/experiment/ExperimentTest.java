@@ -119,7 +119,7 @@ public class ExperimentTest {
         Consumer<Experiment> completionListener = mock(Consumer.class);
         CompletionListeningAgent completionAgent = mock(CompletionListeningAgent.class);
         GroupLocatorAgent groupAgent = mock(GroupLocatorAgent.class);
-        when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class))).thenReturn(completionAgent);
+        when(_agentFactory.getCompletionAgent(same(completionListener), eq(_peerCount), any(Experiment.class), eq(iterations))).thenReturn(completionAgent);
         when(_agentFactory.getGroupLocatingAgentWithAgents(anyList(), same(_configuration))).thenReturn(groupAgent);
 
         Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
