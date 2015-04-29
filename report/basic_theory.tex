@@ -7,40 +7,46 @@ Common to all the attack vectors described in the previous chapter is that the a
 	Access to the published data should not enable the adversary to learn anything extra about target victim compared to no access to the database, even with the presence of any adversary’s background knowledge obtained from other sources.
 \end{quote} 
 
-This privacy definition was reputed by Cynthia Dwork, who showed the general impossibility of formalizing Dalenius' goal due to the existence of auxiliary information. Instead she chose to formulate a new set of privacy goals, and captured these in a method she defined as differential privacy.  
+This privacy goal was rejected by Cynthia Dwork, who showed the general impossibility of Dalenius' goal due to the existence of auxiliary information. Instead she chose to formulate a probabilistic privacy goal, which places an upper bound on how much the risk of privacy breach can increase by participating in a database.
 
 %In a world where massive amounts of sensitive personal data are being collected, attacks on the individual's privacy are becoming more and more of a threat. One type of attack is the identification of an individual's personal information from massive data sets, such as people's movie ratings from the Netflix data set\cite{narayanan2008robust}, and the medical records of a former governor of Massachusetts\cite{barth2012re}. These types of privacy breaches may lead to the unwanted discovery of a person's embarrassing information, and could also lead to the theft of an individual's private data or identity.  
 %
 %Many different approaches have been tried by data custodians to privatize the data they hold, such as removing any columns containing Personally Identifiable Information (PII), anonymizing the data by providing k-anonymity protection\cite{sweeney2002k}, or perform group based anonymization through l-diversity\cite{machanavajjhala2007diversity}. All of these methods mentioned have been proved to be susceptible in some way or form to attacks \cite{ganta2008composition}. Motivated by these shortcomings, a researcher at Microsoft came up with a data theoretical framework called differential privacy, which operates off a solid mathematical foundation and have strong theoretical guarantees on the privacy and utility of the released data.
 
 \section{Differential Privacy}
-The term "differential privacy" was defined by Dwork as a description of a promise, made by a data holder to a data subject: "“You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available." \cite{dwork2013algorithmic}
+\label{section:differential_privacy}
+The term "differential privacy" was defined by Dwork as a description of a promise, made by a data holder to a data subject: "You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available." \cite{dwork2013algorithmic}
 In an ideal situation, databases which implement differential privacy mechanisms can make confidential data widely available for accurate data analysis, without resorting to data usage agreements, data protection plans, or restricted views. Nevertheless, the Fundamental Law of Information Recovery states that overly accurate answers to too many questions will destroy privacy in a spectacular way \cite{dwork2013algorithmic}, meaning that data utility will eventually be consumed.
 
 \subsection{Definition of Differential Privacy}
 The classic example for explaining a security breach is the case of Mr White: Suppose you have access to a database that allows you to compute the income of all residents in a specified area. If you knew that Mr White was going to move, simply querying the database before and after his relocation would allow you to deduce his income. 
 
-\textbf{Definition 1}: a mechanism $M$ is a random function that takes a dataset D as input, and outputs a random variable $M$(D).
-
-\textbf{Definition 2}: the distance of two datasets, d($D_1$, $D_2$), denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
+\begin{definition} The distance of two datasets, $d(D_1, D_2)$, denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
+\end{definition}
 
 Formally, differential privacy is defined as follows:
-A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ differing on at most one row, and all $S\subseteq Range(M)$,
+A randomized function $M$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ where $d(D_1, D_2)=1$, and all $S\subseteq Range(M)$,
 \begin{eqnarray} \label{DiffPrivDef}
  Pr[M(D_1)\in S]\leq \mathrm{e}^{(\epsilon)}\times Pr[M(D_2)\in S]
  \end{eqnarray}
-What this means is that the risk to an individual's privacy should not be substantially increase as a result of participating in a statistical database, as the risk is bounded by the parameter $\epsilon$. Therefore an attacker should not be able to learn anything about any participant that they would not have learned if the participant had opted out of participating. To achieve this standard, privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanism, which will be explained in the following sections.  
 
-\todo[inline]{Must write about privacy budget and how that factors in the queries}
+That is, the presence or absence of a particular record should not affect the probability of any given output of $M(D)$ by more than some multiplicative factor. 
+
+Informally, the presence or absence of a single record in a database should not have a noticeable impact on the output of any queries sent to it. Though the existence of the database itself might allow attackers to learn information about a person, opting out of the database will not significantly help reduce the risk of information disclosure. Conversely, participating in the database does not significantly increase the risk of disclosure either, thus fulfilling Dworks promise quoted in the beginning of Section \ref{section:differential_privacy}.
+
+Privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms to compute useful queries while fulfilling \ref{DiffPrivDef}.
+
 \subsection{Privacy Budget}
-The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ is called the knowledge gain ratio, which measures the extent to which an attacker can ascertain the difference between the two datasets\cite{abowd2008protective}. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other. Sarathy and Muralidhar\cite{Sarathy2011evaluating} argues that the knowledge gain ratio $r$, should satisfy the following requirement: 
-\begin{eqnarray} \label{KnowledgeRatioBound}
-	r \leq 1+\epsilon
- \end{eqnarray}
- What this mean, is that when the $\epsilon$ is very small and close to zero, $e^\epsilon \approx 1+\epsilon$, we have achieved $\epsilon$-differential privacy. When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowledge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
+The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two datasets\cite{abowd2008protective}. Sarathy and Muralidhar\cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other.
+
+Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the dataset. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 
+
+\todo{Formalize why additive privacy budget works.}
+
+When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowledge gain rises exponentially with the rising number of queries. Setting a high value fo` $\epsilon$ will have a measurable impact on data privacy. 
  
- Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the dataset. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 
- 
+
+
 \subsection{Noise Mechanisms}
 This is guaranteed by applying noise to the result of an query to the dataset, by using the function $M$.There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
