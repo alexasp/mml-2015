@@ -50,6 +50,13 @@ public class ConfusionMatrix {
         return 1-fnr;
     }
 
+    public Double getCorrectClassifiedPercentage(){
+        int correct = _confusionMatrix.get("TP")+ _confusionMatrix.get("TN");
+        int incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
+        double percentageCorrect = (correct/(correct+incorrect))*100;
+        return  percentageCorrect;
+    }
+
     public void printConfusionMatrix(Map<String,Integer> confusionMatrix){
 
         int correct = confusionMatrix.get("TP")+confusionMatrix.get("TN");
