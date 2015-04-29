@@ -7,7 +7,7 @@ Common to all the attack vectors described in the previous chapter is that the a
 	Access to the published data should not enable the adversary to learn anything extra about target victim compared to no access to the database, even with the presence of any adversary’s background knowledge obtained from other sources.
 \end{quote} 
 
-This privacy goal was rejected by Cynthia Dwork, who showed the general impossibility of Dalenius' goal due to the existence of auxiliary information. Instead she chose to formulate a probabilistic privacy goal, which places an upper bound on how much the risk of disclosure can increase by participating in a database.
+This privacy goal was rejected by Cynthia Dwork, who showed the general impossibility of Dalenius' goal due to the existence of auxiliary information. Instead she chose to formulate a probabilistic privacy goal, which places an upper bound on how much the risk of privacy breach can increase by participating in a database.
 
 %In a world where massive amounts of sensitive personal data are being collected, attacks on the individual's privacy are becoming more and more of a threat. One type of attack is the identification of an individual's personal information from massive data sets, such as people's movie ratings from the Netflix data set\cite{narayanan2008robust}, and the medical records of a former governor of Massachusetts\cite{barth2012re}. These types of privacy breaches may lead to the unwanted discovery of a person's embarrassing information, and could also lead to the theft of an individual's private data or identity.  
 %
@@ -22,10 +22,10 @@ The classic example for explaining a security breach is the case of Mr White: Su
 
 \textbf{Definition 1}: a mechanism $M$ is a random function that takes a dataset D as input, and outputs a random variable $M$(D).
 
-\textbf{Definition 2}: the distance of two datasets, d($D_1$, $D_2$), denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
+\textbf{Definition 2}: the distance of two datasets, $d(D_1, D_2)$, denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
 
 Formally, differential privacy is defined as follows:
-A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ differing on at most one row, and all $S\subseteq Range(M)$,
+A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ where $d(D_1, D_2)=1$, and all $S\subseteq Range(M)$,
 \begin{eqnarray} \label{DiffPrivDef}
  Pr[M(D_1)\in S]\leq \mathrm{e}^{(\epsilon)}\times Pr[M(D_2)\in S]
  \end{eqnarray}
