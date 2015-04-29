@@ -81,4 +81,8 @@ public class Experiment {
     public ExperimentConfiguration getConfiguration() {
         return _configuration;
     }
+
+    public void reset() {
+        _environment.clearAndKill();
+    }
 }

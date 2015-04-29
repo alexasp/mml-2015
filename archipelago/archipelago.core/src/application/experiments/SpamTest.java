@@ -10,11 +10,13 @@ import experiment.Experiment;
 import experiment.ExperimentConfiguration;
 import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
+import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -22,7 +24,11 @@ import java.util.Scanner;
 public class SpamTest {
 
 
-    public static void main(String[] args) throws ControllerException {
+    public static void main(String[] args) throws ControllerException, InterruptedException {
+        runExperiment();
+    }
+
+    private static void runExperiment() throws ControllerException, InterruptedException {
         Injector injector = Guice.createInjector(new AppInjector());
 
         DataLoader loader = injector.getInstance(DataLoader.class);
@@ -30,10 +36,10 @@ public class SpamTest {
         Collections.shuffle(data);
 
         double trainRatio = 0.8;
-        int peerCount = 1000;
-        int groupSize = 50;
+        int peerCount = 100;
+        int groupSize = 20;
         double testCost = 0.1;
-        int iterations = 100;
+        int iterations = 10;
         double regularization = 1.0;
         double budget = 1.0;
         int parameters = data.get(0).getFeatures().length;
@@ -49,7 +55,13 @@ public class SpamTest {
             String input = sc.nextLine();
         }
 
-        experiment.run(completeExperiment -> System.out.println(meanstd(completeExperiment.test())));
+        Consumer<Experiment> completionAction = completeExperiment -> {
+            System.out.println(meanstd(completeExperiment.test()));
+            experiment.reset();
+        };
+
+        experiment.run(completionAction);
+//        completionAction.wait();
     }
 
     private static String meanstd(List<Double> test) {

@@ -36,8 +36,8 @@ public class Environment {
         // Get a hold on JADE runtime
         Runtime rt = Runtime.instance();
 
-       // Exit the JVM when there are no more containers around
-        rt.setCloseVM(true);
+       // Don't exit the JVM when there are no more containers around
+        rt.setCloseVM(false);
         System.out.print("runtime created\n");
 
         // Create a default profile
@@ -83,5 +83,13 @@ public class Environment {
 
     public void stop() throws ControllerException {
         _mainContainer.suspend();
+    }
+
+    public void clearAndKill() {
+        try {
+            _mainContainer.kill();
+        } catch (StaleProxyException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
