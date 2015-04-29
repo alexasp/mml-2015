@@ -50,16 +50,14 @@ public class SpamTest {
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
-
         //experiment.run(completeExperiment -> System.out.println(completeExperiment.test));
-
-        experiment.test2();
 
         try(Scanner sc = new Scanner(System.in)) {
             String input = sc.nextLine();
         }
 
         Consumer<Experiment> completionAction = completeExperiment -> {
+            experiment.test2();
             System.out.println(meanstd(completeExperiment.test()));
             experiment.reset();
         };
