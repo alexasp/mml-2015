@@ -20,9 +20,11 @@ In an ideal situation, databases which implement differential privacy mechanisms
 \subsection{Definition of Differential Privacy}
 The classic example for explaining a security breach is the case of Mr White: Suppose you have access to a database that allows you to compute the income of all residents in a specified area. If you knew that Mr White was going to move, simply querying the database before and after his relocation would allow you to deduce his income. 
 
-\textbf{Definition 1}: a mechanism $M$ is a random function that takes a dataset D as input, and outputs a random variable $M$(D).
+\begin{definition}A mechanism $M$ is a random function that takes a dataset D as input, and outputs a random variable $M$(D).
+\end{definition}
 
-\textbf{Definition 2}: the distance of two datasets, $d(D_1, D_2)$, denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
+\begin{definition} The distance of two datasets, $d(D_1, D_2)$, denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
+\end{definition}
 
 Formally, differential privacy is defined as follows:
 A randomized function $f$ gives $\epsilon$-differential privacy if for all data sets $D_1$ and $D_2$ where $d(D_1, D_2)=1$, and all $S\subseteq Range(M)$,
