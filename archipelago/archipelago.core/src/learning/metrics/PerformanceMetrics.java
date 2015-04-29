@@ -16,7 +16,7 @@ public class PerformanceMetrics {
         double wrong = 0.0;
 
         for(int i = 0; i < test.size(); i++){
-            if(((int)test.get(i).getLabel()) != ((int) predictions.get(i).doubleValue()) ){
+            if(((int)test.get(i).getLabel()) != ((int) (predictions.get(i).doubleValue())*2.0-1.0) ){
                 wrong++;
             }
         }

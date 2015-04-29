@@ -1,9 +1,11 @@
 package communication.peer.behaviours.aggregation;
 
+import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
 import communication.peer.ArchipelagoPerformatives;
+import communication.peer.behaviours.CompletionBehaviour;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import jade.core.behaviours.Behaviour;
@@ -43,6 +45,8 @@ public class CuratorBehaviorTest {
     private int _dataLength2 = 30;
     private ExperimentConfiguration _configuration;
     private String _conversationId = "id";
+    private BehaviourFactory _behaviorFactory;
+    private CompletionBehaviour _completionBehavior;
 
     @Before
     public void setUp(){
@@ -59,7 +63,10 @@ public class CuratorBehaviorTest {
         when(_randomGenerator.fromLaplacian(AdditionalMatchers.eq(beta, 0.0001d), eq(3)))
                 .thenReturn(_noise);
 
-        _curatorBehavior = new CuratorBehavior(_parties, _conversationId, _peerAgent, _messageFacade, _modelMerger, _randomGenerator, _configuration);
+        _behaviorFactory = mock(BehaviourFactory.class);
+        _completionBehavior = mock(CompletionBehaviour.class);
+        when(_behaviorFactory.getCompletionBehavior(_conversationId, _messageFacade)).thenReturn(_completionBehavior);
+        _curatorBehavior = new CuratorBehavior(_parties, _conversationId, _peerAgent, _messageFacade, _modelMerger, _randomGenerator, _configuration, _behaviorFactory);
     }
 
     private void setUpModels() {
@@ -124,10 +131,10 @@ public class CuratorBehaviorTest {
         when(_messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)).thenReturn(_message1);
 
         _curatorBehavior.action();
-        verify(_messageFacade, never()).sendCompletionMessage(anyString());
+        verify(_peerAgent, never()).addBehaviour(any(CompletionBehaviour.class));
 
         _curatorBehavior.action();
-        verify(_messageFacade).sendCompletionMessage(_conversationId);
+        verify(_peerAgent).addBehaviour(_completionBehavior);
     }
 
 }

@@ -47,7 +47,7 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters, configuration.updateCost);
+        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters, configuration.epsilon);
 
 
         registerPeers(_peers);
@@ -66,7 +66,7 @@ public class Experiment {
         _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
         _environment.registerAgent(completionAgent);
         _environment.registerAgent(groupAgent);
-//        _environment.run();
+        _environment.run();
     }
 
     public List<Double> test() {

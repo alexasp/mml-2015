@@ -64,6 +64,7 @@ public class ModelCreationBehaviorTest {
 
         verify(_model).update(_agent.getEpsilon(), _data);
         verify(_agent).setLocalModel(_model);
+        verify(_agent).addModel(_model);
     }
 
 

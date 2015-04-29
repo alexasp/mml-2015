@@ -142,5 +142,6 @@ public class MessageFacade {
         ACLMessage message = _messageParser.createCompletionMessage(conversationId);
         message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
 
+        _agent.send(message);
     }
 }

@@ -16,6 +16,7 @@ public class ModelCreationBehavior extends OneShotBehaviour {
     private final ModelFactory _modelFactory;
     private BehaviourFactory _behaviorFactory;
     private int _parameters;
+    private double _regularization;
 
     public ModelCreationBehavior(PeerAgent agent, ModelFactory modelFactory, BehaviourFactory behaviorFactory, int parameters) {
         _agent = agent;
@@ -37,5 +38,6 @@ public class ModelCreationBehavior extends OneShotBehaviour {
         ParametricModel model = _modelFactory.getModel(parameterVector); //TODO: add parameters
         model.update(_agent.getEpsilon(), _agent.getData());
         _agent.setLocalModel(model);
+        _agent.addModel(model);
     }
 }

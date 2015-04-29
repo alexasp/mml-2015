@@ -1,11 +1,7 @@
 package learning;
 
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.AdditionalAnswers;
-import org.mockito.AdditionalMatchers;
 import org.mockito.ArgumentMatcher;
 
 import java.util.Arrays;

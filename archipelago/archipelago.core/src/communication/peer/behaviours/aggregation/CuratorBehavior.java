@@ -1,11 +1,13 @@
 package communication.peer.behaviours.aggregation;
 
+import communication.BehaviourFactory;
 import communication.PeerAgent;
 import communication.messaging.Message;
 import communication.messaging.MessageFacade;
 import communication.peer.ArchipelagoPerformatives;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
+import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
 import learning.ModelMerger;
 import learning.ParametricModel;
@@ -27,8 +29,9 @@ public class CuratorBehavior extends CyclicBehaviour{
     private ExperimentConfiguration _configuration;
     private List<ParametricModel> _models;
     private double _smallestSet = Double.MAX_VALUE;
+    private BehaviourFactory _behaviorFactory;
 
-    public CuratorBehavior(List<AID> parties, String conversationId, PeerAgent peerAgent, MessageFacade messageFacade, ModelMerger modelMerger, RandomGenerator randomGenerator, ExperimentConfiguration configuration) {
+    public CuratorBehavior(List<AID> parties, String conversationId, PeerAgent peerAgent, MessageFacade messageFacade, ModelMerger modelMerger, RandomGenerator randomGenerator, ExperimentConfiguration configuration, BehaviourFactory behaviorFactory) {
         _parties = parties;
         _conversationId = conversationId;
         _peerAgent = peerAgent;
@@ -36,6 +39,7 @@ public class CuratorBehavior extends CyclicBehaviour{
         _modelMerger = modelMerger;
         _randomGenerator = randomGenerator;
         _configuration = configuration;
+        _behaviorFactory = behaviorFactory;
 
         _models = new ArrayList<>();
     }
@@ -54,7 +58,7 @@ public class CuratorBehavior extends CyclicBehaviour{
                 double beta = 2.0/(_smallestSet*_peerAgent.getEpsilon()*_configuration.regularization);
                 mergedModel.addTerm(_randomGenerator.fromLaplacian(beta, message.getModel().getParameters().length));
                 publishModel(mergedModel);
-                _messageFacade.sendCompletionMessage(_conversationId);
+                _peerAgent.addBehaviour(_behaviorFactory.getCompletionBehavior(_conversationId, _messageFacade));
                 _peerAgent.removeBehaviour(this);
             }
         }

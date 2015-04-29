@@ -35,7 +35,6 @@ public class PeerUpdateBehaviorTest {
         _completionBehavior = mock(CompletionBehaviour.class);
         _model = mock(ParametricModel.class);
         when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
-        when(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade)).thenReturn(_completionBehavior);
         when(_behaviourFactory.getModelAggregation(_peerAgent, _messageFacade)).thenReturn(_modelAggregationBehavior);
 
         _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);

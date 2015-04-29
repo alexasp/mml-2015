@@ -51,8 +51,8 @@ public class BehaviourFactory {
         return new CompletionListeningBehavior(agent, messageFacade);
     }
 
-    public Behaviour getCompletionBehavior(PeerAgent peerAgent, MessageFacade facade) {
-        return new CompletionBehaviour(peerAgent, facade);
+    public Behaviour getCompletionBehavior(String conversationId, MessageFacade facade) {
+        return new CompletionBehaviour(conversationId, facade);
     }
 
     public ModelAggregationBehavior getModelAggregation(PeerAgent agent, MessageFacade messageFacade) {
@@ -64,7 +64,7 @@ public class BehaviourFactory {
     }
 
     public Behaviour getCuratorBehavior(List<AID> parties, MessageFacade messageFacade, PeerAgent peerAgent, String conversationId) {
-        return new CuratorBehavior(parties, conversationId, peerAgent, messageFacade, _modelMerger, _randomGenerator, _configuration);
+        return new CuratorBehavior(parties, conversationId, peerAgent, messageFacade, _modelMerger, _randomGenerator, _configuration, this);
     }
 
     public Behaviour getGroupFormingBehaviour(Agent groupAgent, List<AID> _agents, ExperimentConfiguration configuration, MessageFacade messageFacade) {

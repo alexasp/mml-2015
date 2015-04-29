@@ -12,7 +12,7 @@ import learning.models.LogisticModelFactory;
 public class AppInjector extends AbstractModule {
     @Override
     protected void configure() {
-        bind(ModelFactory.class).to(LogisticModelFactory.class);
+
         bind(IQueryableFactory.class).to(QueryableFactory.class);
     }
 }
