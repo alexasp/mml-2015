@@ -4,7 +4,6 @@ import application.AppInjector;
 import application.ConfigurationModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.util.Modules;
 import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentConfiguration;
@@ -44,7 +43,9 @@ public class SpamTest {
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
-        experiment.run(completeExperiment -> System.out.println(completeExperiment.test()));
+        //experiment.run(completeExperiment -> System.out.println(completeExperiment.test));
+
+        experiment.test2();
     }
 
 }
