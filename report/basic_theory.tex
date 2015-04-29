@@ -34,7 +34,7 @@ That is, the presence or absence of a particular record should not affect the pr
 
 Informally, the presence or absence of a single record in a database should not have a noticeable impact on the output of any queries sent to it. Though the existence of the database itself might allow attackers to learn information about a person, opting out of the database will not significantly help reduce the risk of information disclosure. Conversely, participating in the database does not significantly increase the risk of disclosure either, thus fulfilling Dworks promise quoted in the beginning of Section \ref{section:differential_privacy}.
 
-To achieve this standard, privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms, which will be explained in the following sections.  
+Privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms to compute useful queries while fulfilling \ref{DiffPrivDef}.
 
 \subsection{Privacy Budget}
 The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two datasets\cite{abowd2008protective}. Sarathy and Muralidhar\cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other.
