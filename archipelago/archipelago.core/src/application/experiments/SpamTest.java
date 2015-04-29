@@ -4,7 +4,6 @@ import application.AppInjector;
 import application.ConfigurationModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.util.Modules;
 import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentConfiguration;
@@ -51,6 +50,11 @@ public class SpamTest {
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
+
+        //experiment.run(completeExperiment -> System.out.println(completeExperiment.test));
+
+        experiment.test2();
+
         try(Scanner sc = new Scanner(System.in)) {
             String input = sc.nextLine();
         }
@@ -70,6 +74,7 @@ public class SpamTest {
         std = Math.sqrt(std);
 
         return String.format("Mean error: %f stddev: %f", mean, std);
+
     }
 
 }

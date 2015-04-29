@@ -57,19 +57,19 @@ public class ConfusionMatrix {
         return  percentageCorrect;
     }
 
-    public void printConfusionMatrix(Map<String,Integer> confusionMatrix){
+    public void printConfusionMatrix(){
 
-        int correct = confusionMatrix.get("TP")+confusionMatrix.get("TN");
-        int incorrect= confusionMatrix.get("FP") + confusionMatrix.get("FN");
+        int correct = _confusionMatrix.get("TP")+_confusionMatrix.get("TN");
+        int incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
         double percentageCorrect = (correct/(correct+incorrect))*100;
 
         System.out.println("Correctly classified instances: " + correct + " , " + percentageCorrect +"%");
-        System.out.println("Incorrectly classified instances: " +incorrect + " , " + (100-percentageCorrect) +"%");
+        System.out.println("Incorrectly classified instances: " + incorrect + " , " + (100 - percentageCorrect) + "%");
 
         System.out.println("== Confusion Matrix ==");
         System.out.println("T F <-- classified as" );
-        System.out.println(confusionMatrix.get("TP") + " " +confusionMatrix.get("FN"));
-        System.out.println(confusionMatrix.get("FP") + " " +confusionMatrix.get("TN"));
+        System.out.println(_confusionMatrix.get("TP") + " " +_confusionMatrix.get("FN"));
+        System.out.println(_confusionMatrix.get("FP") + " " +_confusionMatrix.get("TN"));
     }
 
 }

@@ -9,8 +9,10 @@ import communication.peer.GroupLocatorAgent;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
+import learning.metrics.ConfusionMatrix;
 import learning.metrics.PerformanceMetrics;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -27,6 +29,7 @@ public class Experiment {
     private final AgentFactory _agentFactory;
     private PeerGraph _peerGraph;
     private final ExperimentConfiguration _configuration;
+
 
     private Environment _environment;
 
@@ -71,6 +74,16 @@ public class Experiment {
                 .mapToDouble(peer -> _performanceMetrics.errorRate(_testData, peer.labelData(_testData)))
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public List<ConfusionMatrix> test2(){
+        List<ConfusionMatrix> listOfConfusionMatrices = new ArrayList<ConfusionMatrix>();
+        for(PeerAgent peer : _peers){
+            ConfusionMatrix matrix = new ConfusionMatrix(_testData, peer.labelData(_testData),0.5);
+            matrix.printConfusionMatrix();
+            listOfConfusionMatrices.add(matrix);
+        }
+        return listOfConfusionMatrices;
     }
 
 
