@@ -63,7 +63,7 @@ public class Experiment {
         _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
         _environment.registerAgent(completionAgent);
         _environment.registerAgent(groupAgent);
-//        _environment.run();
+        _environment.run();
     }
 
     public List<Double> test() {
