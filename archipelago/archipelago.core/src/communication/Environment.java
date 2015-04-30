@@ -5,14 +5,13 @@ import jade.core.Agent;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
-import jade.domain.DFService;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
-import jade.domain.FIPAException;
+import jade.util.Logger;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
+
+import java.util.logging.Level;
 
 /**
  * Created by alex on 3/10/15.
@@ -23,6 +22,7 @@ public class Environment {
     private AgentContainer _mainContainer;
     private static final String SERVICE_NAME = "peer";
     private int _counter = 0;
+    private Runtime _rt;
 
 
     public Environment() throws ControllerException {
@@ -34,31 +34,27 @@ public class Environment {
      */
     private void createContainer() throws ControllerException {
         // Get a hold on JADE runtime
-        Runtime rt = Runtime.instance();
+        Logger.getJADELogger(this.getClass().getName()).setLevel(Level.OFF);
+        _rt = Runtime.instance();
 
        // Don't exit the JVM when there are no more containers around
-        rt.setCloseVM(false);
-        System.out.print("runtime created\n");
+        _rt.setCloseVM(false);
+
 
         // Create a default profile
         Profile profile = new ProfileImpl(null, 1201, null);
-        System.out.print("profile created\n");
 
-        System.out.println("Launching a whole in-process platform..."+profile);
-        _mainContainer = rt.createMainContainer(profile);
+        _mainContainer = _rt.createMainContainer(profile);
 
        // now set the default Profile to start a container
         ProfileImpl pContainer = new ProfileImpl(null, 1202, null);
-        System.out.println("Launching the agent container ..."+pContainer);
 
 //        jade.wrapper.AgentContainer cont = rt.createAgentContainer(pContainer);
 //        System.out.println("Launching the agent container after ..."+pContainer);
 
-        System.out.println("containers created");
-        System.out.println("Launching the rma agent on the main container ...");
 
-        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
-        rma.start();
+//        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+//        rma.start();
 //        _mainContainer.suspend();
     }
 
@@ -86,10 +82,6 @@ public class Environment {
     }
 
     public void clearAndKill() {
-        try {
-            _mainContainer.kill();
-        } catch (StaleProxyException e) {
-            throw new RuntimeException(e);
-        }
+        _rt.shutDown();
     }
 }

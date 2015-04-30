@@ -2,6 +2,7 @@ package application.experiments;
 
 import application.AppInjector;
 import application.ExperimentModule;
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import experiment.DataLoader;
@@ -23,30 +24,32 @@ public class SpamTest {
 
 
     public static void main(String[] args) throws ControllerException, InterruptedException {
-        Injector injector = Guice.createInjector(new AppInjector());
+        for(int i = 0; i < 3; i++) {
 
-        DataLoader loader = injector.getInstance(DataLoader.class);
-        List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
-        Collections.shuffle(data);
+            Injector injector = Guice.createInjector(new AppInjector());
 
-        double trainRatio = 0.8;
-        int peerCount = 100;
-        int groupSize = 50;
-        double testCost = 0.1;
-        int iterations = 50;
-        double regularization = 1.0;
-        double budget = 1.0;
-        int parameters = data.get(0).getFeatures().length;
-        double epsilon = 0.1;
+            DataLoader loader = injector.getInstance(DataLoader.class);
+            List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
+            Collections.shuffle(data);
 
-        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
+            double trainRatio = 0.8;
+            int peerCount = 50;
+            int groupSize = 10;
+            double testCost = 0.1;
+            int iterations = 10;
+            double regularization = 1.0;
+            double budget = 1.0;
+            int parameters = data.get(0).getFeatures().length;
+            double epsilon = 0.1;
 
-        injector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
+            ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
+            injector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
-        ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
-        Experiment experiment = experimentFactory.getExperiment(data, configuration);
+            ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
+            Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
-        runExperiment(experiment);
+            runExperiment(experiment);
+        }
     }
 
     private static void runExperiment(Experiment experiment) throws ControllerException, InterruptedException {
@@ -55,7 +58,7 @@ public class SpamTest {
 
         Consumer<Experiment> completionAction = completeExperiment -> {
             System.out.println(meanstd(completeExperiment.test()));
-            experiment.test2();
+//            experiment.test2();
             experiment.reset();
             latch.countDown();
         };
