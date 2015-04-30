@@ -15,6 +15,7 @@ import learning.metrics.ROC_Curve;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,7 @@ public class Experiment {
     private Environment _environment;
 
 
-    public Experiment(List<LabeledSample> samples, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, PeerGraph peerGraph, ExperimentConfiguration configuration) throws StaleProxyException {
+    public Experiment(List<LabeledSample> samples, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, PeerGraph peerGraph, ExperimentConfiguration configuration) throws ControllerException {
         _environment = environment;
         _agentFactory = agentFactory;
         _peerGraph = peerGraph;
@@ -50,7 +51,6 @@ public class Experiment {
         _performanceMetrics = performanceMetrics;
         _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters, configuration.epsilon);
 
-
         registerPeers(_peers);
     }
 
@@ -61,13 +61,15 @@ public class Experiment {
         }
     }
 
-    public void run(Consumer<Experiment> completionAction) throws ControllerException {
+    public void run(Consumer<Experiment> completionAction) throws ControllerException, InterruptedException {
         CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.iterations);
         GroupLocatorAgent groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
+
+        _peerGraph.RegistrationLatch.await();
+
         _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
         _environment.registerAgent(completionAgent);
         _environment.registerAgent(groupAgent);
-        _environment.run();
     }
 
     public List<Double> test() {

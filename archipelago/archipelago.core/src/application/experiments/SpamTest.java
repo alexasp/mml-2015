@@ -1,7 +1,7 @@
 package application.experiments;
 
 import application.AppInjector;
-import application.ConfigurationModule;
+import application.ExperimentModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import experiment.DataLoader;
@@ -13,7 +13,6 @@ import learning.LabeledSample;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
@@ -31,18 +30,18 @@ public class SpamTest {
         Collections.shuffle(data);
 
         double trainRatio = 0.8;
-        int peerCount = 10;
-        int groupSize = 2;
+        int peerCount = 100;
+        int groupSize = 50;
         double testCost = 0.1;
-        int iterations = 10;
+        int iterations = 50;
         double regularization = 1.0;
         double budget = 1.0;
         int parameters = data.get(0).getFeatures().length;
-        double epsilon = 10;
+        double epsilon = 0.1;
 
         ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
 
-        injector = injector.createChildInjector(new ConfigurationModule(configuration));
+        injector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         Experiment experiment = experimentFactory.getExperiment(data, configuration);

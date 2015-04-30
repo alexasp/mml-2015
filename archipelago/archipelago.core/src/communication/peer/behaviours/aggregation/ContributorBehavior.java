@@ -37,6 +37,9 @@ public class ContributorBehavior extends CyclicBehaviour{
             _messageFacade.sendToPeer(_curator, _peerAgent.getLocalModel(), ArchipelagoPerformatives.ModelContribution, _conversationId, _peerAgent.getData().size());
             modelSent = true;
         }
+        else {
+            block();
+        }
 
     }
 }
