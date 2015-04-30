@@ -17,4 +17,5 @@ public interface Model {
 
     double label(double[] test);
 
+    List<Double> label(List<LabeledSample> test, double threshold);
 }

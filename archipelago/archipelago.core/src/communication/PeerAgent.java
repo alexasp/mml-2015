@@ -78,4 +78,8 @@ public class PeerAgent extends Agent {
     public void setLocalModel(ParametricModel model) {
         _trainedModel = model;
     }
+
+    public List<Double> labelData(List<LabeledSample> testData, double threshold) {
+        _ensemble.label(testData, threshold);
+    }
 }

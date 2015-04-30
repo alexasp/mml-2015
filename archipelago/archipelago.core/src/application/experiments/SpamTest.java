@@ -25,6 +25,7 @@ public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException {
         runExperiment();
+        runExperiment();
     }
 
     private static void runExperiment() throws ControllerException, InterruptedException {
@@ -52,9 +53,6 @@ public class SpamTest {
 
         //experiment.run(completeExperiment -> System.out.println(completeExperiment.test));
 
-//        try(Scanner sc = new Scanner(System.in)) {
-//            String input = sc.nextLine();
-//        }
 
         CountDownLatch latch = new CountDownLatch(1);
 
