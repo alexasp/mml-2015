@@ -103,6 +103,17 @@ public class LogisticModel implements ParametricModel {
         return Math.round(sigmoidValue);
     }
 
+    @Override
+    public double label(double[] features, double threshold) {
+        double sigmoidValue = sigmoid(features, _parameters);
+        return sigmoidValue > threshold ? 1.0 : -1.0;
+    }
+
+    @Override
+    public List<Double> label(List<LabeledSample> test, double threshold) {
+        throw new UnsupportedOperationException();
+    }
+
     public double[] getParameters() {
         return _parameters;
     }

@@ -80,6 +80,6 @@ public class PeerAgent extends Agent {
     }
 
     public List<Double> labelData(List<LabeledSample> testData, double threshold) {
-        _ensemble.label(testData, threshold);
+        return _ensemble.label(testData, threshold);
     }
 }
