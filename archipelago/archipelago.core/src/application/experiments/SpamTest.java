@@ -25,7 +25,6 @@ public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException {
         runExperiment();
-        runExperiment();
     }
 
     private static void runExperiment() throws ControllerException, InterruptedException {
