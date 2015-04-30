@@ -11,6 +11,7 @@ import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.ConfusionMatrix;
 import learning.metrics.PerformanceMetrics;
+import learning.metrics.ROC_Curve;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,9 @@ public class Experiment {
             matrix.printConfusionMatrix();
             listOfConfusionMatrices.add(matrix);
         }
+        ROC_Curve roc = new ROC_Curve(listOfConfusionMatrices, "peertest");
+        roc.addPointToCurve();
+        roc.writeFile();
         return listOfConfusionMatrices;
     }
 

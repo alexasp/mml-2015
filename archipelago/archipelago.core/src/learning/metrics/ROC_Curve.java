@@ -45,9 +45,10 @@ public class ROC_Curve {
             HSSFCell cell1 = row.createCell(0);
             cell1.setCellValue(matrix.getSensitivity());
             HSSFCell cell2 = row.createCell(1);
-            cell2.setCellValue(1 - matrix.getSpecitivity());
+            double minus = (1-matrix.getSpecitivity());
+            cell2.setCellValue(minus);
             HSSFCell cell3 = row.createCell(2);
-            cell2.setCellValue(matrix.getThreshold());
+            cell3.setCellValue(matrix.getThreshold());
         }
     }
 

@@ -9,7 +9,6 @@ import experiment.Experiment;
 import experiment.ExperimentConfiguration;
 import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
-import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 
 import java.util.Collections;
