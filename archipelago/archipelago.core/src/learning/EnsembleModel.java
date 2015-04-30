@@ -51,11 +51,18 @@ public class EnsembleModel implements Model {
     }
 
     @Override
+    public double label(double[] test, double threshold) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public List<Double> label(List<LabeledSample> test, double threshold) {
         ArrayList<ParametricModel> ensembleCopy = new ArrayList<>(_ensemble);
         return test.stream()
-                .mapToDouble(sample ->
-                        Math.round(ensembleCopy.stream().mapToDouble(model -> model.label(sample.getFeatures(), threshold)).average().getAsDouble()))
+                .mapToDouble(sample -> {
+                    double averageLabel = ensembleCopy.stream().mapToDouble(model -> model.label(sample.getFeatures(), threshold)).average().getAsDouble();
+                    return averageLabel > threshold ? 1.0 : -1.0;
+                })
                 .boxed().collect(Collectors.toList());
     }
 
