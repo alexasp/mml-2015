@@ -15,6 +15,7 @@ import learning.LabeledSample;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
 /**
@@ -52,18 +53,23 @@ public class SpamTest {
 
         //experiment.run(completeExperiment -> System.out.println(completeExperiment.test));
 
-        try(Scanner sc = new Scanner(System.in)) {
-            String input = sc.nextLine();
-        }
+//        try(Scanner sc = new Scanner(System.in)) {
+//            String input = sc.nextLine();
+//        }
+
+        CountDownLatch latch = new CountDownLatch(1);
 
         Consumer<Experiment> completionAction = completeExperiment -> {
-            experiment.test2();
             System.out.println(meanstd(completeExperiment.test()));
+            experiment.test2();
             experiment.reset();
+            latch.countDown();
         };
 
+
+
         experiment.run(completionAction);
-//        completionAction.wait();
+        latch.await();
     }
 
     private static String meanstd(List<Double> test) {

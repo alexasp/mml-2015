@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class PerformanceMetrics {
 
-    LinkedHashMap<String,Integer> _confusionMatrix;
     public double errorRate(List<LabeledSample> test, List<Double> predictions) {
 
         double wrong = 0.0;
