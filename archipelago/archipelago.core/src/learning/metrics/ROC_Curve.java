@@ -52,6 +52,11 @@ public class ROC_Curve {
         }
     }
 
+    public void calculateAUC(){
+
+    }
+
+
     public void writeFile(){
     // Write the output to a file
         FileOutputStream fileOut = null;
