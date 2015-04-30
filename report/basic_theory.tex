@@ -103,19 +103,11 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  g = \Delta_w l (\textbf{w}) = \sum_{i}^{} (1 - \sigma(y_i \textbf{w}^T	\textbf{x}_i)) y_i \textbf{x}_i - \lambda \textbf{w}
 \end{eqnarray} 
  \section{Programming Frameworks Used [Rename]}
- 
- \subsection{PINQ}
- Privacy Integrated Queries (PINQ) is a platform for computing on privacy-sensitive datasets, while providing guarantees of differential privacy for the underlying records. It is powered by the LINQ declarative query language and it allows analysts to run SQL-like queries on datasets while protecting individual privacy. 
- 
- PINQ was developed as a prototype platform at Microsoft Research by lead researcher Frank McSherry\cite{mcsherry2009PINQ}, and is placed as a thin layer between the query engine and the analyst \todo[inline]{Consider adding the PINQ picture from Microsoft here}
- \missingfigure[figwidth=6cm]{PINQ pic} \newline
-It does not manage data or execute queries, but instead it supplies differentially private implementations of common transformations and aggregations written in LINQ. 
 
-When a query is run through PINQ, it first evaluates the privacy guarantee to ensure that the privacy cost is within the range of the privacy budget. If the query is valid, the cost of the query is detracted from the privacy budget and passes the query to the database engine for execution. When the results in returned from LINQ, the last step of the process is to add the proper amount of noise based on the epsilon value \unsure{Is this right?} 
- 
-\todo[inline]{Write how we adapted PINQ to Java 8 here.} 
  \subsection{JADE}
- The Java Agent framework for Distance learning Environments(JADE) is a middleware which facilitates the development of multi-agent systems. An application based on JADE is made of a set of components called Agents, where each one have an unique name. Agents execute tasks and interact by exchanging messages between each other. Agents execute on top of a Platform that provides them with basic services such as message delivery. A platform is composed of one or more Containers, where the Containers can be executed on different hosts thus achieving a distributed platform. The Main Container is a special container which exists in the platform, as it has two special properties. 1: It must be the first container to start in the platform, and all other containers must register to it. 2: Two special agents are included; the Agent Management System (AMS) which represents the single authority in the platform, and is an agent tasked with platform management actions such as starting and killing other agents. The other special agent is the Directory Facilitator (DF), which provides a directory which announces which agents are available on the platform. This acts like a yellow pages service where agents can publish the services they provide and find other agents providing services they need.
+ The Java Agent framework for Distance learning Environments(JADE) is a middleware which facilitates the development of multi-agent systems. An application based on JADE is made of a set of components called agents, where each one has an unique name. Agents execute tasks and interact by exchanging messages between each other. Agents execute on top of a platform that provides them with basic services such as message delivery. A platform is composed of one or more containers, where the containers can be executed on different hosts thus achieving a distributed platform. The Main container is a special container which exists in the platform, as it has two special properties. 1: It must be the first container to start in the platform, and all other containers must register to it. 2: Two special agents are included; the Agent Management System (AMS) which represents the single authority in the platform, and is an agent tasked with platform management actions such as starting and killing other agents. The other special agent is the Directory Facilitator (DF), which provides a directory which announces which agents are available on the platform. This acts like a yellow pages service where agents can publish the services they provide and find other agents providing services they need.
+
+ Note that while all containers in a single platform must register with the Main container in that platform, multiple Jade platforms can be instantiated separately and communicate with each other, allowing for scalability of Jade deployments.
  
  \begin{figure}[h!]
  	\centering
