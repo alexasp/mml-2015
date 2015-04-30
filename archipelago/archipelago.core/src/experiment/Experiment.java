@@ -79,11 +79,34 @@ public class Experiment {
 
     public List<ConfusionMatrix> test2(){
         List<ConfusionMatrix> listOfConfusionMatrices = new ArrayList<ConfusionMatrix>();
+        PeerAgent peerMin = null;
+        PeerAgent peerMax = null;
+        double max = 0.0;
+        double min = 100.0;
         for(PeerAgent peer : _peers){
+
             ConfusionMatrix matrix = new ConfusionMatrix(_testData, peer.labelData(_testData),0.5);
-            matrix.printConfusionMatrix();
-            listOfConfusionMatrices.add(matrix);
+            //matrix.printConfusionMatrix();
+
+            if(matrix.getCorrectClassifiedPercentage()>max) {
+                max=matrix.getCorrectClassifiedPercentage();
+                peerMax = peer;
+            }
+            if(matrix.getCorrectClassifiedPercentage()<min) {
+                min=matrix.getCorrectClassifiedPercentage();
+                peerMin = peer;
+            }
+
         }
+
+        ConfusionMatrix bestClassifier = new ConfusionMatrix(_testData,peerMax.labelData(_testData),0.5);
+        ConfusionMatrix worstClassifier = new ConfusionMatrix(_testData,peerMin.labelData(_testData),0.5);
+        
+        listOfConfusionMatrices.add(bestClassifier);
+        listOfConfusionMatrices.add(worstClassifier);
+
+
+
         ROC_Curve roc = new ROC_Curve(listOfConfusionMatrices, "peertest");
         roc.addPointToCurve();
         roc.writeFile();

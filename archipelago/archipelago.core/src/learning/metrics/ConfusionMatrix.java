@@ -55,8 +55,8 @@ public class ConfusionMatrix {
     }
 
     public Double getCorrectClassifiedPercentage(){
-        int correct = _confusionMatrix.get("TP")+ _confusionMatrix.get("TN");
-        int incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
+        double correct = _confusionMatrix.get("TP")+ _confusionMatrix.get("TN");
+        double incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
         double percentageCorrect = (correct/(correct+incorrect))*100;
         return  percentageCorrect;
     }
