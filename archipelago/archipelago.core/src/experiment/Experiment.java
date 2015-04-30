@@ -78,12 +78,14 @@ public class Experiment {
     }
 
     public List<ConfusionMatrix> test2(){
-        List<ConfusionMatrix> listOfConfusionMatrices = new ArrayList<ConfusionMatrix>();
-        PeerAgent peerMin = null;
-        PeerAgent peerMax = null;
-        double max = 0.0;
-        double min = 100.0;
+        List<ConfusionMatrix> listOfBestConfusionMatrices = new ArrayList<ConfusionMatrix>();
+        List<ConfusionMatrix> listOfWorstConfusionMatrices = new ArrayList<ConfusionMatrix>();
+
         for(double threshold = 0.0; threshold <= 1.0; threshold = threshold + 0.01d) {
+            PeerAgent peerMin = null;
+            PeerAgent peerMax = null;
+            double max = 0.0;
+            double min = 100.0;
             for (PeerAgent peer : _peers) {
 
                 ConfusionMatrix matrix = new ConfusionMatrix(_testData, peer.labelData(_testData, threshold), threshold);
@@ -99,20 +101,25 @@ public class Experiment {
                 }
 
             }
+            ConfusionMatrix bestClassifier = new ConfusionMatrix(_testData,peerMax.labelData(_testData),threshold);
+            ConfusionMatrix worstClassifier = new ConfusionMatrix(_testData,peerMin.labelData(_testData),threshold);
+
+            listOfBestConfusionMatrices.add(bestClassifier);
+            listOfWorstConfusionMatrices.add(worstClassifier);
         }
 
-        ConfusionMatrix bestClassifier = new ConfusionMatrix(_testData,peerMax.labelData(_testData),0.5);
-        ConfusionMatrix worstClassifier = new ConfusionMatrix(_testData,peerMin.labelData(_testData),0.5);
-        
-        listOfConfusionMatrices.add(bestClassifier);
-        listOfConfusionMatrices.add(worstClassifier);
 
 
 
-        ROC_Curve roc = new ROC_Curve(listOfConfusionMatrices, "peertest");
-        roc.addPointToCurve();
-        roc.writeFile();
-        return listOfConfusionMatrices;
+
+        ROC_Curve bestRoc = new ROC_Curve(listOfBestConfusionMatrices, "Optimal classifier ROC-Curve");
+        bestRoc.addPointToCurve();
+        bestRoc.writeFile();
+
+        ROC_Curve worstRoc = new ROC_Curve(listOfWorstConfusionMatrices, "Worst classifier ROC-Curve");
+        worstRoc.addPointToCurve();
+        worstRoc.writeFile();
+        return listOfBestConfusionMatrices;
     }
 
 

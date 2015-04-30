@@ -56,7 +56,7 @@ public class ROC_Curve {
     // Write the output to a file
         FileOutputStream fileOut = null;
         try {
-            fileOut = new FileOutputStream("ROC-Curve"+_peerName+".xls");
+            fileOut = new FileOutputStream(_peerName+".xls");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
