@@ -25,9 +25,9 @@ public class ConfusionMatrix {
         for(int i = 0; i < test.size(); i++) {
             if (((int) test.get(i).getLabel()) == 1 && ((int) predictions.get(i).doubleValue() == 1)) {
                 _confusionMatrix.put("TP", _confusionMatrix.get("TP") + 1);
-            } else if (((int) test.get(i).getLabel()) == 0 && ((int) predictions.get(i).doubleValue() == 1)) {
+            } else if (((int) test.get(i).getLabel()) == -1 && ((int) predictions.get(i).doubleValue() == 1)) {
                 _confusionMatrix.put("FP", _confusionMatrix.get("FP") + 1);
-            } else if (((int) test.get(i).getLabel()) == 0 && ((int) predictions.get(i).doubleValue() == 0)) {
+            } else if (((int) test.get(i).getLabel()) == -1 && ((int) predictions.get(i).doubleValue() == 0)) {
                 _confusionMatrix.put("TN", _confusionMatrix.get("TN") + 1);
             } else if (((int) test.get(i).getLabel()) == 1 && ((int) predictions.get(i).doubleValue() == 0)) {
                 _confusionMatrix.put("FN", _confusionMatrix.get("FN") + 1);
@@ -42,25 +42,29 @@ public class ConfusionMatrix {
     }
 
     public Double getSensitivity(){
-        double fpr = _confusionMatrix.get("FP") / (_confusionMatrix.get("FP")+_confusionMatrix.get("TN"));
-        return 1-fpr;
+        double fp = _confusionMatrix.get("TP");
+        double div = (_confusionMatrix.get("TP")+_confusionMatrix.get("FN"));
+        double fpr = (fp/div);
+        return fpr;
     }
     public Double getSpecitivity(){
-        double fnr = _confusionMatrix.get("FN") / (_confusionMatrix.get("FN")+_confusionMatrix.get("TP"));
-        return 1-fnr;
+        double fn = _confusionMatrix.get("TN");
+        double div = (_confusionMatrix.get("TN")+_confusionMatrix.get("FP"));
+        double fnr = fn/div;
+        return fnr;
     }
 
     public Double getCorrectClassifiedPercentage(){
-        int correct = _confusionMatrix.get("TP")+ _confusionMatrix.get("TN");
-        int incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
+        double correct = _confusionMatrix.get("TP")+ _confusionMatrix.get("TN");
+        double incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
         double percentageCorrect = (correct/(correct+incorrect))*100;
         return  percentageCorrect;
     }
 
     public void printConfusionMatrix(){
 
-        int correct = _confusionMatrix.get("TP")+_confusionMatrix.get("TN");
-        int incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
+        double correct = _confusionMatrix.get("TP")+_confusionMatrix.get("TN");
+        double incorrect= _confusionMatrix.get("FP") + _confusionMatrix.get("FN");
         double percentageCorrect = (correct/(correct+incorrect))*100;
 
         System.out.println("Correctly classified instances: " + correct + " , " + percentageCorrect +"%");
