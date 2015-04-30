@@ -24,11 +24,6 @@ public class SpamTest {
 
 
     public static void main(String[] args) throws ControllerException, InterruptedException {
-        runExperiment();
-        runExperiment();
-    }
-
-    private static void runExperiment() throws ControllerException, InterruptedException {
         Injector injector = Guice.createInjector(new AppInjector());
 
         DataLoader loader = injector.getInstance(DataLoader.class);
@@ -36,8 +31,8 @@ public class SpamTest {
         Collections.shuffle(data);
 
         double trainRatio = 0.8;
-        int peerCount = 100;
-        int groupSize = 20;
+        int peerCount = 10;
+        int groupSize = 2;
         double testCost = 0.1;
         int iterations = 10;
         double regularization = 1.0;
@@ -46,13 +41,16 @@ public class SpamTest {
         double epsilon = 10;
 
         ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
+
         injector = injector.createChildInjector(new ConfigurationModule(configuration));
 
         ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
         Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
-        //experiment.run(completeExperiment -> System.out.println(completeExperiment.test));
+        runExperiment(experiment);
+    }
 
+    private static void runExperiment(Experiment experiment) throws ControllerException, InterruptedException {
 
         CountDownLatch latch = new CountDownLatch(1);
 
@@ -62,8 +60,6 @@ public class SpamTest {
             experiment.reset();
             latch.countDown();
         };
-
-
 
         experiment.run(completionAction);
         latch.await();

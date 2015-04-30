@@ -36,7 +36,7 @@ public class ROC_Curve {
         _peerName=peerName;
     }
 
-    public void addPointToCurve(){
+    public void formChartObject(){
         //Create a new row in current sheet
         int rownum = 1;
 
@@ -52,12 +52,13 @@ public class ROC_Curve {
         }
     }
 
+
     public void calculateAUC(){
 
     }
+    
+    public void writeChartToFile(){
 
-
-    public void writeFile(){
     // Write the output to a file
         FileOutputStream fileOut = null;
         try {
