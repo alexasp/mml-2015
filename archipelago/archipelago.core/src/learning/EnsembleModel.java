@@ -61,7 +61,7 @@ public class EnsembleModel implements Model {
         return test.stream()
                 .mapToDouble(sample -> {
                     double averageLabel = ensembleCopy.stream().mapToDouble(model -> model.label(sample.getFeatures(), threshold)).average().getAsDouble();
-                    return averageLabel > threshold ? 1.0 : -1.0;
+                    return averageLabel > threshold ? 1.0 : 0.0;
                 })
                 .boxed().collect(Collectors.toList());
     }

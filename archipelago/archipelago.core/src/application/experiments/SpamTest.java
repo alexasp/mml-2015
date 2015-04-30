@@ -36,8 +36,8 @@ public class SpamTest {
         Collections.shuffle(data);
 
         double trainRatio = 0.8;
-        int peerCount = 100;
-        int groupSize = 20;
+        int peerCount = 10;
+        int groupSize = 2;
         double testCost = 0.1;
         int iterations = 10;
         double regularization = 1.0;
@@ -62,8 +62,6 @@ public class SpamTest {
             experiment.reset();
             latch.countDown();
         };
-
-
 
         experiment.run(completionAction);
         latch.await();

@@ -81,7 +81,7 @@ public class Experiment {
         List<ConfusionMatrix> listOfBestConfusionMatrices = new ArrayList<ConfusionMatrix>();
         List<ConfusionMatrix> listOfWorstConfusionMatrices = new ArrayList<ConfusionMatrix>();
 
-        for(double threshold = 0.0; threshold <= 1.0; threshold = threshold + 0.01d) {
+        for(double threshold = 0.0d; threshold <= 1.0; threshold = threshold + 0.1d) {
             PeerAgent peerMin = null;
             PeerAgent peerMax = null;
             double max = 0.0;
@@ -101,8 +101,8 @@ public class Experiment {
                 }
 
             }
-            ConfusionMatrix bestClassifier = new ConfusionMatrix(_testData,peerMax.labelData(_testData),threshold);
-            ConfusionMatrix worstClassifier = new ConfusionMatrix(_testData,peerMin.labelData(_testData),threshold);
+            ConfusionMatrix bestClassifier = new ConfusionMatrix(_testData,peerMax.labelData(_testData, threshold),threshold);
+            ConfusionMatrix worstClassifier = new ConfusionMatrix(_testData,peerMin.labelData(_testData, threshold),threshold);
 
             listOfBestConfusionMatrices.add(bestClassifier);
             listOfWorstConfusionMatrices.add(worstClassifier);

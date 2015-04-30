@@ -106,7 +106,7 @@ public class LogisticModel implements ParametricModel {
     @Override
     public double label(double[] features, double threshold) {
         double sigmoidValue = sigmoid(features, _parameters);
-        return sigmoidValue > threshold ? 1.0 : -1.0;
+        return sigmoidValue > threshold ? 1.0 : 0.0;
     }
 
     @Override
