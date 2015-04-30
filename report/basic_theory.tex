@@ -34,7 +34,7 @@ That is, the presence or absence of a particular record should not affect the pr
 
 Informally, the presence or absence of a single record in a database should not have a noticeable impact on the output of any queries sent to it. Though the existence of the database itself might allow attackers to learn information about a person, opting out of the database will not significantly help reduce the risk of information disclosure. Conversely, participating in the database does not significantly increase the risk of disclosure either, thus fulfilling Dworks promise quoted in the beginning of Section \ref{section:differential_privacy}.
 
-Privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms to compute useful queries while fulfilling \ref{DiffPrivDef}.
+Privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms to compute useful queries while fulfilling Equation \ref{DiffPrivDef}.
 
 \subsection{Privacy Budget}
 The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two datasets\cite{abowd2008protective}. Sarathy and Muralidhar\cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other.
@@ -43,28 +43,29 @@ Privacy budgeting was introduced to limit the amount of information a data analy
 
 \todo{Formalize why additive privacy budget works.}
 
-When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowledge gain rises exponentially with the rising number of queries. Setting a high value fo` $\epsilon$ will have a measurable impact on data privacy. 
- 
+When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowledge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
 
 
 \subsection{Noise Mechanisms}
-This is guaranteed by applying noise to the result of an query to the dataset, by using the function $M$.There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
+Given a target function $f$ to compute on a database $D$, it is necessary to design a randomized function $M$ which fulfills Equation \ref{DiffPrivDef} while yielding a useful approximation to the true $f$. This randomized function $M$ can be created by adding noise to the computation of $f$. There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
 \subsubsection{Laplace Mechanism}
-The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The most common question that needs to be answered before doing research with differentially private data, is how we should define our Laplace random variable, i.e how much noise needs to be added. The Laplace distribution centered around zero has only one parameter, its scale $b$, and this is proportional to its standard deviation. 
+The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The Laplace distribution centered around zero has only one parameter, its scale $b$, and this is proportional to its standard deviation. 
 \begin{eqnarray} \label{LaplaceDisDef}
-Lap(x|b) = \frac{1}{2b} exp (−\frac{|x|}{b})
+Lap(x|b) = \frac{1}{2b} exp (-\frac{|x|}{b})
 \end{eqnarray}
-The scale is naturally dependent on the privacy parameter $\epsilon$, and also on the risk of the most different individual having their private information leaked from the data. This risk is called the sensitivity of the query, and is defined mathematically as:
+When using the Laplace mechanism it is necessary to choose a suitable value for the parameter $b$. Increasing values of $b$ results in increased noise variance. The scale of $b$ is naturally dependent on the privacy parameter $\epsilon$, and also on the effect the presence or absence of a single record can have on the output of function $f$. This risk is called the sensitivity of the function, and is defined mathematically as:
 \begin{eqnarray} \label{LaplaceMecDef}
-\Delta \mathit{f}=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
+\Delta f=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
  \end{eqnarray}
- \missingfigure[figwidth=6cm]{Picture showing the laplacian distribution} \unsure{Not sure if we need the pic}]
+ \missingfigure[figwidth=6cm]{Picture showing the laplacian distribution} \unsure{Not sure if we need the pic. Alex: I think we do.}]
 
-This equation states that the maximum difference in the values that the query \textit{f} may take is on a pair of databases that differ on only one row. Dwork proved that adding a random Laplace variable, $(\Delta f/\epsilon)$, to a query you could guarantee $\epsilon$-differential privacy\cite{dwork2013algorithmic}. 
+This equation states that the sensitivity $\Delta f$ is the maximum difference in the values that the function $f$ may take on any pair of databases that differ on only one row. Dwork proved that adding a noise drawn from $Lap(\Delta f/\epsilon)$ to a query, $\epsilon$-differential privacy\cite{dwork2013algorithmic} is guaranteed. 
+
+\todo{add a section explaining that while it would seem that sensitivity is would often be high, some functions like count are naturally low sensitivity, and that steps such as clamping can be taken to reduce sensitivity}
 
 \subsubsection{Exponential Mechanism}
-The Exponential mechanism proposed by McSherry and Talwar \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
+The exponential mechanism proposed by McSherry and Talwar \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the exponential mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
 
 More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input dataset is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
 \textbf{Definition 4}: the sensitivity of score function $u_f$ is defined as
