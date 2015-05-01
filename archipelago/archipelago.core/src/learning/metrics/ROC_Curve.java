@@ -31,7 +31,7 @@ public class ROC_Curve {
         sheet = workbook.createSheet("Sample sheet");
         header = sheet.createRow(0);
         header.createCell(0).setCellValue("Sensitivity");
-        header.createCell(1).setCellValue("1-Specitivity");
+        header.createCell(1).setCellValue("False Positive Rate");
         header.createCell(2).setCellValue("Threshold");
         _peerName=peerName;
     }
@@ -45,7 +45,7 @@ public class ROC_Curve {
             HSSFCell cell1 = row.createCell(0);
             cell1.setCellValue(matrix.getSensitivity());
             HSSFCell cell2 = row.createCell(1);
-            double minus = (1-matrix.getSpecitivity());
+            double minus = (matrix.getFalsePositiveRate());
             cell2.setCellValue(minus);
             HSSFCell cell3 = row.createCell(2);
             cell3.setCellValue(matrix.getThreshold());
@@ -56,7 +56,7 @@ public class ROC_Curve {
     public void calculateAUC(){
 
     }
-    
+
     public void writeChartToFile(){
 
     // Write the output to a file

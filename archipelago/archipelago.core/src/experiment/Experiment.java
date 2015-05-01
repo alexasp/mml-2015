@@ -85,7 +85,7 @@ public class Experiment {
 
             List<ConfusionMatrix> confusionMatrices = new ArrayList<>();
 
-            for (double threshold = 1.0d; threshold >= 0.0d; threshold = threshold - 0.01d) {
+            for (double threshold = 1.0d; threshold >= 0.0d; threshold = threshold - 0.05d) {
 
                 ConfusionMatrix matrix = new ConfusionMatrix(_testData, peer.labelData(_testData, threshold), threshold);
                 confusionMatrices.add(matrix);

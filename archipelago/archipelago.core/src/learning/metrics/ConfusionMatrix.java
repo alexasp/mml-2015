@@ -47,8 +47,8 @@ public class ConfusionMatrix {
         double fpr = (fp/div);
         return fpr;
     }
-    public Double getSpecitivity(){
-        double fn = _confusionMatrix.get("TN");
+    public Double getFalsePositiveRate(){
+        double fn = _confusionMatrix.get("FP");
         double div = (_confusionMatrix.get("TN")+_confusionMatrix.get("FP"));
         double fnr = fn/div;
         return fnr;
