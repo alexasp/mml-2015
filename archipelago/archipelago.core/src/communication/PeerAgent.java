@@ -33,7 +33,6 @@ public class PeerAgent extends Agent {
         _messageFacade = messageFacadeFactory.getFacade(this);
 
         addBehaviour(behaviourFactory.getModelCreation(this, parameters));
-        addBehaviour(behaviourFactory.getPeerUpdate(this, _messageFacade));
         addBehaviour(behaviourFactory.getModelAggregation(this, _messageFacade));
     }
 

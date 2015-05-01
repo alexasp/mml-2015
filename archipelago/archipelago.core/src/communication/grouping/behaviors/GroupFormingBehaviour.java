@@ -41,7 +41,7 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
                 .collect(Collectors.toList());
 
         _messageFacade.publishAggregationGroup(group, Integer.toString(_iteration));
-        System.out.println("Formed a new group to aggregate a model.");
+//        System.out.println("Formed a new group to aggregate a model.");
         _iteration++;
 
         if(_iteration == _configuration.iterations) {

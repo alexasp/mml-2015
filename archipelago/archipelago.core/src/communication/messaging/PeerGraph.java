@@ -1,5 +1,6 @@
 package communication.messaging;
 
+import com.google.inject.Inject;
 import communication.PeerAgent;
 import communication.peer.CompletionListeningAgent;
 import jade.core.AID;
@@ -9,8 +10,10 @@ import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
+import org.apache.poi.ss.formula.functions.Count;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,6 +23,13 @@ import java.util.stream.IntStream;
 public class PeerGraph {
     private static final String PEER_SERVICE = "peer";
     private static final String COMPLETION_SERVICE = "completion";
+    public final CountDownLatch RegistrationLatch;
+
+    @Inject
+    public PeerGraph(CountDownLatch registrationLatch) {
+        RegistrationLatch = registrationLatch;
+    }
+
 
     public List<AID> getPeers(Agent agent) {
         DFAgentDescription description = createDescription(PEER_SERVICE);
@@ -76,7 +86,8 @@ public class PeerGraph {
                 DFAgentDescription description = createDescription(agent.getAID(), serviceName);
                 try {
                     DFService.register(agent, description);
-                    System.out.println("Registered peer.");
+//                    System.out.println("Registered peer.");
+                    RegistrationLatch.countDown();
                 } catch (FIPAException e) {
                     throw new RuntimeException("Unable to register peer agent.", e);
                 }

@@ -1,1 +1,3 @@
-http://stud2103.idipc.idi.ntnu.no:7778/acc
+
+http://alex-virtual-machine:54215/acc
+
