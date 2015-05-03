@@ -72,6 +72,9 @@ public class GroupFormingBehaviourTest {
     }
 
     @Test
+    public void action_NotFinishedIterations_
+
+    @Test
     public void action_NotFinishedIterations_IncrementsId(){
         when(_randomGenerator.uniform(0, _agentCount-1))
                 .thenReturn(1).thenReturn(2).thenReturn(3)
@@ -95,6 +98,7 @@ public class GroupFormingBehaviourTest {
 
         verify(_groupAgent).removeBehaviour(_behaviour);
     }
+
 
 
 
