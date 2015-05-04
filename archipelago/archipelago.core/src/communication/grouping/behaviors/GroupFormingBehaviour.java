@@ -65,7 +65,7 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
     private void updateAgentBudgetsAndAvailability(List<AID> group) {
         for (AID aid : group) {
             _budgets.put(aid, _budgets.get(aid)-_configuration.budget);
-            if(_budgets.get(aid) < _configuration.budget + 0.000001d) {
+            if(_budgets.get(aid) < _configuration.budget - 0.0000001d) {
                 _agents.remove(aid);
             }
         }

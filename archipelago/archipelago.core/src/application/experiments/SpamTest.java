@@ -40,7 +40,7 @@ public class SpamTest {
             double regularization = 1.0;
             double perUpdateBudget = 0.05d;
             int parameters = data.get(0).getFeatures().length;
-            double epsilon = 0.11d;
+            double epsilon = 0.10d;
             int iterations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
 
             ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
