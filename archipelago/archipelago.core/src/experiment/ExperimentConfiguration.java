@@ -26,4 +26,8 @@ public class ExperimentConfiguration {
         this.regularization = regularization;
         this.groupSize = groupSize;
     }
+
+    public ExperimentConfiguration() {
+
+    }
 }

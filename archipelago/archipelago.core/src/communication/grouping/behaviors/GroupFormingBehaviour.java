@@ -7,14 +7,14 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import privacy.math.RandomGenerator;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Created by alex on 4/23/15.
  */
 public class GroupFormingBehaviour extends CyclicBehaviour {
+    private final HashMap<AID, Double> _budgets;
     private Agent _groupAgent;
     private List<AID> _agents;
     private ExperimentConfiguration _configuration;
@@ -29,24 +29,39 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
         _randomGenerator = randomGenerator;
         _messageFacade = messageFacade;
 
+        _budgets = setUpBudgets(_agents);
+
         _iteration = 0;
+    }
+
+    private HashMap<AID, Double> setUpBudgets(List<AID> _agents) {
+        HashMap<AID, Double> map = new HashMap<>();
+        for (AID agent : _agents) {
+            map.put(agent, _configuration.epsilon);
+        }
+        return map;
     }
 
     @Override
     public void action() {
-        List<AID> group = IntStream.range(0, _configuration.groupSize)
-                .mapToObj(i ->
-                                _agents.get(_randomGenerator.uniform(0, _agents.size()-1))
-                )
-                .collect(Collectors.toList());
+        List<AID> group = _randomGenerator.sample(_agents, _configuration.groupSize);
 
         _messageFacade.publishAggregationGroup(group, Integer.toString(_iteration));
-//        System.out.println("Formed a new group to aggregate a model.");
         _iteration++;
+
+        updateAgentBudgetsAndAvailability(group);
 
         if(_iteration == _configuration.iterations) {
             _groupAgent.removeBehaviour(this);
-//            _messageFacade.sendCompletionMessage(_groupAgent.getAID());
+        }
+    }
+
+    private void updateAgentBudgetsAndAvailability(List<AID> group) {
+        for (AID aid : group) {
+            _budgets.put(aid, _budgets.get(aid)-_configuration.budget);
+            if(_budgets.get(aid) < 0.0d) {
+                _agents.remove(aid);
+            }
         }
     }
 
