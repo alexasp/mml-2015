@@ -50,7 +50,7 @@ public class GroupFormingBehaviourTest {
         _randomGenerator = mock(RandomGenerator.class);
 
         _configuration = new ExperimentConfiguration();
-        _configuration.iterations = 2;
+        _configuration.aggregations = 2;
         _configuration.groupSize = 3;
         _configuration.budget = 0.1d;
         _configuration.epsilon = 0.25d;

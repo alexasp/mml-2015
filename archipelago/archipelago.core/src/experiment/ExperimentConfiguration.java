@@ -5,7 +5,7 @@ package experiment;
  */
 public class ExperimentConfiguration {
 
-    public int iterations;
+    public int aggregations;
     public double budget;
     public double trainRatio;
     public int peerCount;
@@ -15,8 +15,8 @@ public class ExperimentConfiguration {
     public double regularization;
     public int groupSize;
 
-    public ExperimentConfiguration(int iterations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double epsilon, double regularization, int groupSize) {
-        this.iterations = iterations;
+    public ExperimentConfiguration(int aggregations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double epsilon, double regularization, int groupSize) {
+        this.aggregations = aggregations;
         this.budget = budget;
         this.trainRatio = trainRatio;
         this.peerCount = peerCount;

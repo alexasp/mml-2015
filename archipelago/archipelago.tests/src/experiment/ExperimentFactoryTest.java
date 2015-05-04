@@ -4,7 +4,6 @@ import communication.Environment;
 import communication.messaging.PeerGraph;
 import communication.peer.AgentFactory;
 import jade.wrapper.ControllerException;
-import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
 import org.junit.Before;
@@ -65,7 +64,7 @@ public class ExperimentFactoryTest {
         assertEquals(trainRatio, experiment.getConfiguration().trainRatio, 0.0001d);
         assertEquals(peerCount, experiment.getConfiguration().peerCount);
         assertEquals(testCost, experiment.getConfiguration().testCost, 0.0001d);
-        assertEquals(iterations, experiment.getConfiguration().iterations);
+        assertEquals(iterations, experiment.getConfiguration().aggregations);
         assertEquals(_updateCost, experiment.getConfiguration().epsilon, 0.0001d);
         assertEquals(regularization, experiment.getConfiguration().regularization, 0.0001d);
         assertEquals(groupSize, experiment.getConfiguration().groupSize);

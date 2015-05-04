@@ -2,7 +2,6 @@ package application.experiments;
 
 import application.AppInjector;
 import application.ExperimentModule;
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import experiment.DataLoader;
@@ -12,11 +11,18 @@ import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
 import learning.LabeledSample;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
+
+import static com.google.common.math.DoubleMath.mean;
+import static java.util.Collections.max;
+import static java.util.Collections.min;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -34,33 +40,33 @@ public class SpamTest {
             Collections.shuffle(data);
 
             double trainRatio = 0.8;
-            int peerCount = 10;
-            int groupSize = 5;
+            int peerCount = 100;
+            int groupSize = 20;
             double testCost = 0.1;
-            double regularization = 1.0;
+            double regularization = 10.0;
             double perUpdateBudget = 0.05d;
             int parameters = data.get(0).getFeatures().length;
-            double epsilon = 0.10d;
-            int iterations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
+            double epsilon = 0.1d;
+            int aggregations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
 
-            ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
+            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
             injector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
             ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
             Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
 
-            runExperiment(experiment);
+            runExperiment(experiment, String.format("eps%.3f-reg%.3f-cost%.3f-peers%d-groups%d", epsilon, regularization, perUpdateBudget, peerCount, groupSize, i), i);
         }
     }
 
-    private static void runExperiment(Experiment experiment) throws ControllerException, InterruptedException {
+    private static void runExperiment(Experiment experiment, String experimentName, int iteration) throws ControllerException, InterruptedException {
 
         CountDownLatch latch = new CountDownLatch(1);
 
         Consumer<Experiment> completionAction = completeExperiment -> {
-            System.out.println(meanstd(completeExperiment.test()));
-//            experiment.test2();
+//            System.out.println(meanstd(completeExperiment.test()));
+            writeTestResults(experiment, experimentName, iteration);
             experiment.reset();
             latch.countDown();
         };
@@ -69,13 +75,32 @@ public class SpamTest {
         latch.await();
     }
 
-    private static String meanstd(List<Double> test) {
-        double mean = test.stream().mapToDouble(Double::doubleValue).average().getAsDouble();
-        double std = test.stream().mapToDouble(error -> Math.pow(error-mean, 2)).average().getAsDouble();
+    private static void writeTestResults(Experiment experiment, String experimentName, int iteration) {
+        String path = "../experiments/basic/" + experimentName;
+        File experimentDirectory = new File(path);
+        if(!experimentDirectory.exists()){
+            experimentDirectory.mkdirs();
+        }
+
+        try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
+            List<Double> errorRates = experiment.test();
+            writer.println(mean(errorRates));
+            writer.println(std(errorRates));
+            writer.println(max(errorRates));
+            writer.println(min(errorRates));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Failed to write experimental results!", e);
+        }
+    }
+
+
+
+    private static double std(List<Double> test) {
+        double mean = mean(test);
+        double std = test.stream().mapToDouble(error -> Math.pow(error - mean, 2)).average().getAsDouble();
         std = Math.sqrt(std);
 
-        return String.format("Mean error: %f stddev: %f", mean, std);
-
+        return std;
     }
 
 }

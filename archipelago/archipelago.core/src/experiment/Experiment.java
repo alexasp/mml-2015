@@ -48,7 +48,7 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.iterations, configuration.budget, configuration.parameters, configuration.epsilon);
+        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.aggregations, configuration.budget, configuration.parameters, configuration.epsilon);
 
         registerPeers(_peers);
     }
@@ -61,7 +61,7 @@ public class Experiment {
     }
 
     public void run(Consumer<Experiment> completionAction) throws ControllerException, InterruptedException {
-        CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.iterations);
+        CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
         GroupLocatorAgent groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
 
         _peerGraph.getRegistrationLatch().await();

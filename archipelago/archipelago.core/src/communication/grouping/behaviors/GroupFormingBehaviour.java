@@ -57,7 +57,7 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
             _groupAgent.removeBehaviour(this);
         }
 
-//        if(_iteration == _configuration.iterations) {
+//        if(_iteration == _configuration.aggregations) {
 //            _groupAgent.removeBehaviour(this);
 //        }
     }
