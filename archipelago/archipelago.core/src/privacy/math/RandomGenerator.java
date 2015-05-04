@@ -46,7 +46,7 @@ public class RandomGenerator {
         ArrayList<T> samples = new ArrayList<>();
         ArrayList<T> sampleBase = new ArrayList<>(objects);
         for (int i = 0; i < groupSize; i++) {
-            int index = uniform(0, sampleBase.size());
+            int index = uniform(0, sampleBase.size() - 1);
             samples.add(sampleBase.remove(index));
         }
 

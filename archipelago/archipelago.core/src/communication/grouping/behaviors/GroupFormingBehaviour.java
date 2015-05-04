@@ -7,6 +7,7 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import privacy.math.RandomGenerator;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,22 +45,27 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
 
     @Override
     public void action() {
-        List<AID> group = _randomGenerator.sample(_agents, _configuration.groupSize);
+
+        List<AID> group = _randomGenerator.sample(_agents, _configuration.groupSize-1);
 
         _messageFacade.publishAggregationGroup(group, Integer.toString(_iteration));
         _iteration++;
 
         updateAgentBudgetsAndAvailability(group);
 
-        if(_iteration == _configuration.iterations) {
+        if(_agents.size() < _configuration.groupSize){
             _groupAgent.removeBehaviour(this);
         }
+
+//        if(_iteration == _configuration.iterations) {
+//            _groupAgent.removeBehaviour(this);
+//        }
     }
 
     private void updateAgentBudgetsAndAvailability(List<AID> group) {
         for (AID aid : group) {
             _budgets.put(aid, _budgets.get(aid)-_configuration.budget);
-            if(_budgets.get(aid) < 0.0d) {
+            if(_budgets.get(aid) < _configuration.budget - 0.0000001d) {
                 _agents.remove(aid);
             }
         }

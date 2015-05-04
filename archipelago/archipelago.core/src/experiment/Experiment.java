@@ -15,7 +15,6 @@ import learning.metrics.ROC_Curve;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -68,8 +67,11 @@ public class Experiment {
         _peerGraph.getRegistrationLatch().await();
 
         _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
-        _environment.registerAgent(completionAgent);
-        _environment.registerAgent(groupAgent);
+        _environment.registerAgent(completionAgent, "CompletionAgent");
+
+        _environment.registerAgent(groupAgent, "GroupingAgent");
+
+
     }
 
     public List<Double> test() {
