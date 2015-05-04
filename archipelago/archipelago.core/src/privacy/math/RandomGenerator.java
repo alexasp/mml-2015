@@ -1,8 +1,13 @@
 package privacy.math;
 
+import jade.core.AID;
 import org.apache.commons.math3.distribution.LaplaceDistribution;
 import org.apache.commons.math3.distribution.UniformIntegerDistribution;
 import org.apache.commons.math3.distribution.UniformRealDistribution;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Created by alex on 3/5/15.
@@ -35,5 +40,16 @@ public class RandomGenerator {
     public int uniform(int lower, int upper){
         UniformIntegerDistribution distribution = new UniformIntegerDistribution(lower, upper);
         return distribution.sample();
+    }
+
+    public <T> List<T> sample(List<T> objects, int groupSize) {
+        ArrayList<T> samples = new ArrayList<>();
+        ArrayList<T> sampleBase = new ArrayList<>(objects);
+        for (int i = 0; i < groupSize; i++) {
+            int index = uniform(0, sampleBase.size());
+            samples.add(sampleBase.remove(index));
+        }
+
+        return samples;
     }
 }

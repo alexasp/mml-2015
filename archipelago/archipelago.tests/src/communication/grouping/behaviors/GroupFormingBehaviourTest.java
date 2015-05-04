@@ -72,7 +72,9 @@ public class GroupFormingBehaviourTest {
     }
 
     @Test
-    public void action_NotFinishedIterations_
+    public void action_PeerBudgetExpended_IsNotDrawnForNewGroup(){
+        when(_randomGenerator.sample(_agents, _configuration.groupSize))
+    }
 
     @Test
     public void action_NotFinishedIterations_IncrementsId(){
