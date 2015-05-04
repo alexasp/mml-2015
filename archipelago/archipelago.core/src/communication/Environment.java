@@ -53,8 +53,8 @@ public class Environment {
 //        System.out.println("Launching the agent container after ..."+pContainer);
 
 
-//        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
-//        rma.start();
+        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+        rma.start();
 //        _mainContainer.suspend();
     }
 
@@ -64,11 +64,13 @@ public class Environment {
 //    }
 
     public void registerAgent(Agent agent) throws StaleProxyException {
-        AgentController agentWrapper = _mainContainer.acceptNewAgent("peerolini" + _counter, agent);
+        registerAgent(agent, "peerolini" + _counter);
         _counter++;
+    }
+
+    public void registerAgent(Agent agent, String agentName) throws StaleProxyException {
+        AgentController agentWrapper = _mainContainer.acceptNewAgent(agentName, agent);
         agentWrapper.start();
-//        agentWrapper.suspend();
-//        joinDF(agent);
     }
 
 

@@ -85,9 +85,6 @@ public class ACLMessageParser {
     public ACLMessage createGroupMessage(List<AID> group, String conversationId) {
         ACLMessage message = new ACLMessage(ArchipelagoPerformatives.GroupFormation.ordinal());
         message.setOntology(Ontologies.Grouping.name());
-        for (AID aid : group) {
-            message.addReceiver(aid);
-        }
         message.setContent(conversationId + DELIMITER + serializeGroup(group));
         return message;
     }

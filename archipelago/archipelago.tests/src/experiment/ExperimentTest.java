@@ -7,7 +7,6 @@ import communication.peer.AgentFactory;
 import communication.peer.CompletionListeningAgent;
 import communication.peer.GroupLocatorAgent;
 import jade.wrapper.ControllerException;
-import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
 import org.junit.Before;
@@ -90,8 +89,8 @@ public class ExperimentTest {
 
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 
-        verify(_environment).registerAgent(agent1);
-        verify(_environment).registerAgent(agent2);
+        verify(_environment).registerAgent(agent1, "CompletionAgent");
+        verify(_environment).registerAgent(agent2, "CompletionAgent");
     }
 
     @Test
@@ -138,8 +137,8 @@ public class ExperimentTest {
         Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
         experiment.run(completionListener);
 
-        verify(_environment).registerAgent(completionAgent);
-        verify(_environment).registerAgent(groupAgent);
+        verify(_environment).registerAgent(completionAgent, "CompletionAgent");
+        verify(_environment).registerAgent(groupAgent, "CompletionAgent");
         verify(_peerGraph).join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
     }
 

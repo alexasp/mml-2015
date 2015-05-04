@@ -12,6 +12,7 @@ import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
 import learning.LabeledSample;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -23,7 +24,7 @@ import java.util.function.Consumer;
 public class SpamTest {
 
 
-    public static void main(String[] args) throws ControllerException, InterruptedException {
+    public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
         for(int i = 0; i < 3; i++) {
 
             Injector injector = Guice.createInjector(new AppInjector());
@@ -33,20 +34,21 @@ public class SpamTest {
             Collections.shuffle(data);
 
             double trainRatio = 0.8;
-            int peerCount = 50;
-            int groupSize = 10;
+            int peerCount = 10;
+            int groupSize = 5;
             double testCost = 0.1;
-            int iterations = 10;
             double regularization = 1.0;
-            double budget = 1.0;
+            double perUpdateBudget = 0.05d;
             int parameters = data.get(0).getFeatures().length;
-            double epsilon = 0.1;
+            double epsilon = 0.11d;
+            int iterations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
 
-            ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, budget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
+            ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
             injector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
             ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
             Experiment experiment = experimentFactory.getExperiment(data, configuration);
+
 
             runExperiment(experiment);
         }
