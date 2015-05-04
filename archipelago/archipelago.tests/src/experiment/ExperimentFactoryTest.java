@@ -1,7 +1,9 @@
 package experiment;
 
 import communication.Environment;
+import communication.messaging.PeerGraph;
 import communication.peer.AgentFactory;
+import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
@@ -30,20 +32,22 @@ public class ExperimentFactoryTest {
     private DataLoader _dataLoader;
     private int _parameters = 30;
     private double _updateCost = 2.0;
+    private PeerGraph _peerGraph;
 
     @Before
-    public void setUp(){
+    public void setUp() {
 
+        _peerGraph = mock(PeerGraph.class);
         _peerFactory = mock(AgentFactory.class);
         _performanceMetrics = mock(PerformanceMetrics.class);
         _environment = mock(Environment.class);
         _dataLoader = mock(DataLoader.class);
 
-        _experimentFactory = new ExperimentFactory(_peerFactory, _performanceMetrics, _environment, _dataLoader);
+        _experimentFactory = new ExperimentFactory(_peerFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph);
     }
 
     @Test
-    public void getExperiment_ConfiguresExperiment() throws StaleProxyException {
+    public void getExperiment_ConfiguresExperiment() throws ControllerException {
         List<LabeledSample> samples = mock(List.class);
         when(_dataLoader.partition(anyDouble(), same(samples))).thenReturn(Arrays.asList(mock(List.class), mock(List.class)));
         double trainRatio = 0.5;

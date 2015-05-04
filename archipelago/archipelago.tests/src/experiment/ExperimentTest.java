@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
@@ -50,6 +51,7 @@ public class ExperimentTest {
     private PeerGraph _peerGraph;
     private double _regularization = 1.0;
     private int _groupSize = 1;
+    private CountDownLatch _registrationLatch;
 
     @Before
     public void setUp(){
@@ -59,6 +61,8 @@ public class ExperimentTest {
         _environment = mock(Environment.class);
         _dataLoader = mock(DataLoader.class);
         _peerGraph = mock(PeerGraph.class);
+        _registrationLatch = mock(CountDownLatch.class);
+        when(_peerGraph.getRegistrationLatch()).thenReturn(_registrationLatch);
 
         _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters, _updateCost, _regularization, _groupSize);
 
@@ -69,7 +73,7 @@ public class ExperimentTest {
     }
 
     @Test
-    public void construct_CreatesCorrectPeerCountAndGivesIterations() throws StaleProxyException {
+    public void construct_CreatesCorrectPeerCountAndGivesIterations() throws ControllerException {
         int peerCount = 3;
         _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters, _updateCost, _regularization, _groupSize);
 
@@ -79,7 +83,7 @@ public class ExperimentTest {
     }
 
     @Test
-    public void construct_registersPeerWithRunEnvironment() throws StaleProxyException {
+    public void construct_registersPeerWithRunEnvironment() throws ControllerException {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_agentFactory.createPeers(_train, _peerCount, _iterations, _budget, _parameters, _updateCost)).thenReturn(Arrays.asList(agent1, agent2));
@@ -91,7 +95,7 @@ public class ExperimentTest {
     }
 
     @Test
-    public void construct_registersPeerWithGraph() throws StaleProxyException {
+    public void construct_registersPeerWithGraph() throws ControllerException {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_agentFactory.createPeers(_train, _peerCount, _iterations, _budget, _parameters, _updateCost)).thenReturn(Arrays.asList(agent1, agent2));
@@ -104,15 +108,24 @@ public class ExperimentTest {
 
 
     @Test
-    public void construct_GivesPeersTrainingData() throws StaleProxyException {
+    public void construct_GivesPeersTrainingData() throws ControllerException {
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 
         verify(_agentFactory).createPeers(_train, _peerCount, _iterations, _budget, _parameters, _updateCost);
     }
 
+    @Test
+    public void run_WaitsForLatch() throws ControllerException, InterruptedException {
+        Experiment experiment = new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
+        Consumer<Experiment> completionListener = mock(Consumer.class);
+
+        experiment.run(completionListener);
+
+        verify(_registrationLatch).await();
+    }
 
     @Test
-    public void run_RunsEnvironmentAndRegistersCompletionAndGroupLocatingAgent() throws ControllerException {
+    public void run_RunsEnvironmentAndRegistersCompletionAndGroupLocatingAgent() throws ControllerException, InterruptedException {
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);
         when(_agentFactory.createPeers(_train, _peerCount, iterations, _budget, _parameters, _updateCost)).thenReturn(Arrays.asList(agent1, agent2));
@@ -133,7 +146,7 @@ public class ExperimentTest {
 
 
     @Test
-    public void test_GetsResultForEachAgent() throws StaleProxyException {
+    public void test_GetsResultForEachAgent() throws ControllerException {
         int peers = 2;
         PeerAgent agent1 = mock(PeerAgent.class);
         PeerAgent agent2 = mock(PeerAgent.class);

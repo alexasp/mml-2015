@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
 public class PeerGraph {
     private static final String PEER_SERVICE = "peer";
     private static final String COMPLETION_SERVICE = "completion";
-    public final CountDownLatch RegistrationLatch;
+    private final CountDownLatch RegistrationLatch;
 
     @Inject
     public PeerGraph(CountDownLatch registrationLatch) {
@@ -93,5 +93,9 @@ public class PeerGraph {
                 }
             }
         });
+    }
+
+    public CountDownLatch getRegistrationLatch() {
+        return RegistrationLatch;
     }
 }

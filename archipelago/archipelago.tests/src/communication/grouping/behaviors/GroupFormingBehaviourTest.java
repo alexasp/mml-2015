@@ -15,6 +15,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import privacy.math.RandomGenerator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -47,10 +49,12 @@ public class GroupFormingBehaviourTest {
 
         _randomGenerator = mock(RandomGenerator.class);
 
-        _configuration = mock(ExperimentConfiguration.class);
+        _configuration = new ExperimentConfiguration();
         _configuration.iterations = 2;
         _configuration.groupSize = 3;
-        _behaviour = new GroupFormingBehaviour(_groupAgent, _agents, _configuration, _randomGenerator, _messageFacade);
+        _configuration.budget = 0.1d;
+        _configuration.epsilon = 0.25d;
+        _behaviour = new GroupFormingBehaviour(_groupAgent, new ArrayList<>(_agents), _configuration, _randomGenerator, _messageFacade);
     }
 
     @Test
@@ -61,9 +65,9 @@ public class GroupFormingBehaviourTest {
     @Test
     public void action_NotFinishedIterations_FormsARandomGroup() {
         int first = 4, second = 2, third = 7;
-        when(_randomGenerator.uniform(0, _agentCount-1))
-                .thenReturn(first).thenReturn(second).thenReturn(third)
-                .thenReturn(first).thenReturn(second).thenReturn(third);
+        when(_randomGenerator.sample(anyList(), eq(_configuration.groupSize)))
+                .thenReturn(Arrays.asList(_agents.get(first), _agents.get(second), _agents.get(third)))
+                .thenReturn(Arrays.asList(_agents.get(first), _agents.get(second), _agents.get(third)));
 
         _behaviour.action();
         verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(first, second, third)), anyString());
@@ -72,11 +76,33 @@ public class GroupFormingBehaviourTest {
     }
 
     @Test
-    public void action_NotFinishedIterations_
+    public void action_PeerBudgetExpended_IsNotDrawnForNewGroup() {
+        _configuration.groupSize = 2;
+        when(_randomGenerator.sample(anyList(), eq(_configuration.groupSize)))
+                .thenReturn(Arrays.asList(_agents.get(0), _agents.get(2)))
+                .thenReturn(Arrays.asList(_agents.get(2), _agents.get(3)));
+
+        _behaviour.action();
+        verify(_randomGenerator).sample(anyList(), anyInt());
+        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(0, 2)), anyString());
+        _behaviour.action();
+        verify(_randomGenerator, times(2)).sample(anyList(), anyInt());
+        verify(_messageFacade).publishAggregationGroup(argThat(new MatchesAgentSubset(2, 3)), anyString());
+        _behaviour.action();
+        verify(_randomGenerator, times(3)).sample(
+                argThat(new ArgumentMatcher<List<AID>>() {
+                    @Override
+                    public boolean matches(Object argument) {
+                        List<AID> list = (List<AID>) argument;
+                        return !list.contains(_agents.get(2));
+                    }
+                }),
+                eq(_configuration.groupSize));
+    }
 
     @Test
-    public void action_NotFinishedIterations_IncrementsId(){
-        when(_randomGenerator.uniform(0, _agentCount-1))
+    public void action_NotFinishedIterations_IncrementsId() {
+        when(_randomGenerator.uniform(0, _agentCount - 1))
                 .thenReturn(1).thenReturn(2).thenReturn(3)
                 .thenReturn(4).thenReturn(5).thenReturn(6);
 
@@ -87,7 +113,7 @@ public class GroupFormingBehaviourTest {
     }
 
     @Test
-    public void action_FinishedIterations_RemovesBehavior(){
+    public void action_FinishedIterations_RemovesBehavior() {
         int first = 4, second = 2, third = 7;
         when(_randomGenerator.uniform(0, _agentCount))
                 .thenReturn(first).thenReturn(second).thenReturn(third)
@@ -98,8 +124,6 @@ public class GroupFormingBehaviourTest {
 
         verify(_groupAgent).removeBehaviour(_behaviour);
     }
-
-
 
 
     private class MatchesAgentSubset extends ArgumentMatcher<List<AID>> {

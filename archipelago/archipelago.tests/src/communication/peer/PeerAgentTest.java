@@ -72,10 +72,6 @@ public class PeerAgentTest {
     }
 
 
-    @Test
-    public void contructor_AddsUpdatingBehavior(){
-        verify(_behaviourFactory).getPeerUpdate(same(_peerAgent), any(MessageFacade.class));
-    }
 
     @Test
     public void constructor_SchedulesInitialModelTraining(){
