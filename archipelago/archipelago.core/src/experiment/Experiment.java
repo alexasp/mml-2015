@@ -81,7 +81,7 @@ public class Experiment {
                 .collect(Collectors.toList());
     }
 
-    public List<ROC_Curve> test2() {
+    public List<ROC_Curve> test2(String path) {
 
         List<ROC_Curve> rocs = new ArrayList<>();
 
@@ -95,7 +95,7 @@ public class Experiment {
                 confusionMatrices.add(matrix);
 
             }
-            ROC_Curve roc = new ROC_Curve(confusionMatrices, "rocs/ROC_" + peer.getLocalName());
+            ROC_Curve roc = new ROC_Curve(confusionMatrices, path+ "/ROC_" + peer.getLocalName());
             roc.formChartObject();
             roc.writeChartToFile();
             rocs.add(roc);

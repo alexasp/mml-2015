@@ -81,6 +81,13 @@ public class SpamTest {
         if(!experimentDirectory.exists()){
             experimentDirectory.mkdirs();
         }
+        File confDirectory = new File(path+"/conf_matrices");
+        if(!confDirectory.exists()){
+            confDirectory.mkdirs();
+        }
+
+
+        experiment.test2(path + "/conf_matrices");
 
         try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
             List<Double> errorRates = experiment.test();
