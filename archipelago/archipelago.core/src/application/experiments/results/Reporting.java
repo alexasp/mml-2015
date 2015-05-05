@@ -28,6 +28,7 @@ public class Reporting {
 
 
         experiment.writeRocCurves(path + "/roc_curves.xls");
+//        experiment.writeConfusionMatrices();
 
         try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
             List<Double> errorRates = experiment.test();
