@@ -41,7 +41,6 @@ public class Reporting {
     }
 
 
-
     private static double std(List<Double> test) {
         double mean = mean(test);
         double std = test.stream().mapToDouble(error -> Math.pow(error - mean, 2)).average().getAsDouble();
