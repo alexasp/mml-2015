@@ -26,7 +26,6 @@ public class AgentFactory {
     private BehaviourFactory _behaviourFactory;
     private PeerGraph _peerGraph;
     private DataLoader _dataLoader;
-    private IQueryableFactory _queryableFactory;
 
     @Inject
     public AgentFactory(BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, PeerGraph peerGraph, DataLoader dataLoader) {
@@ -36,8 +35,8 @@ public class AgentFactory {
         _dataLoader = dataLoader;
     }
 
-    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters, double updateCost) {
-        List<List<LabeledSample>> partitions = _dataLoader.partition(parts, data);
+    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters, double updateCost, int recordsPerPeer) {
+        List<List<LabeledSample>> partitions = _dataLoader.partition(parts, data, recordsPerPeer);
 
         List<PeerAgent> agents = new ArrayList<>();
 

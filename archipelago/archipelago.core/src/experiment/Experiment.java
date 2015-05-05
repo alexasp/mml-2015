@@ -48,7 +48,7 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.aggregations, configuration.budget, configuration.parameters, configuration.epsilon);
+        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.aggregations, configuration.budget, configuration.parameters, configuration.epsilon, configuration.recordsPerPeer);
 
         registerPeers(_peers);
     }

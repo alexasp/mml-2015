@@ -57,9 +57,9 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
             _groupAgent.removeBehaviour(this);
         }
 
-//        if(_iteration == _configuration.aggregations) {
-//            _groupAgent.removeBehaviour(this);
-//        }
+        if(_iteration == _configuration.aggregations) {
+            _groupAgent.removeBehaviour(this);
+        }
     }
 
     private void updateAgentBudgetsAndAvailability(List<AID> group) {

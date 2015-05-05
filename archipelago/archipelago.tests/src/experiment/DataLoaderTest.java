@@ -49,5 +49,18 @@ public class DataLoaderTest {
         assertEquals(1, partitioned.size());
     }
 
+    @Test
+    public void partitionWithLimit_DividesDataRespectingLimit() {
+        int records = 100;
+        List<LabeledSample> samples = IntStream.range(0, records)
+                .mapToObj(i -> mock(LabeledSample.class))
+                .collect(Collectors.toList());
+
+        List<List<LabeledSample>> partitions = _dataLoader.partition(3, samples, 20);
+
+        assertEquals(20, partitions.get(0).size());
+        assertEquals(20, partitions.get(1).size());
+        assertEquals(20, partitions.get(2).size());
+    }
 
 }

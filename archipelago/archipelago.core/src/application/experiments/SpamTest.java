@@ -38,7 +38,7 @@ public class SpamTest {
 
         List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
         List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
-        double recordsPerPeer = trainRatio * (double) data.size() / (double) max(peerCounts);
+        int recordsPerPeer = (int) (trainRatio * (double) data.size() / (double) max(peerCounts));
 
         for (Integer peerCount : peerCounts) {
             for (Integer groupSize : groupSizes) {
@@ -51,7 +51,7 @@ public class SpamTest {
         System.exit(0);
     }
 
-    private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> data, double recordsPerPeer, double trainRatio) throws ControllerException, InterruptedException {
+    private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> data, int recordsPerPeer, double trainRatio) throws ControllerException, InterruptedException {
         for(int i = 0; i < 10; i++) {
 
             //todo: use recordsPerPeer limitation
@@ -70,7 +70,7 @@ public class SpamTest {
             double epsilon = 0.1d;
             int aggregations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
 
-            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
+            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize, recordsPerPeer);
             injector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
             ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);

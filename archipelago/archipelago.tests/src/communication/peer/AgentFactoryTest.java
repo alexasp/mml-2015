@@ -9,16 +9,13 @@ import experiment.DataLoader;
 import learning.LabeledSample;
 import org.junit.Before;
 import org.junit.Test;
-import privacy.Budget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.same;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -41,6 +38,7 @@ public class AgentFactoryTest {
     private double _budget = 2.0;
     private Environment _environment;
     private int _parameters = 20;
+    private int _recordsPerPeer = 100;
 
     @Before
     public void setUp(){
@@ -65,20 +63,20 @@ public class AgentFactoryTest {
         _partition2 = mock(List.class);
 
         List<List<LabeledSample>> partitioned = new ArrayList<>(Arrays.asList(_partition1, _partition2));
-        when(_dataLoader.partition(anyInt(), same(_data))).thenReturn(partitioned);
+        when(_dataLoader.partition(anyInt(), same(_data), eq(_recordsPerPeer))).thenReturn(partitioned);
     }
 
 
     @Test
     public void createPeers_OnePeerPerPartition(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters, 0);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters, 0, _recordsPerPeer);
 
         assertEquals(_parts, peers.size());
     }
 
     @Test
     public void createPeers_PartitionsData(){
-        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters, 0);
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters, 0, _recordsPerPeer);
 
         assertEquals(_partition1, peers.get(0).getData());
         assertEquals(_partition2, peers.get(1).getData());
@@ -86,4 +84,13 @@ public class AgentFactoryTest {
         assertEquals(peers.get(0).getParameterLength(), _parameters);
     }
 
+    @Test
+    public void createPeers_KeepsRecordLimit(){
+        List<PeerAgent> peers = _peerFactory.createPeers(_data, _parts, _iterations, _budget, _parameters, 0, _recordsPerPeer);
+
+        assertEquals(_partition1, peers.get(0).getData());
+        assertEquals(_partition2, peers.get(1).getData());
+        assertEquals(peers.get(0).getIterations(), _iterations);
+        assertEquals(peers.get(0).getParameterLength(), _parameters);
+    }
 }
