@@ -4,6 +4,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -42,7 +43,7 @@ public class ROC_Curve {
 
     }
 
-    public void formChartObject(List<ConfusionMatrix> listOfConfusionMatrices){
+    private void formChartObject(List<ConfusionMatrix> listOfConfusionMatrices){
         //Create a new row in current sheet
         int rownum = 1;
         double maxClassification = listOfConfusionMatrices.get(0).getCorrectClassifiedPercentage();
@@ -51,50 +52,43 @@ public class ROC_Curve {
         ConfusionMatrix _bestConfusionMatrix = listOfConfusionMatrices.get(0);
 
         for(ConfusionMatrix matrix : listOfConfusionMatrices) {
-            HSSFRow row = sheet.createRow(rownum++);
-            HSSFCell cell1 = row.createCell(0);
-            cell1.setCellValue(matrix.getSensitivity());
-            HSSFCell cell2 = row.createCell(1);
-            double minus = (matrix.getFalsePositiveRate());
-            cell2.setCellValue(minus);
-            HSSFCell cell3 = row.createCell(2);
-            cell3.setCellValue(matrix.getThreshold());
+
+            addRow(sheet, rownum, matrix.getSensitivity(), matrix.getFalsePositiveRate(), matrix.getThreshold());
 
             if(matrix.getCorrectClassifiedPercentage()>maxClassification){
                 maxClassification=matrix.getCorrectClassifiedPercentage();
                 maxClassificationThreshold = matrix.getThreshold();
                 _bestConfusionMatrix=matrix;
             }
+
+            rownum++;
         }
-        HSSFRow jumpRow = sheet.createRow(rownum+2);
-        HSSFCell cell1 =jumpRow.createCell(0);
-        cell1.setCellValue("Best %,Threshold");
-        HSSFCell cell2 = jumpRow.createCell(1);
-        cell2.setCellValue(maxClassification);
-        HSSFCell cell3 = jumpRow.createCell(2);
-        cell3.setCellValue(maxClassificationThreshold);
 
-        HSSFRow expRow = sheet.createRow(rownum+3);
-        HSSFCell expCell1 = expRow.createCell(0);
-        expCell1.setCellValue("TP");
-        HSSFCell expCell2 = expRow.createCell(1);
-        expCell2.setCellValue("FP");
-        HSSFCell expCell3 = expRow.createCell(2);
-        expCell3.setCellValue("FN");
-        HSSFCell expCell4 = expRow.createCell(3);
-        expCell4.setCellValue("TN");
+        addRow(sheet, rownum+2, "Best %","Threshold");
+        addRow(sheet,rownum+3, maxClassification, maxClassificationThreshold);
 
-        HSSFRow lastRow = sheet.createRow(rownum+4);
-        HSSFCell lastCell1 = lastRow.createCell(0);
-        lastCell1.setCellValue(_bestConfusionMatrix.getTP());
-        HSSFCell lastCell2 = lastRow.createCell(1);
-        lastCell2.setCellValue(_bestConfusionMatrix.getFP());
-        HSSFCell lastCell3 = lastRow.createCell(2);
-        lastCell3.setCellValue(_bestConfusionMatrix.getFN());
-        HSSFCell lastCell4 = lastRow.createCell(3);
-        lastCell4.setCellValue(_bestConfusionMatrix.getTN());
+        addRow(sheet, rownum+5, "TP", "FP", "FN", "TN");
 
+        addRow(sheet, rownum+6, _bestConfusionMatrix.getTP(), _bestConfusionMatrix.getFP(), _bestConfusionMatrix.getFN(), _bestConfusionMatrix.getTN());
 
+    }
+
+    private void addRow(HSSFSheet sheet, int rownum, Object... cellValues) {
+        HSSFRow expRow = sheet.createRow(rownum);
+
+        for (int i = 0; i < cellValues.length; i++) {
+            HSSFCell expCell = expRow.createCell(i);
+            expCell.setCellValue(cellValues[i].toString());
+        }
+    }
+
+    private void addRow(HSSFSheet sheet, int rownum, Double... cellValues) {
+        HSSFRow expRow = sheet.createRow(rownum);
+
+        for (int i = 0; i < cellValues.length; i++) {
+            HSSFCell expCell = expRow.createCell(i);
+            expCell.setCellValue(String.format("%.3f", cellValues[i]));
+        }
     }
 
 

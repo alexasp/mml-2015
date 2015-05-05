@@ -81,9 +81,9 @@ public class Experiment {
                 .collect(Collectors.toList());
     }
 
-    public List<ROC_Curve> writeRocCurves(String path) {
+    public ROC_Curve writeRocCurves(String path) {
 
-        List<ROC_Curve> rocs = new ArrayList<>();
+        ROC_Curve roc = new ROC_Curve(path);
 
         for (PeerAgent peer : _peers) {
 
@@ -95,14 +95,12 @@ public class Experiment {
                 confusionMatrices.add(matrix);
 
             }
-            ROC_Curve roc = new ROC_Curve(confusionMatrices, path+ "/ROC_" + peer.getLocalName());
-            roc.formChartObject();
-            roc.writeChartToFile();
-            rocs.add(roc);
-
+            roc.add(confusionMatrices, peer.getLocalName());
         }
 
-        return rocs;
+        roc.writeChartToFile();
+
+        return roc;
     }
 
 

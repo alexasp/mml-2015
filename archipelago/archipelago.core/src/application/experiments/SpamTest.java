@@ -32,7 +32,7 @@ public class SpamTest {
 
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < 1; i++) {
 
             Injector injector = Guice.createInjector(new AppInjector());
 
