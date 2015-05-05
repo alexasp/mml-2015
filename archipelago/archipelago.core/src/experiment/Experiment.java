@@ -113,6 +113,7 @@ public class Experiment {
     }
 
     public void reset() {
+
         _environment.clearAndKill();
     }
 }

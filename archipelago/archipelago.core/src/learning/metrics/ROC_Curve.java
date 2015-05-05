@@ -87,7 +87,7 @@ public class ROC_Curve {
 
         for (int i = 0; i < cellValues.length; i++) {
             HSSFCell expCell = expRow.createCell(i);
-            expCell.setCellValue(String.format("%.3f", cellValues[i]));
+            expCell.setCellValue(String.format("%.4f", cellValues[i]));
         }
     }
 

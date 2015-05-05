@@ -46,7 +46,7 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
     @Override
     public void action() {
 
-        List<AID> group = _randomGenerator.sample(_agents, _configuration.groupSize-1);
+        List<AID> group = _randomGenerator.sample(_agents, _configuration.groupSize);
 
         _messageFacade.publishAggregationGroup(group, Integer.toString(_iteration));
         _iteration++;
