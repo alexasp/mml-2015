@@ -2,6 +2,7 @@ package application.experiments;
 
 import application.AppInjector;
 import application.ExperimentModule;
+import application.experiments.results.Reporting;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import experiment.DataLoader;
@@ -55,7 +56,6 @@ public class SpamTest {
             ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);
             Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
-
             runExperiment(experiment, String.format("eps%.3f-reg%.3f-cost%.3f-peers%d-groups%d", epsilon, regularization, perUpdateBudget, peerCount, groupSize, i), i);
         }
     }
@@ -65,8 +65,7 @@ public class SpamTest {
         CountDownLatch latch = new CountDownLatch(1);
 
         Consumer<Experiment> completionAction = completeExperiment -> {
-//            System.out.println(meanstd(completeExperiment.test()));
-            writeTestResults(experiment, experimentName, iteration);
+            Reporting.writeTestResults(experiment, experimentName, iteration);
             experiment.reset();
             latch.countDown();
         };
@@ -75,39 +74,5 @@ public class SpamTest {
         latch.await();
     }
 
-    private static void writeTestResults(Experiment experiment, String experimentName, int iteration) {
-        String path = "../experiments/basic/" + experimentName;
-        File experimentDirectory = new File(path);
-        if(!experimentDirectory.exists()){
-            experimentDirectory.mkdirs();
-        }
-        File confDirectory = new File(path+"/conf_matrices");
-        if(!confDirectory.exists()){
-            confDirectory.mkdirs();
-        }
-
-
-        experiment.test2(path + "/conf_matrices");
-
-        try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
-            List<Double> errorRates = experiment.test();
-            writer.println(mean(errorRates));
-            writer.println(std(errorRates));
-            writer.println(max(errorRates));
-            writer.println(min(errorRates));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("Failed to write experimental results!", e);
-        }
-    }
-
-
-
-    private static double std(List<Double> test) {
-        double mean = mean(test);
-        double std = test.stream().mapToDouble(error -> Math.pow(error - mean, 2)).average().getAsDouble();
-        std = Math.sqrt(std);
-
-        return std;
-    }
 
 }
