@@ -27,7 +27,7 @@ public class Reporting {
         }
 
 
-        experiment.writeRocCurves(path + "/roc_curves.xls");
+        experiment.writeRocCurves(path + "/roc_curves");
 //        experiment.writeConfusionMatrices();
 
         try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
