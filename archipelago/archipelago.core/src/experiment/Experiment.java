@@ -33,6 +33,8 @@ public class Experiment {
 
 
     private Environment _environment;
+    private CompletionListeningAgent _completionAgent;
+    private GroupLocatorAgent _groupAgent;
 
 
     public Experiment(List<LabeledSample> samples, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, PeerGraph peerGraph, ExperimentConfiguration configuration) throws ControllerException {
@@ -60,9 +62,15 @@ public class Experiment {
         }
     }
 
-    public void run(Consumer<Experiment> completionAction) throws ControllerException, InterruptedException {
-        CompletionListeningAgent completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
-        GroupLocatorAgent groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
+    public void run(Consumer<Experiment> actionOnCompletion) throws ControllerException, InterruptedException {
+        Consumer<Experiment> completionAction =
+                experiment ->
+        {
+            actionOnCompletion.accept(experiment);
+            deregisterAgents();
+        };
+        _completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
+        _groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
 
         _peerGraph.getRegistrationLatch().await();
 
@@ -71,6 +79,10 @@ public class Experiment {
 
         _environment.registerAgent(groupAgent, "GroupingAgent");
 
+
+    }
+
+    private void deregisterAgents() {
 
     }
 
