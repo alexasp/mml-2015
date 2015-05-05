@@ -18,27 +18,36 @@ import java.util.List;
 
 public class ROC_Curve {
 
-    List<ConfusionMatrix> listOfConfusionMatrices;
+    private final String _path;
     HSSFWorkbook workbook;
     HSSFSheet sheet;
     HSSFRow header;
-    String _peerName;
+    String _experimentName;
 
 
-    public ROC_Curve(List<ConfusionMatrix> matrices, String peerName){
-        listOfConfusionMatrices=matrices;
+    public ROC_Curve(String path,String experimentName)
+    {
+        _path = path;
         workbook = new HSSFWorkbook();
-        sheet = workbook.createSheet("Sample sheet");
+        _experimentName = experimentName;
+    }
+
+    public void add(List<ConfusionMatrix> matrices, String peerName){
+
+        sheet = workbook.createSheet(peerName);
         header = sheet.createRow(0);
         header.createCell(0).setCellValue("Sensitivity");
         header.createCell(1).setCellValue("False Positive Rate");
         header.createCell(2).setCellValue("Threshold");
-        _peerName=peerName;
+        formChartObject(matrices);
+
     }
 
-    public void formChartObject(){
+    public void formChartObject(List<ConfusionMatrix> listOfConfusionMatrices){
         //Create a new row in current sheet
         int rownum = 1;
+        double maxClassification = 0.0d;
+        double maxClassificationThreshold = 0.0d;
 
         for(ConfusionMatrix matrix : listOfConfusionMatrices) {
             HSSFRow row = sheet.createRow(rownum++);
@@ -49,7 +58,15 @@ public class ROC_Curve {
             cell2.setCellValue(minus);
             HSSFCell cell3 = row.createCell(2);
             cell3.setCellValue(matrix.getThreshold());
+
+//            if(matrix.getCorrectClassifiedPercentage()>maxClassification){
+//                maxClassification=matrix.getCorrectClassifiedPercentage();
+//                maxClassificationThreshold = matrix.getThreshold();
+//            }
         }
+    }
+    public void getBestConfusionMatrix(){
+
     }
 
 
@@ -62,7 +79,7 @@ public class ROC_Curve {
     // Write the output to a file
         FileOutputStream fileOut = null;
         try {
-            fileOut = new FileOutputStream(_peerName+".xls");
+            fileOut = new FileOutputStream(_experimentName+".xls");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
