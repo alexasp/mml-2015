@@ -27,7 +27,7 @@ public class Reporting {
         }
 
 
-        experiment.test2(path + "/conf_matrices");
+        experiment.writeRocCurves(path + "/roc_curves.xls");
 
         try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
             List<Double> errorRates = experiment.test();

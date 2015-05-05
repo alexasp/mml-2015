@@ -81,7 +81,7 @@ public class Experiment {
                 .collect(Collectors.toList());
     }
 
-    public List<ROC_Curve> test2(String path) {
+    public List<ROC_Curve> writeRocCurves(String path) {
 
         List<ROC_Curve> rocs = new ArrayList<>();
 
