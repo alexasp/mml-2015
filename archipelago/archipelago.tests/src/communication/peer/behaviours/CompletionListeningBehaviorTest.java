@@ -6,7 +6,6 @@ import communication.peer.CompletionListeningAgent;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,7 +35,7 @@ public class CompletionListeningBehaviorTest {
         
         _behavior.action();
         
-        verify(_agent).anAgentCompleted();
+        verify(_agent).aModelCompleted();
     }
 
     @Test
@@ -46,6 +45,6 @@ public class CompletionListeningBehaviorTest {
         _behavior.action();
 
         verify(_messageFacade, never()).nextMessage(CompletionListeningBehavior.Performative);
-        verify(_agent, never()).anAgentCompleted();
+        verify(_agent, never()).aModelCompleted();
     }
 }

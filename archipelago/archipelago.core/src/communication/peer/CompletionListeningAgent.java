@@ -35,12 +35,17 @@ public class CompletionListeningAgent extends Agent {
         addBehaviour(_completionBehavior);
     }
 
-    public void anAgentCompleted() {
+    public void aModelCompleted() {
         _completedPeers++;
 
         if(_completedPeers == _iterations){
-            _completionAction.accept(_experiment);
             removeBehaviour(_completionBehavior);
+
+            while (receive() != null) { }
+
+            _completionAction.accept(_experiment);
         }
     }
+
+
 }

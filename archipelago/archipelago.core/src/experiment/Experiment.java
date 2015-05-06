@@ -66,8 +66,9 @@ public class Experiment {
         Consumer<Experiment> completionAction =
                 experiment ->
         {
-            actionOnCompletion.accept(experiment);
+            _environment.reset();
             deregisterAgents();
+            actionOnCompletion.accept(experiment);
         };
         _completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
         _groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
@@ -82,6 +83,14 @@ public class Experiment {
     }
 
     private void deregisterAgents() {
+        _peerGraph.deregister(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
+        _completionAgent.doDelete();
+        _groupAgent.doDelete();
+
+        for (PeerAgent peer : _peers) {
+            _peerGraph.deregister(peer, PeerAgent.SERVICE_NAME);
+            peer.doDelete();
+        }
 
     }
 
@@ -123,8 +132,4 @@ public class Experiment {
         return _configuration;
     }
 
-    public void reset() {
-
-        _environment.clearAndKill();
-    }
 }

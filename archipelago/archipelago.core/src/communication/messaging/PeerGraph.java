@@ -89,7 +89,7 @@ public class PeerGraph {
 //                    System.out.println("Registered peer.");
                     RegistrationLatch.countDown();
                 } catch (FIPAException e) {
-                    throw new RuntimeException("Unable to register peer agent.", e);
+                    throw new RuntimeException("Unable to register agent.", e);
                 }
             }
         });
@@ -97,5 +97,13 @@ public class PeerGraph {
 
     public CountDownLatch getRegistrationLatch() {
         return RegistrationLatch;
+    }
+
+    public void deregister(Agent completionAgent, String serviceName) {
+        try {
+            DFService.deregister(completionAgent);
+        } catch (FIPAException e) {
+            throw new RuntimeException("Unable to deregister agent.", e);
+        }
     }
 }

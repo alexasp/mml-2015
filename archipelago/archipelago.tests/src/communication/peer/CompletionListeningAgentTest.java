@@ -53,9 +53,9 @@ public class CompletionListeningAgentTest {
     @Test
     public void allIterationsCompleted_RunsAction(){
 
-        IntStream.iterate(0, i -> i+1).limit(_iterations-1).forEach(i -> _completionListeningAgent.anAgentCompleted());
+        IntStream.iterate(0, i -> i+1).limit(_iterations-1).forEach(i -> _completionListeningAgent.aModelCompleted());
         verify(_completionAction, never()).accept(any(Experiment.class));
-        _completionListeningAgent.anAgentCompleted();
+        _completionListeningAgent.aModelCompleted();
 
         verify(_completionAction).accept(any(Experiment.class));
     }
