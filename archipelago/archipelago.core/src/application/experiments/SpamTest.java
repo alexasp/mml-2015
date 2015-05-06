@@ -39,6 +39,7 @@ public class SpamTest {
         List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
         List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
         int recordsPerPeer = (int) (trainRatio * (double) data.size() / (double) max(peerCounts));
+        System.out.println("Total number of records per peer:" + recordsPerPeer);
 
         for (Integer peerCount : peerCounts) {
             for (Integer groupSize : groupSizes) {

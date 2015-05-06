@@ -11,6 +11,8 @@ import org.apache.poi.ss.usermodel.Row;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -101,25 +103,24 @@ public class ROC_Curve {
     public void writeChartToFile(){
 
     // Write the output to a file
-        FileOutputStream fileOut = null;
+
+        PrintStream fileOut = null;
         try {
-            fileOut = new FileOutputStream(_path+".xls");
+            fileOut = new PrintStream(_path + ".xls");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to write experimental output!", e);
         }
-        try {
-//            workbook.write(fileOut);
 
-            for (Row cells : sheet) {
-                String[] cellValues = Iterables.toString(cells);
-                
-                String.join(",", cellValues);
-            }
+        for (Row cells : sheet) {
+            ArrayList<String> cellList = new ArrayList<>();
+            cells.forEach(cell -> cellList.add(cell.getStringCellValue()));
 
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            String line = String.join(",", cellList);
+            fileOut.println(line);
         }
+
+        fileOut.close();
+
 
     }
 

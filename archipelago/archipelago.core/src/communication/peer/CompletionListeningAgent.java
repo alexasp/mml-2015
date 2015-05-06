@@ -6,6 +6,7 @@ import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import experiment.Experiment;
 import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
 
 import java.util.function.Consumer;
 
@@ -18,6 +19,7 @@ public class CompletionListeningAgent extends Agent {
     private final Consumer<Experiment> _completionAction;
     private final int _totalPeerCount;
     private final MessageFacade _messageFacade;
+    private final Behaviour _completionBehavior;
     private int _completedPeers = 0;
     private Experiment _experiment;
     private int _iterations;
@@ -29,7 +31,8 @@ public class CompletionListeningAgent extends Agent {
         _messageFacade = messageFacadeFactory.getFacade(this);
         _experiment = experiment;
 
-        addBehaviour(behaviourFactory.getCompletionListening(this, _messageFacade));
+        _completionBehavior = behaviourFactory.getCompletionListening(this, _messageFacade);
+        addBehaviour(_completionBehavior);
     }
 
     public void anAgentCompleted() {
@@ -37,6 +40,7 @@ public class CompletionListeningAgent extends Agent {
 
         if(_completedPeers == _iterations){
             _completionAction.accept(_experiment);
+            removeBehaviour(_completionBehavior);
         }
     }
 }
