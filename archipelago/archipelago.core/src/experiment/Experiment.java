@@ -74,11 +74,10 @@ public class Experiment {
 
         _peerGraph.getRegistrationLatch().await();
 
-        _peerGraph.join(completionAgent, CompletionListeningAgent.SERVICE_NAME);
-        _environment.registerAgent(completionAgent, "CompletionAgent");
+        _peerGraph.join(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
+        _environment.registerAgent(_completionAgent, "CompletionAgent");
 
-        _environment.registerAgent(groupAgent, "GroupingAgent");
-
+        _environment.registerAgent(_groupAgent, "GroupingAgent");
 
     }
 

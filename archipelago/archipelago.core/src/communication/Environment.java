@@ -84,8 +84,11 @@ public class Environment {
 
     public void clearAndKill() {
         try {
-            _mainContainer.kill();
+//            _mainContainer.kill();
+            _mainContainer.getPlatformController().kill();
         } catch (StaleProxyException e) {
+            e.printStackTrace();
+        } catch (ControllerException e) {
             e.printStackTrace();
         }
         _rt.shutDown();
