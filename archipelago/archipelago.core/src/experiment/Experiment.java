@@ -33,7 +33,7 @@ public class Experiment {
 
 
     private Environment _environment;
-    private CompletionListeningAgent _completionAgent;
+    private static CompletionListeningAgent _completionAgent;
     private GroupLocatorAgent _groupAgent;
 
 
@@ -50,7 +50,7 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.aggregations, configuration.budget, configuration.parameters, configuration.epsilon, configuration.recordsPerPeer);
+        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.aggregations, configuration.perUpdateBudget, configuration.parameters, configuration.epsilon, configuration.recordsPerPeer);
 
         registerPeers(_peers);
     }
@@ -70,21 +70,26 @@ public class Experiment {
             deregisterAgents();
             actionOnCompletion.accept(experiment);
         };
-        _completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
+
+        if(_completionAgent == null) {
+            _completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
+            _environment.registerAgent(_completionAgent, "CompletionAgent");
+            _peerGraph.join(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
+        }
+
+        _completionAgent.init(completionAction, _peers.size(), this, _configuration.aggregations);
         _groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
 
         _peerGraph.getRegistrationLatch().await();
 
-        _peerGraph.join(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
-        _environment.registerAgent(_completionAgent, "CompletionAgent");
 
         _environment.registerAgent(_groupAgent, "GroupingAgent");
 
     }
 
     private void deregisterAgents() {
-        _peerGraph.deregister(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
-        _completionAgent.doDelete();
+//        _peerGraph.deregister(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
+//        _completionAgent.doDelete();
         _groupAgent.doDelete();
 
         for (PeerAgent peer : _peers) {

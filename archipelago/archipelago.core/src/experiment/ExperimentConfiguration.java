@@ -7,7 +7,7 @@ public class ExperimentConfiguration {
 
     public int recordsPerPeer;
     public int aggregations;
-    public double budget;
+    public double perUpdateBudget;
     public double trainRatio;
     public int peerCount;
     public double testCost;
@@ -18,7 +18,7 @@ public class ExperimentConfiguration {
 
     public ExperimentConfiguration(int aggregations, double budget, double trainRatio, int peerCount, double testCost, int parameters, double epsilon, double regularization, int groupSize, int recordsPerPeer) {
         this.aggregations = aggregations;
-        this.budget = budget;
+        this.perUpdateBudget = budget;
         this.trainRatio = trainRatio;
         this.peerCount = peerCount;
         this.testCost = testCost;

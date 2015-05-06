@@ -52,7 +52,7 @@ public class GroupFormingBehaviourTest {
         _configuration = new ExperimentConfiguration();
         _configuration.aggregations = 2;
         _configuration.groupSize = 3;
-        _configuration.budget = 0.1d;
+        _configuration.perUpdateBudget = 0.1d;
         _configuration.epsilon = 0.25d;
         _behaviour = new GroupFormingBehaviour(_groupAgent, new ArrayList<>(_agents), _configuration, _randomGenerator, _messageFacade);
     }

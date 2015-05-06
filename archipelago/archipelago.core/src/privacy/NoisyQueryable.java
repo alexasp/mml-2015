@@ -100,7 +100,7 @@ public class NoisyQueryable<T> implements IQueryable<T> {
     }
 
     private void checkAgentBudget(double epsilon) {
-        if(_budget.getEpsilon() < epsilon){ throw new IllegalStateException("Agent disclosure budget too low for query."); }
+        if(_budget.getEpsilon() < epsilon){ throw new IllegalStateException("Agent disclosure perUpdateBudget too low for query."); }
     }
 
     

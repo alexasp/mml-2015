@@ -36,37 +36,43 @@ public class SpamTest {
         double trainRatio = 0.8;
 
 
-//        List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
-//        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
-        List<Integer> peerCounts = Arrays.asList(500);
-        List<Integer> groupSizes = Arrays.asList(50);
+        List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
+//        List<Integer> peerCounts = Arrays.asList(500);
+//        List<Integer> groupSizes = Arrays.asList(50);
         int recordsPerPeer = (int) (trainRatio * (double) data.size() / (double) max(peerCounts));
         System.out.println("Total number of records per peer:" + recordsPerPeer);
+
+
+        double testCost = 0.1;
+        double regularization = 10.0;
+        double perUpdateBudget = 0.1d;
+        int parameters = data.get(0).getFeatures().length;
+        double epsilon = 0.1d;
+
+        Injector injector = Guice.createInjector(new AppInjector());
 
         for (Integer peerCount : peerCounts) {
             for (Integer groupSize : groupSizes) {
                 if(groupSize > peerCount){ continue; }
 
-                testWithParameters(peerCount, groupSize, data, recordsPerPeer, trainRatio);
+                int aggregations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
+
+                ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize, recordsPerPeer);
+
+
+                testWithParameters(peerCount, groupSize, data, recordsPerPeer, trainRatio, injector, configuration);
             }
         }
 
         System.exit(0);
     }
 
-    private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> data, int recordsPerPeer, double trainRatio) throws ControllerException, InterruptedException {
+    private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> data, int recordsPerPeer, double trainRatio, Injector injector, ExperimentConfiguration configuration) throws ControllerException, InterruptedException {
 
-        Injector injector = Guice.createInjector(new AppInjector());
-        double testCost = 0.1;
-        double regularization = 10.0;
-        double perUpdateBudget = 0.1d;
-        int parameters = data.get(0).getFeatures().length;
-        double epsilon = 0.1d;
-        int aggregations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
+        System.out.println(String.format("Running with peerCount %s, groupSize %s", peerCount, groupSize));
 
-        ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize, recordsPerPeer);
-
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 10; i++) {
             Collections.shuffle(data);
 
 //            int peerCount = 100;
@@ -77,7 +83,7 @@ public class SpamTest {
             ExperimentFactory experimentFactory = currentInjector.getInstance(ExperimentFactory.class);
             Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
-            runExperiment(experiment, String.format("eps%.3f-reg%.3f-cost%.3f-peers%d-groups%d", epsilon, regularization, perUpdateBudget, peerCount, groupSize, i), i);
+            runExperiment(experiment, String.format("eps%.3f-reg%.3f-cost%.3f-peers%d-groups%d", configuration.epsilon, configuration.regularization, configuration.perUpdateBudget, peerCount, groupSize, i), i);
         }
     }
 
