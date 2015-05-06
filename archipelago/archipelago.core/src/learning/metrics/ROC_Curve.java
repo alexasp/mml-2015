@@ -1,10 +1,12 @@
 package learning.metrics;
 
+import com.google.common.collect.Iterables;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -106,7 +108,14 @@ public class ROC_Curve {
             e.printStackTrace();
         }
         try {
-            workbook.write(fileOut);
+//            workbook.write(fileOut);
+
+            for (Row cells : sheet) {
+                String[] cellValues = Iterables.toString(cells);
+                
+                String.join(",", cellValues);
+            }
+
             fileOut.close();
         } catch (IOException e) {
             e.printStackTrace();
