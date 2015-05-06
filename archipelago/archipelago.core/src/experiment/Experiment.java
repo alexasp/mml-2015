@@ -50,7 +50,7 @@ public class Experiment {
         _testData = trainPartitioning.get(1);
 
         _performanceMetrics = performanceMetrics;
-        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.aggregations, configuration.budget, configuration.parameters, configuration.epsilon);
+        _peers = agentFactory.createPeers(_trainData, configuration.peerCount, configuration.aggregations, configuration.budget, configuration.parameters, configuration.epsilon, configuration.recordsPerPeer);
 
         registerPeers(_peers);
     }
@@ -93,9 +93,9 @@ public class Experiment {
                 .collect(Collectors.toList());
     }
 
-    public List<ROC_Curve> writeRocCurves(String path) {
+    public ROC_Curve writeRocCurves(String path) {
 
-        List<ROC_Curve> rocs = new ArrayList<>();
+        ROC_Curve roc = new ROC_Curve(path);
 
         for (PeerAgent peer : _peers) {
 
@@ -107,14 +107,12 @@ public class Experiment {
                 confusionMatrices.add(matrix);
 
             }
-            ROC_Curve roc = new ROC_Curve(confusionMatrices, path+ "/ROC_" + peer.getLocalName());
-            roc.formChartObject();
-            roc.writeChartToFile();
-            rocs.add(roc);
-
+            roc.add(confusionMatrices, peer.getLocalName());
         }
 
-        return rocs;
+        roc.writeChartToFile();
+
+        return roc;
     }
 
 
@@ -127,6 +125,7 @@ public class Experiment {
     }
 
     public void reset() {
+
         _environment.clearAndKill();
     }
 }

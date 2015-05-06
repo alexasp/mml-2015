@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -30,27 +31,47 @@ import static java.util.Collections.min;
  */
 public class SpamTest {
 
-
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
-        for(int i = 0; i < 3; i++) {
+        List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
+        double trainRatio = 0.8;
+
+
+        List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
+        int recordsPerPeer = (int) (trainRatio * (double) data.size() / (double) max(peerCounts));
+        System.out.println("Total number of records per peer:" + recordsPerPeer);
+
+        for (Integer peerCount : peerCounts) {
+            for (Integer groupSize : groupSizes) {
+                if(groupSize > peerCount){ continue; }
+
+                testWithParameters(peerCount, groupSize, data, recordsPerPeer, trainRatio);
+            }
+        }
+
+        System.exit(0);
+    }
+
+    private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> data, int recordsPerPeer, double trainRatio) throws ControllerException, InterruptedException {
+        for(int i = 0; i < 10; i++) {
+
+            //todo: use recordsPerPeer limitation
 
             Injector injector = Guice.createInjector(new AppInjector());
 
             DataLoader loader = injector.getInstance(DataLoader.class);
-            List<LabeledSample> data = loader.readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
             Collections.shuffle(data);
 
-            double trainRatio = 0.8;
-            int peerCount = 100;
-            int groupSize = 20;
+//            int peerCount = 100;
+//            int groupSize = 20;
             double testCost = 0.1;
             double regularization = 10.0;
-            double perUpdateBudget = 0.05d;
+            double perUpdateBudget = 0.1d;
             int parameters = data.get(0).getFeatures().length;
             double epsilon = 0.1d;
             int aggregations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
 
-            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize);
+            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize, recordsPerPeer);
             injector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
             ExperimentFactory experimentFactory = injector.getInstance(ExperimentFactory.class);

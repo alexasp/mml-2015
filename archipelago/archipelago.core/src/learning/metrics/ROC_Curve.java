@@ -1,13 +1,18 @@
 package learning.metrics;
 
+import com.google.common.collect.Iterables;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,11 +30,10 @@ public class ROC_Curve {
     String _experimentName;
 
 
-    public ROC_Curve(String path,String experimentName)
+    public ROC_Curve(String path)
     {
         _path = path;
         workbook = new HSSFWorkbook();
-        _experimentName = experimentName;
     }
 
     public void add(List<ConfusionMatrix> matrices, String peerName){
@@ -43,30 +47,52 @@ public class ROC_Curve {
 
     }
 
-    public void formChartObject(List<ConfusionMatrix> listOfConfusionMatrices){
+    private void formChartObject(List<ConfusionMatrix> listOfConfusionMatrices){
         //Create a new row in current sheet
         int rownum = 1;
-        double maxClassification = 0.0d;
-        double maxClassificationThreshold = 0.0d;
+        double maxClassification = listOfConfusionMatrices.get(0).getCorrectClassifiedPercentage();
+        double maxClassificationThreshold = listOfConfusionMatrices.get(0).getThreshold();
+
+        ConfusionMatrix _bestConfusionMatrix = listOfConfusionMatrices.get(0);
 
         for(ConfusionMatrix matrix : listOfConfusionMatrices) {
-            HSSFRow row = sheet.createRow(rownum++);
-            HSSFCell cell1 = row.createCell(0);
-            cell1.setCellValue(matrix.getSensitivity());
-            HSSFCell cell2 = row.createCell(1);
-            double minus = (matrix.getFalsePositiveRate());
-            cell2.setCellValue(minus);
-            HSSFCell cell3 = row.createCell(2);
-            cell3.setCellValue(matrix.getThreshold());
 
-//            if(matrix.getCorrectClassifiedPercentage()>maxClassification){
-//                maxClassification=matrix.getCorrectClassifiedPercentage();
-//                maxClassificationThreshold = matrix.getThreshold();
-//            }
+            addRow(sheet, rownum, matrix.getSensitivity(), matrix.getFalsePositiveRate(), matrix.getThreshold());
+
+            if(matrix.getCorrectClassifiedPercentage()>maxClassification){
+                maxClassification=matrix.getCorrectClassifiedPercentage();
+                maxClassificationThreshold = matrix.getThreshold();
+                _bestConfusionMatrix=matrix;
+            }
+
+            rownum++;
+        }
+
+        addRow(sheet, rownum+2, "Best %","Threshold");
+        addRow(sheet,rownum+3, maxClassification, maxClassificationThreshold);
+
+        addRow(sheet, rownum+5, "TP", "FP", "FN", "TN");
+
+        addRow(sheet, rownum+6, _bestConfusionMatrix.getTP(), _bestConfusionMatrix.getFP(), _bestConfusionMatrix.getFN(), _bestConfusionMatrix.getTN());
+
+    }
+
+    private void addRow(HSSFSheet sheet, int rownum, Object... cellValues) {
+        HSSFRow expRow = sheet.createRow(rownum);
+
+        for (int i = 0; i < cellValues.length; i++) {
+            HSSFCell expCell = expRow.createCell(i);
+            expCell.setCellValue(cellValues[i].toString());
         }
     }
-    public void getBestConfusionMatrix(){
 
+    private void addRow(HSSFSheet sheet, int rownum, Double... cellValues) {
+        HSSFRow expRow = sheet.createRow(rownum);
+
+        for (int i = 0; i < cellValues.length; i++) {
+            HSSFCell expCell = expRow.createCell(i);
+            expCell.setCellValue(String.format("%.4f", cellValues[i]));
+        }
     }
 
 
@@ -77,18 +103,24 @@ public class ROC_Curve {
     public void writeChartToFile(){
 
     // Write the output to a file
-        FileOutputStream fileOut = null;
+
+        PrintStream fileOut = null;
         try {
-            fileOut = new FileOutputStream(_experimentName+".xls");
+            fileOut = new PrintStream(_path + ".xls");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to write experimental output!", e);
         }
-        try {
-            workbook.write(fileOut);
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        for (Row cells : sheet) {
+            ArrayList<String> cellList = new ArrayList<>();
+            cells.forEach(cell -> cellList.add(cell.getStringCellValue()));
+
+            String line = String.join(",", cellList);
+            fileOut.println(line);
         }
+
+        fileOut.close();
+
 
     }
 

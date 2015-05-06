@@ -13,7 +13,7 @@ public class ConfusionMatrix {
 
     public Map<String,Integer> _confusionMatrix;
     private double _threshold;
-
+    
     public ConfusionMatrix(List<LabeledSample> test, List<Double> predictions,double threshold){
         _threshold=threshold;
         _confusionMatrix = new LinkedHashMap<String,Integer>();
@@ -60,6 +60,18 @@ public class ConfusionMatrix {
         double percentageCorrect = (correct/(correct+incorrect))*100;
         return  percentageCorrect;
     }
+    public int getTP(){
+        return _confusionMatrix.get("TP");
+    }
+    public int getFP(){
+        return _confusionMatrix.get("FP");
+    }
+    public int getFN(){
+        return _confusionMatrix.get("FN");
+    }
+    public int getTN(){
+        return _confusionMatrix.get("TN");
+    }
 
     public void printConfusionMatrix(){
 
@@ -75,5 +87,6 @@ public class ConfusionMatrix {
         System.out.println(_confusionMatrix.get("TP") + " " +_confusionMatrix.get("FN"));
         System.out.println(_confusionMatrix.get("FP") + " " +_confusionMatrix.get("TN"));
     }
+
 
 }

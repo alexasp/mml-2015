@@ -36,7 +36,6 @@ public class Environment {
         // Get a hold on JADE runtime
         Logger.getJADELogger(this.getClass().getName()).setLevel(Level.OFF);
         _rt = Runtime.instance();
-
        // Don't exit the JVM when there are no more containers around
         _rt.setCloseVM(false);
 
@@ -53,8 +52,8 @@ public class Environment {
 //        System.out.println("Launching the agent container after ..."+pContainer);
 
 
-        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
-        rma.start();
+//        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+//        rma.start();
 //        _mainContainer.suspend();
     }
 
@@ -84,6 +83,11 @@ public class Environment {
     }
 
     public void clearAndKill() {
+        try {
+            _mainContainer.kill();
+        } catch (StaleProxyException e) {
+            e.printStackTrace();
+        }
         _rt.shutDown();
     }
 }

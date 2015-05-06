@@ -21,14 +21,8 @@ public class Reporting {
         if(!experimentDirectory.exists()){
             experimentDirectory.mkdirs();
         }
-        File confDirectory = new File(path+"/conf_matrices");
-        if(!confDirectory.exists()){
-            confDirectory.mkdirs();
-        }
 
-
-        experiment.writeRocCurves(path + "/roc_curves.xls");
-//        experiment.writeConfusionMatrices();
+        experiment.writeRocCurves(path + "/roc_curves_iter_" + iteration);
 
         try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
             List<Double> errorRates = experiment.test();

@@ -101,6 +101,10 @@ public class DataLoader {
         return partitions;
     }
 
+    public List<List<LabeledSample>> partition(int parts, List<LabeledSample> data, int recordsPerPeer) {
+        return Lists.partition(data, recordsPerPeer).subList(0, parts);
+    }
+
        /*
         try {
         FileInputStream inputStream = new FileInputStream();
