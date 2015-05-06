@@ -83,7 +83,7 @@ public class SpamTest {
             ExperimentFactory experimentFactory = currentInjector.getInstance(ExperimentFactory.class);
             Experiment experiment = experimentFactory.getExperiment(data, configuration);
 
-            runExperiment(experiment, String.format("eps%.3f-reg%.3f-cost%.3f-peers%d-groups%d", configuration.epsilon, configuration.regularization, configuration.perUpdateBudget, peerCount, groupSize, i), i);
+            runExperiment(experiment, String.format("eps,%.3f-reg,%.3f-cost,%.3f-peers,%d-groups,%d", configuration.epsilon, configuration.regularization, configuration.perUpdateBudget, peerCount, groupSize, i), i);
         }
     }
 
