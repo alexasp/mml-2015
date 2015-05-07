@@ -48,7 +48,7 @@ public class AgentFactory {
     }
 
     public CompletionListeningAgent getCompletionAgent(Consumer<Experiment> completionAction, int totalPeerCount, Experiment experiment, int iterations) {
-        return new CompletionListeningAgent(completionAction, totalPeerCount, _behaviourFactory, _messageFacadeFactory, experiment, iterations);
+        return new CompletionListeningAgent(_messageFacadeFactory, _behaviourFactory);
     }
 
     public GroupLocatorAgent getGroupLocatingAgentWithAgents(List<PeerAgent> agents, ExperimentConfiguration configuration) {

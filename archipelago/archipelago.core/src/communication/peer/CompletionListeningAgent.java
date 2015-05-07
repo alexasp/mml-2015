@@ -16,31 +16,42 @@ import java.util.function.Consumer;
 public class CompletionListeningAgent extends Agent {
     public static final String SERVICE_NAME = "COMPLETION";
 
-    private final Consumer<Experiment> _completionAction;
-    private final int _totalPeerCount;
-    private final MessageFacade _messageFacade;
-    private final Behaviour _completionBehavior;
-    private int _completedPeers = 0;
+    private  Consumer<Experiment> _completionAction;
+    private  int _totalPeerCount;
+    private  MessageFacade _messageFacade;
+    private  Behaviour _completionBehavior;
+    private int _completedPeers;
     private Experiment _experiment;
     private int _iterations;
+    private BehaviourFactory _behaviourFactory;
 
-    public CompletionListeningAgent(Consumer<Experiment> completionAction, int totalPeerCount, BehaviourFactory behaviourFactory, MessageFacadeFactory messageFacadeFactory, Experiment experiment, int iterations) {
+    public CompletionListeningAgent(MessageFacadeFactory messageFacadeFactory, BehaviourFactory behaviourFactory) {
+        _behaviourFactory = behaviourFactory;
+        _messageFacade = messageFacadeFactory.getFacade(this);
+    }
+
+    public void init(Consumer<Experiment> completionAction, int totalPeerCount, Experiment experiment, int iterations){
         _completionAction = completionAction;
         _totalPeerCount = totalPeerCount;
         _iterations = iterations;
-        _messageFacade = messageFacadeFactory.getFacade(this);
         _experiment = experiment;
+        _completedPeers = 0;
 
-        _completionBehavior = behaviourFactory.getCompletionListening(this, _messageFacade);
+        _completionBehavior = _behaviourFactory.getCompletionListening(this, _messageFacade);
         addBehaviour(_completionBehavior);
     }
 
-    public void anAgentCompleted() {
+    public void aModelCompleted() {
         _completedPeers++;
 
         if(_completedPeers == _iterations){
-            _completionAction.accept(_experiment);
             removeBehaviour(_completionBehavior);
+
+            while (receive() != null) { }
+
+            _completionAction.accept(_experiment);
         }
     }
+
+
 }

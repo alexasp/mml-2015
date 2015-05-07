@@ -54,7 +54,7 @@ public class CuratorBehavior extends CyclicBehaviour{
             if(dataSetSize < _smallestSet){ _smallestSet = dataSetSize; }
 
             if(_models.size() >= _parties.size()){
-                System.out.println(_peerAgent + " FINISH "+_conversationId);
+//                System.out.println(_peerAgent + " FINISH "+_conversationId);
                 ParametricModel mergedModel = _modelMerger.merge(_models);
                 double beta = 2.0/(_smallestSet*_peerAgent.getEpsilon()*_configuration.regularization);
                 mergedModel.addTerm(_randomGenerator.fromLaplacian(beta, message.getModel().getParameters().length));

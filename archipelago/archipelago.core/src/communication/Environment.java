@@ -5,6 +5,7 @@ import jade.core.Agent;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
+import jade.domain.DFService;
 import jade.util.Logger;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
@@ -23,6 +24,8 @@ public class Environment {
     private static final String SERVICE_NAME = "peer";
     private int _counter = 0;
     private Runtime _rt;
+    private AgentContainer _cont;
+    private AgentController _rma;
 
 
     public Environment() throws ControllerException {
@@ -45,15 +48,16 @@ public class Environment {
 
         _mainContainer = _rt.createMainContainer(profile);
 
-       // now set the default Profile to start a container
-        ProfileImpl pContainer = new ProfileImpl(null, 1202, null);
+//       now set the default Profile to start a container
+//        ProfileImpl pContainer = new ProfileImpl(null, 1202, null);
 
-//        jade.wrapper.AgentContainer cont = rt.createAgentContainer(pContainer);
+//        _cont = _rt.createAgentContainer(pContainer);
 //        System.out.println("Launching the agent container after ..."+pContainer);
 
-
-//        AgentController rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
-//        rma.start();
+        if(_rma == null) {
+            _rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+            _rma.start();
+        }
 //        _mainContainer.suspend();
     }
 
@@ -82,15 +86,7 @@ public class Environment {
         _mainContainer.suspend();
     }
 
-    public void clearAndKill() {
-        try {
-//            _mainContainer.kill();
-            _mainContainer.getPlatformController().kill();
-        } catch (StaleProxyException e) {
-            e.printStackTrace();
-        } catch (ControllerException e) {
-            e.printStackTrace();
-        }
-        _rt.shutDown();
+    public void reset() {
+        _counter = 0;
     }
 }
