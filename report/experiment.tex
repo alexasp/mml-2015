@@ -48,9 +48,14 @@ What controls the messages and determines where they should go?
 
 \subsection{Learning}
 How is a logistic model implemented in our framework?
+
 How is a model created and passed around the network?
+Each Peer creates a logistic model based on their local data. They then form groups by calling the GroupFormingManager which assigns a group of peers together. This groups creates an aggregated model based on their own local ones. Here we simulate a Homomorphic Encryption scheme which assigns noise by secret sharing. 
+
+
 How does the ensemble learning choose the best model?
 What kind of performance metrics are used?
+Mean classification error and Confusion Matrix.
 
 \subsection{Privacy}
 How does our framework guarantee differential privacy?
@@ -60,6 +65,10 @@ What is NoisyQueryable?
 \subsection{Experiment}
 How are the experiments set up?
 Explain the testing scheme.
+
+Jade is re-run with while changing the initial parameters for the amount of peers, and the size of the groups they form. This test if performed over 10 iterations, while the mean classification error is recorded for each iteration. Each peer also create a confusion matrix with their classification results, and the peer with the best classification accuracy is saved and used to create a ROC-curve. 
+
+Automatic testing scheme - Jade is configured so that it resets the main container after each experiment, and then re-run with new parameter configurations. 
 
 
 

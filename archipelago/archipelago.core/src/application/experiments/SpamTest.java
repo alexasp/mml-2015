@@ -12,19 +12,14 @@ import experiment.ExperimentFactory;
 import jade.wrapper.ControllerException;
 import learning.LabeledSample;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
-import static com.google.common.math.DoubleMath.mean;
 import static java.util.Collections.max;
-import static java.util.Collections.min;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -36,8 +31,13 @@ public class SpamTest {
         double trainRatio = 0.8;
 
 
-        List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
-        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
+//        List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+//        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
+
+
+
+        List<Integer> peerCounts = Arrays.asList(500);
+        List<Integer> groupSizes = Arrays.asList(10, 50, 80, 100, 200);
         int recordsPerPeer = (int) (trainRatio * (double) data.size() / (double) max(peerCounts));
         System.out.println("Total number of records per peer:" + recordsPerPeer);
 
