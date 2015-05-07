@@ -11,5 +11,7 @@ Han et al. investigated the problem of preserving differential privacy in distri
 
 Ji et al. \cite{ji2014DisLogReg} recently proposed a distributed solution using logistic regression, which learned from both private and publicly available medical datasets. Their solution differ from our own as they employ a globally synchronized structure, whereas our own solution works asynchronously. Their approach also requires a global aggregation of gradients, compared to our own which employ distributed ensemble learning,
 
+Pathak et al \cite{pathak2010diffprivhomo} proposed a privacy-preserving protocol for composing a differentially private aggregate classifier. Their protocol trained classifiers locally in different parties, and the parties would then interact with an curator through a homomorphic encryption scheme to create a perturbed aggregate classifier. We took inspiration from their protocol when we created our own ensemble classifier.
+\todo[inline]{Look at the last line and see if it's correct.}  
 
 

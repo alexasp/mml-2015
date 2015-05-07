@@ -32,8 +32,8 @@ public class SpamTest {
 
 
 
-        List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
-        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80);
+        List<Integer> peerCounts = Arrays.asList(10, 30, 50, 75, 100 );
+        List<Integer> groupSizes = Arrays.asList(10, 30, 50, 75);
 //        List<Integer> peerCounts = Arrays.asList(500);
 //        List<Integer> groupSizes = Arrays.asList(50);
 
@@ -43,7 +43,7 @@ public class SpamTest {
 
 
         double testCost = 0.1;
-        double regularization = 10.0;
+        double regularization = 10;
         double perUpdateBudget = 0.1d;
         int parameters = data.get(0).getFeatures().length;
         double epsilon = 0.1d;
