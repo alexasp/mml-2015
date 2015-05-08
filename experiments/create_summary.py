@@ -27,7 +27,7 @@ def getParameters():
 def updateResults(results, experiment_file, parameters):
 	firstLine = experiment_file.readline()
 	results[parameters] = 
-	#TODO: each experiment has a number of iterations - compute averages!
+	#TODO: each experiment has a number of iterations - compute averages!1l	
 
 
 
