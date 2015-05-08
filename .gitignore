@@ -1,6 +1,8 @@
 report/main.pdf
 *.xls
 
+*.pyc
+
 *.class
 
 # Mobile Tools for Java (J2ME)

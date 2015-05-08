@@ -1,4 +1,6 @@
 import os, sys, pickle
+from archipelago_tuples import Parameters, Metrics
+
 
 def main():
 	summaries_dir = 'summaries'
@@ -16,7 +18,6 @@ def main():
 		parameters = getParameters(experiment_dirname)
 		results[parameters] = valueMap 
 
-	print results
 	with open(summaries_dir + "/" + sys.argv[1], 'w') as stored_results:
 		pickle.dump(results, stored_results)
 
@@ -28,12 +29,11 @@ def computeAverages(iterations_filenames, directory):
 			std += float(iteration_file.readline())
 			maximum += float(iteration_file.readline())
 			minimum += float(iteration_file.readline())
-	values = {}
-	values["mean"] = mean / float(len(iterations_filenames))
-	values["std"] = std / float(len(iterations_filenames))
-	values["max"] = maximum / float(len(iterations_filenames))
-	values["min"] = minimum / float(len(iterations_filenames))
-	return values
+	mean = mean / float(len(iterations_filenames))
+	std = std / float(len(iterations_filenames))
+	maximum = maximum / float(len(iterations_filenames))
+	minimum = minimum / float(len(iterations_filenames))
+	return Metrics(mean, std, maximum, minimum)
 
 def getParameters(experiment_dirname):
 	parameters = experiment_dirname.strip().split("-")
@@ -41,7 +41,7 @@ def getParameters(experiment_dirname):
 	for parameter in parameters:
 		parts = parameter.split(",")
 		values.append(parts[1])
-	return tuple(values)
+	return Parameters(values[0], values[1], values[2], values[3], values[4])
 
 
 def get_immediate_subdirectories(a_dir, prefix):
