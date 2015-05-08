@@ -32,7 +32,7 @@ public class SpamTest {
 
 
 
-        List<Integer> peerCounts = Arrays.asList(10, 30, 50, 75, 100 );
+        List<Integer> peerCounts = Arrays.asList(30, 50, 75, 100 );
         List<Integer> groupSizes = Arrays.asList(10, 30, 50, 75);
 //        List<Integer> peerCounts = Arrays.asList(500);
 //        List<Integer> groupSizes = Arrays.asList(50);
@@ -46,7 +46,7 @@ public class SpamTest {
         double regularization = 10;
         double perUpdateBudget = 0.1d;
         int parameters = data.get(0).getFeatures().length;
-        double epsilon = 0.1d;
+        double epsilon = 0.4d;
 
         Injector injector = Guice.createInjector(new AppInjector());
 
@@ -54,7 +54,7 @@ public class SpamTest {
             for (Integer groupSize : groupSizes) {
                 if(groupSize > peerCount){ continue; }
 
-                int aggregations = (int)(epsilon/perUpdateBudget*peerCount/groupSize);
+                int aggregations = (int)(epsilon/perUpdateBudget*peerCount/groupSize) - 1;
 
                 ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize, recordsPerPeer);
 

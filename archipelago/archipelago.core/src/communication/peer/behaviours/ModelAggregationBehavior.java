@@ -32,11 +32,13 @@ public class ModelAggregationBehavior extends CyclicBehaviour{
             GroupMessage message = _messageFacade.nextAggregationGroupMessage();
             int peerIndex = message.agents.indexOf(_peerAgent.getAID());
             if(peerIndex > 0) {
+//                System.out.println(String.format("%s is participating in %s", _peerAgent.getLocalName(), message.conversationId));
                 _peerAgent.addBehaviour(_behaviorFactory.getContributorBehavior(_peerAgent, message.agents.get(0), _messageFacade, message.conversationId));
             }
             else {
                 ArrayList<AID> parties = new ArrayList<>(message.agents);
                 parties.remove(0);
+//                System.out.println(String.format("%s started curating %s", _peerAgent.getLocalName(), message.conversationId));
                 _peerAgent.addBehaviour(_behaviorFactory.getCuratorBehavior(parties, _messageFacade, _peerAgent, message.conversationId));
             }
         }
