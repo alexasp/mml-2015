@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, pickle
 
 def main():
 	summaries_dir = 'summaries'
@@ -11,13 +11,14 @@ def main():
 
 	results = {}
 	for experiment_dirname in experiments:
-		print sys.argv[1] + "/" + experiment_dirname
 		iterations_filenames = get_immediate_subfiles(sys.argv[1] + "/" + experiment_dirname, "eps")
-		valueTuple = computeAverages(iterations_filenames, sys.argv[1] + "/" + experiment_dirname)
+		valueMap = computeAverages(iterations_filenames, sys.argv[1] + "/" + experiment_dirname)
 		parameters = getParameters(experiment_dirname)
-		results[parameters] = valueTuple
+		results[parameters] = valueMap 
 
 	print results
+	with open(summaries_dir + "/" + sys.argv[1], 'w') as stored_results:
+		pickle.dump(results, stored_results)
 
 def computeAverages(iterations_filenames, directory):
 	mean, std, maximum, minimum = 0,0,0,0
@@ -27,11 +28,12 @@ def computeAverages(iterations_filenames, directory):
 			std += float(iteration_file.readline())
 			maximum += float(iteration_file.readline())
 			minimum += float(iteration_file.readline())
-	mean = mean / float(len(iterations_filenames))
-	std = std / float(len(iterations_filenames))
-	maximum = maximum / float(len(iterations_filenames))
-	minimum = minimum / float(len(iterations_filenames))
-	return (mean, std, maximum, minimum)
+	values = {}
+	values["mean"] = mean / float(len(iterations_filenames))
+	values["std"] = std / float(len(iterations_filenames))
+	values["max"] = maximum / float(len(iterations_filenames))
+	values["min"] = minimum / float(len(iterations_filenames))
+	return values
 
 def getParameters(experiment_dirname):
 	parameters = experiment_dirname.strip().split("-")
