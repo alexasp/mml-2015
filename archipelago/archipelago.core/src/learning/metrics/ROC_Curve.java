@@ -102,7 +102,7 @@ public class ROC_Curve {
 
         PrintStream fileOut = null;
         try {
-            fileOut = new PrintStream(_path + ".xls");
+            fileOut = new PrintStream(_path + ".csv");
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Failed to write experimental output!", e);
         }
