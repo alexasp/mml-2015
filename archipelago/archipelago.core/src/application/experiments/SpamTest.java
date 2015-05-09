@@ -42,9 +42,9 @@ public class SpamTest {
 
         double testCost = 0.1;
         double regularization = 10;
-        double perUpdateBudget = 0.1d;
+        double perUpdateBudget = 0.2d;
         int parameters = data.get(0).getFeatures().length;
-        double epsilon = 0.1d;
+        double epsilon = 1.0d;
 
         Injector injector = Guice.createInjector(new AppInjector());
 
