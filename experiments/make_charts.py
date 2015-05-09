@@ -1,6 +1,13 @@
-import sys, pickle
+import sys, pickle, os
 from archipelago_tuples import Parameters, Metrics
 import matplotlib.pyplot as plt
+import pylab
+
+
+chart_path = 'charts'
+
+if not os.path.isdir(chart_path):
+	os.makedirs(chart_path)
 
 def plotByPeerCounts(summary_filename):
 	with open(summary_filename) as summary_file:
@@ -21,7 +28,8 @@ def plotByPeerCounts(summary_filename):
 		axes.set_ylim([0,0.5])
 
 		plt.errorbar(peer_counts, means, stds, linestyle='None', marker='^')
-		plt.show()
+		#plt.show()
+		pylab.savefig(chart_path + '/' + summary_filename.split('/')[-1] + '.png')
 
 def plotByGroupSize(summary_filename):
 	with open(summary_filename) as summary_file:
@@ -42,7 +50,8 @@ def plotByGroupSize(summary_filename):
 		axes.set_ylim([0,0.5])
 
 		plt.errorbar(groupSizes, means, stds, linestyle='None', marker='^')
-		plt.show()
+		#plt.show()
+		pylab.savefig(chart_path + '/' + summary_filename.split('/')[-1] + '.png')
 
 
 
