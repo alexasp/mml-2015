@@ -1,25 +1,37 @@
 import os, sys, pickle
-from archipelago_tuples import Parameters, Metrics
+from scripts.archipelago_tuples import Parameters, Metrics
+from scripts.make_charts import plot
 
 
 def main():
+	experiment_identifier =  sys.argv[1]
+	chart_type = sys.argv[2]
+
+	if not os.path.isdir(experiment_identifier):
+		target_experiment = 'output/most_recent'
+		os.rename(target_experiment, experiment_identifier)
+
+
 	summaries_dir = 'summaries'
 
 	if not os.path.isdir(summaries_dir):
 		os.makedirs(summaries_dir)
 
 
-	experiments = get_immediate_subdirectories(sys.argv[1], "eps")
+	experiments = get_immediate_subdirectories(experiment_identifier, "eps")
 
 	results = {}
 	for experiment_dirname in experiments:
-		iterations_filenames = get_immediate_subfiles(sys.argv[1] + "/" + experiment_dirname, "eps")
-		valueMap = computeAverages(iterations_filenames, sys.argv[1] + "/" + experiment_dirname)
+		iterations_filenames = get_immediate_subfiles(experiment_identifier + "/" + experiment_dirname, "eps")
+		valueMap = computeAverages(iterations_filenames, experiment_identifier + "/" + experiment_dirname)
 		parameters = getParameters(experiment_dirname)
 		results[parameters] = valueMap 
 
-	with open(summaries_dir + "/" + sys.argv[1], 'w') as stored_results:
+	output_path = summaries_dir + "/" + directory_name(experiment_identifier)
+	with open(output_path, 'w') as stored_results:
 		pickle.dump(results, stored_results)
+	plot(chart_type, output_path)
+
 
 def computeAverages(iterations_filenames, directory):
 	mean, std, maximum, minimum = 0,0,0,0
@@ -51,5 +63,8 @@ def get_immediate_subdirectories(a_dir, prefix):
 def get_immediate_subfiles(a_dir, prefix):
     return [name for name in os.listdir(a_dir)
             if os.path.isfile(os.path.join(a_dir, name)) and name.startswith(prefix)]
+
+def directory_name(path):
+	return path.split('/')[-1]
 
 main()

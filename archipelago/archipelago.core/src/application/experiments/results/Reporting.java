@@ -16,7 +16,7 @@ import static java.util.Collections.min;
  */
 public class Reporting {
     public static void writeTestResults(Experiment experiment, String experimentName, int iteration) {
-        String path = "../experiments/output/basic/" + experimentName;
+        String path = "../experiments/output/most_recent/" + experimentName;
         File experimentDirectory = new File(path);
         if(!experimentDirectory.exists()){
             experimentDirectory.mkdirs();
