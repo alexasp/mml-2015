@@ -34,9 +34,9 @@ public class SpamTest {
         double trainRatio = 0.8;
 
         List<Integer> peerCounts = Arrays.asList(100);
-        List<Integer> groupSizes = Arrays.asList(10);
+        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
         List<PrivacyParam> privacyParams = Arrays.asList(PrivacyParam.get(1.0, 0.5));
-        List<Double> regularizations = IntStream.range(-4, 5).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(2, 3).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
 //        List<Integer> peerCounts = Arrays.asList(500);
 //        List<Integer> groupSizes = Arrays.asList(50);
 

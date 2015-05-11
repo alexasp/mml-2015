@@ -26,7 +26,7 @@ def mean_plot_by(summary_filename, x_axis_field, x_min, x_max):
 
         figure = plt.figure()
         plt.errorbar(x_axis_values, means, stds, linestyle='None', marker='^')
-        plt.xscale('log')
+        # plt.xscale('log')
         annotate(figure, x_axis_values, means)
         axes = plt.gca()
         axes.set_xlim([x_min, x_max])
