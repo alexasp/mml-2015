@@ -30,8 +30,16 @@ public class SpamTest {
         List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
         double trainRatio = 0.8;
 
-        List<Integer> peerCounts = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+        List<Integer> peerCounts = Arrays.asList(100);
         List<Integer> groupSizes = Arrays.asList(10);
+        List<PrivacyParam> privacyParams = Arrays.asList(
+                PrivacyParam.get(0.0001, 0.0001/4.0),
+                PrivacyParam.get(0.001, 0.001/4.0),
+                PrivacyParam.get(0.01, 0.01/4.0),
+                PrivacyParam.get(0.1, 0.1/4.0),
+                PrivacyParam.get(1.0, 1.0/4.0),
+                PrivacyParam.get(10.0, 10.0/4.0),
+                PrivacyParam.get(100.0, 100.0/4.0));
 //        List<Integer> peerCounts = Arrays.asList(500);
 //        List<Integer> groupSizes = Arrays.asList(50);
 
@@ -42,23 +50,24 @@ public class SpamTest {
 
         double testCost = 0.1;
         double regularization = 10;
-        double perUpdateBudget = 0.1d/8d;
-        System.out.println(perUpdateBudget);
         int parameters = data.get(0).getFeatures().length;
-        double epsilon = 0.1d;
 
         Injector injector = Guice.createInjector(new AppInjector());
 
         for (Integer peerCount : peerCounts) {
             for (Integer groupSize : groupSizes) {
-                if(groupSize > peerCount){ continue; }
+                if (groupSize > peerCount) {
+                    continue;
+                }
 
-                int aggregations = (int)(epsilon/perUpdateBudget*(peerCount - groupSize + 1)/groupSize);
-                aggregations = aggregations == 0 ? 1 : aggregations;
+                for(PrivacyParam privacyParam : privacyParams) {
+                    int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize + 1) / groupSize);
+                    aggregations = aggregations == 0 ? 1 : aggregations;
 
-                ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, perUpdateBudget, trainRatio, peerCount, testCost, parameters, epsilon, regularization, groupSize, recordsPerPeer);
+                    ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, trainRatio, peerCount, testCost, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer);
 
-                testWithParameters(peerCount, groupSize, data, recordsPerPeer, trainRatio, injector, configuration);
+                    testWithParameters(peerCount, groupSize, data, recordsPerPeer, trainRatio, injector, configuration);
+                }
             }
         }
 
@@ -67,7 +76,7 @@ public class SpamTest {
 
     private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> data, int recordsPerPeer, double trainRatio, Injector injector, ExperimentConfiguration configuration) throws ControllerException, InterruptedException {
 
-        System.out.println(String.format("Running with peerCount %s, groupSize %s", peerCount, groupSize));
+        System.out.println(String.format("Running with peerCount %s, groupSize %s, epsilon %s, aggregation_cost %s", peerCount, groupSize, configuration.epsilon, configuration.perUpdateBudget));
 
         for(int i = 0; i < 10; i++) {
             Collections.shuffle(data);
