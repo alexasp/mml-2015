@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
 import static java.util.Collections.max;
@@ -30,13 +29,16 @@ import static java.util.Collections.max;
 public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
+/*
         List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
+*/
+        List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true); //this is test leakage. Centering should be performed based on train data only
         double trainRatio = 0.8;
 
         List<Integer> peerCounts = Arrays.asList(100);
-        List<Integer> groupSizes = Arrays.asList(10);
-        List<PrivacyParam> privacyParams = Arrays.asList(PrivacyParam.get(1.0, 0.5));
-        List<Double> regularizations = IntStream.range(-4, 5).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Integer> groupSizes = Arrays.asList(10,20,30,40,50,60,70,80,90,100);
+        List<PrivacyParam> privacyParams = Arrays.asList(PrivacyParam.get(0.1, 0.05));
+        List<Double> regularizations = IntStream.range(2, 3).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
 //        List<Integer> peerCounts = Arrays.asList(500);
 //        List<Integer> groupSizes = Arrays.asList(50);
 
