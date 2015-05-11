@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
 import static java.util.Collections.max;
@@ -30,7 +29,10 @@ import static java.util.Collections.max;
 public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
+/*
         List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
+*/
+        List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true); //this is test leakage. Centering should be performed based on train data only
         double trainRatio = 0.8;
 
         List<Integer> peerCounts = Arrays.asList(100);
