@@ -54,10 +54,10 @@ public class Environment {
 //        _cont = _rt.createAgentContainer(pContainer);
 //        System.out.println("Launching the agent container after ..."+pContainer);
 
-        if(_rma == null) {
-            _rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
-            _rma.start();
-        }
+//        if(_rma == null) {
+//            _rma = _mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
+//            _rma.start();
+//        }
 //        _mainContainer.suspend();
     }
 
