@@ -10,7 +10,6 @@ import experiment.Experiment;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import learning.EnsembleModel;
-import learning.IQueryableFactory;
 import learning.LabeledSample;
 
 import java.util.ArrayList;
@@ -35,13 +34,14 @@ public class AgentFactory {
         _dataLoader = dataLoader;
     }
 
-    public List<PeerAgent> createPeers(List<LabeledSample> data, int parts, int iterations, double budget, int parameters, double updateCost, int recordsPerPeer) {
-        List<List<LabeledSample>> partitions = _dataLoader.partition(parts, data, recordsPerPeer);
+    public List<PeerAgent> createPeers(List<LabeledSample> data, ExperimentConfiguration configuration) {
+        List<List<LabeledSample>> partitions = _dataLoader.partition(configuration.peerCount, data, configuration.recordsPerPeer);
 
         List<PeerAgent> agents = new ArrayList<>();
 
         for(List<LabeledSample> partition : partitions){
-            agents.add(new PeerAgent(partition, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory, iterations, _peerGraph, parameters, updateCost));
+            agents.add(new PeerAgent(partition, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory,
+                    configuration.aggregations, _peerGraph, configuration.parameters, configuration.updateCost));
         }
 
         return agents;

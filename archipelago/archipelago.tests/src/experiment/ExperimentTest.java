@@ -64,7 +64,7 @@ public class ExperimentTest {
         _registrationLatch = mock(CountDownLatch.class);
         when(_peerGraph.getRegistrationLatch()).thenReturn(_registrationLatch);
 
-        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _parameters, _updateCost, _regularization, _groupSize, _recordsPerPeer);
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, _peerCount, _testCost, _updateCost, _regularization, _groupSize, _recordsPerPeer);
 
         _train = mock(List.class);
         _test = mock(List.class);
@@ -75,7 +75,7 @@ public class ExperimentTest {
     @Test
     public void construct_CreatesCorrectPeerCountAndGivesIterations() throws ControllerException {
         int peerCount = 3;
-        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _parameters, _updateCost, _regularization, _groupSize, _recordsPerPeer);
+        _configuration = new ExperimentConfiguration(_iterations, _budget, _trainRatio, peerCount, _testCost, _updateCost, _regularization, _groupSize, _recordsPerPeer);
 
         new Experiment(_samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, _configuration);
 

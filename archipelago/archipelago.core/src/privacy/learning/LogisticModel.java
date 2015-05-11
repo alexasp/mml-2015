@@ -59,7 +59,7 @@ public class LogisticModel implements ParametricModel {
             }
 
             for(int d = 0; d < _parameters.length; d++){
-                _parameters[d] += 0.07*(gradient[d] - 2.0*0.001*_parameters[d]);
+                _parameters[d] += 0.07*(gradient[d] - 2.0*_regularization*_parameters[d]);
             }
 
         }

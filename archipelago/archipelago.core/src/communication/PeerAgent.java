@@ -21,15 +21,15 @@ public class PeerAgent extends Agent {
     private List _data;
     private int _iterations;
     private int _parameters;
-    private double _epsilon;
+    private double _updateCost;
     private ParametricModel _trainedModel;
 
-    public PeerAgent(List data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double epsilon) {
+    public PeerAgent(List data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
         _ensemble = ensemble;
         _data = data;
         _iterations = iterations;
         _parameters = parameters;
-        _epsilon = epsilon;
+        _updateCost = updateCost;
         _messageFacade = messageFacadeFactory.getFacade(this);
 
         addBehaviour(behaviourFactory.getModelCreation(this, parameters));
@@ -45,8 +45,8 @@ public class PeerAgent extends Agent {
         return _data;
     }
 
-    public double getEpsilon() {
-        return _epsilon;
+    public double getUpdateCost() {
+        return _updateCost;
     }
 
     public MessageFacade getMessageFacade() {

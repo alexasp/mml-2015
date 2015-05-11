@@ -51,7 +51,7 @@ public class CuratorBehaviorTest {
     @Before
     public void setUp(){
         _peerAgent = mock(PeerAgent.class);
-        when(_peerAgent.getEpsilon()).thenReturn(0.1);
+        when(_peerAgent.getUpdateCost()).thenReturn(0.1);
         _configuration = mock(ExperimentConfiguration.class);
         _configuration.regularization = 1.0;
         _messageFacade = mock(MessageFacade.class);
@@ -59,7 +59,7 @@ public class CuratorBehaviorTest {
         mockAgents();
         _parties = Arrays.asList(_agent1, _agent2);
         _randomGenerator = mock(RandomGenerator.class);
-        double beta = 2.0/(_peerAgent.getEpsilon()*_dataLength1*_configuration.regularization);
+        double beta = 2.0/(_peerAgent.getUpdateCost()*_dataLength1*_configuration.regularization);
         when(_randomGenerator.fromLaplacian(AdditionalMatchers.eq(beta, 0.0001d), eq(3)))
                 .thenReturn(_noise);
 

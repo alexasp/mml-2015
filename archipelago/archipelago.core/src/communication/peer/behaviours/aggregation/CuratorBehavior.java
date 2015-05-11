@@ -7,7 +7,6 @@ import communication.messaging.MessageFacade;
 import communication.peer.ArchipelagoPerformatives;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
 import learning.ModelMerger;
 import learning.ParametricModel;
@@ -56,7 +55,7 @@ public class CuratorBehavior extends CyclicBehaviour{
             if(_models.size() >= _parties.size()){
 //                System.out.println(_peerAgent + " FINISH "+_conversationId);
                 ParametricModel mergedModel = _modelMerger.merge(_models);
-                double beta = 2.0/(_smallestSet*_peerAgent.getEpsilon()*_configuration.regularization);
+                double beta = 2.0/(_smallestSet*_peerAgent.getUpdateCost()*_configuration.regularization);
                 mergedModel.addTerm(_randomGenerator.fromLaplacian(beta, message.getModel().getParameters().length));
                 publishModel(mergedModel);
                 _peerAgent.addBehaviour(_behaviorFactory.getCompletionBehavior(_conversationId, _messageFacade));

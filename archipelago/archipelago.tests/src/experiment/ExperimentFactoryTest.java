@@ -57,7 +57,7 @@ public class ExperimentFactoryTest {
         int groupSize = 3;
         int recordsPerPeer = 100;
 
-        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, 0.0, trainRatio, peerCount, testCost, _parameters, _updateCost, regularization, groupSize, recordsPerPeer);
+        ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, 0.0, trainRatio, peerCount, testCost, _updateCost, regularization, groupSize, recordsPerPeer);
 
         Experiment experiment = _experimentFactory.getExperiment(samples, configuration);
 

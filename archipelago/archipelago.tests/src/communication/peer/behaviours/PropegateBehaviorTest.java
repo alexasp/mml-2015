@@ -33,7 +33,7 @@ public class PropegateBehaviorTest {
         _peerAgent = mock(PeerAgent.class);
         _messaging = mock(MessageFacade.class);
         when(_peerAgent.getMessageFacade()).thenReturn(_messaging);
-        when(_peerAgent.getEpsilon()).thenReturn(_epsilon);
+        when(_peerAgent.getUpdateCost()).thenReturn(_epsilon);
 
         when(_peerAgent.getData()).thenReturn(_data);
 
