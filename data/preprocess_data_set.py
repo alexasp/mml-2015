@@ -10,10 +10,11 @@ def sample_training(samples, labels, training_ratio):
     record_count = len(samples)
     indices = range(record_count)
     random.shuffle(indices)
-    train = [samples[i] for i in indices[0:int(training_ratio * record_count)]]
-    train_labels = [labels[i] for i in indices[0:int(training_ratio * record_count)]]
-    test = [samples[i] for i in indices[int(training_ratio * record_count):]]
-    test_labels = [labels[i] for i in indices[int(training_ratio * record_count):]]
+    train_max = int(training_ratio * record_count)
+    train = [samples[x] for x in indices[0:train_max]]
+    train_labels = [labels[x] for x in indices[0:train_max]]
+    test = [samples[x] for x in indices[train_max:]]
+    test_labels = [labels[x] for x in indices[train_max:]]
     return train, train_labels, test, test_labels
 
 
