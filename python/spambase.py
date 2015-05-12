@@ -5,7 +5,7 @@ from sklearn import cross_validation
 samples = []
 labels = []
 
-with open('../data/uci_spambase.csv') as csvdata:
+with open('../data/uci_spambase.csv.train') as csvdata:
 	for line in csvdata:
 		vector = line.split(',')
 		labels.append(int(vector[-1]))
