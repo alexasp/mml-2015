@@ -16,10 +16,10 @@ public class ExperimentConfiguration {
     public double regularization;
     public int groupSize;
 
-    public ExperimentConfiguration(int aggregations, double budget, double trainRatio, int peerCount, int parameters, double epsilon, double regularization, int groupSize, int recordsPerPeer) {
+    public ExperimentConfiguration(int aggregations, double budget, int peerCount, int parameters, double epsilon, double regularization, int groupSize, int recordsPerPeer) {
         this.aggregations = aggregations;
         this.updateCost = budget;
-        this.trainRatio = trainRatio;
+     //   this.trainRatio = trainRatio;
         this.peerCount = peerCount;
         this.parameters = parameters;
         this.epsilon = epsilon;
