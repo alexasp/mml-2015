@@ -30,8 +30,8 @@ public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
 
-        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", "end", true);
-        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", "end", true);
+        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", "end", true);
+        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.test", "end", true);
 //
 //        List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase_rattle_01.csv", "start", true);
 //        List<List<LabeledSample>> partitions = DataLoader.partition(0.8, data);
