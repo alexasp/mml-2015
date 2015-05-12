@@ -59,7 +59,7 @@ public class ExperimentFactoryTest {
 
         ExperimentConfiguration configuration = new ExperimentConfiguration(iterations, 0.0, trainRatio, peerCount, testCost, _updateCost, regularization, groupSize, recordsPerPeer);
 
-        Experiment experiment = _experimentFactory.getExperiment(samples, configuration);
+        Experiment experiment = _experimentFactory.getExperiment(samples, testData, configuration);
 
         assertEquals(samples, experiment.getData());
         assertEquals(trainRatio, experiment.getConfiguration().trainRatio, 0.0001d);

@@ -10,6 +10,8 @@ The Spambase Dataset \cite{spambase1999data} was used as a baseline training set
 
 We chose this dataset as it is a popular dataset to analyze the performance of binary classifiers, so that we could compare the results of other logistic regression classifiers against our own. While this dataset might not seem like the ideal choice for testing a differentially private classifier due to its lack of personal information, we argue that it still fits well for the purpose of demonstration. In a spam-classifying system based on our distributed model, a logistic regression model can be built by training it locally in each user's personal mail folder and then aggregated into an ensemble. That way you can build a diverse spam-classifier without the users having to give up their personal email to a centralized database.     
 
+Used Rattle to scale the data to -1 1 range, this is due to the proof in Chaudli paper which states the assumption $|X_i|< 1$
+
 
 \section{Algorithm}
 This section explain the logistic regression algorithm, how it is commonly used, and what modifications are needed when used in a distributed setting. Explanation on how it is used in a differentially private manner is explained in the architecture section. 

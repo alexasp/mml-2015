@@ -5,7 +5,6 @@ import communication.Environment;
 import communication.messaging.PeerGraph;
 import communication.peer.AgentFactory;
 import jade.wrapper.ControllerException;
-import jade.wrapper.StaleProxyException;
 import learning.LabeledSample;
 import learning.metrics.PerformanceMetrics;
 
@@ -31,7 +30,7 @@ public class ExperimentFactory {
     }
 
 
-    public Experiment getExperiment(List<LabeledSample> samples, ExperimentConfiguration configuration) throws ControllerException {
-        return new Experiment(samples, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, configuration);
+    public Experiment getExperiment(List<LabeledSample> trainData, List<LabeledSample> testData, ExperimentConfiguration configuration) throws ControllerException {
+        return new Experiment(trainData,testData, _agentFactory, _performanceMetrics, _environment, _dataLoader, _peerGraph, configuration);
     }
 }
