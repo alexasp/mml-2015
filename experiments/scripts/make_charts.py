@@ -1,5 +1,4 @@
 import sys, pickle, os
-from archipelago_tuples import Parameters, Metrics
 import matplotlib.pyplot as plt
 import pylab
 

@@ -19,18 +19,14 @@ public class DataLoader {
     private String label;
     private double numericLabel;
 
-    public List<LabeledSample> readCSVFileReturnSamples(String filename, String labelPos,Boolean isNumericLabel) {
+    public List<LabeledSample> readCSVFileReturnSamples(String filename, int labelIndex,Boolean isNumericLabel) {
         List<LabeledSample> listOfSamples = new ArrayList<LabeledSample>();
         try {
             CSVReader reader = new CSVReader(new FileReader(filename));
 
             while ((nextLine = reader.readNext()) != null) {
-                if(labelPos=="end"){
-                     label = nextLine[nextLine.length-1];
-                }
-                else{
-                     label = nextLine[0];
-                }
+                label = nextLine[labelIndex];
+
                 if(isNumericLabel==false){
                     numericLabel = label == "M" ? 1.0 : -1.0;
                 }
@@ -39,9 +35,13 @@ public class DataLoader {
                 }
 
                 double[] vector = new double[nextLine.length-1 +1];
-                for (int i = 1; i < nextLine.length; i++)
+                int counter = 0;
+                for (int i = 0; i < nextLine.length; i++)
                 {
-                    vector[i-1]= Double.parseDouble(nextLine[i]);
+                    if(i != labelIndex) {
+                        vector[counter] = Double.parseDouble(nextLine[i]);
+                        counter++;
+                    }
                 }
 
                 vector[vector.length-1] = 1.0; //bias term

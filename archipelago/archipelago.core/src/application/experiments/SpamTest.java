@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -30,21 +31,17 @@ public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
 
-        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", "end", true);
-        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", "end", true);
-//
-//        List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv", "start", true);
-//        List<List<LabeledSample>> partitions = DataLoader.partition(0.8, data);
-//        List<LabeledSample> trainData = partitions.get(0);
-//        List<LabeledSample> testData = partitions.get(1);
+//        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
+//        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
-//        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true);
-//        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true);
 
-        List<Integer> peerCounts = Arrays.asList(100);
-        List<Integer> groupSizes = Arrays.asList(100);
-        List<PrivacyParam> privacyParams = IntStream.range(-1, -0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-7, 8).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
+        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
+
+        List<Integer> peerCounts = Arrays.asList(10);
+        List<Integer> groupSizes = Arrays.asList(5);
+        List<PrivacyParam> privacyParams = IntStream.range(4, 5).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-5,6).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
 //        List<Integer> peerCounts = Arrays.asList(500);
 //        List<Integer> groupSizes = Arrays.asList(50);
 
@@ -93,7 +90,7 @@ public class SpamTest {
             ExperimentFactory experimentFactory = currentInjector.getInstance(ExperimentFactory.class);
             Experiment experiment = experimentFactory.getExperiment(trainData,testData, configuration);
 
-            runExperiment(experiment, String.format("eps,%.8f-regularization,%.8f-cost,%.3f-peers,%d-groups,%d", configuration.epsilon, configuration.regularization, configuration.updateCost, peerCount, groupSize, i), i);
+            runExperiment(experiment, String.format(Locale.US, "eps,%.8f-regularization,%.8f-cost,%.3f-peers,%d-groups,%d", configuration.epsilon, configuration.regularization, configuration.updateCost, peerCount, groupSize, i), i);
         }
     }
 
