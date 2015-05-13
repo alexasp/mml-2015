@@ -5,16 +5,10 @@ __author__ = 'alex'
 import sys
 import random
 from sklearn import preprocessing
-
+from sklearn.cross_validation import train_test_split
 
 def sample_training(samples, labels, training_ratio):
-    zipped = zip(samples, labels)
-    random.shuffle(zipped)
-    train_max = int(training_ratio * len(zipped))
-    train_samples = [sample for (sample, label) in zipped[:train_max]]
-    train_labels = [label for (sample, label) in zipped[:train_max]]
-    test_samples = [sample for (sample, label) in zipped[train_max:]]
-    test_labels = [label for (sample, label) in zipped[train_max:]]
+    train_samples, test_samples, train_labels, test_labels = train_test_split(samples, labels, test_size=(1-training_ratio), random_state=1251512)
     return train_samples, train_labels, test_samples, test_labels
 
 
