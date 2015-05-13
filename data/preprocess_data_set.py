@@ -4,43 +4,19 @@ __author__ = 'alex'
 
 import sys
 import random
+from sklearn import preprocessing
 
 
 def sample_training(samples, labels, training_ratio):
-    record_count = len(samples)
-    indices = range(record_count)
-    random.shuffle(indices)
-    train_max = int(training_ratio * record_count)
-    train = [samples[x] for x in indices[0:train_max]]
-    train_labels = [labels[x] for x in indices[0:train_max]]
-    test = [samples[x] for x in indices[train_max:]]
-    test_labels = [labels[x] for x in indices[train_max:]]
-    return train, train_labels, test, test_labels
+    zipped = zip(samples, labels)
+    random.shuffle(zipped)
+    train_max = int(training_ratio * len(zipped))
+    train_samples = [sample for (sample, label) in zipped[:train_max]]
+    train_labels = [label for (sample, label) in zipped[:train_max]]
+    test_samples = [sample for (sample, label) in zipped[train_max:]]
+    test_labels = [label for (sample, label) in zipped[train_max:]]
+    return train_samples, train_labels, test_samples, test_labels
 
-
-def calculate_rescale_0_1(training_set):
-    scaling = []
-    for feature_index in range(len(training_set[0])):
-        minimum = float("inf")
-        maximum = float("-inf")
-        for sample in training_set:
-            if sample[feature_index] < minimum:
-                minimum = sample[feature_index]
-            if sample[feature_index] > maximum:
-                maximum = sample[feature_index]
-        scaling.append({'min': minimum, 'max': maximum})
-    return scaling
-
-
-def rescale_0_1(samples, scaling):
-    scaled_samples = []
-    for sample in samples:
-        scaled_sample = []
-        for i in range(len(sample)):
-            scaled_feature = (sample[i] - scaling[i]['min'])/(scaling[i]['max'] - scaling[i]['min'])
-            scaled_sample.append(scaled_feature)
-        scaled_samples.append(scaled_sample)
-    return scaled_samples
 
 def write_data_set(output_file, samples, labels):
     with open(output_file, 'w') as csv_file:
@@ -64,10 +40,11 @@ with open(data_set_name) as csv_data:
 
 train_set, train_labels, test_set, test_labels = sample_training(samples, labels, training_ratio)
 
-scaling = calculate_rescale_0_1(train_set)
+min_max_scaler = preprocessing.MinMaxScaler()
 
-train_set = rescale_0_1(train_set, scaling)
-test_set = rescale_0_1(test_set, scaling)
+train_set = min_max_scaler.fit_transform(train_set)
+
+test_set = min_max_scaler(test_set)
 
 write_data_set(data_set_name + '.train', train_set, train_labels)
 write_data_set(data_set_name + '.test', test_set, test_labels)
