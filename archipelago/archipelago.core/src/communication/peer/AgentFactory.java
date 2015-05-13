@@ -47,7 +47,7 @@ public class AgentFactory {
         return agents;
     }
 
-    public CompletionListeningAgent getCompletionAgent(Consumer<Experiment> completionAction, int totalPeerCount, Experiment experiment, int iterations) {
+    public CompletionListeningAgent getCompletionAgent() {
         return new CompletionListeningAgent(_messageFacadeFactory, _behaviourFactory);
     }
 

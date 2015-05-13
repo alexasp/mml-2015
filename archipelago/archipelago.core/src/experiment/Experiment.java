@@ -69,7 +69,7 @@ public class Experiment {
         };
 
         if(_completionAgent == null) {
-            _completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
+            _completionAgent = _agentFactory.getCompletionAgent();
             _environment.registerAgent(_completionAgent, "CompletionAgent");
             _peerGraph.join(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
         }
