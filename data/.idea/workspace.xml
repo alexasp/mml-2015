@@ -2,10 +2,312 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b00d35f-ec5a-4a9d-8d55-e1193a1fe210" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/data.iml" afterPath="$PROJECT_DIR$/.idea/data.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,10-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,10-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-3-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,10-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2-australian\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,25000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,0,50000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,1,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,2,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-0" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-1" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-2" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-4" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-5" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-6" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-7" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-8" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10iter-9" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\aspis\workspace\mml-2015\experiments\debugging-test2\eps,1,00000000-regularization,4,00000000-cost,1,000-peers,100-groups,10\roc_curves_iter_9.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/SpamTest.java" afterPath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/SpamTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/australian_test_fixed.csv.test" afterPath="$PROJECT_DIR$/australian_test_fixed.csv.test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/australian_test_fixed.csv.train" afterPath="$PROJECT_DIR$/australian_test_fixed.csv.train" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/preprocess_data_set.py" afterPath="$PROJECT_DIR$/preprocess_data_set.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uci_spambase.csv.test" afterPath="$PROJECT_DIR$/uci_spambase.csv.test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uci_spambase.csv.train" afterPath="$PROJECT_DIR$/uci_spambase.csv.train" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="data.iws" />
@@ -33,8 +335,8 @@
       <file leaf-file-name="preprocess_data_set.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/preprocess_data_set.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22198041" vertical-offset="0" max-vertical-offset="935">
-              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.7171904" vertical-offset="394" max-vertical-offset="935">
+              <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -57,16 +359,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="3162" max-vertical-offset="78302">
               <caret line="186" column="181" selection-start-line="186" selection-start-column="181" selection-end-line="186" selection-end-column="181" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="uci_spambase.csv.train" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/uci_spambase.csv.train">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="62662">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -163,7 +455,7 @@
       <console-settings />
     </option>
   </component>
-  <component name="RunManager" selected="Python.preprocess_data_set">
+  <component name="RunManager" selected="Python.preprocess_data_set (1)">
     <configuration default="false" name="preprocess_data_set" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -177,7 +469,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="data" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocess_data_set.py" />
-      <option name="PARAMETERS" value="australian_test_fixed.csv 0.8 14" />
+      <option name="PARAMETERS" value="uci_spambase.csv 0.8 57" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -326,9 +618,31 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Python.preprocess_data_set" />
-      <item index="1" class="java.lang.String" itemvalue="Python.spambase" />
+    <configuration default="false" name="preprocess_data_set (1)" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="data" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocess_data_set.py" />
+      <option name="PARAMETERS" value="australian_test_fixed.csv 0.8 14" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Python.preprocess_data_set (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.preprocess_data_set" />
+      <item index="2" class="java.lang.String" itemvalue="Python.spambase" />
     </list>
     <recent_temporary>
       <list size="2">
@@ -365,7 +679,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -393,6 +707,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/preprocess_data_set.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -400,7 +721,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="11" />
+      <option name="time" value="13" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -431,14 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uci_spambase.csv.train">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="62662">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/preprocess_data_set.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1309">
@@ -455,14 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uci_spambase.csv.train">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="62662">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../python/spambase.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="646">
@@ -475,8 +780,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocess_data_set.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22198041" vertical-offset="0" max-vertical-offset="935">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.7171904" vertical-offset="394" max-vertical-offset="935">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
           <folding />
         </state>
       </provider>

@@ -44,7 +44,7 @@ min_max_scaler = preprocessing.MinMaxScaler()
 
 train_set = min_max_scaler.fit_transform(train_set)
 
-test_set = min_max_scaler(test_set)
+test_set = min_max_scaler.transform(test_set)
 
 write_data_set(data_set_name + '.train', train_set, train_labels)
 write_data_set(data_set_name + '.test', test_set, test_labels)
