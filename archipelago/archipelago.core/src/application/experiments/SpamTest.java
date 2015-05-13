@@ -30,14 +30,20 @@ public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
 
-//        List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase_centered.csv", "start", true); //this is test leakage. Centering should be performed based on train data only
+        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", "end", true);
+        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.test", "end", true);
+//
+//        List<LabeledSample> data = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase_rattle_01.csv", "start", true);
+//        List<List<LabeledSample>> partitions = DataLoader.partition(0.8, data);
+//        List<LabeledSample> trainData = partitions.get(0);
+//        List<LabeledSample> testData = partitions.get(1);
 
-        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true); //this is test leakage. Centering should be performed based on train data only
-        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true);
+//        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true);
+//        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", "end", true);
 
         List<Integer> peerCounts = Arrays.asList(10);
-        List<Integer> groupSizes = Arrays.asList(5);
-        List<PrivacyParam> privacyParams = IntStream.range(-2, 3).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Integer> groupSizes = Arrays.asList(10);
+        List<PrivacyParam> privacyParams = IntStream.range(0, 1).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
         List<Double> regularizations = IntStream.range(-2, 3).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
 //        List<Integer> peerCounts = Arrays.asList(500);
 //        List<Integer> groupSizes = Arrays.asList(50);

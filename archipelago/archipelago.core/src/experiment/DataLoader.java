@@ -80,7 +80,7 @@ public class DataLoader {
         return partitions;
     }
 
-    public List<List<LabeledSample>> partition(double trainRatio, List<LabeledSample> data) {
+    public static List<List<LabeledSample>> partition(double trainRatio, List<LabeledSample> data) {
         List<List<LabeledSample>> partitions = new ArrayList<>();
         int target = (int)(trainRatio * (double)data.size());
 

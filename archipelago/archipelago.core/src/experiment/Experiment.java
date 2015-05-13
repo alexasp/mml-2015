@@ -43,7 +43,6 @@ public class Experiment {
 
         _configuration = configuration;
 
-        //List<List<LabeledSample>> trainPartitioning = dataLoader.partition(configuration.trainRatio, samples);
         _trainData = trainData;
         _testData = testData;
 

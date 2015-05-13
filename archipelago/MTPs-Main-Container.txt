@@ -1,1 +1,1 @@
-http://stud2103.idipc.idi.ntnu.no:7778/acc
+http://alex:7778/acc
