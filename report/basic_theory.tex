@@ -84,7 +84,7 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  
  The logistic regression model is
   \begin{eqnarray} 
- p(y = ±1|\textbf{x, w}) = \sigma(y \textbf{w}^T \textbf{x}) = \frac{1}{1 + exp(−y \textbf{w}^T \textbf{x})}
+ p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
   \end{eqnarray}
  (1)
  It can be used for binary classification or for predicting the certainty of a binary outcome. See Cox  and Snell (1970) for the use of this model in statistics. This note focuses only on computational issues related

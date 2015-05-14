@@ -74,6 +74,8 @@ Jade is re-run with while changing the initial parameters for the amount of peer
 
 Automatic testing scheme - Jade is configured so that it resets the main container after each experiment, and then re-run with new parameter configurations. 
 
+Implemented 10-fold cross validation. This way we can tune the parameters and not be scared of our model overfitting on the test data. our initial solution was to use a single training and a single test set. This way we tuned the parameters so that they would give the best possible accuracy on the test set, which is not how the system should behave in the real world. 
+
 
 
 \cleardoublepage

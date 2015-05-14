@@ -7,7 +7,6 @@ import learning.LabeledSample;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -74,11 +73,12 @@ public class DataLoader {
 
             partitions.get(targetPartition).add(data.get(i));
 
-            if(targetPartition >= parts){
-                break;
-            }
+
             if((i + 1) % recordsToEach == 0){
                 targetPartition++;
+            }
+            if(targetPartition >= parts){
+                break;
             }
         }
 
