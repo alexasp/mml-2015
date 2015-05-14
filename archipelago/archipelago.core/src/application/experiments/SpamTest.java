@@ -47,11 +47,10 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> peerCounts = Arrays.asList(10);
-        List<Integer> groupSizes = Arrays.asList(5);
-
-        List<PrivacyParam> privacyParams = IntStream.range(4, 5).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-4,6).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Integer> peerCounts = Arrays.asList(50);
+        List<Integer> groupSizes = Arrays.asList(50);
+        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-8, -7).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
 
 
         double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();

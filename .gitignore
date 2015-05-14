@@ -44,3 +44,5 @@ obj
 *.mtc1
 *.out
 *.synctex.gz
+
+\data\.idea\workspace.xml

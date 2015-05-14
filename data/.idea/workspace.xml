@@ -2,9 +2,191 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b00d35f-ec5a-4a9d-8d55-e1193a1fe210" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\peterfh\Documents\MML\mml-2015\experiments\charts\dust.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/AustralianTest.java" afterPath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/AustralianTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../report/analysis.tex" afterPath="$PROJECT_DIR$/../report/analysis.tex" />
+
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/SpamTest.java" afterPath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/SpamTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../experiments/.idea/experiments.iml" afterPath="$PROJECT_DIR$/../experiments/.idea/experiments.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../experiments/.idea/misc.xml" afterPath="$PROJECT_DIR$/../experiments/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../experiments/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../experiments/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../experiments/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../experiments/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../experiments/scripts/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../experiments/scripts/.idea/workspace.xml" />
+
     </list>
     <ignored path="data.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +213,8 @@
       <file leaf-file-name="preprocess_data_set.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/preprocess_data_set.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21083172" vertical-offset="112" max-vertical-offset="833">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.52427185" vertical-offset="0" max-vertical-offset="1030">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -41,7 +223,7 @@
       <file leaf-file-name="spambase.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../python/spambase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="646">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
               <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
@@ -53,7 +235,7 @@
       <file leaf-file-name="uci_spambase.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/uci_spambase.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3162" max-vertical-offset="78302">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3348" max-vertical-offset="82908">
               <caret line="186" column="181" selection-start-line="186" selection-start-column="181" selection-end-line="186" selection-end-column="181" />
               <folding />
             </state>
@@ -73,10 +255,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="240" />
-    <option name="y" value="259" />
-    <option name="width" value="1370" />
-    <option name="height" value="692" />
+    <option name="x" value="-1" />
+    <option name="width" value="1922" />
+    <option name="height" value="1175" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -382,11 +563,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="240" y="259" width="1370" height="692" extended-state="0" />
-    <editor active="false" />
+    <frame x="-1" y="0" width="1922" height="1175" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24741507" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24791667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -438,7 +619,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/preprocess_data_set.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -446,7 +627,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../python/spambase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="646">
+        <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="684">
           <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
@@ -456,7 +637,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/uci_spambase.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3162" max-vertical-offset="78302">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3348" max-vertical-offset="82908">
           <caret line="186" column="181" selection-start-line="186" selection-start-column="181" selection-end-line="186" selection-end-column="181" />
           <folding />
         </state>
@@ -542,8 +723,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocess_data_set.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21083172" vertical-offset="112" max-vertical-offset="833">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.52427185" vertical-offset="0" max-vertical-offset="1030">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
           <folding />
         </state>
       </provider>
