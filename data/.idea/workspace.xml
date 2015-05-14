@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b00d35f-ec5a-4a9d-8d55-e1193a1fe210" name="Default" comment="">
+
       <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../experiments/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
@@ -185,6 +186,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../experiments/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../experiments/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../experiments/scripts/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../experiments/scripts/.idea/workspace.xml" />
+
     </list>
     <ignored path="data.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -324,6 +326,7 @@
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
