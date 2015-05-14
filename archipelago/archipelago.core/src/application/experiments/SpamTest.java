@@ -31,22 +31,30 @@ public class SpamTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
 
-//        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
-//        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
+        List<LabeledSample> trainData;
+        List<LabeledSample> testData;
 
+        trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
+//      testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
-        List<LabeledSample> trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
-        List<LabeledSample> testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
+//        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
+        testData = null;
+//      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
+
+        boolean useCrossValidation = true;
+        int foldCount = 10;
+
+        if(useCrossValidation){
+            testData = null;
+        }
 
         List<Integer> peerCounts = Arrays.asList(10);
         List<Integer> groupSizes = Arrays.asList(5);
         List<PrivacyParam> privacyParams = IntStream.range(4, 5).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-5,6).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
-//        List<Integer> peerCounts = Arrays.asList(500);
-//        List<Integer> groupSizes = Arrays.asList(50);
+        List<Double> regularizations = IntStream.range(-10,11).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
 
-
-        int recordsPerPeer = (int) ( (double) trainData.size() / (double) max(peerCounts));
+        double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
+        int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
         System.out.println("Total number of records per peer:" + recordsPerPeer);
 
         int parameters = trainData.get(0).getFeatures().length;
@@ -64,9 +72,9 @@ public class SpamTest {
                         int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize + 1) / groupSize);
                         aggregations = aggregations == 0 ? 1 : aggregations;
 
-                        ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer);
+                        ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
 
-                        testWithParameters(peerCount, groupSize, trainData,testData, recordsPerPeer, injector, configuration);
+                        testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
                     }
                 }
             }
@@ -75,20 +83,35 @@ public class SpamTest {
         System.exit(0);
     }
 
-    private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> trainData, List<LabeledSample> testData, int recordsPerPeer, Injector injector, ExperimentConfiguration configuration) throws ControllerException, InterruptedException {
+    private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> trainDataSource, List<LabeledSample> testDataSource, int recordsPerPeer, Injector injector, ExperimentConfiguration configuration) throws ControllerException, InterruptedException {
 
         System.out.println(String.format("Running with peerCount %s, groupSize %s, epsilon %s, aggregation_cost %s, regularization %s", peerCount, groupSize, configuration.epsilon, configuration.updateCost, configuration.regularization));
+        Collections.shuffle(trainDataSource);
+        List<List<LabeledSample>> folds = DataLoader.partition(configuration.cvFolds, trainDataSource);
+
 
         for(int i = 0; i < 10; i++) {
-            Collections.shuffle(trainData);
+            List<LabeledSample> train;
+            List<LabeledSample> test;
 
+            if(configuration.useCrossValidation) {
+                train = DataLoader.mergeExcept(folds, i);
+                test = folds.get(i);
+            }
+            else{
+                train = trainDataSource;
+                Collections.shuffle(train);
+                test = testDataSource;
+            }
 //            int peerCount = 100;
 //            int groupSize = 20;
+
+
 
             Injector currentInjector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
             ExperimentFactory experimentFactory = currentInjector.getInstance(ExperimentFactory.class);
-            Experiment experiment = experimentFactory.getExperiment(trainData,testData, configuration);
+            Experiment experiment = experimentFactory.getExperiment(train,test, configuration);
 
             runExperiment(experiment, String.format(Locale.US, "eps,%.8f-regularization,%.8f-cost,%.3f-peers,%d-groups,%d", configuration.epsilon, configuration.regularization, configuration.updateCost, peerCount, groupSize, i), i);
         }

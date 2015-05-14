@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 /**
@@ -57,20 +59,27 @@ public class DataLoader {
 
     }
 
-    public List<List<LabeledSample>> partition(int parts, List<LabeledSample> data) {
+    public static List<List<LabeledSample>> partition(int parts, List<LabeledSample> data) {
         if(parts == 1){
             return new ArrayList<>(Arrays.asList(data));
         }
 
         int recordsToEach = (int) Math.floor((double) data.size() / (double) parts);
 
-        List<List<LabeledSample>> partitions = new ArrayList<>();
+        List<List<LabeledSample>> partitions = IntStream.range(0, parts).mapToObj(i -> new ArrayList<LabeledSample>()).collect(Collectors.toList());
         int index = 0;
-        for (int i = 0; i < data.size(); i += recordsToEach) {
-            if(data.subList(i, i + Math.min(recordsToEach, data.size() - i)).size() == recordsToEach) {
-                partitions.add(new ArrayList<>(data.subList(i, i + Math.min(recordsToEach, data.size() - i))));
+        int targetPartition = 0;
+        for (int i = 0; i < data.size(); i++) {
+            index++;
+
+            partitions.get(targetPartition).add(data.get(i));
+
+            if(targetPartition >= parts){
+                break;
             }
-            index = i;
+            if((i + 1) % recordsToEach == 0){
+                targetPartition++;
+            }
         }
 
         for(int i = index; i < data.size(); i++){
@@ -102,7 +111,20 @@ public class DataLoader {
     }
 
     public List<List<LabeledSample>> partition(int parts, List<LabeledSample> data, int recordsPerPeer) {
-        return Lists.partition(data, recordsPerPeer).subList(0, parts);
+        List<List<LabeledSample>> partitioned = Lists.partition(data, recordsPerPeer);
+        return partitioned.subList(0, parts);
+    }
+
+    public static List<LabeledSample> mergeExcept(List<List<LabeledSample>> folds, int excludedFold) {
+        List<LabeledSample> mergedList = new ArrayList<>();
+
+        for (int i = 0; i < folds.size(); i++) {
+            if (i != excludedFold) {
+                mergedList.addAll(folds.get(i));
+            }
+        }
+
+        return mergedList;
     }
 
        /*
