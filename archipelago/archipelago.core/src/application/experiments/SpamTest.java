@@ -47,17 +47,17 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> peerCounts = Arrays.asList(10);
-        List<Integer> groupSizes = Arrays.asList(2);
-//        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-4, -3).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Integer> peerCounts = Arrays.asList(50);
+        List<Integer> groupSizes = Arrays.asList(50);
+//        List<PrivacyParam> privacyParams = IntStream.range(-10, 10).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-10, 4).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(0.1, 0.1),
-                new PrivacyParam(0.1, 0.1/2.0),
-                new PrivacyParam(0.1, 0.1/4.0),
-                new PrivacyParam(0.1, 0.1/8.0),
-                new PrivacyParam(0.1, 0.1/16.0),
-                new PrivacyParam(0.1, 0.1/32.0)
+                new PrivacyParam(1.0, 1.0)
+//                new PrivacyParam(0.1, 0.1/2.0),
+//                new PrivacyParam(0.1, 0.1/4.0),
+//                new PrivacyParam(0.1, 0.1/8.0),
+//                new PrivacyParam(0.1, 0.1/16.0),
+//                new PrivacyParam(0.1, 0.1/32.0)
         );
 
 
