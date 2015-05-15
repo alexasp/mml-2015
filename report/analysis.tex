@@ -18,12 +18,12 @@ More data per peer leads to better classification. With small number of peers, t
 
 Australian: Sweet spot for regularization at a 2e-3, 10 peers 5 groupsize
 
-What was the effect of tuning the regularization parameter? 
+What was the effect of tuning the regularization parameter? High and low regularization leads to more SD on the error rate, but there is a sweet spot.
 
 What was the effect of increasing the epsilon? 
 	It seemed like it was better to keep the perUpdateBudget smaller than the epsilon, so that the models are aggregated more. Did this lead to better accuracy? Why do more aggregations lead to better classification than having a bigger budget but only one aggregation.
 	
-Compare the results of our distributed logistic regression classifier with the tradional ones in literature. Sharma and Arora report getting 92.95\% classification accuracy on the same data set. Kumar et al. reports  0.1389 error rate before filtering when using logistic regression combined with a least squares regularization method. This 
+Compare the results of our distributed logistic regression classifier with the tradional ones in literature. Sharma and Arora \cite{sharma2013adaptive} report getting 92.95\% classification accuracy on the same data set. Kumar et al\cite{kumar2012comparative}. reports  0.1389 error rate before filtering when using logistic regression combined with a least squares regularization method. Our classifier can compare to these under certain circumstances, even after noise addition.  
 
 
 \cleardoublepage
