@@ -12,9 +12,18 @@ What can we take away from our experiments?
 
 What should have been done better? 
 
-More data per peer leads to better classification.
+What did we learn from tuning the different parameters?
+
+More data per peer leads to better classification. With small number of peers, there are more records per peer. This generally leads to better classification accuracy. Why is this? 
 
 Australian: Sweet spot for regularization at a 2e-3, 10 peers 5 groupsize
+
+What was the effect of tuning the regularization parameter? 
+
+What was the effect of increasing the epsilon? 
+	It seemed like it was better to keep the perUpdateBudget smaller than the epsilon, so that the models are aggregated more. Did this lead to better accuracy? Why do more aggregations lead to better classification than having a bigger budget but only one aggregation.
+	
+Compare the results of our distributed logistic regression classifier with the tradional ones in literature. Sharma and Arora report getting 92.95\% classification accuracy on the same data set. Kumar et al. reports  0.1389 error rate before filtering when using logistic regression combined with a least squares regularization method. This 
 
 
 \cleardoublepage
