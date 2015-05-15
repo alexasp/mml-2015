@@ -25,8 +25,7 @@ public class Experiment {
     private final List<PeerAgent> _peers;
     private final PerformanceMetrics _performanceMetrics;
     private final List<LabeledSample> _trainData;
-    private List<LabeledSample> _testData;
-    private final List<LabeledSample> _data;
+    private final List<LabeledSample> _testData;
     private final AgentFactory _agentFactory;
     private PeerGraph _peerGraph;
     private final ExperimentConfiguration _configuration;
@@ -37,17 +36,15 @@ public class Experiment {
     private GroupLocatorAgent _groupAgent;
 
 
-    public Experiment(List<LabeledSample> samples, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, PeerGraph peerGraph, ExperimentConfiguration configuration) throws ControllerException {
+    public Experiment(List<LabeledSample> trainData,List<LabeledSample> testData, AgentFactory agentFactory, PerformanceMetrics performanceMetrics, Environment environment, DataLoader dataLoader, PeerGraph peerGraph, ExperimentConfiguration configuration) throws ControllerException {
         _environment = environment;
         _agentFactory = agentFactory;
         _peerGraph = peerGraph;
 
         _configuration = configuration;
 
-        List<List<LabeledSample>> trainPartitioning = dataLoader.partition(configuration.trainRatio, samples);
-        _data = samples;
-        _trainData = trainPartitioning.get(0);
-        _testData = trainPartitioning.get(1);
+        _trainData = trainData;
+        _testData = testData;
 
         _performanceMetrics = performanceMetrics;
         _peers = agentFactory.createPeers(_trainData, configuration);
@@ -72,7 +69,7 @@ public class Experiment {
         };
 
         if(_completionAgent == null) {
-            _completionAgent = _agentFactory.getCompletionAgent(completionAction, _configuration.peerCount, this, _configuration.aggregations);
+            _completionAgent = _agentFactory.getCompletionAgent();
             _environment.registerAgent(_completionAgent, "CompletionAgent");
             _peerGraph.join(_completionAgent, CompletionListeningAgent.SERVICE_NAME);
         }
@@ -130,7 +127,7 @@ public class Experiment {
 
 
     public List<LabeledSample> getData() {
-        return _data;
+        return _trainData;
     }
 
     public ExperimentConfiguration getConfiguration() {

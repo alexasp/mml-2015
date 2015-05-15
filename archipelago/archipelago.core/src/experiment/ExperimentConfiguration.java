@@ -15,11 +15,15 @@ public class ExperimentConfiguration {
     public double epsilon;
     public double regularization;
     public int groupSize;
+    public int cvFolds;
+    public boolean useCrossValidation;
 
-    public ExperimentConfiguration(int aggregations, double budget, double trainRatio, int peerCount, int parameters, double epsilon, double regularization, int groupSize, int recordsPerPeer) {
+    public ExperimentConfiguration(int aggregations, double budget, int peerCount, int parameters, double epsilon, double regularization, int groupSize, int recordsPerPeer, int cvFolds, boolean useCrossValidation) {
+        this.useCrossValidation = useCrossValidation;
+        this.cvFolds = cvFolds;
         this.aggregations = aggregations;
         this.updateCost = budget;
-        this.trainRatio = trainRatio;
+     //   this.trainRatio = trainRatio;
         this.peerCount = peerCount;
         this.parameters = parameters;
         this.epsilon = epsilon;

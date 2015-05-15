@@ -1,7 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51e08562-6ab0-4948-baf1-1109b8f03322" name="Default" comment="" />
+    <list default="true" id="51e08562-6ab0-4948-baf1-1109b8f03322" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00048828-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00097656-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00195313-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00390625-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.00781250-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.01562500-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.03125000-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-8" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5iter-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,10-groups,5/roc_curves_iter_9.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5iter-7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_0.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/output/most_recent/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,10-groups,5/roc_curves_iter_7.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/SpamTest.java" afterPath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/SpamTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/experiments.iml" afterPath="$PROJECT_DIR$/.idea/experiments.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../data/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../data/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/.idea/workspace.xml" afterPath="$PROJECT_DIR$/scripts/.idea/workspace.xml" />
+    </list>
     <ignored path="experiments.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +211,8 @@
       <file leaf-file-name="create_summary.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/create_summary.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1440">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="1458">
+              <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -39,8 +223,8 @@
       <file leaf-file-name="make_charts.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7223114" vertical-offset="0" max-vertical-offset="1026">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.62734586" vertical-offset="0" max-vertical-offset="1026">
+              <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -51,14 +235,17 @@
       <file leaf-file-name="archipelago_tuples.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-              <caret line="3" column="78" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="78" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="180">
+              <caret line="3" column="89" selection-start-line="3" selection-start-column="79" selection-end-line="3" selection-end-column="89" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -73,7 +260,7 @@
     <option name="width" value="1922" />
     <option name="height" value="1175" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -96,6 +283,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -130,12 +318,16 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -158,7 +350,9 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/make_charts.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
@@ -175,7 +369,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="experiments" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/create_summary.py" />
-      <option name="PARAMETERS" value="output/eps0.0001-100,budgdiv4,peers100,groups10 epsilons" />
+      <option name="PARAMETERS" value="output/eps0.25-64,budgdiv4,peers50,groups10 peer_count 0.0 70.0" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -317,6 +511,9 @@
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="51e08562-6ab0-4948-baf1-1109b8f03322" name="Default" comment="" />
@@ -330,25 +527,25 @@
     <frame x="-1" y="0" width="1922" height="1175" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1546875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994455" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15572916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994455" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28558224" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39926064" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3284055" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994455" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3970433" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -375,16 +572,38 @@
           <line>42</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/create_summary.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="5" />
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/create_summary.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1440">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1404">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="1008">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -393,16 +612,118 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-          <caret line="3" column="78" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="78" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="180">
+          <caret line="3" column="89" selection-start-line="3" selection-start-column="79" selection-end-line="3" selection-end-column="89" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/create_summary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7223114" vertical-offset="0" max-vertical-offset="1026">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="969">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="170">
+          <caret line="3" column="78" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/create_summary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="1360">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="170">
+          <caret line="3" column="78" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/create_summary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="1360">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="170">
+          <caret line="3" column="78" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="180">
+          <caret line="3" column="89" selection-start-line="3" selection-start-column="79" selection-end-line="3" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/create_summary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="1458">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62734586" vertical-offset="0" max-vertical-offset="1026">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>

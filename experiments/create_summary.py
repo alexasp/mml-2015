@@ -8,6 +8,7 @@ def main():
     chart_type = sys.argv[2]
     x_min = float(sys.argv[3])
     x_max = float(sys.argv[4])
+    log = len(sys.argv) == 6 and sys.argv[5] == 'log'
 
     if not os.path.isdir(experiment_identifier):
         target_experiment = 'output/most_recent'
@@ -30,7 +31,7 @@ def main():
     output_path = summaries_dir + "/" + directory_name(experiment_identifier)
     with open(output_path, 'w') as stored_results:
         pickle.dump(results, stored_results)
-    plot(chart_type, output_path, x_min, x_max)
+    plot(chart_type, output_path, x_min, x_max, log)
 
 
 def compute_averages(iterations_filenames, directory):

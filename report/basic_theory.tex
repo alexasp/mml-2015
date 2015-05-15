@@ -55,7 +55,7 @@ The Laplace mechanism involves adding random noise which follows the Laplace sta
 Lap(x|b) = \frac{1}{2b} exp (-\frac{|x|}{b})
 \end{eqnarray}
 When using the Laplace mechanism it is necessary to choose a suitable value for the parameter $b$. Increasing values of $b$ results in increased noise variance. The scale of $b$ is naturally dependent on the privacy parameter $\epsilon$, and also on the effect the presence or absence of a single record can have on the output of function $f$. This risk is called the sensitivity of the function, and is defined mathematically as:
-\begin{eqnarray} \label{LaplaceMecDef}
+\begin{eqnarray} \label{eq:sensitivity_def}
 \Delta f=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
  \end{eqnarray}
  \missingfigure[figwidth=6cm]{Picture showing the laplacian distribution} \unsure{Not sure if we need the pic. Alex: I think we do.}]
@@ -84,8 +84,12 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  
  The logistic regression model is
   \begin{eqnarray} 
- p(y = ±1|\textbf{x, w}) = \sigma(y \textbf{w}^T \textbf{x}) = \frac{1}{1 + exp(−y \textbf{w}^T \textbf{x})}
+ p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
   \end{eqnarray}
+  where $\theta$ is the parameters we wish to learn. Following this we want to maximize the following:
+  \begin{eqnarray}
+  argmax_\theta \sum_{i=1}^{m} log Pr(y_i | x_i,\theta) - 
+    \end{eqnarray}
  (1)
  It can be used for binary classification or for predicting the certainty of a binary outcome. See Cox  and Snell (1970) for the use of this model in statistics. This note focuses only on computational issues related
  to maximum-likelihood or more generally maximum a-posteriori (MAP) estimation. A common
@@ -103,11 +107,32 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  g = \Delta_w l (\textbf{w}) = \sum_{i}^{} (1 - \sigma(y_i \textbf{w}^T	\textbf{x}_i)) y_i \textbf{x}_i - \lambda \textbf{w}
 \end{eqnarray} 
 
-\subsection{Sensitivity of Logistic Regression}
+When m, the number of observations or training examples, is not large enough compared to n, the number of feature variables, simple logistic regression leads to over-fit. A standard technique to prevent over-fitting is regularization, in which an extra term that penalizes large weights is added to the average logistic loss function. The $l_2$-regularized logistic regression problem is
+\begin{eqnarray}
+minimize:	  l_{avg}(v,w)+ \lambda||w||^2_2 = (1/m) \sum_{i=1}^{m} f(w^T a_i +vb_i) + \lambda \sum_{i=1}^{n} w_i^2
+\end{eqnarray}
+Here $\lambda > 0$ is the regularization parameter, used to control the trade-off between the average logistic loss and the size of the weight vector, as measured by the $l_2$-norm. The objective function in this logistic regression problem is smooth and convex, and can be minimized by standard gradient descent.
 
-\todo{reference kamalikas paper for logres senstivity}
 
-\todo{reference pathaks paper for sensitivity of aggregation process}
+\subsection{Sensitivity of Aggregated Logistic Regression Models}
+
+In order to built logistic regression models in a way that preserves privacy, it is necessary to determine the sensitivity of the output model. Chaudhuri and Monteleoni\cite{chaudhuri2009logistic} showed that the sensitivity of logistic regression is at most 
+\begin{eqnarray}\label{eq:logres_sensitivity}
+	\frac{2}{n\lambda}
+\end{eqnarray}
+
+where $n$ is the size of the training set and $\lambda$ is the regularization parameter used in model training.
+
+This solves only the case of training a privacy-preserving logistic regression model on local data. Our research goal involves any number of peers cooperating to build useful models without compromising the privacy of their local data.\unsure{} Pathak, Rane and Raj\cite{pathak2010diffprivhomo} proposed an approach where locally trained logistic regression classifiers are aggregated by averaging. Secrecy is achieved by using an encryption method to compute the aggregate classifier, ensuring that local data is not shared while allowing a differentially private model to be published. This encrypted computation method is presented in more detail in Section \ref{sec:homomorphic_encryption}. When aggregating K locally trained models, their approach computes the final model
+
+\begin{eqnarray}
+\boldsymbol{w} = 1/K\sum_{j=1}^{K} \boldsymbol{w_j} + \boldsymbol{\eta}
+\end{eqnarray}
+
+where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of $\frac{2}{n_j}\epsilon\lambda$, which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
+	
+\todo{Write about how this does not consider the fact that it might be necessary to protect ALL the records of a particular participant.}
+
 
  \section{Programming Frameworks Used [Rename]}
 
@@ -128,7 +153,7 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
 \todo[inline]{Write how we adapted the use of JADE here}
 
 
-\section{Homomorphic Encryption}
+\section{Homomorphic Encryption\label{sec:homomorphic_encryption}
 Homomorphic encryption is an encryption scheme which allows computations to be carried out on ciphertext, meaning plaintext that has been encrypted using an algorithm and a public key. The result of the computations is also encrypted, and can be deciphered back to plaintext using a private key. This has long been considered as crypthography's holy grail \cite{Micciancio2011HomoEnc}, as this would allowing operating on encrypted text without knowing the decryption key. For example, given ciphertexts $C_1=Enc(Data1)$ and $C_2=Enc(Data2)$, an additively homomorphic encryption scheme would allow to combine $C_1$ and $C_2$ to obtain $Enc_K(Data1+Data2)$. More concretely this means that if you encrypt your data using such an encryption scheme, you can transfer your data to an untrusted server which can perform some arbitrary computations on that data without being able to decrypt the data itself.
 
 Up until recently, all published homomorphic encryption schemes only supported one basic operation, most commonly addition. These schemes could only be called partially homomorphic, as they did not provide any extensive functionality. The notion of a  fully homomorphic encryption schemes was first proposed by Rivest, Adleman, and Dertouzos in 1978 \cite{rivest1978data}, but it wasn't until 2009 that Craig Gentry published a doctoral thesis where he proved that he had constructed a fully homomorphic scheme\cite{gentry2009FHEpaper}. Gentry's solution was based on "ideal lattices" as well as a method to double-encrypt the data in such a way that the errors could be handled "behind the scenes". By periodically unlocking the inner layer of encryption underneath an outer layer of scrambling, the computer could hide and recover from errors without ever analyzing the secret data. 

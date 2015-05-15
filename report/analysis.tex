@@ -2,6 +2,28 @@
 
 \chapter{Analysis}
 
+Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{fig/eps2e-10-2e9,bud=eps,peers50,groups50,reg2e-4}
+ 	\caption{$\epsilon = [2^{-10}, 2^{9}], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
+ 	\label{fig:epsilon_big_range}
+\end{figure}
+ 
+
+ 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{fig/eps2e10.0,bud2e10.0,peers10,groups5,reg2e-12-2e7}
+	\caption{$\epsilon = 2^{10}, \lambda = [2^{-12}, 2^{7}]$, 50 peers, 1 aggregation}
+	\label{fig:regularization_extremelyhighepsilon}
+\end{figure}
+
+Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class. On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. In a context where privacy is irrelevant, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce risk of overfitting.
+
+When noise, tuned to offer $epsilon$-differential privacy, is added to the model creation process, the trade-offs involved in choosing regularization $\lambda$ become more tricky.
+
 What are the results of our experiments?
 
 What did we learn from the basic structure of creating our framework?
@@ -11,6 +33,10 @@ What difficulties did we encounter?
 What can we take away from our experiments?
 
 What should have been done better? 
+
+More data per peer leads to better classification.
+
+Australian: Sweet spot for regularization at a 2e-3, 10 peers 5 groupsize
 
 
 \cleardoublepage
