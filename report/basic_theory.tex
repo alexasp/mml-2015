@@ -86,7 +86,7 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
   \begin{eqnarray} 
  p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
   \end{eqnarray}
-  where $\theta$ is the parameters we wish to learn. Following this we want to maximize the following:
+  where \theta is the parameters we wish to learn. Following this we want to maximize the following:
   \begin{eqnarray}
   argmax_\theta \sum_{i=1}^{m} log Pr(y_i | x_i,\theta) - 
     \end{eqnarray}
@@ -114,20 +114,7 @@ minimize:	  l_{avg}(v,w)+ \lambda||w||^2_2 = (1/m) \sum_{i=1}^{m} f(w^T a_i +vb_
 Here $\lambda > 0$ is the regularization parameter, used to control the trade-off between the average logistic loss and the size of the weight vector, as measured by the $l_2$-norm. The objective function in this logistic regression problem is smooth and convex, and can be minimized by standard gradient descent.
 
 
-\subsection{Sensitivity of Aggregated Logistic Regression Models}
-
-In order to built logistic regression models in a way that preserves privacy, it is necessary to determine the sensitivity of the output model. Chaudhuri and Monteleoni\cite{chaudhuri2009logistic} showed that the sensitivity of logistic regression is at most 
-\begin{eqnarray}\label{eq:logres_sensitivity}
-	\frac{2}{n\lambda}
-\end{eqnarray}
-
-where $n$ is the size of the training set and $\lambda$ is the regularization parameter used in model training.
-
-This solves only the case of training a privacy-preserving logistic regression model on local data. Our research goal involves any number of peers cooperating to build useful models without compromising the privacy of their local data.\unsure{} Pathak, Rane and Raj\cite{pathak2010diffprivhomo} proposed an approach where locally trained logistic regression classifiers are aggregated by averaging. Secrecy is achieved by using an encryption method to compute the aggregate classifier, ensuring that local data is not shared while allowing a differentially private model to be published. This encrypted computation method is presented in more detail in Section \ref{sec:homomorphic_encryption}. When aggregating K locally trained models, their approach computes the final model
-
-\begin{eqnarray}
-\boldsymbol{w} = 1/K\sum_{j=1}^{K} \boldsymbol{w_j} + \boldsymbol{\eta}
-\end{eqnarray}
+\subsection{Sensitivity of Logistic Regression}
 
 where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of $\frac{2}{n_j}\epsilon\lambda$, which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
 	
