@@ -37,6 +37,7 @@ Informally, the presence or absence of a single record in a database should not 
 Privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms to compute useful queries while fulfilling Equation \ref{DiffPrivDef}.
 
 \subsection{Privacy Budget}
+\label{section:privacy_budget}
 The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two datasets\cite{abowd2008protective}. Sarathy and Muralidhar\cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other.
 
 Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the dataset. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 

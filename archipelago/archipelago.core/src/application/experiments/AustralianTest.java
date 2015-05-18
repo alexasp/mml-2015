@@ -52,10 +52,10 @@ import static java.util.Collections.max;
                 testData = null;
             }
 
-            List<Integer> peerCounts = Arrays.asList(2,4,6,8,10);
-            List<Integer> groupSizes = Arrays.asList(2);
+            List<Integer> peerCounts = Arrays.asList(10);
+            List<Integer> groupSizes = Arrays.asList(5);
 
-            List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+            List<PrivacyParam> privacyParams = IntStream.range(-6, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, -1), Math.pow(2, i))).collect(Collectors.toList());
             List<Double> regularizations = IntStream.range(-3,-2).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
 
 

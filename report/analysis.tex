@@ -2,7 +2,7 @@
 
 \chapter{Analysis}
 
-Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$.
+As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a dataset by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
 
 \begin{figure}[h!]
 	\centering
@@ -11,7 +11,7 @@ Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\e
  	\label{fig:epsilon_big_range}
 \end{figure}
  
-
+Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^-10$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. 
  
 \begin{figure}[h!]
 	\centering
@@ -20,7 +20,7 @@ Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\e
 	\label{fig:regularization_extremelyhighepsilon}
 \end{figure}
 
-Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class. On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. In a context where privacy is irrelevant, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce risk of overfitting.
+Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class. On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. In a context where privacy is irrelevant, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting.
 
 When noise, tuned to offer $epsilon$-differential privacy, is added to the model creation process, the trade-offs involved in choosing regularization $\lambda$ become more tricky.
 
@@ -46,6 +46,22 @@ What was the effect of increasing the epsilon?
 	It seemed like it was better to keep the perUpdateBudget smaller than the epsilon, so that the models are aggregated more. Did this lead to better accuracy? Why do more aggregations lead to better classification than having a bigger budget but only one aggregation.
 	
 Compare the results of our distributed logistic regression classifier with the tradional ones in literature. Sharma and Arora \cite{sharma2013adaptive} report getting 92.95\% classification accuracy on the same data set. Kumar et al\cite{kumar2012comparative}. reports  0.1389 error rate before filtering when using logistic regression combined with a least squares regularization method. Our classifier can compare to these under certain circumstances, even after noise addition.  
+
+
+
+\section{Potential Future applications}
+This section will discuss the potential application of a system based on our distributed machine learner.
+
+\subsection{Health}
+A growing worldwide market is the sale and usage of wearable sensors, such as environmental sensors, motion sensors, and health sensors. A IHS report \cite{ihs2014reportwearables} from 2014 estimates that the market for sensors in wearables will expand to 135 million units in 2019, up from 50 million in 2013. These wearables will evolve from being just a single purpose device such as a pedometer and grow into more multipurpose devices such as a smartwatch, which will consist of several sensors which can monitor several components within its area of use. 
+
+Sensor a la fitbit, jawbone, etc collect biometric data about those who wear them. This data can be considered as highly sensitive information, as it can unveil a lot about a 
+
+-Future homes can potentially track you through you phone, or similar device. 
+
+-You don't want to send this data to someone else, but what you can learn from the data can be highly useful in your daily life. 
+
+Kevin Fong and the England rugby team. Monitor heart rate, step balance, and a lot of other factors. Can pick up injuries and illnesses well before any doctor. This will trickle down into daily use over the next decade. 
 
 
 \cleardoublepage
