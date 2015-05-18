@@ -9,5 +9,7 @@
 \contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Write about how this does not consider the fact that it might be necessary to protect ALL the records of a particular participant.}{15}{section*.20}
 \contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Consider remaking this figure so we don't have to cite it}{16}{section*.22}
 \contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Write how we adapted the use of JADE here}{16}{section*.23}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ This section should maybe go somewhere else, but where?}{18}{section*.24}
-\contentsline {todo}{Figure: Figure explaining our framework}{18}{section.4.2}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Do we need to talk about a method of HE that doesn't really work for our requirements?}{17}{section*.24}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Give analysis of time and space complexities and how much this taxes a device.}{17}{section*.25}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ This section should maybe go somewhere else, but where?}{20}{section*.26}
+\contentsline {todo}{Figure: Figure explaining our framework}{20}{section.4.2}
