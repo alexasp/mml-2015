@@ -117,7 +117,15 @@ Here $\lambda > 0$ is the regularization parameter, used to control the trade-of
 
 \subsection{Sensitivity of Logistic Regression}
 
-where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of $\frac{2}{n_j}\epsilon\lambda$, which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
+where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of 
+
+\begin{eqnarray}
+\label{eq:aggregated_logistic_sensitivity}
+\frac{2}{n_j}\epsilon\lambda
+\end{eqnarray}
+
+
+which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
 	
 \todo{Write about how this does not consider the fact that it might be necessary to protect ALL the records of a particular participant.}
 

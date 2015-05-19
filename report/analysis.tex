@@ -7,22 +7,43 @@ As explained in section \ref{section:differential_privacy}, differential privacy
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{fig/eps2e-10-2e9,bud=eps,peers50,groups50,reg2e-4}
- 	\caption{$\epsilon = [2^{-10}, 2^{9}], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
+ 	\caption{$\epsilon = [10^{-3}, 10^{3}], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
  	\label{fig:epsilon_big_range}
 \end{figure}
  
-Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^-10$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. 
- 
+Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^{-10}$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. The positive class rate in the UCI Spambase data set is 0.4, so any error rate at this level is no better than a random classifier. The plot shows how sensitive output is to the values of $\epsilon$
+
+
+
+Figure \ref{fig:linear_epsilon_range} 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{fig/eps0.1-2.2,bud=eps,peers50,groups50,reg2e-4}
+	\caption{$\epsilon = [0.1, 2.2], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
+	\label{fig:linear_epsilon_range}
+\end{figure}
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{fig/eps2e10.0,bud2e10.0,peers10,groups5,reg2e-12-2e7}
-	\caption{$\epsilon = 2^{10}, \lambda = [2^{-12}, 2^{7}]$, 50 peers, 1 aggregation}
+	\caption{$\epsilon = 2^{10}, \lambda = [2^{-12}, 2^{7}]$, 50 peers, 1 aggregation. The high value for $\epsilon$ means that noise is essentially zero.}
 	\label{fig:regularization_extremelyhighepsilon}
 \end{figure}
 
-Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class. On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. In a context where privacy is irrelevant, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting.
+Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only \unsure the negative class. On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting.
 
-When noise, tuned to offer $epsilon$-differential privacy, is added to the model creation process, the trade-offs involved in choosing regularization $\lambda$ become more tricky.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{fig/eps1.0,bud1.0,peers50,groups50,reg2e-10-2e3}
+	\caption{$\epsilon = 1.0, \lambda = [2^{-10}, 2^{3}]$, 50 peers, 1 aggregation}
+	\label{fig:regularization_normalepsilon}
+\end{figure}
+
+Figure \ref{fig:regularization_normalepsilon} shows mean accuracy over a range of $\lambda$ similar to Figure \ref{fig:regularization_extremelyhighepsilon}, where $\epsilon$ is set to a level where the noise variance still has an effect on prediction accuracy, as seen in figure \ref{fig:epsilon_big_range}.
+
+When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda.
 
 What are the results of our experiments?
 
