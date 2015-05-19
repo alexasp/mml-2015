@@ -37,6 +37,7 @@ Informally, the presence or absence of a single record in a database should not 
 Privacy preserving data analysis platforms such as PINQ\cite{mcsherry2009PINQ}, Airavat\cite{roy2010airavat} and Fuzz\cite{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms to compute useful queries while fulfilling Equation \ref{DiffPrivDef}.
 
 \subsection{Privacy Budget}
+\label{section:privacy_budget}
 The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two datasets\cite{abowd2008protective}. Sarathy and Muralidhar\cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other.
 
 Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the dataset. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 
@@ -55,7 +56,7 @@ The Laplace mechanism involves adding random noise which follows the Laplace sta
 Lap(x|b) = \frac{1}{2b} exp (-\frac{|x|}{b})
 \end{eqnarray}
 When using the Laplace mechanism it is necessary to choose a suitable value for the parameter $b$. Increasing values of $b$ results in increased noise variance. The scale of $b$ is naturally dependent on the privacy parameter $\epsilon$, and also on the effect the presence or absence of a single record can have on the output of function $f$. This risk is called the sensitivity of the function, and is defined mathematically as:
-\begin{eqnarray} \label{LaplaceMecDef}
+\begin{eqnarray} \label{eq:sensitivity_def}
 \Delta f=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
  \end{eqnarray}
  \missingfigure[figwidth=6cm]{Picture showing the laplacian distribution} \unsure{Not sure if we need the pic. Alex: I think we do.}]
@@ -86,7 +87,7 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
   \begin{eqnarray} 
  p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
   \end{eqnarray}
-  where \theta is the parameters we wish to learn. Following this we want to maximize the following:
+  where $\theta$ is the parameters we wish to learn. Following this we want to maximize the following:
   \begin{eqnarray}
   argmax_\theta \sum_{i=1}^{m} log Pr(y_i | x_i,\theta) - 
     \end{eqnarray}
@@ -116,11 +117,12 @@ Here $\lambda > 0$ is the regularization parameter, used to control the trade-of
 
 \subsection{Sensitivity of Logistic Regression}
 
-\todo{reference kamalikas paper for logres senstivity}
+where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of $\frac{2}{n_j}\epsilon\lambda$, which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
+	
+\todo{Write about how this does not consider the fact that it might be necessary to protect ALL the records of a particular participant.}
 
-\todo{reference pathaks paper for sensitivity of aggregation process}
 
- \section{Programming Frameworks Used [Rename]}
+ \section{Programming Frameworks Used}
 
  \subsection{JADE}
  The Java Agent framework for Distance learning Environments(JADE) is a middleware which facilitates the development of multi-agent systems. An application based on JADE is made of a set of components called agents, where each one has an unique name. Agents execute tasks and interact by exchanging messages between each other. Agents execute on top of a platform that provides them with basic services such as message delivery. A platform is composed of one or more containers, where the containers can be executed on different hosts thus achieving a distributed platform. The Main container is a special container which exists in the platform, as it has two special properties. 1: It must be the first container to start in the platform, and all other containers must register to it. 2: Two special agents are included; the Agent Management System (AMS) which represents the single authority in the platform, and is an agent tasked with platform management actions such as starting and killing other agents. The other special agent is the Directory Facilitator (DF), which provides a directory which announces which agents are available on the platform. This acts like a yellow pages service where agents can publish the services they provide and find other agents providing services they need.
@@ -139,7 +141,7 @@ Here $\lambda > 0$ is the regularization parameter, used to control the trade-of
 \todo[inline]{Write how we adapted the use of JADE here}
 
 
-\section{Homomorphic Encryption}
+\section{Homomorphic Encryption}\label{sec:homomorphic_encryption}
 Homomorphic encryption is an encryption scheme which allows computations to be carried out on ciphertext, meaning plaintext that has been encrypted using an algorithm and a public key. The result of the computations is also encrypted, and can be deciphered back to plaintext using a private key. This has long been considered as crypthography's holy grail \cite{Micciancio2011HomoEnc}, as this would allowing operating on encrypted text without knowing the decryption key. For example, given ciphertexts $C_1=Enc(Data1)$ and $C_2=Enc(Data2)$, an additively homomorphic encryption scheme would allow to combine $C_1$ and $C_2$ to obtain $Enc_K(Data1+Data2)$. More concretely this means that if you encrypt your data using such an encryption scheme, you can transfer your data to an untrusted server which can perform some arbitrary computations on that data without being able to decrypt the data itself.
 
 Up until recently, all published homomorphic encryption schemes only supported one basic operation, most commonly addition. These schemes could only be called partially homomorphic, as they did not provide any extensive functionality. The notion of a  fully homomorphic encryption schemes was first proposed by Rivest, Adleman, and Dertouzos in 1978 \cite{rivest1978data}, but it wasn't until 2009 that Craig Gentry published a doctoral thesis where he proved that he had constructed a fully homomorphic scheme\cite{gentry2009FHEpaper}. Gentry's solution was based on "ideal lattices" as well as a method to double-encrypt the data in such a way that the errors could be handled "behind the scenes". By periodically unlocking the inner layer of encryption underneath an outer layer of scrambling, the computer could hide and recover from errors without ever analyzing the secret data. 

@@ -56,6 +56,9 @@ public class SpamTest {
                 new PrivacyParam(0.75, 0.75)
         );
 
+        if(useCrossValidation){
+            testData = null;
+        }
 
         double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
         int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
