@@ -19,11 +19,13 @@ Used normalization to scale the data to 0-1 range, this is due to the proof in C
 
 Number of peers $P$ specifies how many different peers participate in the experiment, and necessarily the number of partitions of the training data sets. The training is divided into $P$ parts of equal size.
 
-Aggregate models are created from local models at each peer through an aggregation process that is performed one or more times with subsets of peers. The parameter $G$ specifies how many peers will participate in a single model aggregation. Since each peer has a unique subset of data, this parameter determines how many partitions of the training set contribute to the published aggregate models. These data partitions do not contribute directly, but indirectly through the aggregation of models trained locally on each partition.
+Aggregate models are created from local models at each peer through an aggregation process that is performed one or more times with subsets of peers. The parameter $g$ specifies how many peers will participate in a single model aggregation. Since each peer has a unique subset of data, this parameter determines how many partitions of the training set contribute to the published aggregate models. These data partitions do not contribute directly, but indirectly through the aggregation of models trained locally on each partition.
 
 Each peer trains a local logistic regression classifier on its data partition. This requires selection of a learning rate $\alpha$, a regularization constant $\lambda$ and a maximum number of iterations of gradient descent $I$.
 
-The privacy parameter $\epsilon$ determines the level of privacy for each data partition. Note that this parameter does not apply to the original training set as a whole - each peer has its own private database, which is protected by $\epsilon$-differential privacy. Finally, this epsilon can be divided \todo{finish}.
+The privacy parameter $\epsilon$ determines the level of privacy for each data partition. Note that this parameter does not apply to the original training set as a whole - each peer has its own private database, which is protected by $\epsilon$-differential privacy. 
+
+Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_i$. Each data partition can participate the aggregation mechanism $n$ times, where $n\epsilon_i \leq \epsilon$.
 
 \todo{Insert logistic regression training algorithm including hyperparameter usage}
 
@@ -35,9 +37,42 @@ For the XXXX experiment\todo{insert experiment here}, the test set was used.
 
 \section{Algorithm}
 
-
 This section explain the logistic regression algorithm, how it is commonly used, and what modifications are needed when used in a distributed setting. Explanation on how it is used in a differentially private manner is explained in the architecture section. 
 
+\subsection{Platform Setup}
+
+\subsection{Application of Aggregation Mechanism}
+
+\begin{algorithm}[H]
+	\KwIn{$P$ - the set of peers\;
+		$\epsilon$ - privacy parameter\; 
+		$\epsilon_A$ - privacy level of a mechanism application\;
+		$A$ - the $\epsilon_A$-differentially private aggregation mechanism\;
+		$g$ - number of peers in a single mechanism application}
+	\For{peer $\in$ P}{
+		$budget_{peer} \leftarrow \epsilon$\;
+	}
+	\While{$|P| \geq g$}{
+		$G \leftarrow randomSample(P, g)$\;
+		model $\leftarrow A(G)$\;
+		\For{peer $\in$ G}{
+			$budget_{peer} \leftarrow budget_{peer} - \epsilon_A$\;
+			\If{$budget_{peer} < \epsilon_A$}{
+				$P \leftarrow P \smallsetminus peer$\;
+			}
+		}
+		$publish(P, model)$
+}
+\caption{Aggregation mechanism}
+\end{algorithm}
+
+\todo[inline]{Defend randomSample procedure using Newscast reference}
+
+\subsection{Fitting Local Classifiers}
+
+\subsection{Propegation Of Published Models}
+
+\unsure{Remove this subsection if propegation is not tested}
 
 \subsection{Distribution}
 Introduce notion of distributed machine learning. 

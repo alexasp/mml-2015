@@ -42,7 +42,7 @@ The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to wh
 
 Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the dataset. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 
 
-\todo{Formalize why additive privacy budget works.}
+Defining and depleting a privacy budget is possible due to the sequential composition property of $\epsilon$-differentially private mechanisms, as shown by McSherry\cite{mcsherry2009PINQ}. Given $N$ mechanisms $M_i$ that offer $\frac{\epsilon}{N}$-differential privacy, applying each mechanism $M_i$ in sequence offers $\epsilon$-differentially privacy.
 
 When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowledge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
 
