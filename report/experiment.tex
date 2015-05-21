@@ -4,7 +4,7 @@
 
 Introduce the experiment
 
-\subsection{Dataset}
+\section{Dataset}
 This section will introduce the dataset(s) used. What features it contains, what we try to learn/classify, and why we chose to use it.
 The Spambase Dataset \cite{spambase1999data} was used as a baseline training set. This dataset is publicly available from the UCI machine learning directory, and contains 57 input attributes of continuous format which serves as input features for spam detection and 1 target attribute in discrete format which represents the class.
 
@@ -15,8 +15,27 @@ Used normalization to scale the data to 0-1 range, this is due to the proof in C
 	X_{norm} = \frac{X-X_{min}}{X_{max} - X_{min}}
 \end{eqnarray}
 
+\section{Parameter tuning}
+
+Number of peers $P$ specifies how many different peers participate in the experiment, and necessarily the number of partitions of the training data sets. The training is divided into $P$ parts of equal size.
+
+Aggregate models are created from local models at each peer through an aggregation process that is performed one or more times with subsets of peers. The parameter $G$ specifies how many peers will participate in a single model aggregation. Since each peer has a unique subset of data, this parameter determines how many partitions of the training set contribute to the published aggregate models. These data partitions do not contribute directly, but indirectly through the aggregation of models trained locally on each partition.
+
+Each peer trains a local logistic regression classifier on its data partition. This requires selection of a learning rate $\alpha$, a regularization constant $\lambda$ and a maximum number of iterations of gradient descent $I$.
+
+The privacy parameter $\epsilon$ determines the level of privacy for each data partition. Note that this parameter does not apply to the original training set as a whole - each peer has its own private database, which is protected by $\epsilon$-differential privacy. Finally, this epsilon can be divided \todo{finish}.
+
+\todo{Insert logistic regression training algorithm including hyperparameter usage}
+
+\section{Validation}
+
+The test sets set aside could not be used when tuning and evaluating system hyperparameters. In order to explore the effects of the various hyperparamterse we used cross validation with number of folds $n=10$. For a given combination of hyperparameters, performance metrics were measured as their average across ten repetitions. In repetition $i$, data fold $i$ was used as validation set and the remaining $n-1$ data folds were combined to form the test set.
+
+For the XXXX experiment\todo{insert experiment here}, the test set was used.
 
 \section{Algorithm}
+
+
 This section explain the logistic regression algorithm, how it is commonly used, and what modifications are needed when used in a distributed setting. Explanation on how it is used in a differentially private manner is explained in the architecture section. 
 
 
@@ -33,12 +52,17 @@ Record-based differential privacy. Does it work?
 
 \todo[inline]{This section should maybe go somewhere else, but where?}
 
+
+
 \section{Architecture}
 
 In this section we will describe the architecture of Archipelago, our distributed machine learning system. 
 Using notions borrowed from PINQ, we designed a distributed system using the JADE framework. Consists of explanation of peers, NoisyQueryable, DataLoader
 
  \missingfigure[figwidth=6cm]{Figure explaining our framework}
+
+\subsection{Experiment instantiation and reset}
+
 
 \subsection{Communication}
 \subsubsection{Peer}
