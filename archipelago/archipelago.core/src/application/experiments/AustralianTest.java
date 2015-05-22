@@ -55,9 +55,12 @@ import static java.util.Collections.max;
             List<Integer> peerCounts = Arrays.asList(10);
             List<Integer> groupSizes = Arrays.asList(5);
 
-            List<PrivacyParam> privacyParams = IntStream.range(-6, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, -1), Math.pow(2, i))).collect(Collectors.toList());
-            List<Double> regularizations = IntStream.range(-3,-2).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+            //List<PrivacyParam> privacyParams = IntStream.range(-6, 2).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+            List<Double> regularizations = IntStream.range(-6,3).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+            List<PrivacyParam> privacyParams = Arrays.asList(
+                    new PrivacyParam(0.01, 0.01)
 
+            );
 
             double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
             int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
