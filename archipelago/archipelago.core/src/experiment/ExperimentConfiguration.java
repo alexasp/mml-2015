@@ -1,5 +1,7 @@
 package experiment;
 
+import communication.peer.behaviours.aggregation.PublishTypes;
+
 /**
  * Created by Alexander on 3/30/2015.
  */
@@ -17,6 +19,7 @@ public class ExperimentConfiguration {
     public int groupSize;
     public int cvFolds;
     public boolean useCrossValidation;
+    public PublishTypes publishType;
 
     public ExperimentConfiguration(int aggregations, double budget, int peerCount, int parameters, double epsilon, double regularization, int groupSize, int recordsPerPeer, int cvFolds, boolean useCrossValidation) {
         this.useCrossValidation = useCrossValidation;

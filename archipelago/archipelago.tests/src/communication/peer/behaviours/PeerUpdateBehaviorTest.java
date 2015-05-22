@@ -37,7 +37,7 @@ public class PeerUpdateBehaviorTest {
         when(_behaviourFactory.getModelPropegate(_peerAgent, _model)).thenReturn(_propegateBehavior);
         when(_behaviourFactory.getModelAggregation(_peerAgent, _messageFacade)).thenReturn(_modelAggregationBehavior);
 
-        _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade, _behaviourFactory);
+        _updateBehavior = new PeerUpdateBehavior(_peerAgent, _messageFacade);
     }
 
     private Message fakeMessage(ParametricModel model) {

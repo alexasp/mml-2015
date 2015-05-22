@@ -116,7 +116,7 @@ public class MessageFacade {
     }
 
     public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative, String conversationId, int datasetSize) {
-        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative, datasetSize);
+        ACLMessage message = _messageParser.createModelMessage(model, performative, datasetSize);
         message.addReceiver(receiver);
         message.setConversationId(conversationId);
 
@@ -124,7 +124,7 @@ public class MessageFacade {
     }
 
     public void sendToPeer(AID receiver, ParametricModel model, ArchipelagoPerformatives performative, String conversationId) {
-        ACLMessage message = _messageParser.createModelMessage(model, receiver, performative);
+        ACLMessage message = _messageParser.createModelMessage(model, performative);
         message.addReceiver(receiver);
         message.setConversationId(conversationId);
 
@@ -141,6 +141,17 @@ public class MessageFacade {
     public void sendCompletionMessage(String conversationId) {
         ACLMessage message = _messageParser.createCompletionMessage(conversationId);
         message.addReceiver(_peerGraph.getMonitoringAgent(_agent));
+
+        _agent.send(message);
+    }
+
+    public void sendToAll(ParametricModel mergedModel, ArchipelagoPerformatives performative, String conversationId) {
+        ACLMessage message = _messageParser.createModelMessage(mergedModel, performative);
+        message.setConversationId(conversationId);
+        List<AID> peers = _peerGraph.getPeers(_agent);
+        for (AID peer : peers) {
+            message.addReceiver(peer);
+        }
 
         _agent.send(message);
     }

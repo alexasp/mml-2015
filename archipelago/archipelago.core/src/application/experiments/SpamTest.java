@@ -5,6 +5,7 @@ import application.ExperimentModule;
 import application.experiments.results.Reporting;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import communication.peer.behaviours.aggregation.PublishTypes;
 import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentConfiguration;
@@ -40,6 +41,7 @@ public class SpamTest {
         testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
+        PublishTypes modelPublishType = PublishTypes.Party;
         boolean useCrossValidation = true;
         int foldCount = 10;
 
@@ -47,13 +49,20 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> peerCounts = Arrays.asList(100);
-        List<Integer> groupSizes = IntStream.range(1, 100).filter(i -> i % 5 == 0).boxed().collect(Collectors.toList());
+        List<Integer> peerCounts = Arrays.asList(50);
+        List<Integer> groupSizes = Arrays.asList(10);
 //        List<PrivacyParam> privacyParams = IntStream.range(-10, 10).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
 //        List<PrivacyParam> privacyParams = IntStream.range(0, 10).mapToObj(i -> new PrivacyParam((double) (10 - i) / 10.0, (double) (10 - i) / 10.0)).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-8, -7).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-3, -2).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(0.75, 0.75)
+                new PrivacyParam(0.1),
+                new PrivacyParam(0.4),
+                new PrivacyParam(0.7),
+                new PrivacyParam(1.0),
+                new PrivacyParam(1.3),
+                new PrivacyParam(1.6),
+                new PrivacyParam(1.9),
+                new PrivacyParam(2.2)
         );
 
         if(useCrossValidation){
@@ -80,6 +89,7 @@ public class SpamTest {
                         aggregations = aggregations == 0 ? 1 : aggregations;
 
                         ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
+                        configuration.publishType = modelPublishType;
 
                         testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
                     }
@@ -112,7 +122,6 @@ public class SpamTest {
             }
 //            int peerCount = 100;
 //            int groupSize = 20;
-
 
 
             Injector currentInjector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
