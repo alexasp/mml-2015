@@ -36,7 +36,7 @@ public class BehaviourFactory {
     }
 
     public Behaviour getPeerUpdate(PeerAgent peerAgent, MessageFacade messageFacade) {
-        return new PeerUpdateBehavior(peerAgent, messageFacade, this);
+        return new PeerUpdateBehavior(peerAgent, messageFacade);
     }
 
     public Behaviour getModelPropegate(PeerAgent agent, ParametricModel model) {

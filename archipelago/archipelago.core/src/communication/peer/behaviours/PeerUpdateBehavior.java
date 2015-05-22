@@ -15,29 +15,17 @@ public class PeerUpdateBehavior extends CyclicBehaviour {
 
     private final PeerAgent _peerAgent;
     private final MessageFacade _messageFacade;
-    private final BehaviourFactory _behaviourFactory;
-    private int _iteration;
     public static final ArchipelagoPerformatives Performative = ArchipelagoPerformatives.ModelPropegation;
 
-    public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade, BehaviourFactory behaviourFactory) {
+    public PeerUpdateBehavior(PeerAgent peerAgent, MessageFacade messageFacade) {
         _peerAgent = peerAgent;
         _messageFacade = messageFacade;
-        _behaviourFactory = behaviourFactory;
     }
 
     @Override
     public void action() {
-        if(_iteration <= _peerAgent.getIterations() - 1) {
-            _peerAgent.addBehaviour(_behaviourFactory.getModelAggregation(_peerAgent, _messageFacade));
-        }
-        if (_iteration == _peerAgent.getIterations() - 1){
-//            _peerAgent.addBehaviour(_behaviourFactory.getCompletionBehavior(_peerAgent, _messageFacade)); TODO: What is the correct way to propegate?
-        }
-
-        _iteration++;
 
         if(_messageFacade.hasMessage(Performative)){
-
             Message message = _messageFacade.nextMessage(Performative);
             _peerAgent.addModel(message.getModel());
         }

@@ -69,8 +69,12 @@ public class CuratorBehavior extends CyclicBehaviour{
     }
 
     private void publishModel(ParametricModel mergedModel) {
-        for (AID agentId : _parties) {
-            _messageFacade.sendToPeer(agentId, mergedModel, ArchipelagoPerformatives.AggregatedResult, _conversationId);
+        if(_configuration.publishType == PublishTypes.Party) {
+            for (AID agentId : _parties) {
+                _messageFacade.sendToPeer(agentId, mergedModel, ArchipelagoPerformatives.ModelPropegation, _conversationId);
+            }
+        } else if(_configuration.publishType == PublishTypes.All){
+            _messageFacade.sendToAll(mergedModel, ArchipelagoPerformatives.ModelPropegation, _conversationId);
         }
     }
 }

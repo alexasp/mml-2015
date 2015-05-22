@@ -46,24 +46,23 @@ public class ACLMessageParser {
         }
     }
 
-    public ACLMessage createModelMessage(ParametricModel model, AID agent, ArchipelagoPerformatives performative, int datasetSize) {
-        ACLMessage message = createModelMessage(model, agent, performative);
+    public ACLMessage createModelMessage(ParametricModel model, ArchipelagoPerformatives performative, int datasetSize) {
+        ACLMessage message = createModelMessage(model, performative);
         message.setContent(message.getContent() + SIZE_DELIMITER + datasetSize);
 
         return message;
     }
 
-    public ACLMessage createModelMessage(ParametricModel model, AID agent, ArchipelagoPerformatives performative) {
+    public ACLMessage createModelMessage(ParametricModel model, ArchipelagoPerformatives performative) {
         ACLMessage message = performative != null ? new ACLMessage(performative.ordinal()) : new ACLMessage();
         message.setOntology(Ontologies.Model.name());
-        message.addReceiver(agent);
         message.setContent(model.serialize());
 
         return message;
     }
 
     public ACLMessage createModelMessage(ParametricModel model, AID agent2) {
-        return createModelMessage(model, agent2, ArchipelagoPerformatives.ModelPropegation);
+        return createModelMessage(model, ArchipelagoPerformatives.ModelPropegation);
     }
 
     public ACLMessage createCompletionMessage(AID agent1) {

@@ -9,7 +9,6 @@ public enum ArchipelagoPerformatives {
     ModelContribution,
     AggregationGroupRequest,
     GroupFormation,
-    AggregatedResult,
     IterationsCompleted,
     ModelPropegation;
 }

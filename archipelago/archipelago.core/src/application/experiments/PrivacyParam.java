@@ -12,6 +12,10 @@ public class PrivacyParam {
         this.perUpdateBudget = perUpdateBudget;
     }
 
+    public PrivacyParam(double epsilon) {
+        this(epsilon, epsilon);
+    }
+
     public static PrivacyParam get(double epsilon, double perUpdateBudget) {
         return new PrivacyParam(epsilon, perUpdateBudget);
     }
