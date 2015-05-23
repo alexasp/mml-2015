@@ -45,6 +45,13 @@ Figure \ref{fig:regularization_normalepsilon} shows mean accuracy over a range o
 
 When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda.
 
+\todo{insert figure showing situations where smaller groups is better}
+
+We see in Figure \ref{abovefigure} that a smaller group size and consequently more aggregated models published results in a strong reduction in accuracy variance. A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble.
+
+On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
+\todo{cite some boosting paper here}
+
 What are the results of our experiments?
 
 What did we learn from the basic structure of creating our framework?
@@ -78,13 +85,13 @@ A growing worldwide market is the sale and usage of wearable sensors, such as en
 
 The wearable devices are implementing fitness and health monitoring by using a mixture of sensors, such as motion, pulse, hydration and skin temperature sensors. All of these wearables will therefore generate a massive amount of data about the person who are using them. This data can be considered as highly sensitive information, as it can unveil a lot about their user's health, and the manufacturers of these devices knows this. Dana Liebelson, a reporter for Huffington Post, queried several US-based fitness device companies about their privacy. One of the replies she got, was that "the company does not sell information collected from the device that can identify individual users", but that they were considering marketing aggregate information that cannot be linked back to an individual. As we saw in section \ref{section:privacy_breaches} and \ref{section:attack_vectors}, many of the popular methods for aggregating and anonymizing a dataset carries an inherent risk of a privacy breach.
 
-
+This is where we see a potential application for our distributed framework, as it solves the problem faced by those who don't want to give up control of their data to a third party, but they still want to analyze their data as it can be highly useful. 
 
 -Future homes can potentially track you through you phone, or similar device. 
 
--You don't want to send this data to someone else, but what you can learn from the data can be highly useful in your daily life. 
+-You don't want to send this data to someone else, but what you can learn from the data can be highly useful in your daily life if analyzed. 
 
-Kevin Fong and the England rugby team. Monitor heart rate, step balance, and a lot of other factors. Can pick up injuries and illnesses well before any doctor. This will trickle down into daily use over the next decade. 
+Kevin Fong and the England rugby team. Monitor heart rate, step balance, and a lot of other factors. Can pick up injuries and illnesses well before any doctor. This will trickle down into daily use over the next decade, and let people 
 
 
 \cleardoublepage

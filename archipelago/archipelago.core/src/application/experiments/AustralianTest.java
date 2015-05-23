@@ -5,6 +5,7 @@ import application.ExperimentModule;
 import application.experiments.results.Reporting;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import communication.peer.behaviours.aggregation.PublishTypes;
 import experiment.DataLoader;
 import experiment.Experiment;
 import experiment.ExperimentConfiguration;
@@ -45,6 +46,7 @@ import static java.util.Collections.max;
             testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
+            PublishTypes modelPublishType = PublishTypes.All;
             boolean useCrossValidation = true;
             int foldCount = 10;
 
@@ -53,11 +55,14 @@ import static java.util.Collections.max;
             }
 
             List<Integer> peerCounts = Arrays.asList(10);
-            List<Integer> groupSizes = Arrays.asList(5);
+            List<Integer> groupSizes = Arrays.asList(2,3,4,5,6,7,8,9,10);
 
-            List<PrivacyParam> privacyParams = IntStream.range(-6, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, -1), Math.pow(2, i))).collect(Collectors.toList());
-            List<Double> regularizations = IntStream.range(-3,-2).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+            //List<PrivacyParam> privacyParams = IntStream.range(-6, 2).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+            List<Double> regularizations = IntStream.range(-1,0).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+            List<PrivacyParam> privacyParams = Arrays.asList(
+                    new PrivacyParam(0.01, 0.01)
 
+            );
 
             double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
             int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
@@ -79,7 +84,7 @@ import static java.util.Collections.max;
                             aggregations = aggregations == 0 ? 1 : aggregations;
 
                             ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
-
+                            configuration.publishType = modelPublishType;
                             testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
                         }
                     }
