@@ -1,6 +1,8 @@
 report/main.pdf
 *.xls
 
+*.tdo
+
 *.pyc
 
 *.class
