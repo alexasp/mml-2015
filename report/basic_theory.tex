@@ -108,6 +108,8 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  g = \Delta_w l (\textbf{w}) = \sum_{i}^{} (1 - \sigma(y_i \textbf{w}^T	\textbf{x}_i)) y_i \textbf{x}_i - \lambda \textbf{w}
 \end{eqnarray} 
 
+\todo[inline]{Include learning rate in update rule}
+
 When m, the number of observations or training examples, is not large enough compared to n, the number of feature variables, simple logistic regression leads to over-fit. A standard technique to prevent over-fitting is regularization, in which an extra term that penalizes large weights is added to the average logistic loss function. The $l_2$-regularized logistic regression problem is
 \begin{eqnarray}
 minimize:	  l_{avg}(v,w)+ \lambda||w||^2_2 = (1/m) \sum_{i=1}^{m} f(w^T a_i +vb_i) + \lambda \sum_{i=1}^{n} w_i^2
