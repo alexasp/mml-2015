@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class PerformanceMetrics {
 
-    public double errorRate(List<LabeledSample> test, List<Double> predictions) {
+    public static double errorRate(List<LabeledSample> test, List<Double> predictions) {
 
         double wrong = 0.0;
 
