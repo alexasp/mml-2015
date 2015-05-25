@@ -23,9 +23,11 @@ Aggregate models are created from local models at each peer through an aggregati
 
 Each peer trains a local logistic regression classifier on its data partition. This requires selection of a learning rate $\alpha$, a regularization constant $\lambda$ and a maximum number of iterations of gradient descent $I$. The learning rate is sensitive to the size of the local training set\cite{wilson20013learningrate}, and should be tuned individually by each peer. In usual data mining applications the regularization $\lambda$ would be tuned in this manner as well, but the sensitivity of the aggregation mechanism depends on $\lambda$, as seen in Equation \ref{eq:aggregated_logistic_sensitivity}. This means that the peers will have to communicate to either agree on a regularization level or to determine the smallest regularization constant to identify the worst case noise level. In our experiments we chose a global regularization level, which was used by all peers. We identified the best $\lambda$ by testing a coarse grid of powers of 2 whenever we changed the per-peer number of training samples.
 
+\todo{Talk about the problem of tuning regularization. We are essentially doing a global selection of regularization. This could be difficult. Better to communicate the minimum, perhaps? But then, which regularization should peers pick locally? The highest one that stil has good performance?}
+
 The privacy parameter $\epsilon$ determines the level of privacy for each data partition. Note that this parameter does not apply to the original training set as a whole - each peer has its own private database, which is protected by $\epsilon$-differential privacy. 
 
-Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_i$. Each data partition can participate the aggregation mechanism $n$ times, where $n\epsilon_i \leq \epsilon$.
+Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_i$. Each data partition can participate the aggregation mechanism $n$ times, where $n\epsilon_A \leq \epsilon$.
 
 \todo{Insert logistic regression training algorithm including hyperparameter usage}
 
@@ -83,7 +85,12 @@ This section explain the logistic regression algorithm, how it is commonly used,
 	\caption{Gradient descent of logistic regression model}
 \end{algorithm}
 
-\subsection{Propegation Of Published Models}
+\subsection{Propagation Of Published Models}
+
+Originally in our system, aggregated models were only propagated to the peers that had participated in creating that model, as can be seen in Figure \ref{fig:peerAggregationFigure}. What resulted from this, especially when epsilon was set to a low amount such as 0.1 or lower, was that the high amount of noise made the classifiers have a big standard deviation on their mean classification rate. What this meant was that while the classifiers could be very accurate in some peers, classifying up towards 90\% accuracy, it could also be significantly worse in other peers. 
+
+We theorized that we could improve the ensemble classifier in each peer if we could propagate the aggregated models to all the peers in the network, instead of just those who had participated in making them. Our hypotheses was that this would lead to more stable classifiers with lower standard deviation, due to a smoothing effect in having more models in the ensemble classifier in each peer. This is basically the same idea as bootstrap aggregating, or bagging, which has been proven to lead to improvements in unstable procedures\cite{breiman1996bagging}. 
+
 
 \unsure{Remove this subsection if propegation is not tested}
 
