@@ -52,10 +52,10 @@ public class LogisticModel implements ParametricModel {
 
     @Override
     public void update(double epsilon, List<LabeledSample> data) {
-        List<Double> alphas = IntStream.range(-7, 0).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> alphas = IntStream.range(-7, -4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         double best_alpha = alphas.get(0);
         double best_error = 1.0;
-        List<List<LabeledSample>> folds = DataLoader.partition(10, data);
+        List<List<LabeledSample>> folds = DataLoader.partition(3, data);
 
         for (Double alpha : alphas) {
 
@@ -81,8 +81,11 @@ public class LogisticModel implements ParametricModel {
 
     private double[] fitModel(List<LabeledSample> train, double alpha) {
         double[] parameters = Arrays.copyOf(_parameters, _parameters.length);
+        ArrayList<Double> logConditionalLikelihoods = new ArrayList<>();
 
-        for (int iteration = 0; iteration < 50; iteration++) {
+        logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+
+        for (int iteration = 0; iteration < 100; iteration++) {
 
             double[] gradient = new double[parameters.length];
 
@@ -91,13 +94,33 @@ public class LogisticModel implements ParametricModel {
                 gradient[i] = train.stream().mapToDouble(sample -> errorProjection(sample) * sample.getFeatures()[finalI]).sum();
             }
 
-            for (int d = 0; d < parameters.length; d++) {
+            for (int d = 0; d < parameters.length - 1; d++) {
                 parameters[d] += alpha * (gradient[d] - 2.0 * _regularization * parameters[d]);
             }
+            parameters[parameters.length - 1] = alpha * gradient[parameters.length - 1]; //don't regularize the intercept/bias term.
 
+            logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+
+            if(logConditionalLikelihoods.get(iteration + 1) - logConditionalLikelihoods.get(iteration) < 0.01){
+                break;
+            }
+            else{
+                assert Boolean.TRUE;
+            }
         }
 
         return parameters;
+    }
+
+    private Double calculateLcl(List<LabeledSample> train, double[] parameters, double regularization) {
+        double logConditionalLikelihood = 0.0;
+        for (LabeledSample labeledSample : train) {
+            double probability = sigmoid(labeledSample.getFeatures(), parameters);
+            double y = labeledSample.getLabel() == 1.0 ? 1.0 : 0.0;
+            logConditionalLikelihood += probability * y + (1.0-probability) * (1 - y);
+        }
+        logConditionalLikelihood -= regularization * IntStream.range(0, parameters.length).mapToDouble(i -> _parameters[i]*_parameters[i]).sum();
+        return logConditionalLikelihood;
     }
 
     @Override

@@ -14,10 +14,7 @@ import jade.wrapper.ControllerException;
 import learning.LabeledSample;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -53,7 +50,7 @@ public class SpamTest {
         List<Integer> groupSizes = Arrays.asList(10);
 //        List<PrivacyParam> privacyParams = IntStream.range(-10, 10).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
 //        List<PrivacyParam> privacyParams = IntStream.range(0, 10).mapToObj(i -> new PrivacyParam((double) (10 - i) / 10.0, (double) (10 - i) / 10.0)).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-7, -3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-7, -2).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1.0)
         );
@@ -65,6 +62,8 @@ public class SpamTest {
         double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
         int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
         System.out.println("Total number of records per peer:" + recordsPerPeer);
+
+
 
         int parameters = trainData.get(0).getFeatures().length;
 
