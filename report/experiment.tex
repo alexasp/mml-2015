@@ -15,6 +15,8 @@ Used normalization to scale the data to 0-1 range, this is due to the proof in C
 	X_{norm} = \frac{X-X_{min}}{X_{max} - X_{min}}
 \end{eqnarray}
 
+We appended a feature with constant value 1.0 to all data records, to act as the intercept or bias term. 
+
 \section{Parameter tuning}
 
 Number of peers $P$ specifies how many different peers participate in the experiment, and necessarily the number of partitions of the training data sets. The training is divided into $P$ parts of equal size.
@@ -73,17 +75,38 @@ This section explain the logistic regression algorithm, how it is commonly used,
 \subsection{Fitting Local Classifiers}
 
 \begin{algorithm}[H]
-	\KwData{Set of training samples $D$}
+	\KwData{Set of training samples $D$ with dimensionality $d$}
+	\KwIn{$\lambda$ - regularization strength\;
+		$\alpha$ - learning rate\;
+		$iterations_{max}$ - maximum number of ascent iterations}
+	\KwResult{Logistic regression model fitted to $D$}
+	
+    $model \leftarrow$ 0-vector of length $d$\;
+	\For{$iterations_{max}$}{
+		$gradient \leftarrow$ 0-vector of length $d$
+		\For{instance $D_i$ in $D$}{
+			for-block
+			}
+		$model_i \leftarrow model_i + \alpha[()]$
+		}
+	\caption{Cross validated selection of best model}
+\end{algorithm}
+
+\begin{comment}
+\begin{algorithm}[H]
+	\KwData{Set of training samples $D$ with dimensionality $d$}
 	\KwIn{$\lambda$ - regularization strength\;
 		$\alpha$ - learning rate\; 
 		$iterations_{max}$ - maximum number of iterations}
 	\KwResult{Logistic regression model fitted to $D$}
-	$model \leftarrow 	$
-	\For{$iterations_{max}$ iterations}{
-		repeat-block;\
-		}
+	
+	$model \leftarrow$ 0-vector of length $d$\;
+	\For{$iterations_{max}$}{
+		;\
+	}
 	\caption{Gradient descent of logistic regression model}
 \end{algorithm}
+\end{comment}
 
 \subsection{Propegation Of Published Models}
 

@@ -13,8 +13,6 @@ As explained in section \ref{section:differential_privacy}, differential privacy
  
 Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^{-10}$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. The positive class rate in the UCI Spambase dataset is 0.4, so any error rate at this level is no better than a random classifier. The plot shows how sensitive output is to the values of $\epsilon$
 
-
-
 Figure \ref{fig:linear_epsilon_range} 
 
 \begin{figure}[h!]
@@ -47,10 +45,15 @@ When noise with significant variance is added to the model creation process, tun
 
 \todo{insert figure showing situations where smaller groups is better}
 
-We see in Figure \ref{abovefigure} that a smaller group size and consequently more aggregated models published results in a strong reduction in accuracy variance. A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble.
-
-On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
+We see in Figure \ref{abovefigure} that a smaller group size and consequently more aggregated models published results in a strong reduction in accuracy variance. A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
 \todo{cite some boosting paper here}
+
+
+The interesting observation that can be made from this is that the best situation is when there is not aggregation. A group size of 2 results in only a single model being contributed, and is equivalent to each peer publishing its local model with noise. One possible reason for this is that there simply is no value in averaging models in the way done by Pathak et al.\cite{pathak2010diffprivhomo} and in our experiments.
+
+Another possible explanation for this observation is that aggregation can be useful, but not when the peers all have samples of data from the exact same distribution. Neither our experiment or the experiment by Pathak et al. help distinguish between these two cases. 
+
+To determine whether there is value in aggregation, it would be necessary to obtain a data set which has subsets that are produced by distinct distributions, and partitioning data without fully shuffling first. Due to time constraints we did not have time to run these additional experiments. \todo{See if we have time to do this. We REALLY should, otherwise it will give a lower grade.}
 
 What are the results of our experiments?
 
