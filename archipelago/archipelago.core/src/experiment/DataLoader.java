@@ -127,17 +127,5 @@ public class DataLoader {
         return mergedList;
     }
 
-       /*
-        try {
-        FileInputStream inputStream = new FileInputStream();
-        UTF8_CHARSET charset = StandardCharsets.UTF_8.newDecoder();
-        UTF8_CHARSET.onMalformedInput(CodingErrorAction.REPLACE);
-        FileReader fileReader = new InputStreamReader(inputStream, UTF8_CHARSET);
-        this.reader = new CSVReader(this.fileReader);
-        }
-        catch (FileNotFoundException ex) {
-
-        }
-        */
 
 }
