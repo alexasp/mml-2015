@@ -43,10 +43,10 @@ Figure \ref{fig:regularization_normalepsilon} shows mean accuracy over a range o
 
 When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda.
 
-\todo{insert figure showing situations where smaller groups is better}
+
 \subsection{Analysis of Propagation and group size}
 
-As mentioned in Section \ref{sec:PropagationPubModel}, 
+As mentioned in Section \ref{sec:PropagationPubModel}, \todo[inline]{finish this}
 
 \begin{figure}[h!]
 	\centering
@@ -63,11 +63,22 @@ As mentioned in Section \ref{sec:PropagationPubModel},
 	\end{minipage}
 \end{figure}
 
-We see in Figure \ref{fig:RegRangeTestPubAll} that a smaller group size and consequently more aggregated models published results in a strong reduction in accuracy variance. A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
+As the previous experiment indicates that publishing newly made models to as many peers as possible is better \todo{Add a reflection talking about why this makes sense.}, we performed an additional experiment to determine whether it in such a scenario would be better to perform many aggregations with fewer models included in each aggregate or performing few aggregations including many models. This was achieved by testing performance with a range of values. In the experiment, each peer can only participate in a single aggregation before reaching the limit set by the privacy guarantee. For example, given a set of 50 peers, a aggregation size of 25 can only publish two aggregated models.
+ 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{fig/GroupSizeEffectSpam-eps1.0,budg=eps,peers50,groups2-50,reg2e0-pubAll-LRbyCV-retuning}
+	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [1, 49]}
+	\label{fig:groupsize_is_better}
+\end{figure}
 
-The interesting observation that can be made from this is that the best situation is when there is no aggregation. A group size of 2 results in only a single model being contributed, and is equivalent to each peer publishing its local model with noise. One possible reason for this is that there simply is no value in averaging models in the way done by Pathak et al.\cite{pathak2010diffprivhomo} and in our experiments.
+The results of this experiment is seen in Figure \ref{fig:groupsize_is_better}. It is clear that a smaller group size and consequently more aggregated models published resulted in a strong reduction in accuracy variance. While the variance is too high at larger group sizes to know much about the actual mean value after only 10 repetitions of the experiment, it is unlikely that it is smaller than the mean accuracy observed when the group size is one. 
 
-Another possible explanation for this observation is that aggregation can be useful, but not when the peers all have samples of data from the exact same distribution. Neither our experiment or the experiment by Pathak et al. help distinguish between these two cases. 
+A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
+
+The interesting observation that can be made from this is that the best situation is when there is no aggregation. A group size of one results in only a single model being contributed, and is equivalent to each peer publishing its local model with noise. One possible reason for this could be that there simply is no value in averaging models in the way done in our experiments and by Pathak et al.\cite{pathak2010diffprivhomo}.
+
+Another possible explanation for this observation is that aggregation might be useful, but not when the peers all have samples of data from the exact same distribution. This is the case with the Spambase data set used in the experiment in Figure \ref{fig:groupsize_is_better}. Neither our experiment or the experiment by Pathak et al. help distinguish between these two possibilities.
 
 To determine whether there is value in aggregation, it would be necessary to obtain a data set which has subsets that are produced by distinct distributions, and partitioning data without fully shuffling first. Due to time constraints we did not have time to run these additional experiments. \todo{See if we have time to do this. We REALLY should, otherwise it will very possibly give a lower grade.}
 
