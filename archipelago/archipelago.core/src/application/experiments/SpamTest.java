@@ -38,7 +38,7 @@ public class SpamTest {
         testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        PublishTypes modelPublishType = PublishTypes.All ;
+        PublishTypes modelPublishType = PublishTypes.Party;
         boolean useCrossValidation = true;
         int foldCount = 10;
 
@@ -46,11 +46,10 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> peerCounts = Arrays.asList(10);
-        List<Integer> groupSizes = Arrays.asList(10);
-//        List<PrivacyParam> privacyParams = IntStream.range(-10, 10).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-//        List<PrivacyParam> privacyParams = IntStream.range(0, 10).mapToObj(i -> new PrivacyParam((double) (10 - i) / 10.0, (double) (10 - i) / 10.0)).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-7, -2).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Integer> peerCounts = Arrays.asList(50);
+        List<Integer> groupSizes = Arrays.asList(2);
+//        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-5, 5).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1.0)
         );
