@@ -23,9 +23,11 @@ Aggregate models are created from local models at each peer through an aggregati
 
 Each peer trains a local logistic regression classifier on its data partition. This requires selection of a learning rate $\alpha$, a regularization constant $\lambda$ and a maximum number of iterations of gradient descent $I$. The learning rate is sensitive to the size of the local training set\cite{wilson20013learningrate}, and should be tuned individually by each peer. In usual data mining applications the regularization $\lambda$ would be tuned in this manner as well, but the sensitivity of the aggregation mechanism depends on $\lambda$, as seen in Equation \ref{eq:aggregated_logistic_sensitivity}. This means that the peers will have to communicate to either agree on a regularization level or to determine the smallest regularization constant to identify the worst case noise level. In our experiments we chose a global regularization level, which was used by all peers. We identified the best $\lambda$ by testing a coarse grid of powers of 2 whenever we changed the per-peer number of training samples.
 
+\todo{Talk about the problem of tuning regularization. We are essentially doing a global selection of regularization. This could be difficult. Better to communicate the minimum, perhaps? But then, which regularization should peers pick locally? The highest one that stil has good performance?}
+
 The privacy parameter $\epsilon$ determines the level of privacy for each data partition. Note that this parameter does not apply to the original training set as a whole - each peer has its own private database, which is protected by $\epsilon$-differential privacy. 
 
-Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_i$. Each data partition can participate the aggregation mechanism $n$ times, where $n\epsilon_i \leq \epsilon$.
+Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_i$. Each data partition can participate the aggregation mechanism $n$ times, where $n\epsilon_A \leq \epsilon$.
 
 \todo{Insert logistic regression training algorithm including hyperparameter usage}
 
