@@ -46,8 +46,26 @@ Figure \ref{fig:regularization_normalepsilon} shows mean accuracy over a range o
 When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda.
 
 \todo{insert figure showing situations where smaller groups is better}
+\subsection{Analysis of Propagation and group size}
 
-We see in Figure \ref{abovefigure} that a smaller group size and consequently more aggregated models published results in a strong reduction in accuracy variance. A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble.
+As mentioned in Section \ref{sec:PropagationPubModel}, 
+
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/PartyAllComparisonSpam-eps1.0,budg=eps,peers50,groups2,reg2e-5-2e4-pubParty-LRbyCV-retuning.png}
+		\captionof{figure}{$\epsilon = 1.0, \lambda = [2^{-5}, 2^{4}]$ 50 peers, 25 aggregations, publish to participants}
+		\label{fig:RegRangeTestPubParty}
+	\end{minipage}
+	\hspace{.001\linewidth}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/PartyAllComparisonSpam-eps1.0,budg=eps,peers50,groups2,reg2e-5-2e4-pubAll-LRbyCV-retuning.png}
+		\captionof{figure}{$\epsilon = 1.0, \lambda = [2^{-5}, 2^{4}]$ 50 peers, 25 aggregations, publish to all}
+		\label{fig:RegRangeTestPubAll}
+	\end{minipage}
+\end{figure}
+
+We see in Figure \ref{fig:RegRangeTestPubAll} that a smaller group size and consequently more aggregated models published results in a strong reduction in accuracy variance. A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble.
 
 On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
 \todo{cite some boosting paper here}
