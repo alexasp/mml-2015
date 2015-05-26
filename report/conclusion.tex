@@ -3,12 +3,26 @@
 \chapter{Conclusion}
 
 
+\section{Threats To Validity}
+
+\subsection{Platform}
+A potential threat to the validity of our conclusion/work \todo{Fix this sentence}, is how we performed the setup of the Jade platform. Since we wanted to perform our experiments on over a range of parameters, we needed to find a way to reset the platform after a successive experiment and re-run it with a new set of configurations. We solved this by having a jade agent called CompletionAgent be responsible for waiting for every peer to message indicating their completion, which would trigger the CompletionAgent to deregister all the peers from the MainContainer and then reset the whole environment. The environment would then be set up again with new parameters. 
+
+What we see as a potential source for concern in this process is the possibility for error during the deregistration. During the implementation of this process we encountered some problems in making it work, as the CompletionAgent seemed to take an unreasonable amount of time in completing its purpose. Although we found a solution to this problems, there is still a risk that peers do not deregister as they should and carry through into the next iteration of testing. This could lead to false information being injected into our experiment, which would skew our results.  
+
+We have however minimized this risk by continuously developing unit test to verify new code additions, as well as using JADE's native GUI to supervise the behavior of the peers while running. We therefore conclude that the risk is negligible.
+
 
 \section{Future Work}
 
 Further develop and test the propagation of aggregated models. We experienced that when we shared the aggregated models globally in our network, we could decrease the SD in our classification error, as well as sometimes improving the classifier. Further research should go in expanding this behavior, as you could potentially propagate models only to peers in geographic and/or demographic vicinity. This could possibly lead to more specialized models, which could give better classification rate to a specialized subset of peers.  
 
 Implement the Newscast algorithm for selecting peers. The Newscast algorithm is a gossip protocol which facilitates a robust spread of information. The core of the protocol involves periodic and pairvise interaction between processes. Implementing this algorithm would allow our system to scale better when a big number of peers are added to the network. The biggest bottleneck of our system at the moment is the peer sampling during the group forming, as it requires a single agent to act as a manager for how groups are formed. The basic idea of the Newscast algorithm is that each node, or peer in our situation, has a partial view of the system. All nodes exchange their views periodically, which allows them to keep an up-to-date view locally and spread their information throughout the network. Further research into this algorithm would allow us to customize this algorithm so that peers in our network could form groups based on their partial views of the network. 
+
+Full data protection for each peer's data. This would involve dividing the epsilon by the biggest dataset size, as formalized by Dwork in \todo{citation}. This is an ever tighter privacy guarantee, but it would potentially mean that the results would contain too much noise. To test this we would need a massive dataset, as we would need to test the correlation between dataset size, and amount of noise added to each peer. (More noise needs more data to smooth out.)
+
+Real world case which takes humans into account. Right now research in privacy is all about the technical details, and try to get it as close as possible to existing methods. Without some kind of popular support, the method will never see practice in real-world applications. 
+
 \newpage
 \listoftodos[Notes]
 
