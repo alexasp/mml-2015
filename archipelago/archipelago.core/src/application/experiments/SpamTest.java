@@ -38,20 +38,22 @@ public class SpamTest {
         testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        PublishTypes modelPublishType = PublishTypes.Party;
+        PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = true;
         int foldCount = 10;
+        int maxRecordsPerPeer = 1000;
 
         if(useCrossValidation){
             testData = null;
         }
 
         List<Integer> peerCounts = Arrays.asList(50);
-        List<Integer> groupSizes = Arrays.asList(2);
+//        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
+        List<Integer> groupSizes = Arrays.asList(2, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-5, 5).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1.0)
+                new PrivacyParam(10.0)
         );
 
         if(useCrossValidation){
@@ -59,7 +61,7 @@ public class SpamTest {
         }
 
         double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
-        int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
+        int recordsPerPeer = Math.min((int) (trainDataSize / (double) max(peerCounts)), maxRecordsPerPeer);
         System.out.println("Total number of records per peer:" + recordsPerPeer);
 
 
