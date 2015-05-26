@@ -24,20 +24,23 @@ Figure \ref{fig:linear_epsilon_range}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\textwidth]{fig/eps2e10.0,bud2e10.0,peers10,groups5,reg2e-12-2e7}
-	\caption{$\epsilon = 2^{10}, \lambda = [2^{-12}, 2^{7}]$, 50 peers, 1 aggregation. The high value for $\epsilon$ means that noise is essentially zero.}
-	\label{fig:regularization_extremelyhighepsilon}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/spambase/eps2e10,budg=eps,peers50,groups2,reg2e-5-2e4-pubAll-LRbyCV-retuning}
+		\captionof{figure}{$\epsilon = 2^{10}, \lambda = [2^{-5}, 2^{4}]$, 50 peers, 25 aggregations, publish to participants}
+		\label{fig:regularization_normalepsilon}
+	\end{minipage}
+	\hspace{.001\linewidth}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers50,groups2,reg2e-5-2e4-pubAll-LRbyCV-retuning}
+		\captionof{figure}{$\epsilon = 0.1, \lambda = [2^{-5}, 2^{4}]$ 50 peers, 25 aggregations, publish to all}
+		\label{fig:regularization_extremelyhighepsilon}
+	\end{minipage}
 \end{figure}
 
-Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only \unsure the negative class. On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting.
+Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy for the spambase data set, by setting $\epsilon$ so high that noise is essentially nonexistent. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class, which constitutes 60\% of the data set. This happen because the high regularization forces the parameter vector to the zero vector, resulting in uniform class probability for all samples. 
 
+On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting.
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{fig/eps1.0,bud1.0,peers50,groups50,reg2e-10-2e3}
-	\caption{$\epsilon = 1.0, \lambda = [2^{-10}, 2^{3}]$, 50 peers, 1 aggregation}
-	\label{fig:regularization_normalepsilon}
-\end{figure}
 
 Figure \ref{fig:regularization_normalepsilon} shows mean accuracy over a range of $\lambda$ similar to Figure \ref{fig:regularization_extremelyhighepsilon}, where $\epsilon$ is set to a level where the noise variance still has an effect on prediction accuracy, as seen in figure \ref{fig:epsilon_big_range}.
 
