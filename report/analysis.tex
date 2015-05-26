@@ -2,6 +2,8 @@
 
 \chapter{Analysis}
 
+\todo[inline]{Make a table with baseline classification rate for logistic regression, put in our values. 1 Peer with no noise, 1 peer with noise, best case from other experiments that we want to highlight. This can lead to a discussion of why our results are not as good, where they show promise etc}
+
 All prediction results given in this section are presented with mean and standard deviation values. These values are computed by evaluating each combination of parameters with 10-fold cross validation and taking the mean and standard deviation of accuracy across the 10 data folds.
 
 As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a dataset by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
@@ -73,7 +75,7 @@ As the previous experiment indicates that publishing newly made models to as man
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{fig/GroupSizeEffectSpam-eps1.0,budg=eps,peers50,groups2-50,reg2e0-pubAll-LRbyCV-retuning}
-	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [1, 49], 66 samples per peer}
+	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [2, 50], 66 samples per peer}
 	\label{fig:groupsize_is_better}
 \end{figure}
 
@@ -93,11 +95,11 @@ An alternative avenue for validating the value of doing aggregation could be to 
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\textwidth]{fig/GroupSizeEffectSpam-eps1.0,budg=eps,peers50,groups2-50,reg2e0-pubAll-LRbyCV-retuning}
-	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [1, 49], 66 samples per peer}
+	\includegraphics[width=\textwidth]{fig/spambase/ShowingPotentialUsefulnessOfLargerGroups-eps1.0,budg=eps,peers50,groups2-20,reg2e-2-dataMax20-pubAll-LRbyCV-retuning}
+	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [2, 50], 20 samples per peer}
 	\label{fig:groupsize_limiteddata}
 \end{figure}
-
+\todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
 
 What are the results of our experiments?
 
