@@ -71,7 +71,7 @@ As the previous experiment indicates that publishing newly made models to as man
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{fig/GroupSizeEffectSpam-eps1.0,budg=eps,peers50,groups2-50,reg2e0-pubAll-LRbyCV-retuning}
-	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [1, 49]}
+	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [1, 49], 66 samples per peer}
 	\label{fig:groupsize_is_better}
 \end{figure}
 
@@ -83,7 +83,8 @@ The interesting observation that can be made from this is that the best situatio
 
 Another possible explanation for this observation is that aggregation might be useful, but not when the peers all have samples of data from the exact same distribution. This is the case with the Spambase data set used in the experiment in Figure \ref{fig:groupsize_is_better}. Neither our experiment or the experiment by Pathak et al. help distinguish between these two possibilities.
 
-To determine whether there is value in aggregation, it would be necessary to obtain a data set which has subsets that are produced by distinct distributions, and partitioning data without fully shuffling first. Due to time constraints we did not have time to run these additional experiments. \todo{See if we have time to do this. We REALLY should, otherwise it will very possibly give a lower grade.}
+To determine whether there is value in aggregation, it would be necessary to obtain a data set which has subsets that are produced by distinct distributions, and partitioning data without fully shuffling first. Due to time constraints we did not have time to locate and prepare data sets that fit this requirement. \todo{See if we have time to do this. We REALLY should, otherwise it will very possibly give a lower grade.}
+
 
 What are the results of our experiments?
 
