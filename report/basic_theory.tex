@@ -117,7 +117,7 @@ minimize:	  l_{avg}(v,w)+ \lambda||w||^2_2 = (1/m) \sum_{i=1}^{m} f(w^T a_i +vb_
 Here $\lambda > 0$ is the regularization parameter, used to control the trade-off between the average logistic loss and the size of the weight vector, as measured by the $l_2$-norm. The objective function in this logistic regression problem is smooth and convex, and can be minimized by standard gradient descent.
 
 
-\subsection{Sensitivity of Logistic Regression}
+\subsection{Sensitivity of Logistic Regression} \label{sec:Sensitivity_of_LogReg}
 
 where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of 
 
