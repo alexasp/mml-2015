@@ -46,27 +46,34 @@ public class CuratorBehavior extends CyclicBehaviour{
     @Override
     public void action() {
 
+        checkForCompletion();
+
         if(_messageFacade.hasMessage(ArchipelagoPerformatives.ModelContribution, _conversationId)) {
             Message message = _messageFacade.nextMessage(ArchipelagoPerformatives.ModelContribution, _conversationId);
             _models.add(message.getModel());
             int dataSetSize = message.getDatasetSize();
             if(dataSetSize < _smallestSet){ _smallestSet = dataSetSize; }
 
-            if(_models.size() >= _parties.size()){
-//                System.out.println(_peerAgent + " FINISH "+_conversationId);
-                ParametricModel mergedModel = _modelMerger.merge(_models);
-                double beta = 2.0/(_smallestSet*_peerAgent.getUpdateCost()*_configuration.regularization);
-                mergedModel.addTerm(_randomGenerator.fromLaplacian(beta, message.getModel().getParameters().length));
-                publishModel(mergedModel);
-                _peerAgent.addModel(mergedModel);
-                _peerAgent.addBehaviour(_behaviorFactory.getCompletionBehavior(_conversationId, _messageFacade));
-                _peerAgent.removeBehaviour(this);
-            }
+            checkForCompletion();
+
         }
         else{
             block();
         }
 
+    }
+
+    private void checkForCompletion() {
+        if(_models.size() >= _parties.size()) {
+            _models.add(_peerAgent.getLocalModel()); //Add the curators own model
+            ParametricModel mergedModel = _modelMerger.merge(_models);
+            double beta = 2.0 / (_smallestSet * _peerAgent.getUpdateCost() * _configuration.regularization);
+            mergedModel.addTerm(_randomGenerator.fromLaplacian(beta, mergedModel.getParameters().length));
+            publishModel(mergedModel);
+            _peerAgent.addModel(mergedModel);
+            _peerAgent.addBehaviour(_behaviorFactory.getCompletionBehavior(_conversationId, _messageFacade));
+            _peerAgent.removeBehaviour(this);
+        }
     }
 
     private void publishModel(ParametricModel mergedModel) {
