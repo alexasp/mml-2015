@@ -38,7 +38,7 @@ public class SpamTest {
         testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        PublishTypes modelPublishType = PublishTypes.Party;
+        PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = true;
         int foldCount = 10;
 
