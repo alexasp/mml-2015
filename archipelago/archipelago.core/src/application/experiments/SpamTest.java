@@ -48,11 +48,11 @@ public class SpamTest {
         }
 
 
-        List<Integer> dataLimits = Arrays.asList(1000);
+        List<Integer> dataLimits = Arrays.asList(10,20,30,40,50,60,70,80,90,100,110);
         List<Integer> peerCounts = Arrays.asList(30);
 
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
-        List<Integer> groupSizes = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> groupSizes = Arrays.asList(5);
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
         List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
