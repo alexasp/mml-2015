@@ -62,17 +62,19 @@ The observation we've made is therefore thoroughly grounded in theory, and is im
 
 Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy for the spambase data set, by setting $\epsilon$ so high that noise is essentially nonexistent. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class, which constitutes 60\% of the data set. This happen because the high regularization forces the parameter vector to the zero vector, resulting in uniform class probability for all samples. 
 
-On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting.
-
+On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting
 
 Figure \ref{fig:regularization_normalepsilon} shows mean accuracy over a range of $\lambda$ similar to Figure \ref{fig:regularization_extremelyhighepsilon}, where $\epsilon$ is set to a level where the noise variance still has an effect on prediction accuracy, as seen in figure \ref{fig:epsilon_big_range}.
 
 When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda.
 
+\todo[inline]{Talk about how it is interesting that regularization now must respect something other than just model performance, and offer some guidelines on how regularization should be considered, especially in a setting like ours, with many independent parties}
 
 \subsection{Analysis of Propagation and group size}
 
-As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated in phase 2.\unsure{Rewrite this if we don't use phases} Figure \ref{fig:RegRangeTestPubParty} shows the setting where each group of peers only share the published model among themselves.
+As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated in phase 2.\unsure{Rewrite this if we don't use phases} In this section we present the effects of publishing method. Figure \ref{fig:RegRangeTestPubParty} shows the case where each group of peers only share the perturbed, aggregate model among themselves, while Figure \ref{fig:RegRangeTestPubAll} shows the results the model is sent to all existing peers. 
+
+The most obvious effect of globally publishing models is that the standard deviation is much lower than the group publishing case. This is not surprising.
 
 The truth is probably somewhere in the middle - we can't expect to easily publish models globally in all settings. Additionally, there might be situations were global publishing could be detrimental to real world performance - for instance, if there are strong geographical, temporal or demographic trends, it might be better to limit the amount of model sharing to suitable subsets.
 
@@ -124,6 +126,11 @@ One way to answer question would be by finding a data set which has subsets that
 An alternative avenue for validating the value of doing aggregation could be to reduce the amount of data given to each peer. If just one peer has data sufficient to train a good classifier, it is sufficient. For that reason it makes sense to stage a situation were it is highly unlikely that even a single peer gets a lucky subset of data. Figure \ref{fig:groupsize_limiteddata} demonstrates such a case. Again, there is not clear indication that averaging multiple models is better than simply publishing them individually and using them in ensemble classifiers.
 
 \todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
+
+\subsection{Issues with cold start}
+
+\todo[]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches.}
+
 
 What are the results of our experiments?
 
