@@ -67,7 +67,9 @@ When noise with significant variance is added to the model creation process, tun
 
 \subsection{Analysis of Propagation and group size}
 
-As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated in phase 2.\unsure{Rewrite this if we don't use phases} 
+As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated in phase 2.\unsure{Rewrite this if we don't use phases} Figure \ref{fig:RegRangeTestPubParty} shows the setting where each group of peers only share the published model among themselves.
+
+The truth is probably somewhere in the middle - we can't expect to easily publish models globally in all settings. Additionally, there might be situations were global publishing does not improve on performance - for instance, if there are strong geographical, temporal or demographic trends, it might be better to limit the amount of model sharing.
 
 \begin{figure}[h!]
 	\centering
@@ -105,14 +107,15 @@ Another possible explanation for this observation is that aggregation might be u
 
 One way to answer question would be by finding a data set which has subsets that are produced by distinct distributions, and partitioning data by source distribution. Due to time constraints we did not have time to locate and prepare data sets that fit this requirement. \todo{See if we have time to do this. We REALLY sho1uld, otherwise it will very possibly give a lower grade.}
 
-An alternative avenue for validating the value of doing aggregation could be to reduce the amount of data given to each peer. If just one peer has data sufficient to train a good classifier, it is sufficient. For that reason it makes sense to stage a situation were it is highly unlikely that even a single peer gets a lucky subset of data. Figure \ref{fig:groupsize_limiteddata} demonstrates such a case.
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{fig/spambase/ShowingPotentialUsefulnessOfLargerGroups-eps1.0,budg=eps,peers50,groups2-20,reg2e-2-dataMax20-pubAll-LRbyCV-retuning}
 	\caption{Spambase. $\epsilon = 1.0, \lambda = [1.0]$, 50 peers, aggregation sizes in range [2, 50], 20 samples per peer}
 	\label{fig:groupsize_limiteddata}
 \end{figure}
+
+An alternative avenue for validating the value of doing aggregation could be to reduce the amount of data given to each peer. If just one peer has data sufficient to train a good classifier, it is sufficient. For that reason it makes sense to stage a situation were it is highly unlikely that even a single peer gets a lucky subset of data. Figure \ref{fig:groupsize_limiteddata} demonstrates such a case. Again, there is not clear indication that averaging multiple models is better than simply publishing them individually and using them in ensemble classifiers.
+
 \todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
 
 What are the results of our experiments?
