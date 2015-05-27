@@ -49,23 +49,24 @@ import static java.util.Collections.max;
             PublishTypes modelPublishType = PublishTypes.All;
             boolean useCrossValidation = true;
             int foldCount = 10;
+            int maxRecordsPerPeer = 2000;
 
             if(useCrossValidation){
                 testData = null;
             }
 
-            List<Integer> peerCounts = Arrays.asList(10);
-            List<Integer> groupSizes = Arrays.asList(2,3,4,5,6,7,8,9,10);
+            List<Integer> peerCounts = Arrays.asList(5);
+            List<Integer> groupSizes = Arrays.asList(2,3,4,5);
 
             //List<PrivacyParam> privacyParams = IntStream.range(-6, 2).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
             List<Double> regularizations = IntStream.range(-1,0).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
             List<PrivacyParam> privacyParams = Arrays.asList(
-                    new PrivacyParam(0.01, 0.01)
+                    new PrivacyParam(0.3, 0.3)
 
             );
 
             double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
-            int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
+            int recordsPerPeer = Math.min((int) (trainDataSize / (double) max(peerCounts)), maxRecordsPerPeer);
             System.out.println("Total number of records per peer:" + recordsPerPeer);
 
             int parameters = trainData.get(0).getFeatures().length;

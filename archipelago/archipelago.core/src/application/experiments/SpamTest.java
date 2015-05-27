@@ -41,7 +41,7 @@ public class SpamTest {
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = true;
         int foldCount = 10;
-        int maxRecordsPerPeer = 1000;
+        int maxRecordsPerPeer = 20;
 
         if(useCrossValidation){
             testData = null;
