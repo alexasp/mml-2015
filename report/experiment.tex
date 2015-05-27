@@ -123,6 +123,8 @@ Originally in our system, aggregated models were only propagated to the peers th
 We theorized that we could improve the ensemble classifier in each peer if we could propagate the aggregated models to all the peers in the network, instead of just those who had participated in making them. Our hypotheses was that this would lead to more stable classifiers with lower standard deviation, due to a smoothing effect in having more models in the ensemble classifier in each peer. This is basically the same idea as bootstrap aggregating, or bagging, which has been proven to lead to improvements in unstable procedures\cite{breiman1996bagging}. 
 \todo{Definitely talk more about the bagging effect, either here or in the analysis section}
 
+For this reason, we decided to run experiments to compare the different possible model. In all cases, the published models will have. In the group publication setting, only the peers that join together to produce a perturbed model will receive the final result. In the full publication setting, all peers active in the network will receive all perturbed models.
+
 \unsure{Remove this subsection if propegation is not tested}
 
 \subsection{Distribution}
