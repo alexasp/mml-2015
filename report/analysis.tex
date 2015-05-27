@@ -114,6 +114,8 @@ One way to answer question would be by finding a data set which has subsets that
 	\label{fig:groupsize_limiteddata}
 \end{figure}
 
+
+
 An alternative avenue for validating the value of doing aggregation could be to reduce the amount of data given to each peer. If just one peer has data sufficient to train a good classifier, it is sufficient. For that reason it makes sense to stage a situation were it is highly unlikely that even a single peer gets a lucky subset of data. Figure \ref{fig:groupsize_limiteddata} demonstrates such a case. Again, there is not clear indication that averaging multiple models is better than simply publishing them individually and using them in ensemble classifiers.
 
 \todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
