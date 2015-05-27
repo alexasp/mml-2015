@@ -50,42 +50,53 @@ import static java.util.Collections.max;
             boolean useCrossValidation = true;
             int foldCount = 10;
 
-            if(useCrossValidation){
+
+            if (useCrossValidation) {
                 testData = null;
             }
 
-            List<Integer> peerCounts = Arrays.asList(10);
-            List<Integer> groupSizes = Arrays.asList(2,3,4,5,6,7,8,9,10);
-
-            //List<PrivacyParam> privacyParams = IntStream.range(-6, 2).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-            List<Double> regularizations = IntStream.range(-1,0).mapToDouble(i->Math.pow(2, i)).boxed().collect(Collectors.toList());
+            List<Integer> dataLimits = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+            List<Integer> peerCounts = Arrays.asList(30);
+//        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
+            List<Integer> groupSizes = Arrays.asList(5);
+//        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+            List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
             List<PrivacyParam> privacyParams = Arrays.asList(
-                    new PrivacyParam(0.01, 0.01)
-
+                    new PrivacyParam(10.0)
             );
 
-            double trainDataSize = useCrossValidation ? (double) trainData.size() / (double)foldCount * ((double)foldCount - 1.0) : trainData.size();
-            int recordsPerPeer = (int) ( trainDataSize / (double) max(peerCounts));
-            System.out.println("Total number of records per peer:" + recordsPerPeer);
+            if (useCrossValidation) {
+                testData = null;
+            }
+
+            double trainDataSize = useCrossValidation ? (double) trainData.size() / (double) foldCount * ((double) foldCount - 1.0) : trainData.size();
+
 
             int parameters = trainData.get(0).getFeatures().length;
 
             Injector injector = Guice.createInjector(new AppInjector());
 
-            for (Integer peerCount : peerCounts) {
-                for (Integer groupSize : groupSizes) {
-                    if (groupSize > peerCount) {
-                        continue;
-                    }
+            for (int maxRecordsPerPeer : dataLimits) {
+                int recordsPerPeer = Math.min((int) (trainDataSize / (double) max(peerCounts)), maxRecordsPerPeer);
 
-                    for(PrivacyParam privacyParam : privacyParams) {
-                        for(double regularization : regularizations) {
-                            int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize + 1) / groupSize);
-                            aggregations = aggregations == 0 ? 1 : aggregations;
+                for (Integer peerCount : peerCounts) {
+                    for (Integer groupSize : groupSizes) {
 
-                            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
-                            configuration.publishType = modelPublishType;
-                            testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
+                        if (groupSize > peerCount) {
+                            continue;
+                        }
+
+                        for (PrivacyParam privacyParam : privacyParams) {
+                            for (double regularization : regularizations) {
+
+                                int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize + 1) / groupSize);
+                                aggregations = aggregations == 0 ? 1 : aggregations;
+
+                                ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
+                                configuration.publishType = modelPublishType;
+
+                                testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
+                            }
                         }
                     }
                 }
@@ -96,20 +107,19 @@ import static java.util.Collections.max;
 
         private static void testWithParameters(Integer peerCount, Integer groupSize, List<LabeledSample> trainDataSource, List<LabeledSample> testDataSource, int recordsPerPeer, Injector injector, ExperimentConfiguration configuration) throws ControllerException, InterruptedException {
 
-            System.out.println(String.format("Running with peerCount %s, groupSize %s, epsilon %s, aggregation_cost %s, regularization %s", peerCount, groupSize, configuration.epsilon, configuration.updateCost, configuration.regularization));
+            System.out.println(String.format("Running with peerCount %s, groupSize %s, epsilon %s, aggregation_cost %s, regularization %s, data limit %s", peerCount, groupSize, configuration.epsilon, configuration.updateCost, configuration.regularization, recordsPerPeer));
             Collections.shuffle(trainDataSource);
             List<List<LabeledSample>> folds = DataLoader.partition(configuration.cvFolds, trainDataSource);
 
 
-            for(int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) {
                 List<LabeledSample> train;
                 List<LabeledSample> test;
 
-                if(configuration.useCrossValidation) {
+                if (configuration.useCrossValidation) {
                     train = DataLoader.mergeExcept(folds, i);
                     test = folds.get(i);
-                }
-                else{
+                } else {
                     train = trainDataSource;
                     Collections.shuffle(train);
                     test = testDataSource;
@@ -118,13 +128,12 @@ import static java.util.Collections.max;
 //            int groupSize = 20;
 
 
-
                 Injector currentInjector = injector.createChildInjector(new ExperimentModule(configuration, new CountDownLatch(peerCount)));
 
                 ExperimentFactory experimentFactory = currentInjector.getInstance(ExperimentFactory.class);
-                Experiment experiment = experimentFactory.getExperiment(train,test, configuration);
+                Experiment experiment = experimentFactory.getExperiment(train, test, configuration);
 
-                runExperiment(experiment, String.format(Locale.US, "eps,%.8f-regularization,%.8f-cost,%.3f-peers,%d-groups,%d", configuration.epsilon, configuration.regularization, configuration.updateCost, peerCount, groupSize, i), i);
+                runExperiment(experiment, String.format(Locale.US, "eps,%.8f-regularization,%.8f-cost,%.3f-peers,%d-groups,%d-data,%d", configuration.epsilon, configuration.regularization, configuration.updateCost, peerCount, groupSize, recordsPerPeer), i);
             }
         }
 
@@ -143,4 +152,3 @@ import static java.util.Collections.max;
 
 
     }
-

@@ -23,7 +23,7 @@ def main():
 
     results = {}
     for experiment_dirname in experiments:
-        iterations_filenames = get_immediate_subfiles(experiment_identifier + "/" + experiment_dirname, "eps")
+        iterations_filenames = get_immediate_subfiles(experiment_identifier + '/' + experiment_dirname, "eps")
         valueMap = compute_averages(iterations_filenames, experiment_identifier + "/" + experiment_dirname)
         parameters = get_parameters(experiment_dirname)
         results[parameters] = valueMap
