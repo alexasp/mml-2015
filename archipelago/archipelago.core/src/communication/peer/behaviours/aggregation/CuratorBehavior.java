@@ -58,6 +58,7 @@ public class CuratorBehavior extends CyclicBehaviour{
                 double beta = 2.0/(_smallestSet*_peerAgent.getUpdateCost()*_configuration.regularization);
                 mergedModel.addTerm(_randomGenerator.fromLaplacian(beta, message.getModel().getParameters().length));
                 publishModel(mergedModel);
+                _peerAgent.addModel(mergedModel);
                 _peerAgent.addBehaviour(_behaviorFactory.getCompletionBehavior(_conversationId, _messageFacade));
                 _peerAgent.removeBehaviour(this);
             }
