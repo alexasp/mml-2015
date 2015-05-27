@@ -69,7 +69,9 @@ When noise with significant variance is added to the model creation process, tun
 
 \subsection{Analysis of Propagation and group size}
 
-As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated in phase 2.\unsure{Rewrite this if we don't use phases} In this section we present the effects of publishing method. Figure \ref{fig:RegRangeTestPubParty} shows the case where each group of peers only share the published model among themselves, while Figure \ref{fig:RegRangeTestPubAll} shows the results when any aggregated. The most obvious effect of globally publishing models is that the standard deviation is much lower than the group publishing case.
+As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated in phase 2.\unsure{Rewrite this if we don't use phases} In this section we present the effects of publishing method. Figure \ref{fig:RegRangeTestPubParty} shows the case where each group of peers only share the perturbed, aggregate model among themselves, while Figure \ref{fig:RegRangeTestPubAll} shows the results the model is sent to all existing peers. 
+
+The most obvious effect of globally publishing models is that the standard deviation is much lower than the group publishing case. This is not surprising.
 
 The truth is probably somewhere in the middle - we can't expect to easily publish models globally in all settings. Additionally, there might be situations were global publishing could be detrimental to real world performance - for instance, if there are strong geographical, temporal or demographic trends, it might be better to limit the amount of model sharing to suitable subsets.
 
