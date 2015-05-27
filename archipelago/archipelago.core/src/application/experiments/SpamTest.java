@@ -54,7 +54,7 @@ public class SpamTest {
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
         List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(10.0)
+                new PrivacyParam(0.3)
         );
 
         if (useCrossValidation) {
