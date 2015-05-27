@@ -38,7 +38,7 @@ public class SpamTest {
         testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        PublishTypes modelPublishType = PublishTypes.All;
+        PublishTypes modelPublishType = PublishTypes.Party;
         boolean useCrossValidation = true;
         int foldCount = 10;
 
@@ -48,7 +48,7 @@ public class SpamTest {
         }
 
 
-        List<Integer> dataLimits = Arrays.asList(35);
+        List<Integer> dataLimits = Arrays.asList(1000);
         List<Integer> peerCounts = Arrays.asList(50);
 
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
