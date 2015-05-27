@@ -8,7 +8,7 @@ All prediction results given in this section are presented with mean and standar
 
 As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a dataset by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{fig/eps2e-10-2e9,bud=eps,peers50,groups50,reg2e-4}
  	\caption{$\epsilon = [10^{-3}, 10^{3}], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
@@ -18,6 +18,20 @@ As explained in section \ref{section:differential_privacy}, differential privacy
 Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^{-10}$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. The positive class rate in the UCI Spambase dataset is 0.4, so any error rate at this level is no better than a random classifier. The plot shows how sensitive output is to the values of $\epsilon$
 
 Figure \ref{fig:linear_epsilon_range} 
+
+\section{The importance of data}
+One of the more important findings for 
+Data is important, the more data a peer have, the greater the chance is that it will make a decent local classifier. J
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig/eps0.3,budg=eps,peers30,groups5,reg2e-2-pubAll-datalimitTEST}
+	\caption{$\epsilon = [0.3], \lambda = 2^{-2}$, 30 peers, 1 aggregation}
+	\label{fig:data_limit_test}
+\end{figure}
+
+
+
 
 \begin{figure}[h!]
 	\centering
