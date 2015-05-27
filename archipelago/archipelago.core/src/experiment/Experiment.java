@@ -75,11 +75,10 @@ public class Experiment {
         }
 
         _completionAgent.init(completionAction, _peers.size(), this, _configuration.aggregations);
-        _groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
 
         _peerGraph.getRegistrationLatch().await();
 
-
+        _groupAgent = _agentFactory.getGroupLocatingAgentWithAgents(_peers, _configuration);
         _environment.registerAgent(_groupAgent, "GroupingAgent");
 
     }

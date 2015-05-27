@@ -31,6 +31,7 @@ public class CompletionListeningAgent extends Agent {
     }
 
     public void init(Consumer<Experiment> completionAction, int totalPeerCount, Experiment experiment, int iterations){
+
         _completionAction = completionAction;
         _totalPeerCount = totalPeerCount;
         _iterations = iterations;

@@ -55,8 +55,7 @@ public class GroupFormingBehaviour extends CyclicBehaviour {
         if(_agents.size() < _configuration.groupSize){
             _groupAgent.removeBehaviour(this);
         }
-
-        if(_iteration == _configuration.aggregations) {
+        else if(_iteration == _configuration.aggregations) {
             _groupAgent.removeBehaviour(this);
         }
     }
