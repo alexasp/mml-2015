@@ -49,14 +49,14 @@ public class SpamTest {
 
 
         List<Integer> dataLimits = Arrays.asList(1000);
-        List<Integer> peerCounts = Arrays.asList(30);
+        List<Integer> peerCounts = Arrays.asList(50);
 
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
-        List<Integer> groupSizes = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> groupSizes = Arrays.asList(50);
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(0, 1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(0.3)
+                new PrivacyParam(1.0)
         );
 
         if (useCrossValidation) {
