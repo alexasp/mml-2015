@@ -32,6 +32,9 @@ Data is important, the more data a peer have, the greater the chance is that it 
 
 Figure \ref{fig:data_limit_test} indicate how the classification performance improves as the amount of data records available to each peer grows. When each peer only have a small amount of data to create their local classifier, the classifier tends to have display terrible performance. As peers gain more data, both the performance and the variance of the classifier improves.     
 
+The reason for this improvement is two-fold. 1: A bigger sample size for the logistic regression model generally leads to better performance \cite{peduzzi1996simulation}. 2: The sensitivity of logistic regression (see equation \ref{eq:logres_sensitivity}) is bounded by the size of the training set. What this means is that the more data a peer have available, the less amount of noise is needed to obfuscate their logistic model. 
+
+The observation we've made is therefore thoroughly grounded in theory, and is important to highlight when discussing our main research question. Until a certain amount of data has been gathered, a system based on our distributed architecture will display very poor performance.   
 
 \section{Importance of regularization}
 
