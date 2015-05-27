@@ -47,8 +47,10 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(20, 40, 60, 80, 100, 120, 140, 160, 180, 200);
-        List<Integer> peerCounts = Arrays.asList(10);
+
+        List<Integer> dataLimits = Arrays.asList(10,20,30,40,50,60,70,80,90,100,110,120);
+        List<Integer> peerCounts = Arrays.asList(30);
+
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
         List<Integer> groupSizes = Arrays.asList(5);
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
