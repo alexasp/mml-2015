@@ -55,7 +55,7 @@ def get_parameters(experiment_dirname):
     for parameter in parameters:
         parts = parameter.split(",")
         values.append(parts[1])
-    return Parameters(values[0], values[1], values[2], values[3], values[4])
+    return Parameters(values[0], values[1], values[2], values[3], values[4], values[5])
 
 
 def get_immediate_subdirectories(a_dir, prefix):
