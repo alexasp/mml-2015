@@ -119,6 +119,20 @@ Here $\lambda > 0$ is the regularization parameter, used to control the trade-of
 
 \subsection{Sensitivity of Logistic Regression}
 
+In order to built logistic regression models in a way that preserves privacy, it is necessary to determine the sensitivity of the output model. Chaudhuri and Monteleoni\cite{chaudhuri2009logistic} showed that the sensitivity of logistic regression is at most 
+\begin{eqnarray}\label{eq:logres_sensitivity}
+\frac{2}{n\lambda}
+\end{eqnarray}
+
+where $n$ is the size of the training set and $\lambda$ is the regularization parameter used in model training.
+
+This solves only the case of training a privacy-preserving logistic regression model on local data. Our research goal involves any number of peers cooperating to build useful models without compromising the privacy of their local data. Pathak, Rane and Raj\cite{pathak2010diffprivhomo} proposed an approach where locally trained logistic regression classifiers are aggregated by averaging. Secrecy is achieved by using an encryption method to compute the aggregate classifier, ensuring that local data is not shared while allowing a differentially private model to be published. This encrypted computation method is presented in more detail in Section \ref{sec:homomorphic_encryption}. When aggregating K locally trained models, their approach computes the final model
+
+\begin{eqnarray}
+\boldsymbol{w} = 1/K\sum_{j=1}^{K} \boldsymbol{w_j} + \boldsymbol{\eta}
+\end{eqnarray}
+
+
 where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of 
 
 \begin{eqnarray}
