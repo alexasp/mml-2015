@@ -39,6 +39,7 @@ public class CuratorBehavior extends CyclicBehaviour{
         _randomGenerator = randomGenerator;
         _configuration = configuration;
         _behaviorFactory = behaviorFactory;
+        _smallestSet = _peerAgent.getData().size();
 
         _models = new ArrayList<>();
     }
