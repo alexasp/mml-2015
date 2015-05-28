@@ -12,8 +12,19 @@ What we see as a potential source for concern in this process is the possibility
 
 We have however minimized this risk by continuously developing unit test to verify new code additions, as well as using JADE's native GUI to supervise the behavior of the peers while running. We therefore conclude that the risk is negligible.
 
+\subsection{Resource Consumption}
+A clear weakness of our system is our lack of formal analysis of resource consumption and scalability. In 
+\todo[inline]{What have we done to to guarantee scalability? Is it enough to say it should scale well?}
 
-\section{Future Work}
+Due to time constraints, we've had to take certain shortcuts while implementing our systems. The most glaring liability for system scalability is our use of a single GroupFormingManager to handle allocating aggregation groups for the participating peers. This manager would quickly become a bottleneck in our system if we wanted to scale the amount of peers beyond just a small mass of users. Our solution to this predicament is found in section \ref{sec:Future Work}, where we provide a solution in the form of the Newscast algorithm. 
+
+\subsection{Datasets used}
+
+
+
+
+
+\section{Future Work} \label{sec:Future Work}
 
 Further develop and test the propagation of aggregated models. We experienced that when we shared the aggregated models globally in our network, we could decrease the SD in our classification error, as well as sometimes improving the classifier. Further research should go in expanding this behavior, as you could potentially propagate models only to peers in geographic and/or demographic vicinity. This could possibly lead to more specialized models, which could give better classification rate to a specialized subset of peers.  
 

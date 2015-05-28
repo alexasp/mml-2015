@@ -8,12 +8,18 @@ The terms "big data" and "analytics" have been widely used as common designation
 The wide variety of the potential applications of big data analytics have also raised essential questions about whether our social and ethical norms are sufficient to protect privacy in a world which has entered "the era of big data". Both in the European Union and in the United States there have been efforts made to create new laws for handling data privacy. The Council to the President, an advisory group to the US President, concluded in their 2014 report \cite{house2014bigdata} that preserving privacy values would be their number one recommendation when designing a new policy framework for big data. Furthermore, they advised that more than 70 million USD should be made available to federal research in privacy-enhancing technologies. 
 
 \section{Objective and Scope / Problem Statement}
-The objective of this study is to contribute to the aforementioned field of study, more specifically in the area of Privacy-Preserving Data Mining (PPDM). In our work we explore the usefulness \unsure{Right word?} of employing a privacy-preserving technique called differential privacy. Relying on previous work in homomorphic encryption and peer to peer communication, we would like to create an architecture that allows for distributed, scalable machine learning while preserving the privacy of the participants.
-\textbf{R1: How big is the loss of accuracy in a distributed, differentially private system, compared to a centrally trained model?}
-While there have been research on both distributed and differentially private machine learning system, there have been very little research done on a combination of both. Results from research on differential privacy indicate that there often is a trade-off between privacy and a loss of accuracy. We want to study this trade-off in our distributed approach and analyze which factors comes into play and how they can be handled in a way that leads to an optimal result. 
+The objective of this study is to contribute to the aforementioned field of study, more specifically in the area of Privacy-Preserving Data Mining (PPDM). In our work we explore the usefulness \unsure{Right word?} of employing a privacy-preserving technique called differential privacy. Relying on previous work in homomorphic encryption and peer to peer communication, we would like to create an architecture that allows for distributed, scalable machine learning while preserving the privacy of the participants. 
 
+\vspace{3mm}
+\noindent\textbf{R1: How big is the loss of accuracy in a distributed, differentially private system, compared to a centrally trained model?}
+
+\noindent While there have been research on both distributed and differentially private machine learning system, there have been very little research done on a combination of both. Results from research on differential privacy indicate that there often is a trade-off between privacy and a loss of accuracy. We want to study this trade-off in our distributed approach and analyze which factors comes into play and how they can be handled in a way that leads to an optimal result. 
+
+\vspace{3mm}
+\noindent
 \textbf{R2: How can the variance in accuracy between participants be minimized?}
-Our system architecture is based on a notion of independent peers which collaborate to create aggregated logistic regression models which is used for classification. Due to there not being one single centralized classifier, there will most likely be a variance in the accuracy of the classifiers each peer hold. We want to explore options on how to reduce this variance, so that we can reduce the likelihood of one peer having a well-performing classifier while another produces poor classification results. 
+
+\noindent Our system architecture is based on a notion of independent peers which collaborate to create aggregated logistic regression models which is used for classification. Due to there not being one single centralized classifier, there will most likely be a variance in the accuracy of the classifiers each peer hold. We want to explore options on how to reduce this variance, so that we can reduce the likelihood of one peer having a well-performing classifier while another produces poor classification results. 
 
 
 
