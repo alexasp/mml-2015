@@ -15,7 +15,7 @@ As explained in section \ref{section:differential_privacy}, differential privacy
  	\label{fig:epsilon_big_range}
 \end{figure}
  
-Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^{-10}$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. The positive class rate in the UCI Spambase dataset is 0.4, so any error rate at this level is no better than a random classifier. The plot shows how sensitive output is to the values of $\epsilon$
+Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^{-10}$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. The positive class rate in the UCI Spambase dataset is 0.4, so any error rate at this level is no better than a random classifier. The plot shows how sensitive output is to the values of $\epsilon$.
 
 Figure \ref{fig:linear_epsilon_range} 
 
@@ -25,7 +25,7 @@ Data is important, the more data a peer have, the greater the chance is that it 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{fig/eps0.3,budg=eps,peers30,groups5,reg2e-2-pubAll-datalimitTEST}
+	\includegraphics[width=\textwidth]{fig/eps0.3,budg=eps,peers30,groups5,reg2e-2,dataLim10-110-pubAll-datalimitTEST10-110}
 	\caption{$\epsilon = [0.3], \lambda = 2^{-2}$, 30 peers, 1 aggregation}
 	\label{fig:data_limit_test}
 \end{figure}
@@ -34,7 +34,7 @@ Figure \ref{fig:data_limit_test} indicate how the classification performance imp
 
 The reason for this improvement is two-fold. 1: A bigger sample size for the logistic regression model generally leads to better performance \cite{peduzzi1996simulation}. 2: The sensitivity of logistic regression (see equation \ref{eq:logres_sensitivity}) is bounded by the size of the training set. What this means is that the more data a peer have available, the less amount of noise is needed to obfuscate their logistic model. 
 
-The observation we've made is therefore thoroughly grounded in theory, and is important to highlight when discussing our main research question. Until a certain amount of data has been gathered, a system based on our distributed architecture will display very poor performance.   
+The observation we've made is therefore thoroughly grounded in theory, and is important to highlight when discussing our main research question. Until a certain amount of data has been gathered, a system based on our distributed architecture will display very poor performance. What is interesting however, is that the amount of data needed seems to be a relatively low number. In the paper written by Pathtak et al\cite{pathak2010diffprivhomo}, they report that each party was given at least 3256 data records. In our experiments we found that a much smaller amount of data could still be used and create decent classifiers. We believe this is due to our choice of propagating every model out, so that each peer can create an ensemble of classifiers. \todo[inline]{Fix this last sentence. It is not that good}
 
 \section{Importance of regularization}
 
@@ -122,12 +122,14 @@ One way to answer question would be by finding a data set which has subsets that
 \end{figure}
 
 
-
 An alternative avenue for validating the value of doing aggregation could be to reduce the amount of data given to each peer. If just one peer has data sufficient to train a good classifier, it is sufficient. For that reason it makes sense to stage a situation were it is highly unlikely that even a single peer gets a lucky subset of data. Figure \ref{fig:groupsize_limiteddata} demonstrates such a case. Again, there is not clear indication that averaging multiple models is better than simply publishing them individually and using them in ensemble classifiers.
 
 \todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
 
 \subsection{Issues with cold start}
+
+Section \ref{sec:} important motivation for this project was the idea that application users should be able to retain ownership of their own data, and only share it to a degree that they choose.
+
 
 \todo[]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches.}
 
