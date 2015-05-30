@@ -65,8 +65,11 @@ The central element in our experiments is the aggregation mechanism $A$, which t
 			$\lambda$ - regularization level used when training each model in $\boldmath{M}$\;
 			}
 		\KwOut{Perturbed aggregate of the models in $\boldmath{M}$}
-		$n_{min} \leftarrow min(\boldmath{N})$
-		$model_{agg} \leftarrow 1/K\sum_{j=1}^{|\boldmath{N}|} \boldmath{w_j} + \boldmath{\eta}$
+		$n_{min} \leftarrow min(\boldmath{N})$\;
+		$\eta \leftarrow Laplace(0; \frac{2}{n_{min}\epsilon\lambda})$\;
+		$model_{agg} \leftarrow 1/K\sum_{j=1}^{|\boldmath{N}|} \boldmath{w_j} + \boldmath{\eta}$\;
+		\KwRet{$model_{agg}$}
+		
 \caption{$\epsilon$-differentially private aggregation mechanism}
 \end{algorithm}
 
