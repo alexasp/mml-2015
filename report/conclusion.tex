@@ -18,15 +18,15 @@ A clear weakness of our system is our lack of formal analysis of resource consum
 
 Due to time constraints, we've had to take certain shortcuts while implementing our systems. The most glaring liability for system scalability is our use of a single GroupFormingManager to handle allocating aggregation groups for the participating peers. This manager would quickly become a bottleneck in our system if we wanted to scale the amount of peers beyond just a small mass of users. Our solution to this predicament is found in section \ref{sec:Future Work}, where we provide a solution in the form of the Newscast algorithm. 
 
-\subsection{Datasets used}
-
-
-
+\subsection{Homomorphic encryption}
+As mentioned in Section \ref{sec:homomorphic_encryption}, homomorphic encryption is still in an infantile stage of development and therefore cannot be called a well-proven technology. Our method for aggregating models from various peers is based on a homomorphic encryption scheme developed by Pathak et al. but due to time constraints we could not actually implement it and instead had to opt for simulating the results of applying this scheme. We therefore do not have real-world results that can validate the applicability of this scheme, nor do we know if applying this scheme would lead to increased run-time and resource consumption. While this remains an interesting area for future research, as it stands now it remains a possible threat to the validity of the results we've achieved and therefore also the conclusion we have drawn from them.   
 
 
 \section{Future Work} \label{sec:Future Work}
 
-Further develop and test the propagation of aggregated models. We experienced that when we shared the aggregated models globally in our network, we could decrease the SD in our classification error, as well as sometimes improving the classifier. Further research should go in expanding this behavior, as you could potentially propagate models only to peers in geographic and/or demographic vicinity. This could possibly lead to more specialized models, which could give better classification rate to a specialized subset of peers.  
+Further develop and test the propagation of aggregated models. We experienced that when we shared the aggregated models globally in our network, we could decrease the SD in our classification error, as well as sometimes improving the classifier. Further research should go in expanding this behavior, as you could potentially propagate models only to peers in geographic and/or demographic vicinity. This could possibly lead to more specialized models, which could give better classification rate to a specialized subset of peers. 
+
+Another important area of research would be to further test the applicability of peers sharing data to create better aggregated models. Our original research questions was designed to explore the validity of our proposed method of doing differentially private machine learning, and our current research has been limited to testing on a small amount of datasets which is publicly available. \todo{text} In the future more research is needed on datasets with an uneven underlying distribution, which could potentially provide results highlighting the usefulness of sharing information between peers. An ideal dataset would be one where each peer only holds data which makes up only a part of the solution. \todo{This last sentence is crap and I hate it}
 
 Implement the Newscast algorithm for selecting peers. The Newscast algorithm is a gossip protocol which facilitates a robust spread of information. The core of the protocol involves periodic and pairvise interaction between processes. Implementing this algorithm would allow our system to scale better when a big number of peers are added to the network. The biggest bottleneck of our system at the moment is the peer sampling during the group forming, as it requires a single agent to act as a manager for how groups are formed. The basic idea of the Newscast algorithm is that each node, or peer in our situation, has a partial view of the system. All nodes exchange their views periodically, which allows them to keep an up-to-date view locally and spread their information throughout the network. Further research into this algorithm would allow us to customize this algorithm so that peers in our network could form groups based on their partial views of the network. 
 
@@ -35,6 +35,9 @@ Full data protection for each peer's data. This would involve dividing the epsil
 Real world case which takes humans into account. Right now research in privacy is all about the technical details, and try to get it as close as possible to existing methods. Without some kind of popular support, the method will never see practice in real-world applications. 
 
 Work on a system that would work in a online setting. It could potentially improve the system, as you would have new data coming in which could replace old data with spent budgets, but it would also be potentially a big tradeoff as you won't have the same data history as you would have in a system without differential privacy. Dwork has written about this in her book, so we can take inspiration from there. (As well as our own paper)
+
+Security mechanisms for stopping sabotage. In our current system we have assumed that the peers will be honest-but-curious when sharing their data, meaning that we have no way of detecting dishonest peers. In a real world system there would need to be safeguards against people which intend to either destroy the validity of the classifier created by feeding misinformation into the system, or people who tries to intercept and expose the data from other peers. Potential research ares would be intrusion detection in distributed systems, fraud detection, trust networks and reputation systems, and further research into encryption.  
+
 
 \newpage
 \listoftodos[Notes]
