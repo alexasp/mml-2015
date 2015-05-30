@@ -160,7 +160,9 @@ Record-based differential privacy. Does it work?
 \section{Architecture}
 
 In this section we will describe the architecture of Archipelago, our distributed machine learning system. 
-Using notions borrowed from PINQ, we designed a distributed system using the JADE framework. Consists of explanation of peers, NoisyQueryable, DataLoader
+We designed a distributed system using the JADE framework. The core component in this system is a PeerAgent, which represents a participant in the distributed learning setting. This agent contains what wouuld be the local data of a person in real life.
+
+
 
  \missingfigure[figwidth=6cm]{Figure explaining our framework}
 
@@ -169,6 +171,7 @@ Using notions borrowed from PINQ, we designed a distributed system using the JAD
 
 \subsection{Communication}
 \subsubsection{Peer}
+\todo{Model training on agent instantiation.}
 How is each peer set up, and what behaviors do they implement? 
 How do they update then propagate the model being learned.
 How do they know when to stop?
