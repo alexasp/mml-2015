@@ -44,7 +44,7 @@ Privacy budgeting was introduced to limit the amount of information a data analy
 
 Defining and depleting a privacy budget is possible due to the sequential composition property of $\epsilon$-differentially private mechanisms, as shown by McSherry\cite{mcsherry2009PINQ}. Given $N$ mechanisms $M_i$ that offer $\frac{\epsilon}{N}$-differential privacy, applying each mechanism $M_i$ in sequence offers $\epsilon$-differentially privacy.
 
-When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowledge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
+%When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowlfa edge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
 
 
 \subsection{Noise Mechanisms}
@@ -149,7 +149,7 @@ It is important to note that this does not offer full protection to participants
 
 \section{Cross validation}
 
-It is important to . We initally divided the data sets into a training set and a testing set, the latter being intended to evaluate the performance and properties of our approach. We needed to explore many different combinations and variations of our experiment during, but the test set should only be used as a final step. If the test set is used for repeated validation of different parameters, we would risk overfitting it and getting unrealistic test results. 
+We initally divided the data sets into a training set and a testing set, the latter being intended to evaluate the performance and properties of our approach. We needed to explore many different combinations and variations of our experiment during, but the test set should only be used as a final step. If the test set is used for repeated validation of different parameters, we would risk overfitting it and getting unrealistic test results. 
 
 One way to do reliable accuracy estimation is with cross validation, which makes more efficient use of training data than creating a separate holdout set and has less bias than as shown by Kohavi \cite{kohavi1995crossvalidation}. Cross validation involves partitioning the training set into K disjoint sets. Then, for each $t \in [1, K]$ partition $t$ is used as the test set, and the remaining partitions are combined to form the training set. Accuracy is reported as number of correctly classified instances divided by the total number of instances over all K partitions. 
 
