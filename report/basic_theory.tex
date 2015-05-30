@@ -126,7 +126,9 @@ In order to built logistic regression models in a way that preserves privacy, it
 
 where $n$ is the size of the training set and $\lambda$ is the regularization parameter used in model training.
 
-This solves only the case of training a privacy-preserving logistic regression model on local data. Our research goal involves any number of peers cooperating to build useful models without compromising the privacy of their local data. Pathak, Rane and Raj\cite{pathak2010diffprivhomo} proposed an approach where locally trained logistic regression classifiers are aggregated by averaging. Secrecy is achieved by using an encryption method to compute the aggregate classifier, ensuring that local data is not shared while allowing a differentially private model to be published. This encrypted computation method is presented in more detail in Section \ref{sec:homomorphic_encryption}. When aggregating K locally trained models, their approach computes the final model
+This solves only the case of training a privacy-preserving logistic regression model on local data. Our research goal involves any number of peers cooperating to build useful models without compromising the privacy of their local data. Pathak, Rane and Raj\cite{pathak2010diffprivhomo} proposed an approach where locally trained logistic regression classifiers are aggregated by averaging. Secrecy is achieved by using an encryption method to compute the aggregate classifier, ensuring that local data is not shared while allowing a differentially private model to be published. This encrypted computation method is presented in more detail in Section \ref{sec:homomorphic_encryption}. It is important to note that the approach of Pathak et al. assumes that the participants are honest-but-curious. This assumption means that participants will follow the established protocol, but will read any information that is somehow available to it. Their method is not robust against malicious sabotage. 
+
+When aggregating K locally trained models, their approach computes the final model
 
 \begin{eqnarray}
 \boldsymbol{w} = 1/K\sum_{j=1}^{K} \boldsymbol{w_j} + \boldsymbol{\eta}
@@ -144,6 +146,14 @@ where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-different
 which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
 
 It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ datasets would allow a third party to learn information. This is a very critical issue, and must be rectified before the system can be applied to data sets were even . For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about individual biometric records.
+
+\section{Cross validation}
+
+It is important to . We initally divided the data sets into a training set and a testing set, the latter being intended to evaluate the performance and properties of our approach. We needed to explore many different combinations and variations of our experiment during, but the test set should only be used as a final step. If the test set is used for repeated validation of different parameters, we would risk overfitting it and getting unrealistic test results. 
+
+One way to do reliable accuracy estimation is with cross validation, which makes more efficient use of training data than creating a separate holdout set and has less bias than as shown by Kohavi \cite{kohavi1995crossvalidation}. Cross validation involves partitioning the training set into K disjoint sets. Then, for each $t \in [1, K]$ partition $t$ is used as the test set, and the remaining partitions are combined to form the training set. Accuracy is reported as number of correctly classified instances divided by the total number of instances over all K partitions. 
+
+Kohavi recommends 10-fold stratified cross validation. Stratified cross validation involves ensuring that each fold has the same class distribution as the original data set. . Since the data sets we tested with have thousands of records and close to uniform class distribution, we concluded that stratified folds was not necessary. Our experiments were evaluated with 10-fold cross validation with each fold being a random, disjoint subset of the training set.
 
 
  \section{Programming Frameworks Used}
