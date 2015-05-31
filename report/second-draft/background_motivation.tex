@@ -1,0 +1,105 @@
+%===================================== CHAP 2 =================================
+
+\chapter{Background and Motivation}
+
+In this section we will first explain some basic concepts and expressions that are used in the privacy context such anonymization operations and Personally Identifiable Information(PII). Then we will have a look at some classic examples of failure to preserve privacy when data publishing and how these attacks motivated us to choose our topic for this thesis.
+
+\section{Concepts and Expressions}
+In the most basic form of privacy-preserving data publishing (PPDP), the data holder has a table of attributes from the following four categories: Explicit Identifier, Quasi Identifier, Sensitive Attributes, and Non-Sensitive Attributes \cite{fung2010privacybook}. A summary of each category can be found in Table \ref{table:DataAttributesTable}.
+\begin{table}[H]
+	\begin{tabulary}{\textwidth}{|L|L|L|}
+		\hline \textbf{Attribute name}  & \textbf{Definition} & \textbf{Example} \\ 
+		\hline   Explicit Identifier &  Explicitly identifies record owners & Government identity number (e.g SSN)  \\ 
+		\hline   Quasi Identifier(QID)  & Potentially identifies record owners & Birth date and gender  \\ 
+		\hline   Sensitive Attributes & Sensitive information about a person & Income, disability status  \\ 
+		\hline   Non-Sensitive Attributes & All other attributes & Favorite band  \\ 
+		\hline 
+	\end{tabulary} 
+	\caption{Table of basic categories of database attributes}
+	\label{table:DataAttributesTable}
+\end{table}
+From these categories, it would be easy to think that Personally Identifiable Information (PII) would only be found in the first attribute. As we will see in the next section, this is not the case. Recent privacy laws have defined PII in a much broader way. They account for the possibility of deductive disclosure and do not lay down a list of attributes that constitutes as PII. For example, the European Parliament made a set of directives known as the Data Protection Directive, in which personal data is defined as: ''any information relating to an […] natural person […] who can be identified, directly or indirectly, in particular by reference […] to one or more factors specific to his physical, physiological, mental, economic, cultural, or social identity''`\cite{EUdataprotection2006}. 
+
+In order to remove any PII from a dataset, it needs to go through a process called anonymization. This constitutes a series of modifications/manipulations of with the ultimate end goal of protecting the privacy of the dataset's participants. Fung et al.\cite{fung2010privacybook} operates with a number of five basic operations which might be applied for this purpose. These operations are shortly described in Table \ref{table:AnonymizationTable}.
+\begin{table}[H]	
+		\begin{tabulary}{\textwidth}{|L|L|}
+			\hline \textbf{Anonymization Operation} & \textbf{Definition }\\ 
+			\hline Generalization & Replaces the value with more general value, such as a mean value \\ 
+			\hline Suppression & Replaces the value with a special value, indicating that the replaced values are not disclosed \\ 
+			\hline Anatomization & De-associates the relationship between the quasi-identifier and sensitive information  \\ 
+			\hline Permutation & Partitions a set of data records into groups and shuffles their sensitive values    \\ 
+			\hline Perturbation & Replace the original value with a synthetic value that keep the statistical characteristics  \\ 
+			\hline 
+		\end{tabulary} 
+		\caption{Table of anonymization operations (adapted from \cite{fung2010privacybook} )}
+		\label{table:AnonymizationTable}
+\end{table}
+\section{Privacy Breaches}
+\label{section:privacy_breaches}
+In the recent years there have been many failures in privacy preserving data publishing. Many companies have been faced with a PR disaster after releasing data about their customers thinking them being anonymized, only to have people de-anonymize their data and breaching the privacy of the datasets' participants. In this section we will have a look at some of these privacy failures.
+
+\subsection{Netflix Prize Competition}
+Netflix, the world's largest online movie streaming website, decided in 2006 to crowdsource a new movie suggestion algorithm and offered a cash prize of 1 million dollar for the most efficient algorithm. To help the research, they released 100 million supposedly anonymized movie ratings from their own database. In order to protect the privacy of their users, Netflix removed all user level information; such as name, username, age, geographic location, browser used, etc. They also deliberately perturbed "some of the rating data for some customers[...] in one or more of the following ways: deleting ratings; inserting alternative ratings and dates, and modifying random dates"\cite{bell2007netflix}. The released data records included an anonymized user ID, movie name, date of rating, and the user's rate on a scale from 1 to 5. 
+
+Two researchers from the University of Texas,Narayanan and Shmatikov\cite{narayanan2008robust}, demonstrated that an adversary who knows only a little bit about an individual subscriber can easily identify this subscriber's record in the dataset. Using the publicly available dataset from the Internet Movie Database (IMDB) as the source of background knowledge, they matched certain subscribers with their Netflix records, and uncovered their apparent political preferences and other potentially sensitive information. The paper also offered a formal mathematical treatment of how a small amount of auxiliary knowledge about an individual can be used to do a fairly reliable re-identification. In the case of the Netflix dataset, the authors \cite{narayanan2008robust} found that with only 8 movie ratings, 99\% of the records could be uniquely identified. Furthermore, they proved that the de-anonymization algorithm they employed is robust to discrepancies in the rating and dates.
+
+\subsection{Group Insurance Commission} \label{sec:GIC}
+In 1997, Latanya Sweeney wrote a paper on how she had identified the medical records of Massachussets governor William Weld based on publicly available information from the database of Group Insurance Commission. She achieved this analyzing data from a public voter list, and linked it with patient-specific medical data through a combination of birth date, zip code, and gender\cite{sweeney2002k}. As these columns were similar in both databases, their combination could be used to identify medical records that belong to either one person, or a small group of people. Sweeney hypothesized that 87\% of the US population could be identified by having the combination of the three aforementioned records. It's worth noting here that this theory is not conclusive. A paper by Daniel Barth-Jones suggests that the re-identification of Weld may have been a fluke due to his public figure, and that ordinary people risk of identification is much lower\cite{barth2012re}. 
+
+\subsection{New York Taxi dataset} 
+The New York City Taxi and Limousine Commission released a dataset in 2013 containing details about every taxi ride that year, including pickup and drop-off times, location, fare, as well as anonymized (hashed) versions of the taxi's license and medallion numbers. Vijay Pandurangan, a researcher for Google, wrote a blog-post where he showed how he exploited a vulnerability in the hashing-function to re-identify the drivers. He then showed how this could be potentially used to calculate any driver's personal income\cite{vijay2014online}. 
+
+Another researcher, called Anthony Tockar, wrote an article during his internship at Neustar Research where he proved that the dataset also contained an inherent privacy risk to the passengers which had been riding New York Taxis. Even though there was no information in the dataset on who had been riding the taxis, Tockar showed that by using auxiliary information such as timestamped pictures, he could stalk celebrities and figure out to where they were driving, and how much they tipped the driver. He also used map data from Google Maps to create a map of drop-off locations for people that had exited a late night visit from gentleman's club and taken a cab home. He then used websites like Spokeo and Facebook to find the cab customer's ethnicity, relationship status, court records, and even a profile picture\cite{tockar2014online}.
+
+\section{Attack Vectors}
+\label{section:attack_vectors}
+
+
+\subsection{Linkage Attacks [Rename]}
+In each of the examples in the previous section, the privacy breach was achieved through an attack model called linkage attacks. These types of attacks are characterized that they create a decision rule which link at least one data entry in the anonymized dataset with public information which contain individual identifiers, given that the probability of these two matching exceeds a selected confidence threshold. 
+
+In the literature\cite{bonchi2010privacybook,fung2010privacybook}, they broadly classify the attack models into two categories: Record linkage and attribute linkage. In both these types of attack, we need to assume that the attacker knows the QID of the victim.
+
+\subsubsection{Record Linkage[rename]}
+In the case of attribute linkage, some quasi-identifier value QID identifies a small number of records in the original dataset, which is called a group. If the victim's QID is the same, he or she is then vulnerable to being linked to this much smaller number of records in the group. With the help of some additional information, there is then a chance that the attacker could uniquely identify the victim's records in the group. This is what happened to governor William Weld as mentioned in section\ref{sec:GIC}. Sweeney linked medical data with a voter list, which both included the QID= \textless Zip,Birth date,Sex \textgreater. She then employed the background knowledge that governor Weld was admitted to the hospital at the certain date, which allowed her to uniquely identify him from the small group of people that shared the same QID as him. 
+
+k-anonymity  
+Sweeney\cite{sweeney2002k} proposed a notion called k-anonymity in order to try and prevent record linkage through QID. She defined that a table $T$ with a quasi-identifier $QI_T$ would satisfy k-anonymity if and only if each sequence of values $T[QI_T]$ appears with at least $k$ occurrences in $T[QI_T]$. From that definition it appears that k-anonymity is designed to prevent record linkage through hiding the record of the victim in a big group of records with the same QID. This method has a weakness however, as an attacker can still infer a victim's sensitive attribute, such as having the attribute hasDisease=true, if most records in a group have similar values on those sensitive values. 
+
+\subsubsection{Attribute Linkage[rename]}
+The aforementioned weakness is an example of an attribute linkage attack. An attacker might not be able to precisely identify the victim through a record, but can still infer his or her sensitive values from the published data. The attacker does this based on the set of sensitive values associated to the group the victim belongs to. 
+
+To prevent this type of attack, Machanavajjhala et al\cite{machanavajjhala2007diversity} proposed an idea based on diminishing the correlation between the QID attributes and the sensitive values, which they called l-diversity. The method requires each group with similar QID to have $l$ distinct values for the sensitive attributes. 
+
+
+\subsection{Background Information}	
+
+
+\section{Challenges in Data Privacy}
+
+Several studies have been performed to assess which privacy risks exists in fields such as mobile applications {citations}, health care data, and in social networks, and all of them found deficiencies in either the collection or handling of individuals' data. A study run by the European Data Protection Authorities (DPA) found that out of 1211 mobile applications surveyed, 59\% caused concern with respect to pre-installation privacy communications, and that 31\%  requested permissions exceeding what the surveyors would expect based on their understanding of the applications’ functionality\cite{EUprivacySweep2014}. 
+
+The law might not necessarily be enough to sufficiently prevent the misuse of personally sensitive information, such as patient's health care data. A study performed by Yale's center for bioethics concluded that: "Law likely cannot catch up with burgeoning data collection, data aggregation, and data
+mining activities, nor with technological advance, let alone adequately anticipate it." Yet the author also argued that technological progress would lead to "Better alternatives to identification and de-identification;  means of tracking data; [...] improved data security; and returning benefit to data originators"\cite{kaplan2014patient}.
+
+\section{Motivation}
+
+We hope to show that a competitive solution can be created in a distributed learning setting, which also can provide a privacy guarantee for the people who supply the data required for learning. If we are successful, our research can open an avenue of practical solutions where the paradigm in data mining shifts from collecting data in massive centralized databases, to a distributed approach where the data producers also become data owners.
+
+\subsection{Data security}
+This project is motivated by the aforementioned challenges and breaches of data privacy, and wish to contribute to the development of privacy-preserving technology. In a world where massive amounts of sensitive personal data are being collected, attacks on the individual's privacy are becoming more and more of a threat.
+
+\subsection{Data ownership}
+\label{sec:motivation_data_ownership}
+
+Addtionally, we are strongly motivated by the idea that there should be a reversal in data ownership. Currently, companies offering services to users collect the data stream generated by a user and store it centrally in a data center owned by the company. The user has to trust that these data centers will not be breached or leaked. Furthermore, the user has to trust that the company policies or ethical standards will not change in the future and that the company or their data will not be bought by a independent third party. If data streams were instead collected in some user-controlled repository, risk of breaches would be reduced and the user would maintain full access control and monitoring. Tim Berners-Lee voiced his support for this idea at the IP EXPO in 2014\cite{bernerslee2014dataownershiptelegraph}: "I would like us to build a world in which I have control of my data. I can sell it to you and we can negotiate a price, but more importantly I will have legal ownership of all the data about me,". He also brought up another compelling reason to ensure that users retain the data they produce\cite{bernerslee2014dataownershipguardian}: "In general … if you put together all that data, from my wearable, my house, from other companies like the credit card company and the banks, from all the social networks, I can give my computer a good view of my life, and I can use that. That information is more valuable to me than it is to the cloud." A user will have multiple applications that gather information from their daily life, such as exercise, social and office applications. While each of these data streams on their own can be useful for the companies that collect them, they can have even more powerful uses when put together to give a more complete context. Instead of each company pulling user data to their data centers, users could push data stream to their personal storage, and offer. The user then has control of who accesses the data and how, while also allowing for data analysis across completely separate applications.
+
+\subsection{Future legal requirements}
+
+The European Parliament is working towards new legislation that will create a set of common data protection rules for all EU member states\cite{eudata2013newlegislation}. This legislation offers right to erasure and right to portability. The matter of portability is a step in the direction of the ideas of data ownership discussed in Section \ref{sec:motivation_data_ownership}.  Perhaps most significantly, the regulation requires that all companies operating from the EU or having customers in the EU will be required to comply with. Companies that do not comply can risk being imposed periodic data protection audits or fines up to €100 million or 5\% of annual worldwide turnover.
+
+The European Parliament is not alone in looking new laws to regulate data privacys. The Council to the President, an advisory group to the US President, concluded in their 2014 report \cite{house2014bigdata} that preserving privacy values would be their number one recommendation when designing a new policy framework for big data. Furthermore, the so called "Privacy Bill of Rights" outlined by the Obama administration in 2012 is moving forward, and a new discussion draft was published in 2015\cite{whitehouse2015draft}. Among the requirements put forward in this bill is transparency about how data is used, the degree of control a person has over how their data is used.
+
+
+
+\cleardoublepage
