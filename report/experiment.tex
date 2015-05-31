@@ -2,6 +2,7 @@
 
 \chapter{Experiment}
 
+\todo{Give an overview of the experiment first.}
 Introduce the experiment
 
 \section{Dataset}
@@ -164,8 +165,12 @@ Record-based differential privacy. Does it work?
 
 \section{Architecture}
 
-We designed a distributed system using the JADE framework. The core component in this system is a PeerAgent, which represents a participant in the distributed learning setting. This agent contains what would be the local data of a person using some application.
+We designed a distributed system using the JADE framework. The core component in this system is a PeerAgent, which represents a participant in the distributed learning setting. This agent contains what would be the local data of a person using some application. In the remaining sections, whenever we say "peer" we are refering to the PeerAgent described here, holding a local data set and with means of communcating with other PeerAgent instances.
 
+To form aggregate models it is necessary to select groups of peers to create each model. In our experiment, this is implemented with a singleton agent we named the GroupAgent. This agent draws random subset. The size and number of groups formed is given by the parameters selected at the beginning of the experiment, as specified in Section \ref{sec:parameter_tuning}. It is this agent that is responsible for keeping track of 
+%talk about how the stuff explained in Basic theory like AMS plays into our setup
+
+%when we are talking about peers, we are refering to instance of the PeerAgent
 
 
  \missingfigure[figwidth=6cm]{Figure explaining our framework}
