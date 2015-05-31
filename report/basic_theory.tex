@@ -131,6 +131,7 @@ This solves only the case of training a privacy-preserving logistic regression m
 When aggregating K locally trained models, their approach computes the final model
 
 \begin{eqnarray}
+\label{eq:parametric_aggregation}
 \boldsymbol{w} = 1/K\sum_{j=1}^{K} \boldsymbol{w_j} + \boldsymbol{\eta}
 \end{eqnarray}
 
@@ -152,7 +153,9 @@ individual biometric records.
 
 In ensemble learning, the predictions of individually trained models are combined to form a final prediction\cite{opitz1999popularensemble}.
 
-In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by Breiman\cite{breiman1996bagging}. Breiman showed that when changes in the training set has a significant effect on the trained model, bagging can give better performance than training a single model on the learning set.
+In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by Breiman\cite{breiman1996bagging}. Breiman showed that when changes in the training set has a significant effect on the trained model, bagging can give better performance than training a single model on the learning set. Bootstrap aggregating involves creating new learning sets by sampling from the original set with replacement, and training a model on each new set produced. These models are all added to the ensemble, which then makes predictions by taking a majority vote.
+
+We did not strictly use bagging according to its formal definition, as the bootstrap step was not used. In our approach models are instead trained on disjoint subsets of the training set, which are then published after being aggregated according to Equation \ref{eq:parametric_aggregation}. There can be many such models published, so they are added to ensembles and prediction is done in the same fashion as in bagging. 
 
 \section{Cross validation}
 
