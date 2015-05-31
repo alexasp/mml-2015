@@ -117,7 +117,7 @@ minimize:	  l_{avg}(v,w)+ \lambda||w||^2_2 = (1/m) \sum_{i=1}^{m} f(w^T a_i +vb_
 Here $\lambda > 0$ is the regularization parameter, used to control the trade-off between the average logistic loss and the size of the weight vector, as measured by the $l_2$-norm. The objective function in this logistic regression problem is smooth and convex, and can be minimized by standard gradient descent.
 
 
-\subsection{Sensitivity of Logistic Regression} \label{sec:Sensitivity_of_LogReg}
+\subsection{Sensitivity of Logistic Regression Aggregation Mechanism} \label{sec:Sensitivity_of_LogReg}
 
 In order to built logistic regression models in a way that preserves privacy, it is necessary to determine the sensitivity of the output model. Chaudhuri and Monteleoni\cite{chaudhuri2009logistic} showed that the sensitivity of logistic regression is at most 
 \begin{eqnarray}\label{eq:logres_sensitivity}
@@ -151,15 +151,13 @@ individual biometric records.
 
 \section{Ensemble learning}
 
-In ensemble learning, the predictions of individually trained models are combined to form a final prediction\cite{opitz1999popularensemble}.
-
-In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by Breiman\cite{breiman1996bagging}. Breiman showed that when changes in the training set has a significant effect on the trained model, bagging can give better performance than training a single model on the learning set. Bootstrap aggregating involves creating new learning sets by sampling from the original set with replacement, and training a model on each new set produced. These models are all added to the ensemble, which then makes predictions by taking a majority vote.
+In ensemble learning, the predictions of individually trained models are combined to form a final prediction\cite{opitz1999popularensemble}. In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by Breiman\cite{breiman1996bagging}. Breiman showed that when changes in the training set has a significant effect on the trained model, bagging can give better performance than training a single model on the learning set. Bootstrap aggregating involves creating new learning sets by sampling from the original set with replacement, and training a model on each new set produced. These models are all added to the ensemble, which then makes predictions by taking a majority vote.
 
 We did not strictly use bagging according to its formal definition, as the bootstrap step was not used. In our approach models are instead trained on disjoint subsets of the training set, which are then published after being aggregated according to Equation \ref{eq:parametric_aggregation}. There can be many such models published, so they are added to ensembles and prediction is done in the same fashion as in bagging. 
 
 \section{Cross validation}
 
-We initally divided the data sets into a training set and a testing set, the latter being intended to evaluate the performance and properties of our approach. We needed to explore many different combinations and variations of our experiment during, but the test set should only be used as a final step. If the test set is used for repeated validation of different parameters, we would risk overfitting it and getting unrealistic test results. 
+We initially divided the data sets into a training set and a testing set, the latter being intended to evaluate the performance and properties of our approach. We needed to explore many different combinations and variations of our experiment during, but the test set should only be used as a final step. If the test set is used for repeated validation of different parameters, we would risk overfitting it and getting unrealistic test results. 
 
 One way to do reliable accuracy estimation is with cross validation, which makes more efficient use of training data than creating a separate holdout set and has less bias than as shown by Kohavi \cite{kohavi1995crossvalidation}. Cross validation involves partitioning the training set into K disjoint sets. Then, for each $t \in [1, K]$ partition $t$ is used as the test set, and the remaining partitions are combined to form the training set. Accuracy is reported as number of correctly classified instances divided by the total number of instances over all K partitions. 
 
