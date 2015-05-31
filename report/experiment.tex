@@ -7,16 +7,25 @@ Introduce the experiment
 
 \section{Dataset}
 This section will introduce the dataset(s) used. What features it contains, what we try to learn/classify, and why we chose to use it.
-The Spambase Dataset \cite{spambase1999data} was used as a baseline training set. This dataset is publicly available from the UCI machine learning directory, and contains 57 input attributes of continuous format which serves as input features for spam detection and 1 target attribute in discrete format which represents the class.
+
+\subsection{Spambase} \label{sec:spambase}
+The Spambase dataset \cite{spambase1999data} was used as a baseline training set. This dataset is publicly available from the UCI machine learning directory, and contains 57 input attributes of continuous format which serves as input features for spam detection and 1 target attribute in discrete format which represents the class.
 
 We chose this dataset as it is a popular dataset to analyze the performance of binary classifiers, so that we could compare the results of other logistic regression classifiers against our own. While this dataset might not seem like the ideal choice for testing a differentially private classifier due to its lack of personal information, we argue that it still fits well for the purpose of demonstration. In a spam-classifying system based on our distributed model, a logistic regression model can be built by training it locally in each user's personal mail folder and then aggregated into an ensemble. That way you can build a diverse spam-classifier without the users having to give up their personal email to a centralized database.     
 
-Used normalization to scale the data to 0-1 range, this is due to the proof in Chaudhuri paper which states the assumption $|X_i|< 1$. Based on the formula
+Before we could use the dataset, we needed to use normalization to scale the data to 0-1 range. This is due to the proof in Chaudhuri paper which states the assumption $|X_i|< 1$. The scaling was  based on the formula
 \begin{eqnarray}
 	X_{norm} = \frac{X-X_{min}}{X_{max} - X_{min}}
 \end{eqnarray}
 
 We appended a feature with constant value 1.0 to all data records, to act as the intercept or bias term. 
+
+\subsection{Australian Credit Approval}
+Another dataset we used, was the Australian Credit Approval (Statlog), which concerns the approval or disapproval of credit card applications. It is publicly available from the UCI machine learning directory. This is a much smaller set of data, with only 690 samples spread over 14 attributes. The data is useful for binary classification as it contains a good mix of attributes: continuous, nominal with small numbers of values, and nominal with larger numbers of values.
+
+We mostly used this dataset to confirm and double-check the conclusions we drew from the Spambase dataset, as it contains too few data records for it to be 100\% ideal for our use. Due to the sparsity of data we had to scale down the amount of peers in each experiment, so that each peer could get enough data to create a decent local classifier. We chose to keep on using this data as one of the motivating examples in Dwork's book\cite{dwork2013algorithmic} of differential privacy, is to protect data holders from insurance and credit card companies. 
+
+This dataset was preprocessed in the same manner as was described in Section \ref{sec:spambase}.
 
 \section{Parameter tuning}
 \label{sec:parameter_tuning}
