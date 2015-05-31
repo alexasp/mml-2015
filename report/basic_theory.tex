@@ -145,7 +145,12 @@ where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-different
 
 which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
 
-It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ datasets would allow a third party to learn information. This is a very critical issue, and must be rectified before the system can be applied to data sets were even . For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about individual biometric records.
+It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ datasets would allow a third party to learn information. This is a very critical issue, and must be rectified before the system can be applied to data sets were even . For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about 
+individual biometric records.
+
+\section{Ensemble learning}
+
+In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by Breiman\cite{breiman1996bagging}. Breiman showed that when changes in the training set has a significant effect on the trained model, bagging can give better performance than training a single model on the learning set.
 
 \section{Cross validation}
 
@@ -156,7 +161,7 @@ One way to do reliable accuracy estimation is with cross validation, which makes
 Kohavi recommends 10-fold stratified cross validation. Stratified cross validation involves ensuring that each fold has the same class distribution as the original data set. . Since the data sets we tested with have thousands of records and close to uniform class distribution, we concluded that stratified folds was not necessary. Our experiments were evaluated with 10-fold cross validation with each fold being a random, disjoint subset of the training set.
 
 
- \section{Programming Frameworks Used}
+\section{Programming Frameworks Used}
 
  \subsection{JADE}
  
