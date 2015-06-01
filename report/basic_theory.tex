@@ -82,34 +82,28 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
   \begin{eqnarray} 
  p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
   \end{eqnarray}
-  where $\theta$ is the parameter vector we wish to learn. Following this we want to find $\theta$ such that:
-  \begin{eqnarray}
-  \theta = argmax_\theta \sum_{i=1}^{m} log Pr(y_i | x_i,\theta) - \mu \|\theta\|^{2}_{2}
-    \end{eqnarray}
+  where $\theta$ is the parameter vector we wish to learn.
+ It can be used for predicting the probability of a binary outcome or binary classification by setting a classification threshold. Given a training set we choose the $\theta$ with the largest likelihood, the maximum likelihood estimator (MLE)\cite{elkan2014logreg}. The likelihood of parameter $\theta$ is
  
- where the term $\mu\|\theta\|^{2}_{2}$ is a regularization term to restrict the magnitude of $\theta$ and avoid overfitting the training data.
- It can be used for binary classification or for predicting the certainty of a binary outcome. See Cox  and Snell (1970) for the use of this model in statistics. This note focuses only on computational issues related to maximum-likelihood or more generally maximum a-posteriori (MAP) estimation. A common
- prior to use with MAP is:
- p(w) ∼ N (0, λ−1  I) (2)
- Using λ > 0 gives a “regularized” estimate of w which often has superior generalization performance,
- especially when the dimensionality is high (Nigam et al., 1999).
- Given a data set (X, y) = [(x1, y1), ...,(xN , yN )], we want to find the parameter vector w which
- maximizes:
- \begin{eqnarray} 
- log(1 + exp(−y_i \textbf{w}^T \textbf{x}_i)) - \frac{\lambda}{2} \textbf{w}^T \textbf{w}
-\end{eqnarray}
- The gradient of this objective is
- \begin{eqnarray} 
- g = \Delta_w l (\textbf{w}) = \sum_{i}^{} (1 - \sigma(y_i \textbf{w}^T	\textbf{x}_i)) y_i \textbf{x}_i - \lambda \textbf{w}
-\end{eqnarray} 
+   \begin{eqnarray}
+   \prod_{i=1}^{m} p(y_i | x_i,\theta)
+   \end{eqnarray}
+   
+For convenience, the point of maximum log-likelihood is used instead. Since the log function is monotonically increasing, the maximum likelihood estimator and the maximum log-likelihood estimator is the same. We then select
+ 
+  \begin{eqnarray}
+  \theta_{MLE} = \arg\max_\theta [\sum_{i=1}^{m} \log p(y_i | x_i,\theta)] - \mu \|\theta\|^{2}_{2}
+  \end{eqnarray}
+  
+where the term $\mu\|\theta\|^{2}_{2}$ is a regularization term to restrict the magnitude of $\theta$ and avoid overfitting the training data. Using $\mu > 0$ gives a “regularized” estimate of w which often has superior generalization performance, especially when the dimensionality is high (Nigam et al., 1999). 
+  
+We find the point of maximum log-likelihood by gradient descent of the regularized objective. The rule for updating each dimension $j$ of $\theta$ becomes
 
-\todo[inline]{Include learning rate in update rule}
-
-When m, the number of observations or training examples, is not large enough compared to n, the number of feature variables, simple logistic regression leads to over-fit. A standard technique to prevent over-fitting is regularization, in which an extra term that penalizes large weights is added to the average logistic loss function. The $l_2$-regularized logistic regression problem is
 \begin{eqnarray}
-minimize:	  l_{avg}(v,w)+ \lambda||w||^2_2 = (1/m) \sum_{i=1}^{m} f(w^T a_i +vb_i) + \lambda \sum_{i=1}^{n} w_i^2
+\theta^{t+1}_j = \theta^{t}_j + \lambda[\sum_{i=1}^{m}(y_i - p(y_i | x_i,\theta))x_{ij} - 2\mu \|\theta^{t}_j\|]
 \end{eqnarray}
-Here $\lambda > 0$ is the regularization parameter, used to control the trade-off between the average logistic loss and the size of the weight vector, as measured by the $l_2$-norm. The objective function in this logistic regression problem is smooth and convex, and can be minimized by standard gradient descent.
+
+Where $\lambda$ is the step length in gradient descent, also referred to as the learning rate.
 
 
 \subsection{Sensitivity of Logistic Regression Aggregation Mechanism} \label{sec:Sensitivity_of_LogReg}
