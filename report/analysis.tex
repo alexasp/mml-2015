@@ -4,6 +4,26 @@
 
 \todo[inline]{Make a table with baseline classification rate for logistic regression, put in our values. 1 Peer with no noise, 1 peer with noise, best case from other experiments that we want to highlight. This can lead to a discussion of why our results are not as good, where they show promise etc}
 
+
+
+\section{Baseline Classification results and comparisons}
+\begin{table}[h]
+	\begin{tabular}{ll}
+		\begin{tabular}[c]{@{}l@{}}Error Rate/Spambase\end{tabular} &        \\
+		Sharma\cite{sharma2013adaptive}                                    & 0.0705 \\
+		Kumar\cite{kumar2012comparative}                                  & 0.1389 \\
+		Our optimal result ($\epsilon$=10, 1 peer)                        & 0.130  \\
+		Less noise, less peers($\epsilon$=0.1, 10 peers)				  & 0.138  \\
+		Less noise, more peers($\epsilon$=1.0, 100 peers)				  & 0.164  \\
+		Noisy result ($\epsilon$=0.1, 50 peers)                           & 0.220  \\
+		
+		
+	\end{tabular}
+	\label{tab:baseline_class_results}
+\end{table}
+
+
+
 All prediction results given in this section are presented with mean and standard deviation values. These values are computed by evaluating each combination of parameters with 10-fold cross validation and taking the mean and standard deviation of accuracy across the 10 data folds.
 
 As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a dataset by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
@@ -167,7 +187,9 @@ A growing worldwide market is the sale and usage of wearable sensors, such as en
 
 The wearable devices are implementing fitness and health monitoring by using a mixture of sensors, such as motion, pulse, hydration and skin temperature sensors. All of these wearables will therefore generate a massive amount of data about the person who are using them. This data can be considered as highly sensitive information, as it can unveil a lot about their user's health, and the manufacturers of these devices knows this. Dana Liebelson, a reporter for Huffington Post, queried several US-based fitness device companies about their privacy. One of the replies she got, was that "the company does not sell information collected from the device that can identify individual users", but that they were considering marketing aggregate information that cannot be linked back to an individual. As we saw in section \ref{section:privacy_breaches} and \ref{section:attack_vectors}, many of the popular methods for aggregating and anonymizing a dataset carries an inherent risk of a privacy breach.
 
-This is where we see a potential application for our distributed framework, as it solves the problem faced by those who don't want to give up control of their data to a third party, but they still want to analyze their data as it can be highly useful. 
+A study by Raij et al\cite{raij2011privacyConcernWearables} have been performed to try to measure the privacy concerns of people using wearable sensors, and found that activity trackers that monitor heart rate, steps, and pulse for instance, was usually seen as inoffensive to the users’ privacy at the start of the study. The researchers then had some of the testers wear sensors, and could from the resulting data infer periods of heightened stress, as well as derive certain context and behaviors that could trigger the aforementioned stress. The participants were then given a similar questionnaire to the initial one, and many then reported a heightened sense of concern. 
+  
+This is where we see a potential application for our distributed framework. Although there would be some initial problems due to our learner at the moment requiring labeled data to create a classifier, there can be potential in an health application where users keep control of their own data. A potential solution could be to employ an unsupervised learning technique based on clustering. Research have been performed for testing the validity of applying differential privacy to clustering techniques and yielded positive results. Combining this with the results of \todo{Find the health paper from last year that did mini-clustering online}  
 
 -Future homes can potentially track you through you phone, or similar device. 
 
