@@ -129,14 +129,39 @@ where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-different
 
 \begin{eqnarray}
 \label{eq:aggregated_logistic_sensitivity}
-\frac{2}{n_j\epsilon\lambda}
+\Delta\boldsymbol{\hat{w^s}} = \frac{2}{n_j\lambda}
 \end{eqnarray}
 
 
 which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
 
-It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ datasets would allow a third party to learn information. This is a very critical issue, and must be rectified before the system can be applied to data sets were even . For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about 
-individual biometric records.
+We can improve upon the sensitivity result by Pathak et al. By following the same argument as in \cite{pathak2010diffprivhomo}, we can show that the sensitivity of the aggregated model is at most 
+
+\begin{eqnarray}
+\label{eq:aggregated_logistic_sensitivity_stronger}
+\Delta\boldsymbol{\hat{w^s}} = \frac{2}{K n_j	\lambda}
+\end{eqnarray}
+
+where K is the number of participants.
+
+\textit{Proof.} As in \cite{pathak2010diffprivhomo}, we consider a case where one record in data set $D$ is changed, giving the adjacent data set $D'$. This data set is partitioned to each of the participants $P_1$ through $P_K$ Assume that the change is in the dataset of participant $P_j$, then the change in the final aggregated model $\hat{w}^s$ will only be in $\hat{w}_j$, the local model of $P_j$. We denoted this changed model as $\hat{w}_j'$ Given the size of the smallest data set partition $n_{(1)}$, that there are K participants and that the sensitivity of $\hat{w}_j$ is at most $\frac{2}{\eta_j\lambda}$, we have that
+
+$$
+\frac{P(\boldsymbol{\hat{w}^s}|D)}{P(\boldsymbol{\hat{w}^s}|D')} = \frac{P(\frac{\boldsymbol{\hat{w}_j}}{K} + \eta|D)}{P(\frac{\boldsymbol{\hat{w}_j'}}{K} + \eta|D')} = \frac{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j}}{K}\|_1]}{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j'}}{K}\|_1]}= \frac{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j}\|_1]}{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j'}\|_1]} $$
+$$\leq \exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j} - \boldsymbol{\hat{w}_j'}\|_1]
+\leq \exp[\frac{n_{(1)}\epsilon\lambda}{2}\frac{2}{n_j\lambda}]
+= \exp[\frac{n_{(1)}\epsilon}{n_j}]
+\leq \exp(\epsilon)
+$$
+
+\todo{Show/explain that the same holds for the lower bound -epsilon also, as in Pathak}
+
+\todo{Add proof of above sensitivity}
+
+It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ datasets would allow a third party to learn information. For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about 
+individual biometric records. 
+
+As stated by Dwork, groups of records can be protected \todo{Explain how we can protect whole user sets and the balance between data set sizes and limits} \cite{Dwork06differentialprivacy} Dwork points out that the end goal of differential privacy is allow learning aggregate information in a way that privacy. 
 
 \section{Ensemble learning}
 
