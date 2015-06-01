@@ -76,24 +76,19 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  
  `
  \section{Logistic Regression}
- 
- Logistic regression is a popular probability model developed by D.R Cox in 1958. The most basic form is used to predict a binary response based on a set of features.
- 
- \begin{eqnarray} 
- h_{\theta}(x) = \theta^Tx = \sum_{i=0}^n \theta_i x_i, \nonumber
- \end{eqnarray}
+
  
  The logistic regression model is
   \begin{eqnarray} 
  p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
   \end{eqnarray}
-  where $\theta$ is the parameters we wish to learn. Following this we want to maximize the following:
+  where $\theta$ is the parameter vector we wish to learn. Following this we want to find $\theta$ such that:
   \begin{eqnarray}
-  argmax_\theta \sum_{i=1}^{m} log Pr(y_i | x_i,\theta) - 
+  \theta = argmax_\theta \sum_{i=1}^{m} log Pr(y_i | x_i,\theta) - \mu \|\theta\|^{2}_{2}
     \end{eqnarray}
- (1)
- It can be used for binary classification or for predicting the certainty of a binary outcome. See Cox  and Snell (1970) for the use of this model in statistics. This note focuses only on computational issues related
- to maximum-likelihood or more generally maximum a-posteriori (MAP) estimation. A common
+ 
+ where the term $\mu\|\theta\|^{2}_{2}$ is a regularization term to restrict the magnitude of $\theta$ and avoid overfitting the training data.
+ It can be used for binary classification or for predicting the certainty of a binary outcome. See Cox  and Snell (1970) for the use of this model in statistics. This note focuses only on computational issues related to maximum-likelihood or more generally maximum a-posteriori (MAP) estimation. A common
  prior to use with MAP is:
  p(w) ∼ N (0, λ−1  I) (2)
  Using λ > 0 gives a “regularized” estimate of w which often has superior generalization performance,
