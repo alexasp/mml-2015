@@ -3,7 +3,7 @@
 \chapter{Experiment}
 
 \section{Overview}
-
+\label{sec:experiment_overview}
 As presented in Section \ref{sec:problem_statement}, we wanted to do test an architecture that allows fully decentralized machine learning that maintains the privacy of the participants. 
 
 We consider a setting with $N$ peers that each have a local data set. These data sets are assumed to be independently sampled for each peer, but may be sampled from the same distribution. When the system initializes, each peer trains a logistic regression model on its local dataset. The data set and the trained model is private and should only be known by its owner.
@@ -21,6 +21,18 @@ Certain parts of this system is not implemented in this project, and are replace
 The protocol created by Pathak et al. for computing aggregates securely was not implemented. In our implementation models are sent unencrypted to the peer acting as curator. While this part would need to be replaced with a full implementation of the approach by Pathak et al. the output returned by the curator is exactly the same, using the computation in Equation \ref{eq:parametric_aggregation}. 
 
 Finally, the selection of random groups is done in a non-scalable manner. A centralized actor that has full knowledge of all participating peers randomly selects groups of these peers and sends a message to each peer with the list of participants. This should be replaced by a decentralized method for the system to be scalable. How we intend to do this is discussed further in Section \ref{sec:Future Work} on Future Work.
+
+
+\section{Architecture}
+
+We designed a distributed system using the JADE framework. The core component in this system is a PeerAgent, which represents a participant in the distributed learning setting. This agent contains what would be the local data of a person using some application. In the remaining sections, whenever we say "peer" we are refering to the PeerAgent described here, holding a local data set and with means of communcating with other PeerAgent instances.
+
+To form aggregate models it is necessary to select groups of peers to create each model. In our experiment, this is implemented with a singleton agent we named the GroupAgent. This agent draws random subset of size $g$ from the set of all peers. The size and number of groups formed is given by parameters selected at the beginning of the experiment, which are described in detail in Section \ref{sec:parameter_tuning}. 
+
+As stated in Section \ref{sec:experiment_overview},  the experiment terminates when there no longer a sufficient amount of active peers to form a group. That is, when the number of peers with sufficient budget is less than the group size parameter, the experiment is stopped. This behavior was implemented into an agent we named CompletionAgent. This agent listens to messages from the curators in the different groups. Once it has received messages of the expected number of aggregated models having been created, it initiates the final step of the experiment, including testing performance metrics and preparing the JADE environment for the next experiment. 
+%talk about how the stuff explained in Basic theory like AMS plays into our setup
+
+%when we are talking about peers, we are refering to instance of the PeerAgent
 
 \section{Dataset}
 This section will introduce the dataset(s) used. What features it contains, what we try to learn/classify, and why we chose to use it.
@@ -189,14 +201,6 @@ Record-based differential privacy. Does it work?
 
 
 
-\section{Architecture}
-
-We designed a distributed system using the JADE framework. The core component in this system is a PeerAgent, which represents a participant in the distributed learning setting. This agent contains what would be the local data of a person using some application. In the remaining sections, whenever we say "peer" we are refering to the PeerAgent described here, holding a local data set and with means of communcating with other PeerAgent instances.
-
-To form aggregate models it is necessary to select groups of peers to create each model. In our experiment, this is implemented with a singleton agent we named the GroupAgent. This agent draws random subset. The size and number of groups formed is given by the parameters selected at the beginning of the experiment, as specified in Section \ref{sec:parameter_tuning}. It is this agent that is responsible for keeping track of 
-%talk about how the stuff explained in Basic theory like AMS plays into our setup
-
-%when we are talking about peers, we are refering to instance of the PeerAgent
 
 
  \missingfigure[figwidth=6cm]{Figure explaining our framework}
