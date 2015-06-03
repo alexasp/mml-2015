@@ -2,8 +2,9 @@ from sklearn.datasets import load_svmlight_file
 import sys
 
 path = sys.argv[1]
+features = sys.argv[2]
 
-X_train, y_train = load_svmlight_file(path, n_features=123)
+X_train, y_train = load_svmlight_file(path, n_features=features)
 
 y_train_list = y_train.tolist()
 X_train_dense = X_train.todense().tolist()
