@@ -28,7 +28,7 @@ labels = []
 with open(data_set_name) as csv_data:
     for line in csv_data:
         vector = line.split(',')
-        labels.append(int(vector[label_index]))
+        labels.append(int(float(vector[label_index])))
         sample = [float(vector[i]) for i in range(len(vector)) if not i == label_index]
         samples.append(sample)
 
