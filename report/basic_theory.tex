@@ -1,7 +1,7 @@
 % !TeX spellcheck = en_US
 %===================================== CHAP 3 =================================
 
-\chapter{Basic Theory}
+\chapter{Basic Theory} \label{ch:Basic Theory}
 
 Common to all the attack vectors described in the previous chapter is that the attacker rely on background knowledge, often also called auxiliary information, to perform their linkage attacks. Protecting a database against this threat has long been a major challenge in database design. Already back in 1977 Tore Dalenius \cite{dalenius1977towards} defined a desideratum for data privacy which says that: \begin{quote}
 	Access to the published data should not enable the adversary to learn anything extra about target victim compared to no access to the database, even with the presence of any adversary’s background knowledge obtained from other sources.
@@ -65,7 +65,7 @@ This equation states that the sensitivity $\Delta f$ is the maximum difference i
 
 \todo{add a section explaining that while it would seem that sensitivity is would often be high, some functions like count are naturally low sensitivity, and that steps such as clamping can be taken to reduce sensitivity}
 
-\subsubsection{Exponential Mechanism}
+\subsubsection{Exponential Mechanism} \label{sec:Exponential Mechanism}
 The exponential mechanism proposed by McSherry and Talwar \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the exponential mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
 
 More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input dataset is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
