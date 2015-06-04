@@ -7,6 +7,7 @@ import learning.metrics.PerformanceMetrics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -51,7 +52,7 @@ public class LogisticModel implements ParametricModel {
 
     @Override
     public void update(double epsilon, List<LabeledSample> data) {
-        List<Double> alphas = IntStream.range(-4, 5).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> alphas = IntStream.range(-6, 7).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         double best_alpha = alphas.get(0);
         double best_error = 1.0;
         List<List<LabeledSample>> folds = DataLoader.partition(3, data);
@@ -62,7 +63,7 @@ public class LogisticModel implements ParametricModel {
             for (int i = 0; i < folds.size(); i++) {
                 List<LabeledSample> test = folds.get(i);
                 List<LabeledSample> train = DataLoader.mergeExcept(folds, i);
-                double[] parameters = fitModel(train, alpha);
+                double[] parameters = fitModel(train, alpha, 1);
 
                 errorRate += PerformanceMetrics.errorRate(test, label(test, parameters))/(double)folds.size();
             }
@@ -72,42 +73,40 @@ public class LogisticModel implements ParametricModel {
             }
         }
 
-        _parameters = fitModel(data, best_alpha);
+        _parameters = fitModel(data, best_alpha, 100);
     }
 
     
 
 
-    private double[] fitModel(List<LabeledSample> train, double alpha) {
+    private double[] fitModel(List<LabeledSample> train, double eta, int epochs) {
         double[] parameters = Arrays.copyOf(_parameters, _parameters.length);
-        ArrayList<Double> logConditionalLikelihoods = new ArrayList<>();
 
-        logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+        Collections.shuffle(train);
 
-        for (int iteration = 0; iteration < 100; iteration++) {
+        for (int epoch = 0; epoch < epochs; epoch++) {
 
-            double[] gradient = new double[parameters.length];
-
-            for (int i = 0; i < gradient.length; i++) {
-                final int finalI = i;
-                gradient[finalI] = train.stream().mapToDouble(sample -> errorProjection(sample, parameters) * sample.getFeatures()[finalI]).sum()/(double)train.size();
-            }
-
-            for (int d = 0; d < parameters.length - 1; d++) {
-                parameters[d] += alpha * (gradient[d] - 2.0 * _regularization * parameters[d]);
-            }
-            parameters[parameters.length - 1] += alpha * gradient[parameters.length - 1]; //don't regularize the intercept/bias term.
-
+            double alpha = eta / (1 + _regularization * eta * epoch);
+            ArrayList<Double> logConditionalLikelihoods = new ArrayList<>();
             logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
 
-            if(Math.abs(logConditionalLikelihoods.get(iteration + 1) - logConditionalLikelihoods.get(iteration)) < 0.01){
-                break;
-            }
-            else if(iteration == 99){
-                assert Boolean.TRUE;
-            }
-            else{
-                assert Boolean.TRUE;
+            for (LabeledSample labeledSample : train) {
+                for (int i = 0; i < parameters.length - 1; i++) {
+                    parameters[i] += alpha * (errorProjection(labeledSample, parameters)*labeledSample.getFeatures()[i] - 2 * _regularization * parameters[i]);
+                }
+                parameters[parameters.length - 1] += alpha * (errorProjection(labeledSample, parameters)*labeledSample.getFeatures()[parameters.length - 1]);
+
+                logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+
+                if(Math.abs(logConditionalLikelihoods.get(logConditionalLikelihoods.size() - 1) - logConditionalLikelihoods.get(logConditionalLikelihoods.size() - 2)) < 0.01){
+                    break;
+                }
+                else if(epoch == 99){
+                    assert Boolean.TRUE;
+                }
+                else{
+                    assert Boolean.TRUE;
+                }
             }
         }
 
