@@ -14,7 +14,10 @@ import jade.wrapper.ControllerException;
 import learning.LabeledSample;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -25,13 +28,13 @@ import static java.util.Collections.max;
 /**
  * Created by aspis on 25.03.2015.
  */
-public class SpamTest {
+public class SusyTest {
 
     public static void main(String[] args) throws ControllerException, InterruptedException, IOException {
 
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
-        trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
+        trainData = new DataLoader().readCSVFileReturnSamples("../data/susy_10000_dense.csv.train", 18, true);
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
@@ -40,7 +43,7 @@ public class SpamTest {
 
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = true;
-        int foldCount = 5;
+        int foldCount = 10;
 
 
         if (useCrossValidation) {
@@ -48,14 +51,14 @@ public class SpamTest {
         }
 
 
-        List<Integer> dataLimits = Arrays.asList(500);
+        List<Integer> dataLimits = Arrays.asList(300);
         List<Integer> peerCounts = Arrays.asList(1);
 
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
         List<Integer> groupSizes = Arrays.asList(1);
 
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-5, 6).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-7,8).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1024)
         );

@@ -4,9 +4,12 @@ import pylab
 
 
 chart_path = 'charts'
+chart_point_path = 'chart_points'
 
 if not os.path.isdir(chart_path):
     os.makedirs(chart_path)
+
+
 
 
 def mean_plot_by(summary_filename, x_axis_field, x_min, x_max, log_scale):
@@ -32,6 +35,7 @@ def mean_plot_by(summary_filename, x_axis_field, x_min, x_max, log_scale):
         axes.set_xlim([x_min, x_max])
         axes.set_ylim([0, 1.0])
         save_figure(summary_filename)
+        save_figure_points(summary_filename, x_axis_values, means, stds)
         # plt.show()
 
 
@@ -45,6 +49,13 @@ def annotate(fig, x, y):
 
 def save_figure(summary_filename):
     pylab.savefig(chart_path + '/' + summary_filename.split('/')[-1] + '.png')
+
+def save_figure_points(summary_filename, x_axis_values, means, stds):
+    with open(chart_point_path + '/' + summary_filename.split('/')[-1] + '.csv', 'w') as points_file:
+        for i in range(len(x_axis_values)):
+            points_file.write(','.join([str(x_axis_values[i]), str(means[i]), str(stds[i])]) + '\n')
+
+
 
 
 def plot(plot_type, summary_filename, x_min, x_max, log_scale):

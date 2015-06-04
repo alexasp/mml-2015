@@ -31,7 +31,7 @@ public class AdultTest {
 
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
-        trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
+        trainData = new DataLoader().readCSVFileReturnSamples("../data/a9a_dense.csv", 0, true);
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
@@ -40,7 +40,7 @@ public class AdultTest {
 
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = true;
-        int foldCount = 10;
+        int foldCount = 5;
 
 
         if (useCrossValidation) {
@@ -48,14 +48,14 @@ public class AdultTest {
         }
 
 
-        List<Integer> dataLimits = Arrays.asList(10000000);
+        List<Integer> dataLimits = Arrays.asList(500);
         List<Integer> peerCounts = Arrays.asList(1);
 
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
         List<Integer> groupSizes = Arrays.asList(1);
 
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-7, 6).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-7, 4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1024)
         );
