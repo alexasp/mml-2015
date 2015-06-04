@@ -1,17 +1,36 @@
 
-\section{Related Work}
+\chapter{Related Work} \label{ch:Related Work}
 
+In this chapter we will present some of the existing works related to our thesis and research goals. The papers referenced in this chapter are naturally also related to this thesis' constituent papers. We have chosen to mention papers that are related to one or more of the major theoretical framework we have employed. This chapter will therefore be structured in three sections: the first will give the main theoretical contributions to the concept of differential privacy. The second section will explore some centralized approaches to machine learning with differential privacy guarantees. The third and last section will explore works that have employed a distributed approach similar to our own framework.   
+
+\section{Differential privacy}
+As mentioned in Chapter \ref{ch:Basic Theory}, differential privacy was defined by Cynthia Dwork in her seminal work published in 2006 \citep{Dwork06differentialprivacy}. This paper lay the mathematical foundations for the privacy guarantee we employ in our work. Dwork later expounded on her work in the book Algorithmic Foundations of Differential Privacy\citep{dwork2013algorithmic}, which we used as a main piece of reference when gathering knowledge in the early phases of this thesis project.
+
+Other defining works include the two papers written by Frank McSherry. His work on mechanism design \citep{mcsherry2007} allowed for the expansion of Dwork's Laplacian mechanism design, by providing the theoretical analysis that other mechanisms could satisfy the same guarantee (see section \ref{sec:Exponential Mechanism} for more). His paper \citep{mcsherry2009PINQ} on the design and implementation of PINQ were hugely influential in the early phases of our project, as we that and the publicly available code when implementing our own design. 
+
+
+
+\cite{chaudhuri2011riskMinimization}
+\section{Centralized approaches}
+Chaudhuri and Monteloni designed a logistic regression algorithm which guaranteed differential privacy in 2009, but their algorithm was designed to run on a single centralized database\citep{chaudhuri2009logistic}.
+
+\citep{yu2014logisticSNPassociation}
+
+\citep{zhang2012functionMechanism}
+
+\section{Distributed approaches}
 Boutet et al. worked on a privacy-preserving distributed collaborative filtering which relied on user profile obfuscation and randomized response.\cite{boutet2013DisCollFil}.
 
 Boutsis et al developed a participatory sensing system for smartphones which assumed that the data was distributed locally. Their system was called LOCATE, which handled ensured the privacy of the users, but they did not provide a differential privacy guarantee. \cite{boutsis2013}
 
-Chaudhuri and Monteloni designed a logistic regression algorithm which guaranteed differential privacy in 2009, but their algorithm was designed to run on a single centralized database\cite{chaudhuri2009logistic}.
-
-Han et al. investigated the problem of preserving differential privacy in distributed constrained optimization. By creating an algorithm based on stochastic gradient descent, which preserved privacy by adding noise to the public coordination signals (i.e gradients). \cite{han2014disOptimization}
-
 Ji et al. \cite{ji2014DisLogReg} recently proposed a distributed solution using logistic regression, which learned from both private and publicly available medical datasets. Their solution differ from our own as they employ a globally synchronized structure, whereas our own solution works asynchronously. Their approach also requires a global aggregation of gradients, compared to our own which employ distributed ensemble learning,
 
 Pathak et al \cite{pathak2010diffprivhomo} proposed a privacy-preserving protocol for composing a differentially private aggregate classifier. Their protocol trained classifiers locally in different parties, and the parties would then interact with an curator through a homomorphic encryption scheme to create a perturbed aggregate classifier. We took inspiration from their protocol when we created our own ensemble classifier.
+
+Han et al. investigated the problem of preserving differential privacy in distributed constrained optimization. By creating an algorithm based on stochastic gradient descent, which preserved privacy by adding noise to the public coordination signals (i.e gradients). \cite{han2014disOptimization}
+
+
+
 \todo[inline]{Look at the last line and see if it's correct.}  
 
 \todo{Add a reference to the multiparty gradient descent paper that cited Pathak, and somewhere rationalize why we chose the Pathak approach despite worse theoretical }
