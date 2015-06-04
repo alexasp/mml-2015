@@ -51,9 +51,9 @@ def save_figure(summary_filename):
     pylab.savefig(chart_path + '/' + summary_filename.split('/')[-1] + '.png')
 
 def save_figure_points(summary_filename, x_axis_values, means, stds):
-    with open(chart_point_path + '/' + summary_filename.split('/')[-1] + '.csv') as points_file:
+    with open(chart_point_path + '/' + summary_filename.split('/')[-1] + '.csv', 'w') as points_file:
         for i in range(len(x_axis_values)):
-            points_file.write(','.join(str(x_axis_values[i]), str(means[i]), str(stds[i])) + '\n')
+            points_file.write(','.join([str(x_axis_values[i]), str(means[i]), str(stds[i])]) + '\n')
 
 
 
