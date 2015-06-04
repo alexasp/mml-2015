@@ -75,7 +75,7 @@ public class LogisticModel implements ParametricModel {
         _parameters = fitModel(data, best_alpha);
     }
 
-
+    
 
 
     private double[] fitModel(List<LabeledSample> train, double alpha) {
