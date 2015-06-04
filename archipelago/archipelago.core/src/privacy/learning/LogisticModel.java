@@ -73,7 +73,7 @@ public class LogisticModel implements ParametricModel {
             }
         }
 
-        _parameters = fitModel(data, best_alpha, 100);
+        _parameters = fitModel(data, best_alpha, 2);
     }
 
     

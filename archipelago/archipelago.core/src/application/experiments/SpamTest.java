@@ -55,7 +55,7 @@ public class SpamTest {
         List<Integer> groupSizes = Arrays.asList(50);
 
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-4, 5).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-7, 5).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(10)
         );
