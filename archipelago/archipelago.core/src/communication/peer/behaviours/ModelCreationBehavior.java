@@ -31,8 +31,9 @@ public class ModelCreationBehavior extends OneShotBehaviour {
 //        System.out.println(_agent.getName() + " created model.");
 
         double[] parameterVector = IntStream.range(0, _parameters)
-                .mapToDouble(i -> 0)
+                .mapToDouble(i -> 0.0)
                 .toArray();
+//        parameterVector[parameterVector.length - 1] = 0.01;
 
 
         ParametricModel model = _modelFactory.getModel(parameterVector); //TODO: add parameters

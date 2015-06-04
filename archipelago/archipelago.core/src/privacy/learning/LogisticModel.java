@@ -43,8 +43,8 @@ public class LogisticModel implements ParametricModel {
     }
 
 
-    public double errorProjection(LabeledSample example) {
-        double prediction = sigmoid(example.getFeatures(), _parameters);
+    public double errorProjection(LabeledSample example, double[] parameters) {
+        double prediction = sigmoid(example.getFeatures(), parameters);
 
         double error = (example.getLabel() + 1.0) / 2.0 - prediction;
         return error;
@@ -52,7 +52,7 @@ public class LogisticModel implements ParametricModel {
 
     @Override
     public void update(double epsilon, List<LabeledSample> data) {
-        List<Double> alphas = IntStream.range(-7, 0).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> alphas = IntStream.range(-1, 3).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
         double best_alpha = alphas.get(0);
         double best_error = 1.0;
         List<List<LabeledSample>> folds = DataLoader.partition(3, data);
@@ -91,18 +91,21 @@ public class LogisticModel implements ParametricModel {
 
             for (int i = 0; i < gradient.length; i++) {
                 final int finalI = i;
-                gradient[i] = train.stream().mapToDouble(sample -> errorProjection(sample) * sample.getFeatures()[finalI]).sum();
+                gradient[finalI] = train.stream().mapToDouble(sample -> errorProjection(sample, parameters) * sample.getFeatures()[finalI]).sum()/(double)train.size();
             }
 
             for (int d = 0; d < parameters.length - 1; d++) {
                 parameters[d] += alpha * (gradient[d] - 2.0 * _regularization * parameters[d]);
             }
-            parameters[parameters.length - 1] = alpha * gradient[parameters.length - 1]; //don't regularize the intercept/bias term.
+            parameters[parameters.length - 1] += alpha * gradient[parameters.length - 1]; //don't regularize the intercept/bias term.
 
             logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
 
-            if(logConditionalLikelihoods.get(iteration + 1) - logConditionalLikelihoods.get(iteration) < 0.01){
+            if(Math.abs(logConditionalLikelihoods.get(iteration + 1) - logConditionalLikelihoods.get(iteration)) < 0.01){
                 break;
+            }
+            else if(iteration == 99){
+                assert Boolean.TRUE;
             }
             else{
                 assert Boolean.TRUE;
@@ -119,7 +122,7 @@ public class LogisticModel implements ParametricModel {
             double y = labeledSample.getLabel() == 1.0 ? 1.0 : 0.0;
             logConditionalLikelihood += probability * y + (1.0-probability) * (1 - y);
         }
-        logConditionalLikelihood -= regularization * IntStream.range(0, parameters.length).mapToDouble(i -> _parameters[i]*_parameters[i]).sum();
+        logConditionalLikelihood -= regularization * IntStream.range(0, parameters.length).mapToDouble(i -> parameters[i]*parameters[i]).sum();
         return logConditionalLikelihood;
     }
 
@@ -172,6 +175,11 @@ public class LogisticModel implements ParametricModel {
     private double label(double[] features, double[] parameters) {
         double sigmoidValue = sigmoid(features, parameters);
         return Math.round(sigmoidValue);
+    }
+
+    public double label(double[] features, double[] parameters, double threshold) {
+        double sigmoidValue = sigmoid(features, parameters);
+        return sigmoidValue > threshold ? 1.0 : 0.0;
     }
 
     @Override

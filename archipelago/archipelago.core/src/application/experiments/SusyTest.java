@@ -43,7 +43,7 @@ public class SusyTest {
 
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = true;
-        int foldCount = 10;
+        int foldCount = 5;
 
 
         if (useCrossValidation) {
@@ -58,7 +58,7 @@ public class SusyTest {
         List<Integer> groupSizes = Arrays.asList(1);
 
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-7,8).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-10,3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1024)
         );

@@ -26,6 +26,9 @@ public class Reporting {
 
         try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
             List<Double> errorRates = experiment.test();
+            for (Double errorRate : errorRates) {
+                System.out.println(errorRate);
+            }
             writer.println(mean(errorRates));
             writer.println(std(errorRates));
             writer.println(max(errorRates));
