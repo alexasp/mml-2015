@@ -51,16 +51,16 @@ public class SusyTest {
         }
 
 
-        List<Integer> dataLimits = Arrays.asList(5000);
-        List<Integer> peerCounts = Arrays.asList(1);
+        List<Integer> dataLimits = Arrays.asList(200);
+        List<Integer> peerCounts = Arrays.asList(40);
 
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
         List<Integer> groupSizes = Arrays.asList(1);
 
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-0,6).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(2,3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1024)
+                new PrivacyParam(1.0)
         );
 
         if (useCrossValidation) {
