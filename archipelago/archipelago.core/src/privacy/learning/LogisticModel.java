@@ -90,7 +90,7 @@ public class LogisticModel implements ParametricModel {
 
             for (int i = 0; i < gradient.length; i++) {
                 final int finalI = i;
-                gradient[finalI] = train.stream().mapToDouble(sample -> errorProjection(sample, parameters) * sample.getFeatures()[finalI]).sum()/(double)train.size();
+                gradient[finalI] = train.stream().mapToDouble(sample -> errorProjection(sample, parameters) * sample.getFeatures()[finalI]).sum();
             }
 
             for (int d = 0; d < parameters.length - 1; d++) {

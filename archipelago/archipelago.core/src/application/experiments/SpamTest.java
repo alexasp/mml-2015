@@ -48,7 +48,7 @@ public class SpamTest {
         }
 
 
-        List<Integer> dataLimits = Arrays.asList(1000);
+        List<Integer> dataLimits = Arrays.asList(100);
         List<Integer> peerCounts = Arrays.asList(1);
 
 //        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
