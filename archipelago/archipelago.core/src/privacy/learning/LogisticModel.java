@@ -51,31 +51,31 @@ public class LogisticModel implements ParametricModel {
 
     @Override
     public void update(double epsilon, List<LabeledSample> data) {
-        List<Double> alphas = IntStream.range(-4, 5).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
-        double best_alpha = alphas.get(0);
-        double best_error = 1.0;
-        List<List<LabeledSample>> folds = DataLoader.partition(3, data);
+//        List<Double> alphas = IntStream.range(-3, 4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+//        double best_alpha = alphas.get(0);
+//        double best_error = 1.0;
+//        List<List<LabeledSample>> folds = DataLoader.partition(3, data);
+//
+//        for (Double alpha : alphas) {
+//
+//            double errorRate = 0.0;
+//            for (int i = 0; i < folds.size(); i++) {
+//                List<LabeledSample> test = folds.get(i);
+//                List<LabeledSample> train = DataLoader.mergeExcept(folds, i);
+//                double[] parameters = fitModel(train, alpha);
+//
+//                errorRate += PerformanceMetrics.errorRate(test, label(test, parameters))/(double)folds.size();
+//            }
+//            if(errorRate < best_error){
+//                best_error = errorRate;
+//                best_alpha = alpha;
+//            }
+//        }
 
-        for (Double alpha : alphas) {
-
-            double errorRate = 0.0;
-            for (int i = 0; i < folds.size(); i++) {
-                List<LabeledSample> test = folds.get(i);
-                List<LabeledSample> train = DataLoader.mergeExcept(folds, i);
-                double[] parameters = fitModel(train, alpha);
-
-                errorRate += PerformanceMetrics.errorRate(test, label(test, parameters))/(double)folds.size();
-            }
-            if(errorRate < best_error){
-                best_error = errorRate;
-                best_alpha = alpha;
-            }
-        }
-
-        _parameters = fitModel(data, best_alpha);
+        _parameters = fitModel(data, 0.01);
     }
 
-    
+
 
 
     private double[] fitModel(List<LabeledSample> train, double alpha) {
