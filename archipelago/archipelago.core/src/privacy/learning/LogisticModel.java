@@ -52,7 +52,7 @@ public class LogisticModel implements ParametricModel {
 
     @Override
     public void update(double epsilon, List<LabeledSample> data) {
-        List<Double> alphas = IntStream.range(-6, 7).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> alphas = IntStream.range(-3, 4).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
         double best_alpha = alphas.get(0);
         double best_error = 1.0;
         List<List<LabeledSample>> folds = DataLoader.partition(3, data);
@@ -73,7 +73,7 @@ public class LogisticModel implements ParametricModel {
             }
         }
 
-        _parameters = fitModel(data, best_alpha, 2);
+        _parameters = fitModel(data, best_alpha, 100);
     }
 
     
@@ -84,19 +84,22 @@ public class LogisticModel implements ParametricModel {
 
         Collections.shuffle(train);
 
+        int samples = 0;
         for (int epoch = 0; epoch < epochs; epoch++) {
 
-            double alpha = eta / (1 + _regularization * eta * epoch);
             ArrayList<Double> logConditionalLikelihoods = new ArrayList<>();
             logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
 
             for (LabeledSample labeledSample : train) {
+                double alpha = eta / (1 + _regularization * eta * samples);
+                samples++;
                 for (int i = 0; i < parameters.length - 1; i++) {
                     parameters[i] += alpha * (errorProjection(labeledSample, parameters)*labeledSample.getFeatures()[i] - 2 * _regularization * parameters[i]);
                 }
                 parameters[parameters.length - 1] += alpha * (errorProjection(labeledSample, parameters)*labeledSample.getFeatures()[parameters.length - 1]);
 
                 logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+
 
                 if(Math.abs(logConditionalLikelihoods.get(logConditionalLikelihoods.size() - 1) - logConditionalLikelihoods.get(logConditionalLikelihoods.size() - 2)) < 0.01){
                     break;
