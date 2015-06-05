@@ -60,7 +60,7 @@ public class SusyTest {
 //        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
         List<Double> regularizations = IntStream.range(-7,8).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1024)
+                new PrivacyParam(1.0)
         );
 
         if (useCrossValidation) {
