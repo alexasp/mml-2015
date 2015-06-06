@@ -54,7 +54,7 @@ public class LogisticModel implements ParametricModel {
 
     @Override
     public void update(double epsilon, List<LabeledSample> data) {
-        List<Double> alphas = IntStream.range(0, 6).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
+        List<Double> alphas = IntStream.range(-2, 3).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
         double best_alpha = alphas.get(0);
         double best_error = 1.0;
         List<List<LabeledSample>> folds = DataLoader.partition(3, data);
