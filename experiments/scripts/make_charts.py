@@ -22,6 +22,7 @@ def mean_plot_by(summary_filename, x_axis_field, x_min, x_max, log_scale):
             x_axis_values.append(float(getattr(entry, x_axis_field)))
             means.append(float(summary[entry].mean))
             stds.append(float(summary[entry].std))
+
         print x_axis_values
         print means
         print stds

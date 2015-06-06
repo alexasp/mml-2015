@@ -32,30 +32,30 @@ public class SpamTest {
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
         trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
-//      testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
+        testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
-        testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
         PublishTypes modelPublishType = PublishTypes.All;
-        boolean useCrossValidation = true;
-        int foldCount = 5;
+        boolean useCrossValidation = false;
+        int foldCount = 10;
 
 
         if (useCrossValidation) {
             testData = null;
         }
 
+        List<Integer> dataLimits = Arrays.asList(10000);
+        List<Integer> peerCounts = Arrays.asList(10);
 
-        List<Integer> dataLimits = Arrays.asList(100);
-        List<Integer> peerCounts = Arrays.asList(1);
 
-//        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
-        List<Integer> groupSizes = Arrays.asList(1);
+//        List<Integer> groupSizes = IntStream.range(1, 21).boxed().collect(Collectors.toList());
+        List<Integer> groupSizes = Arrays.asList(10);
 
-//        List<PrivacyParam> privacyParams = IntStream.range(-9, 10).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-5, 6).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
+//        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-8, 4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1.0)
         );

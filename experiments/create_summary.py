@@ -1,6 +1,7 @@
 import os, sys, pickle
 from scripts.archipelago_tuples import Parameters, Metrics
 from scripts.make_charts import plot
+import numpy
 
 
 def main():
@@ -36,14 +37,16 @@ def main():
 
 def compute_averages(iterations_filenames, directory):
     mean, std, maximum, minimum = 0, 0, 0, 0
+    means = []
     for iteration_filename in iterations_filenames:
         with open(directory + "/" + iteration_filename) as iteration_file:
-            mean += float(iteration_file.readline())
-            std += float(iteration_file.readline())
+            means.append(float(iteration_file.readline()))
+            # std += float(iteration_file.readline())
             maximum += float(iteration_file.readline())
             minimum += float(iteration_file.readline())
-    mean /= float(len(iterations_filenames))
-    std /= float(len(iterations_filenames))
+    mean = numpy.mean(means)
+    # std /= float(len(iterations_filenames))
+    std = numpy.std(means) #hotfix
     maximum /= float(len(iterations_filenames))
     minimum /= float(len(iterations_filenames))
     return Metrics(mean, std, maximum, minimum)

@@ -56,6 +56,7 @@ public class PeerAgent extends Agent {
 
     public List<Double> labelData(List<LabeledSample> test) {
         return _ensemble.label(test);
+//        return getLocalModel().label(test);
     }
 
     public int getIterations() {
