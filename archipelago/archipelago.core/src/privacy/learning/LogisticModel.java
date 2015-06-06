@@ -7,9 +7,12 @@ import learning.metrics.PerformanceMetrics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.lang.Math.min;
 
 /**
  * Created by alex on 3/5/15.
@@ -51,64 +54,78 @@ public class LogisticModel implements ParametricModel {
 
     @Override
     public void update(double epsilon, List<LabeledSample> data) {
-//        List<Double> alphas = IntStream.range(-3, 4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
-//        double best_alpha = alphas.get(0);
-//        double best_error = 1.0;
-//        List<List<LabeledSample>> folds = DataLoader.partition(3, data);
-//
-//        for (Double alpha : alphas) {
-//
-//            double errorRate = 0.0;
-//            for (int i = 0; i < folds.size(); i++) {
-//                List<LabeledSample> test = folds.get(i);
-//                List<LabeledSample> train = DataLoader.mergeExcept(folds, i);
-//                double[] parameters = fitModel(train, alpha);
-//
-//                errorRate += PerformanceMetrics.errorRate(test, label(test, parameters))/(double)folds.size();
-//            }
-//            if(errorRate < best_error){
-//                best_error = errorRate;
-//                best_alpha = alpha;
-//            }
-//        }
 
-        _parameters = fitModel(data, 0.01);
+        List<Double> alphas = IntStream.range(-2, 3).mapToDouble(i -> Math.pow(10, i)).boxed().collect(Collectors.toList());
+        double best_alpha = alphas.get(0);
+        double best_error = 1.0;
+        List<List<LabeledSample>> folds = DataLoader.partition(3, data);
+
+        for (Double alpha : alphas) {
+
+            double errorRate = 0.0;
+            for (int i = 0; i < folds.size(); i++) {
+                List<LabeledSample> test = folds.get(i);
+                List<LabeledSample> train = DataLoader.mergeExcept(folds, i);
+                double[] parameters = fitModel(train, alpha, 1);
+
+                errorRate += PerformanceMetrics.errorRate(test, label(test, parameters))/(double)folds.size();
+            }
+            if(errorRate < best_error){
+                best_error = errorRate;
+                best_alpha = alpha;
+            }
+        }
+
+        _parameters = fitModel(data, best_alpha, 100);
     }
 
 
 
 
-    private double[] fitModel(List<LabeledSample> train, double alpha) {
+    private double[] fitModel(List<LabeledSample> train, double eta, int epochs) {
         double[] parameters = Arrays.copyOf(_parameters, _parameters.length);
-        ArrayList<Double> logConditionalLikelihoods = new ArrayList<>();
 
-        logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+        double batchSize = 1000;
+        Collections.shuffle(train);
 
-        for (int iteration = 0; iteration < 100; iteration++) {
+        for (int epoch = 0; epoch < epochs; epoch++) {
 
-            double[] gradient = new double[parameters.length];
-
-            for (int i = 0; i < gradient.length; i++) {
-                final int finalI = i;
-                gradient[finalI] = train.stream().mapToDouble(sample -> errorProjection(sample, parameters) * sample.getFeatures()[finalI]).sum();
-            }
-
-            for (int d = 0; d < parameters.length - 1; d++) {
-                parameters[d] += alpha * (gradient[d] - 2.0 * _regularization * parameters[d]);
-            }
-            parameters[parameters.length - 1] += alpha * gradient[parameters.length - 1]; //don't regularize the intercept/bias term.
-
+            ArrayList<Double> logConditionalLikelihoods = new ArrayList<>();
             logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+            double alpha = eta / (1 + _regularization * eta * epoch);
 
-            if(Math.abs(logConditionalLikelihoods.get(iteration + 1) - logConditionalLikelihoods.get(iteration)) < 0.01){
-                break;
+            int sampleIndex = 0;
+            while(sampleIndex < train.size()){
+
+                double[] gradient = new double[parameters.length];
+
+                for(LabeledSample labeledSample : train.subList(sampleIndex, (int) (sampleIndex+min(batchSize, train.size() - sampleIndex)))) {
+
+                    for (int i = 0; i < parameters.length; i++) {
+                        gradient[i] += errorProjection(labeledSample, parameters) * labeledSample.getFeatures()[i];
+                    }
+                    sampleIndex++;
+                }
+
+                for (int i = 0; i < parameters.length - 1; i++) {
+                    parameters[i] += alpha * (gradient[i] - 2 * _regularization * parameters[i]);
+                }
+                parameters[parameters.length - 1] += alpha * gradient[parameters.length - 1];
+
+                logConditionalLikelihoods.add(calculateLcl(train, parameters, _regularization));
+
+
+                if(Math.abs(logConditionalLikelihoods.get(logConditionalLikelihoods.size() - 1) - logConditionalLikelihoods.get(logConditionalLikelihoods.size() - 2)) < 0.01){
+                    break;
+                }
+                else if(epoch == 99){
+                    assert Boolean.TRUE;
+                }
+                else{
+                    assert Boolean.TRUE;
+                }
             }
-            else if(iteration == 99){
-                assert Boolean.TRUE;
-            }
-            else{
-                assert Boolean.TRUE;
-            }
+
         }
 
         return parameters;
