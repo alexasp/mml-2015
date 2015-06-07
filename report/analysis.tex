@@ -39,7 +39,7 @@ Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\e
 
 Figure \ref{fig:linear_epsilon_range} 
 
-\section{The importance of data}
+\section{The importance of data} \label{importance_of_data}
 One of the more important findings for 
 Data is important, the more data a peer have, the greater the chance is that it will make a decent local classifier. J
 
@@ -159,7 +159,7 @@ An alternative avenue for validating the value of doing aggregation could be to 
 Section \ref{sec:} important motivation for this project was the idea that application users should be able to retain ownership of their own data, and only share it to a degree that they choose.
 
 
-\todo[]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches.}
+\todo[inline]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches.}
 
 
 What are the results of our experiments?
@@ -187,28 +187,7 @@ Compare the results of our distributed logistic regression classifier with the t
 
 
 
-\section{Potential Future applications}
-This section will discuss the potential application of a system based on our distributed machine learner.
 
-\subsection{Health}
-A growing worldwide market is the sale and usage of wearable sensors, such as environmental sensors, motion sensors, and health sensors. A IHS report \cite{ihs2014reportwearables} from 2014 estimates that the market for sensors in wearables will expand to 135 million units in 2019, up from 50 million in 2013. These wearables will evolve from being just a single purpose device such as a pedometer and grow into more multipurpose devices such as a smartwatch, which will consist of several sensors which can monitor several components within its area of use. 
-
-The wearable devices are implementing fitness and health monitoring by using a mixture of sensors, such as motion, pulse, hydration and skin temperature sensors. All of these wearables will therefore generate a massive amount of data about the person who are using them. This data can be considered as highly sensitive information, as it can unveil a lot about their user's health, and the manufacturers of these devices knows this. Dana Liebelson, a reporter for Huffington Post, queried several US-based fitness device companies about their privacy. One of the replies she got, was that "the company does not sell information collected from the device that can identify individual users", but that they were considering marketing aggregate information that cannot be linked back to an individual. As we saw in section \ref{section:privacy_breaches} and \ref{section:attack_vectors}, many of the popular methods for aggregating and anonymizing a dataset carries an inherent risk of a privacy breach.
-
-A study by Raij et al\cite{raij2011privacyConcernWearables} have been performed to try to measure the privacy concerns of people using wearable sensors, and found that activity trackers that monitor heart rate, steps, and pulse for instance, was usually seen as inoffensive to the users’ privacy at the start of the study. The researchers then had some of the testers wear sensors, and could from the resulting data infer periods of heightened stress, as well as derive certain context and behaviors that could trigger the aforementioned stress. The participants were then given a similar questionnaire to the initial one, and many then reported a heightened sense of concern. 
-  
-This is where we see a potential application for our distributed framework. Although there would be some initial problems due to our learner at the moment requiring labeled data to create a classifier, there can be potential in an health application where users keep control of their own data. A potential solution could be to employ an unsupervised learning technique based on clustering. Research have been performed for testing the validity of applying differential privacy to clustering techniques and yielded positive results. Combining this with the results of \todo{Find the health paper from last year that did mini-clustering online}  
-
--Future homes can potentially track you through you phone, or similar device. 
-
--You don't want to send this data to someone else, but what you can learn from the data can be highly useful in your daily life if analyzed. 
-
-Kevin Fong and the England rugby team. Monitor heart rate, step balance, and a lot of other factors. Can pick up injuries and illnesses well before any doctor. This will trickle down into daily use over the next decade, and let people potentially discover illnesses before they even occur. 
-
-\subsection{Private sharing of business data}
-A potentially interesting and lucrative market can be found in facilitating the sharing of data between businesses in a private manner. Our motivating example is found in the business of oil market analysis, where competing firms gather a lot of data about oil price, rig placements, supply ship availability, and more. They use this data to create analytical models which help them in their work, and they also sell this information to external clients. Often the firms would like to collaborate their models or their data with their competitors. This could be to validate that they are seeing the same trends or any other reason, but due to the sensitive nature of their data and their fear of losing a competitive edge, they cannot do this in a practical way. 
-
-It is in a situation like this that our distributed learner could be applied, and allow the sharing of data between competitors as our system could provide a privacy guarantee to all of the participants. The participants would never lose control of their data, as all they would need to install a program that allows them to connect as a peer in our network: No third party would ever need access to their data.   
 
 
 
