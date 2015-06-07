@@ -30,7 +30,7 @@ As explained in section \ref{section:differential_privacy}, differential privacy
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{fig/eps2e-10-2e9,bud=eps,peers50,groups50,reg2e-4}
+	\includegraphics[width=\textwidth]{fig/spambase/eps2e-8-2e8,budg=eps,peers10,groups10,reg2e-2-data368-pubAll-spam-baseline-testset}
  	\caption{$\epsilon = [10^{-3}, 10^{3}], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
  	\label{fig:epsilon_big_range}
 \end{figure}
@@ -43,12 +43,27 @@ Figure \ref{fig:linear_epsilon_range}
 One of the more important findings for 
 Data is important, the more data a peer have, the greater the chance is that it will make a decent local classifier. J
 
-\begin{figure}[H]
+\begin{figure}[h!]
 	\centering
-	\includegraphics[width=\textwidth]{fig/eps0.3,budg=eps,peers30,groups5,reg2e-2,dataLim10-110-pubAll-datalimitTEST10-110}
-	\caption{$\epsilon = [0.3], \lambda = 2^{-2}$, 30 peers, 1 aggregation}
-	\label{fig:data_limit_test}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-withoutlocalmodel}
+		\captionof{figure}{$\epsilon = 0.1, \lambda = 2^{-2}$, 10 peers, 1 aggregations. Aggregated model only.}
+		\label{fig:data_limit_test_withoutlocalmodel}
+	\end{minipage}
+	\hspace{.001\linewidth}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-withlocalmodel}
+		\captionof{figure}{$\epsilon = 0.1, \lambda = 2^{-2}$, 10 peers, 1 aggregations. Aggregated and local model.}
+		\label{fig:data_limit_test_withlocalmodel}
+	\end{minipage}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-localmodelonly}
+		\captionof{figure}{$\epsilon = 2^{10}, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation. Local model only.}
+		\label{fig:data_limit_test_localmodelonly}
+	\end{minipage}
 \end{figure}
+
+\todo[inline]{Compare the figures about data limits, ie data_limit_test_withoutlocalmodel and such. Clearly, with local model is better than without, but it is not clear whether local only or aggregated+local is better.}
 
 Figure \ref{fig:data_limit_test} indicate how the classification performance improves as the amount of data records available to each peer grows. When each peer only have a small amount of data to create their local classifier, the classifier tends to have display terrible performance. As peers gain more data, both the performance and the variance of the classifier improves.     
 
@@ -60,22 +75,15 @@ The observation we've made is therefore thoroughly grounded in theory, and is im
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\textwidth]{fig/eps0.1-2.2,bud=eps,peers50,groups50,reg2e-4}
-	\caption{$\epsilon = [0.1, 2.2], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
-	\label{fig:linear_epsilon_range}
-\end{figure}	
-
-\begin{figure}[h!]
-	\centering
 	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps2e10,budg=eps,peers50,groups2,reg2e-5-2e4-pubAll-LRbyCV-retuning}
-		\captionof{figure}{$\epsilon = 2^{10}, \lambda = [2^{-5}, 2^{4}]$, 50 peers, 25 aggregations, publish to participants}
+		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testset}
+		\captionof{figure}{$\epsilon = 0.1, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
 		\label{fig:regularization_normalepsilon}
 	\end{minipage}
 	\hspace{.001\linewidth}
 	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers50,groups2,reg2e-5-2e4-pubAll-LRbyCV-retuning}
-		\captionof{figure}{$\epsilon = 0.1, \lambda = [2^{-5}, 2^{4}]$ 50 peers, 25 aggregations, publish to all}
+		\includegraphics[width=\linewidth]{fig/spambase/eps2e10,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testset}
+		\captionof{figure}{$\epsilon = 2^{10}, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
 		\label{fig:regularization_extremelyhighepsilon}
 	\end{minipage}
 \end{figure}
