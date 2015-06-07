@@ -46,7 +46,7 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(10000);
+        List<Integer> dataLimits = Arrays.asList(360);
         List<Integer> peerCounts = Arrays.asList(10);
 
 
