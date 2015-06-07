@@ -56,6 +56,12 @@ We mostly used this dataset to confirm and double-check the conclusions we drew 
 
 This dataset was preprocessed in the same manner as was described in Section \ref{sec:spambase}.
 
+\subsection{Adult}
+As we needed a larger dataset to enable us to scale the amounts of peers in the experiments, we chose to use the Adult dataset from the UCI machine learning repository.  It consists of personal information records extracted from the US census database and the task is to predict whether a given person has an annual income over or under \$50,000. The original Adult data set has six continuous and eight categorical features. We
+downloaded the dataset pre-processed by \citep{platt1999fast}, where the continuous features are discretized into quintiles, and each quintile is represented by a binary feature. Each categorical feature is converted to as many binary features as its cardinality. The dataset contains 32,561 training and 16,281 test instances each with 123 features.
+
+This dataset is very popular to use in various machine learning experiments, ranking second on the download list for the UCI machine learning repository. This dataset has also been used before in research in privacy research, most notably in the work by \cite{pathak2010diffprivhomo}. This has given us some baselines to compare our own results against \todo{Put in a ref to baseline table}]. 
+
 \section{Parameter tuning}
 \label{sec:parameter_tuning}
 Number of peers $P$ specifies how many different peers participate in the experiment, and necessarily the number of partitions of the training data sets. The training is divided into $P$ parts of equal size.
