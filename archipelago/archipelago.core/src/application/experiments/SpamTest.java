@@ -37,8 +37,8 @@ public class SpamTest {
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        PublishTypes modelPublishType = PublishTypes.All;
-        boolean useCrossValidation = false;
+        PublishTypes modelPublishType = PublishTypes.Party;
+        boolean useCrossValidation = true;
         int foldCount = 10;
 
 
@@ -47,17 +47,17 @@ public class SpamTest {
         }
 
         List<Integer> dataLimits = Arrays.asList(360);
-        List<Integer> peerCounts = Arrays.asList(10);
+        List<Integer> peerCounts = Arrays.asList(50);
 
 
 //        List<Integer> groupSizes = IntStream.range(1, 21).boxed().collect(Collectors.toList());
-        List<Integer> groupSizes = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> groupSizes = Arrays.asList(1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50);
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
         List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(0.1)
+                new PrivacyParam(1.0)
         );
 
         if (useCrossValidation) {
