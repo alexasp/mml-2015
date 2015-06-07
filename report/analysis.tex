@@ -10,12 +10,12 @@
 \begin{table}[h]
 	\begin{tabular}{ll}
 		\begin{tabular}[c]{@{}l@{}}Error Rate/Spambase\end{tabular} &        \\
-		Sharma\cite{sharma2013adaptive}                                    & 0.0705 \\
-		Kumar\cite{kumar2012comparative}                                  & 0.1389 \\
-		Our optimal result ($\epsilon$=10, 1 peer)                        & 0.130  \\
-		Less noise, less peers($\epsilon$=0.1, 10 peers)				  & 0.138  \\
-		Less noise, more peers($\epsilon$=1.0, 100 peers)				  & 0.164  \\
-		Noisy result ($\epsilon$=0.1, 50 peers)                           & 0.220  \\
+		Sharma\citep{sharma2013adaptive}                                    & 0.0705 \\
+		Kumar\citep{kumar2012comparative}                                  & 0.1389 \\
+		Our optimal result (Local model, no noise, 1 peer)                & 0.100  \\
+		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
+		Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
+		Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
 		
 		
 	\end{tabular}
@@ -63,7 +63,7 @@ The observation we've made is therefore thoroughly grounded in theory, and is im
 	\includegraphics[width=\textwidth]{fig/eps0.1-2.2,bud=eps,peers50,groups50,reg2e-4}
 	\caption{$\epsilon = [0.1, 2.2], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
 	\label{fig:linear_epsilon_range}
-\end{figure}
+\end{figure}	
 
 \begin{figure}[h!]
 	\centering
