@@ -34,33 +34,34 @@ As stated in Section \ref{sec:experiment_overview},  the experiment terminates w
 
 %when we are talking about peers, we are refering to instance of the PeerAgent
 
-\section{Dataset}
+\section{Dataset and preprocessing steps}
+\label{sec:datasets}
 This section will introduce the dataset(s) used. What features it contains, what we try to learn/classify, and why we chose to use it.
+
+For all the following datasets, a feature with constant value 1.0 was appended to all data records before fitting models, to act as the intercept or bias term. When necessary we scaled the features of the data sets to 0-1 range. This is due to the proof in Chaudhuri paper which states the assumption $|X_i|\leq 1$. The scaling was done by the formula
+
+\begin{eqnarray}
+X_{norm} = \frac{X-X_{min}}{X_{max} - X_{min}}
+\end{eqnarray}
 
 \subsection{Spambase} \label{sec:spambase}
 The Spambase dataset \cite{spambase1999data} was used as a baseline training set. This dataset is publicly available from the UCI machine learning directory, and contains 57 input attributes of continuous format which serves as input features for spam detection and 1 target attribute in discrete format which represents the class.
 
 We chose this dataset as it is a popular dataset to analyze the performance of binary classifiers, so that we could compare the results of other logistic regression classifiers against our own. While this dataset might not seem like the ideal choice for testing a differentially private classifier due to its lack of personal information, we argue that it still fits well for the purpose of demonstration. In a spam-classifying system based on our distributed model, a logistic regression model can be built by training it locally in each user's personal mail folder and then aggregated into an ensemble. That way you can build a diverse spam-classifier without the users having to give up their personal email to a centralized database.     
 
-Before we could use the dataset, we needed to use normalization to scale the data to 0-1 range. This is due to the proof in Chaudhuri paper which states the assumption $|X_i|< 1$. The scaling was  based on the formula
-\begin{eqnarray}
-	X_{norm} = \frac{X-X_{min}}{X_{max} - X_{min}}
-\end{eqnarray}
-
-We appended a feature with constant value 1.0 to all data records, to act as the intercept or bias term. 
+We randomly partitioned this data set into a training set and a test set, with 80\% of the records in the training set and the remaining 20\% in the test set.
 
 \subsection{Australian Credit Approval}
 Another dataset we used, was the Australian Credit Approval (Statlog), which concerns the approval or disapproval of credit card applications. It is publicly available from the UCI machine learning directory. This is a much smaller set of data, with only 690 samples spread over 14 attributes. The data is useful for binary classification as it contains a good mix of attributes: continuous, nominal with small numbers of values, and nominal with larger numbers of values.
 
 We mostly used this dataset to confirm and double-check the conclusions we drew from the Spambase dataset, as it contains too few data records for it to be 100\% ideal for our use. Due to the sparsity of data we had to scale down the amount of peers in each experiment, so that each peer could get enough data to create a decent local classifier. We chose to keep on using this data as one of the motivating examples in Dwork's book\citep{dwork2013algorithmic} on the applications differential privacy, is to protect data holders from insurance and credit card companies. 
 
-This dataset was preprocessed in the same manner as was described in Section \ref{sec:spambase}.
 
 \subsection{Adult}
 As we needed a larger dataset to enable us to scale the amounts of peers in the experiments, we chose to use the Adult dataset from the UCI machine learning repository.  It consists of personal information records extracted from the US census database and the task is to predict whether a given person has an annual income over or under \$50,000. The original Adult data set has six continuous and eight categorical features. We
-downloaded the dataset pre-processed by \cite{platt1999fast}, where the continuous features are discretized into quintiles, and each quintile is represented by a binary feature. Each categorical feature is converted to as many binary features as its cardinality. The dataset contains 32,561 training and 16,281 test instances each with 123 features.
+downloaded the dataset pre-processed by \cite{platt1999fast}, where the continuous features are discretized into quintiles, and each quintile is represented by a binary feature. Each categorical feature is converted to as many binary features as its cardinality. The dataset contains 32,561 training and 16,281 test instances each with 14 features.
 
-This dataset is very popular to use in various machine learning experiments, ranking second on the download list for the UCI machine learning repository. This dataset has also been used before in research in privacy research, most notably in the work by \cite{pathak2010diffprivhomo}. This has given us some baselines to compare our own results against \todo{Put in a ref to baseline table}]. 
+This dataset is very popular to use in various machine learning experiments, ranking second on the download list for the UCI machine learning repository. This dataset has also been used before in research in privacy research, most notably in the work by \cite{pathak2010diffprivhomo}. This has given us some baselines to compare our own results against \todo{Put in a ref to baseline table}].
 
 \section{Parameter tuning}
 \label{sec:parameter_tuning}
@@ -86,9 +87,9 @@ Finally, the parameter $\epsilon$ can be divided across several applications of 
 
 \section{Validation}
 
-The test sets set aside could not be used when tuning and evaluating system hyperparameters. In order to explore the effects of the various hyperparameters we used cross validation with number of folds $n=10$. For a given combination of hyperparameters, performance metrics were measured as their average across ten repetitions. In repetition $i$, data fold $i$ was used as validation set and the remaining $n-1$ data folds were combined to form the test set.
+The test sets set created as described in Section \ref{sec:datasets}. These test sets set aside could not be used when tuning and evaluating our solution. In order to explore the effects of the various parameters we used cross validation with number of folds $n=10$. For a given combination of parameters, performance metrics were measured as their average across ten repetitions. In repetition $i$, data fold $i$ was used as validation set and the remaining $n-1$ data folds were combined to form the test set.
 
-For the XXXX experiment\todo{insert experiment here}, the test set was used.
+Following the approach outlined in Section \ref{sec:parameter_tuning}, we established suitable ranges of logistic regression hyperparameters, before proceeding to testing with different levels of privacy, peer numbers, group sizes and record numbers. Once we felt confident that we had established a set of experiments that as far as possible could answer our research questions, we performed. All numbers reported in Chapter \ref{chap:analysis} are average measures on the test set across ten full executions of the experiment, with the training set being randomized before each iteration.
 
 \section{Algorithm}
 
