@@ -34,6 +34,28 @@ As stated in Section \ref{sec:experiment_overview},  the experiment terminates w
 
 %when we are talking about peers, we are refering to instance of the PeerAgent
 
+\subsection{Experiment instantiation and reset}
+
+Between each execution of the experiment the JADE environment must be prepared for the next experiment. In our initial implementation we had problems with dynamically restarting the environment, as it was slow. For this reason, the experiment environment is reset by simply removing all PeerAgent instances and the GroupAgent. We still had problems with removing the CompletionAgent quickly enough to allow the experiments to execute without pause, so instead of removing this agent, we simply reset its state and reconfigure it with the next experimental setup.
+
+\subsection{Communication}
+\subsubsection{Peer}
+\todo{Model training on agent instantiation.}
+How is each peer set up, and what behaviors do they implement? 
+How do they update then propagate the model being learned.
+How do they know when to stop?
+\subsubsection{messaging}
+How do the peers communicate with each other?
+What does a message look like?
+What is the PeerGraph?
+What controls the messages and determines where they should go?
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{fig/peerModelCreation}
+	\caption{One iteration of model aggregation}
+	\label{fig:peerAggregationFigure}
+\end{figure}
+
 \section{Dataset and preprocessing steps}
 \label{sec:datasets}
 This section will introduce the dataset(s) used. What features it contains, what we try to learn/classify, and why we chose to use it.
@@ -87,8 +109,6 @@ In usual data mining applications the regularization $\lambda$ would be tuned in
 When we wanted to test a new number of records per peer $R$ or the privacy level $\epsilon$, we re-tuned $\lambda$ to ensure that it had the optimal value. This is necessary, since a lower number of records can mean that higher regularization is necessary. Additionally, a lower value of $\epsilon$ increases the variance of noise added to the aggregated models. This effect can be mitigated by increasing regularization. \todo[inline]{We should also discuss possible problems with this approach.} The manner in which we choose $\lambda$ should be considered a bit of an optimistic approach. In reality, global cross validation to determine best regularization is not practical and would create challenges with the privacy guarantees. Since we mostly experimented with less than 100 peers, we believe our global cross validation is reasonable close to an approach were peers cooperate to pick the strongest possible $\lambda$ with acceptable performance on average.
 
 Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_i$. Each data partition can participate the aggregation mechanism $n$ times, where $n\epsilon_A \leq \epsilon$.
-
-\todo{Insert logistic regression training algorithm including hyperparameter usage}
 
 \section{Validation}
 
@@ -216,27 +236,7 @@ Record-based differential privacy. Does it work?
 
  \missingfigure[figwidth=6cm]{Figure explaining our framework}
 
-\subsection{Experiment instantiation and reset}
 
-Each combination of parameters described in Section \ref{sec:parameter_tuning} is run with 10-fold cross validation. Cross 
-
-\subsection{Communication}
-\subsubsection{Peer}
-\todo{Model training on agent instantiation.}
-How is each peer set up, and what behaviors do they implement? 
-How do they update then propagate the model being learned.
-How do they know when to stop?
-\subsubsection{messaging}
-How do the peers communicate with each other?
-What does a message look like?
-What is the PeerGraph?
-What controls the messages and determines where they should go?
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{fig/peerModelCreation}
-	\caption{One iteration of model aggregation}
-	\label{fig:peerAggregationFigure}
-\end{figure}
 
 
 \subsection{Learning}
