@@ -75,9 +75,10 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  \end{eqnarray}
  
  `
- \section{Logistic Regression}
-
+\section{Multi-Party Logistic Regression With Differential Privacy}
+\label{sec:logistic_regression}
  
+ \subsection{Logistic regression}
  The logistic regression model is
   \begin{eqnarray} 
  p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
@@ -96,10 +97,14 @@ For convenience, the point of maximum log-likelihood is used instead. Since the 
   \end{eqnarray}
   
 where the term $\mu\|\theta\|^{2}_{2}$ is a regularization term to restrict the magnitude of $\theta$ and avoid overfitting the training data. Using $\mu > 0$ gives a “regularized” estimate of w which often has superior generalization performance, especially when the dimensionality is high (Nigam et al., 1999). 
-  
+
+\subsection{Stochastic Gradient Descent}
+\label{sec:gradient_descent}
 We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full dataset for a each gradient step. This can be very time consuming for larger datasets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the dataset. If convergence is not achieved after a single pass, SGD can do multiple passes over the dataset as needed. This makes SGD more adaptable to varying dataset sizes than full batch gradient descent. 
 
 Mini-batch SGD is a trade-off between the basic batch gradient descent and single instance SGD\citep{cotter2011batchsgd}. The dataset is divided into $|D|$/$b$ batches of size $b$, and a gradient step is taken for each batch. Given mini-batch SGD, the rule for updating each dimension $j$ of $\theta$ given a single batch of size $b$ becomes
+
+\subsubsection{Update Rule}
 
 \begin{eqnarray}
 \theta^{t+1}_j = \theta^{t}_j + \alpha[\sum_{i=1}^{b}(y_i - p(y_i | x_i,\theta))x_{ij} - 2\lambda \|\theta^{t}_j\|]
@@ -114,6 +119,9 @@ As in regular SGD, multiple passes over the data set is performed as necessary. 
 
 where $\lambda$ is the regularization constant, $t$ is the current epoch and $\eta$ is a parameter used to tune the adaptive learning rate. Note that this means that we do not need to search for suitable values of the learning rate $\alpha$ - instead, we must identify a suitable $\eta$.
 
+\subsubsection{Convergence criteria}
+
+\todo{Give the convergence criteria we use - lcl or max epochs}
 
 \subsection{Sensitivity of Logistic Regression Aggregation Mechanism} \label{sec:Sensitivity_of_LogReg}
 
