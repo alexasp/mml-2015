@@ -20,8 +20,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.Collections.max;
-
 /**
  * Created by aspis on 25.03.2015.
  */
@@ -32,13 +30,14 @@ public class AdultTest {
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
         trainData = new DataLoader().readCSVFileReturnSamples("../data/a9a_dense.csv", 0, true);
-//      testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
+        testData = null;
+//        testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
-        testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        PublishTypes modelPublishType = PublishTypes.All;
+        boolean includeLocalModel = true;
+        PublishTypes modelPublishType = PublishTypes.Party;
         boolean useCrossValidation = true;
         int foldCount = 10;
 
@@ -47,19 +46,18 @@ public class AdultTest {
             testData = null;
         }
 
+        List<Integer> dataLimits = Arrays.asList(50);
 
-        List<Integer> dataLimits = Arrays.asList(100);
+        List<PeerParam> peerParams = IntStream.range(1, 50).mapToObj(i -> new PeerParam(50, i)).collect(Collectors.toList());
+//        List<PeerParam> peerParams = Arrays.asList(
+//                new PeerParam(20, 1),
+//        );
 
-        List<Integer> peerCounts = Arrays.asList(40);
+//        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(0, 1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
-//        List<Integer> groupSizes = IntStream.range(1, 21).boxed().collect(Collectors.toList());
-        List<Integer> groupSizes = Arrays.asList(1, 10, 20, 30, 40);
-
-//        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-
-        List<Double> regularizations = IntStream.range(2, 3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1024)
+                new PrivacyParam(1.0)
         );
 
         if (useCrossValidation) {
@@ -73,27 +71,24 @@ public class AdultTest {
 
         Injector injector = Guice.createInjector(new AppInjector());
 
-        for (int maxRecordsPerPeer : dataLimits) {
-            int recordsPerPeer = Math.min((int) (trainDataSize / (double) max(peerCounts)), maxRecordsPerPeer);
+        for (int recordsPerPeer : dataLimits) {
 
-            for (Integer peerCount : peerCounts) {
-                for (Integer groupSize : groupSizes) {
+            for (PeerParam peerParam : peerParams) {
 
-                    if (groupSize > peerCount) {
-                        continue;
-                    }
+                int peerCount = peerParam.peerCount;
+                int groupSize = peerParam.groupSize;
 
-                    for (PrivacyParam privacyParam : privacyParams) {
-                        for (double regularization : regularizations) {
+                for (PrivacyParam privacyParam : privacyParams) {
+                    for (double regularization : regularizations) {
 
-                            int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize) / groupSize);
-                            aggregations = aggregations == 0 ? 1 : aggregations;
+                        int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize) / groupSize);
+                        aggregations = aggregations == 0 ? 1 : aggregations;
 
-                            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
-                            configuration.publishType = modelPublishType;
+                        ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
+                        configuration.publishType = modelPublishType;
+                        configuration.localModelInEnsemble = includeLocalModel;
 
-                            testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
-                        }
+                        testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
                     }
                 }
             }

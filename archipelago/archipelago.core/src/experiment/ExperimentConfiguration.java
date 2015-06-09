@@ -20,6 +20,7 @@ public class ExperimentConfiguration {
     public int cvFolds;
     public boolean useCrossValidation;
     public PublishTypes publishType;
+    public boolean localModelInEnsemble;
 
     public ExperimentConfiguration(int aggregations, double budget, int peerCount, int parameters, double epsilon, double regularization, int groupSize, int recordsPerPeer, int cvFolds, boolean useCrossValidation) {
         this.useCrossValidation = useCrossValidation;
@@ -33,6 +34,7 @@ public class ExperimentConfiguration {
         this.regularization = regularization;
         this.groupSize = groupSize;
         this.recordsPerPeer = recordsPerPeer;
+        this.localModelInEnsemble = true;
     }
 
     public ExperimentConfiguration() {

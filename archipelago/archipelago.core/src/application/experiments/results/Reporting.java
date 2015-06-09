@@ -22,7 +22,7 @@ public class Reporting {
             experimentDirectory.mkdirs();
         }
 
-        experiment.writeRocCurves(path + "/roc_curves_iter_" + iteration);
+//        experiment.writeRocCurves(path + "/roc_curves_iter_" + iteration);
 
         try(PrintWriter writer = new PrintWriter(path + "/" + experimentName + "iter-" + iteration)) {
             List<Double> errorRates = experiment.test();

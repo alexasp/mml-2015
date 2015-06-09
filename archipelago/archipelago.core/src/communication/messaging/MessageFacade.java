@@ -1,9 +1,11 @@
 package communication.messaging;
 
+import communication.PeerAgent;
 import communication.peer.ArchipelagoPerformatives;
 import jade.content.onto.OntologyException;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.domain.AMSService;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import learning.ParametricModel;
@@ -145,10 +147,22 @@ public class MessageFacade {
         _agent.send(message);
     }
 
-    public void sendToAll(ParametricModel mergedModel, ArchipelagoPerformatives performative, String conversationId) {
+    public void sendToAll(ParametricModel mergedModel, ArchipelagoPerformatives performative) {
         ACLMessage message = _messageParser.createModelMessage(mergedModel, performative);
-        message.setConversationId(conversationId);
         List<AID> peers = _peerGraph.getPeers(_agent);
+        for (AID peer : peers) {
+            message.addReceiver(peer);
+        }
+
+        _agent.send(message);
+    }
+
+    public void sendToAllExcept(ParametricModel mergedModel, ArchipelagoPerformatives performative, Agent agent) {
+        ACLMessage message = _messageParser.createModelMessage(mergedModel, performative);
+        List<AID> peers = _peerGraph.getPeers(_agent);
+        if(peers.contains(agent.getAID())) {
+            peers.remove(agent.getAID());
+        }
         for (AID peer : peers) {
             message.addReceiver(peer);
         }

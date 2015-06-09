@@ -31,13 +31,15 @@ public class SpamTest {
 
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
+        trainData = new DataLoader().readCSVFileReturnSamples("../data/a9a_dense.csv", 0, true);
         trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
         testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        PublishTypes modelPublishType = PublishTypes.Party;
+        boolean includeLocalModel = false;
+        PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = true;
         int foldCount = 10;
 
@@ -46,15 +48,12 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(360);
-        List<Integer> peerCounts = Arrays.asList(50);
+        List<Integer> dataLimits = Arrays.asList(500);
 
-
-//        List<Integer> groupSizes = IntStream.range(1, 21).boxed().collect(Collectors.toList());
-        List<Integer> groupSizes = Arrays.asList(1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50);
+        List<PeerParam> peerParams = IntStream.range(1, 5).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-4, -3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1.0)
@@ -71,27 +70,24 @@ public class SpamTest {
 
         Injector injector = Guice.createInjector(new AppInjector());
 
-        for (int maxRecordsPerPeer : dataLimits) {
-            int recordsPerPeer = Math.min((int) (trainDataSize / (double) max(peerCounts)), maxRecordsPerPeer);
+        for (int recordsPerPeer : dataLimits) {
 
-            for (Integer peerCount : peerCounts) {
-                for (Integer groupSize : groupSizes) {
+            for (PeerParam peerParam : peerParams) {
 
-                    if (groupSize > peerCount) {
-                        continue;
-                    }
+                int peerCount = peerParam.peerCount;
+                int groupSize = peerParam.groupSize;
+                
+                for (PrivacyParam privacyParam : privacyParams) {
+                    for (double regularization : regularizations) {
 
-                    for (PrivacyParam privacyParam : privacyParams) {
-                        for (double regularization : regularizations) {
+                        int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize) / groupSize);
+                        aggregations = aggregations == 0 ? 1 : aggregations;
 
-                            int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize) / groupSize);
-                            aggregations = aggregations == 0 ? 1 : aggregations;
+                        ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
+                        configuration.publishType = modelPublishType;
+                        configuration.localModelInEnsemble = includeLocalModel;
 
-                            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
-                            configuration.publishType = modelPublishType;
-
-                            testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
-                        }
+                        testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
                     }
                 }
             }

@@ -38,7 +38,9 @@ public class PeerAgent extends Agent {
     }
 
     public void addModel(ParametricModel model) {
-        _ensemble.add(model);
+        if(!_ensemble.contains(model)) {
+            _ensemble.add(model);
+        }
     }
 
     //todo: consider making this private or require a new agent, to avoid breaching differential privacy

@@ -2,6 +2,7 @@ package communication.peer.behaviours;
 
 import communication.BehaviourFactory;
 import communication.PeerAgent;
+import experiment.ExperimentConfiguration;
 import jade.core.behaviours.OneShotBehaviour;
 import learning.ParametricModel;
 import learning.ModelFactory;
@@ -16,13 +17,14 @@ public class ModelCreationBehavior extends OneShotBehaviour {
     private final ModelFactory _modelFactory;
     private BehaviourFactory _behaviorFactory;
     private int _parameters;
-    private double _regularization;
+    private ExperimentConfiguration _configuration;
 
-    public ModelCreationBehavior(PeerAgent agent, ModelFactory modelFactory, BehaviourFactory behaviorFactory, int parameters) {
+    public ModelCreationBehavior(PeerAgent agent, ModelFactory modelFactory, BehaviourFactory behaviorFactory, int parameters, ExperimentConfiguration configuration) {
         _agent = agent;
         _modelFactory = modelFactory;
         _behaviorFactory = behaviorFactory;
         _parameters = parameters;
+        _configuration = configuration;
     }
 
     @Override
@@ -38,6 +40,8 @@ public class ModelCreationBehavior extends OneShotBehaviour {
         ParametricModel model = _modelFactory.getModel(parameterVector); //TODO: add parameters
         model.update(_agent.getUpdateCost(), _agent.getData());
         _agent.setLocalModel(model);
+
+        if(_configuration.localModelInEnsemble)
         _agent.addModel(model);
     }
 }

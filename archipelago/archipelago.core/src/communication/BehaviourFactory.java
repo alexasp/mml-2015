@@ -44,7 +44,7 @@ public class BehaviourFactory {
     }
 
     public Behaviour getModelCreation(PeerAgent agent, int parameters) {
-        return new ModelCreationBehavior(agent, _modelFactory, this, parameters);
+        return new ModelCreationBehavior(agent, _modelFactory, this, parameters, _configuration);
     }
 
     public Behaviour getCompletionListening(CompletionListeningAgent agent, MessageFacade messageFacade) {

@@ -55,7 +55,7 @@ public class ModelCreationBehaviorTest {
 
         when(_agent.getData()).thenReturn(_data);
 
-        _creationBehaviour = new ModelCreationBehavior(_agent, _modelFactory, _behaviorFactory, _parameters);
+        _creationBehaviour = new ModelCreationBehavior(_agent, _modelFactory, _behaviorFactory, _parameters, configuration);
     }
 
     @Test

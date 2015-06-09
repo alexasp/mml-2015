@@ -83,7 +83,7 @@ public class CuratorBehavior extends CyclicBehaviour{
                 _messageFacade.sendToPeer(agentId, mergedModel, ArchipelagoPerformatives.ModelPropegation, _conversationId);
             }
         } else if(_configuration.publishType == PublishTypes.All){
-            _messageFacade.sendToAll(mergedModel, ArchipelagoPerformatives.ModelPropegation, _conversationId);
+            _messageFacade.sendToAllExcept(mergedModel, ArchipelagoPerformatives.ModelPropegation, _peerAgent);
         }
     }
 }

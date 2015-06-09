@@ -38,6 +38,10 @@ public class EnsembleModel implements Model {
 
     @Override
     public List<Double> label(List<LabeledSample> test) {
+//        while(_ensemble.size() == 0){
+//            assert Boolean.TRUE;
+//        } //Wait, agent has not received message with model yet.
+
         ArrayList<ParametricModel> ensembleCopy = new ArrayList<>(_ensemble);
         return test.stream()
                 .mapToDouble(sample ->
@@ -57,6 +61,10 @@ public class EnsembleModel implements Model {
 
     @Override
     public List<Double> label(List<LabeledSample> test, double threshold) {
+//        while(_ensemble.size() == 0){
+//            assert Boolean.TRUE;
+//        } //Wait, agent has not received message with model yet.
+
         ArrayList<ParametricModel> ensembleCopy = new ArrayList<>(_ensemble);
         return test.stream()
                 .mapToDouble(sample -> {
@@ -68,5 +76,9 @@ public class EnsembleModel implements Model {
 
     public ArrayList<ParametricModel> getModels() {
         return _ensemble;
+    }
+
+    public boolean contains(ParametricModel model) {
+        return _ensemble.contains(model);
     }
 }
