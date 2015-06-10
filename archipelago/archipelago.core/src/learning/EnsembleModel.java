@@ -38,9 +38,9 @@ public class EnsembleModel implements Model {
 
     @Override
     public List<Double> label(List<LabeledSample> test) {
-//        while(_ensemble.size() == 0){
-//            assert Boolean.TRUE;
-//        } //Wait, agent has not received message with model yet.
+        while(_ensemble.size() == 0){
+            assert Boolean.TRUE;
+        } //Wait, agent has not received message with model yet.
 
         ArrayList<ParametricModel> ensembleCopy = new ArrayList<>(_ensemble);
         return test.stream()
