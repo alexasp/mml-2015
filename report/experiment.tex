@@ -113,6 +113,8 @@ The test sets set created as described in Section \ref{sec:datasets}. These test
 
 Following the approach outlined in Section \ref{sec:parameter_tuning}, we established suitable ranges of logistic regression hyperparameters, before proceeding to testing with different levels of privacy, peer numbers, group sizes and record numbers. Once we felt confident that we had established a set of experiments that as far as possible could answer our research questions, we performed. All numbers reported in Chapter \ref{chap:analysis} are average measures on the test set across ten full executions of the experiment, with the training set being randomized before each iteration.
 
+\todo[inline]{Justify the usage of Mean classification error}
+
 \section{Experiment execution}
 
 For each experiment, we selected a single parameter of the set of parameters specified in Section \ref{sec:parameter_tuning}, for which we wanted to explore the behavior of the system as the parameter took a range of values. specified a range of values for the parameter we were experimenting with. fixed, scalar values for each of the parameters described in Section . For example, one of the experiments we performed was intended to test the effect of varying number of peers participating in the system. One possible parameter combination to test this could then be
@@ -206,7 +208,7 @@ Between each execution of the experiment the JADE environment must be prepared f
 
 Once the CompletionAgent is reset and the other agents are removed, the environment is prepared for the next experiment. If all iterations of testing has completed for the particular combination of parameters, the experiment moves to the next set of parameters. If not, the same parameter combination is tested once more. 
 
-\subsection{Distribution}`
+\section{Distribution}`
 Introduce notion of distributed machine learning. 
 
 Why did we choose to perform distributed learning?
@@ -218,41 +220,6 @@ Can we guarantee differential privacy while doing it distributed
 Record-based differential privacy. Does it work?
 
 \todo[inline]{This section should maybe go somewhere else, but where?}
-
-
-
-
-
- \missingfigure[figwidth=6cm]{Figure explaining our framework}
-
-
-
-
-\subsection{Learning}
-How is a logistic model implemented in our framework?
-
-How is a model created and passed around the network?
-Each Peer creates a logistic model based on their local data. They then form groups by calling the GroupFormingManager which assigns a group of peers together. This groups creates an aggregated model based on their own local ones. Here we simulate a Homomorphic Encryption scheme which assigns noise by secret sharing. 
-
-
-How does the ensemble learning choose the best model?
-What kind of performance metrics are used?
-Mean classification error and Confusion Matrix.
-
-\subsection{Privacy}
-How does our framework guarantee differential privacy?
-Based on the paper by 
-
-\subsection{Experiment}
-How are the experiments set up?
-Explain the testing scheme.
-
-Jade is re-run with while changing the initial parameters for the amount of peers, and the size of the groups they form. This test if performed over 10 iterations, while the mean classification error is recorded for each iteration. Each peer also create a confusion matrix with their classification results, and the peer with the best classification accuracy is saved and used to create a ROC-curve. 
-
-Automatic testing scheme - Jade is configured so that it resets the main container after each experiment, and then re-run with new parameter configurations. 
-
-Implemented 10-fold cross validation. This way we can tune the parameters and not be scared of our model overfitting on the test data. our initial solution was to use a single training and a single test set. This way we tuned the parameters so that they would give the best possible accuracy on the test set, which is not how the system should behave in the real world. 
-
 
 
 \cleardoublepage
