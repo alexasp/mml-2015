@@ -38,6 +38,7 @@
 \label{tab:baseline_class_results_adult}
 \end{table}
 
+\todo[]{Talk about the baselines and whatnot.}
 
 All prediction results given in this section are presented with mean and standard deviation values. These values are computed by evaluating each combination of parameters with 10-fold cross validation and taking the mean and standard deviation of accuracy across the 10 data folds.
 
@@ -115,6 +116,8 @@ When noise with significant variance is added to the model creation process, tun
 
 \subsection{Analysis of Propagation and group size}
 
+\todo{Add some subsection that talks about the effect on standard deviation among peers, and give the numbers from table used in our presentation.}
+
 As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated in phase 2.\unsure{Rewrite this if we don't use phases} In this section we present the effects of publishing method. Figure \ref{fig:RegRangeTestPubParty} shows the case where each group of peers only share the perturbed, aggregate model among themselves, while Figure \ref{fig:RegRangeTestPubAll} shows the results the model is sent to all existing peers. 
 
 The most obvious effect of globally publishing models is that the standard deviation is much lower than the group publishing case. This is not surprising.
@@ -136,6 +139,7 @@ The truth is probably somewhere in the middle - we can't expect to easily publis
 	\end{minipage}
 \end{figure}
 
+
 As the previous experiment indicates that publishing newly made models to as many peers as possible is better \todo{Add a reflection talking about why this makes sense.}, we performed an additional experiment to determine whether it in such a scenario would be better to perform many aggregations with fewer models included in each aggregate or performing few aggregations including many models. This was achieved by testing performance with a range of values. In the experiment, each peer can only participate in a single aggregation before reaching the limit set by the privacy guarantee. For example, given a set of 50 peers, a aggregation size of 25 can only publish two aggregated models.
  
 \begin{figure}[h!]
@@ -151,7 +155,7 @@ A possible explanation of this result is that the effects of boosting counters t
 
 The interesting observation that can be made from this is that the best situation is when there is no aggregation. A group size of one results in only a single model being contributed, and is equivalent to each peer publishing its local model with noise. One possible reason for this could be that there simply is no value in averaging models in the way done in our experiments and by Pathak et al.\cite{pathak2010diffprivhomo}. Neither our experiment or the experiment by Pathak et al. help distinguish between these two possibilities. The experiment by Pathak et al. only demonstrate that their method for creating aggregated models has comparable performance to adding noise to a centrally computed model. Additionally, this is only demonstrated with large data sets. In their experiment, the minimum data set size for any participant is 3256. With data sets this large, it is possible they would have gotten similar results by testing a model produced by a single participant, without performing additional aggregation. However, no experiment evaluating this possibility remains. Their theoretical conclusions stand, but experimentally validating the value of aggregation is necessary.
 
-\todo{look at a couple of vectors trained with large subsets of data and see if they are similar.} Thus the key question is whether or not aggregation is worth the complexity of a homomorphic encryption protocol. If similar performance can be achieved solely by ensemble classifiers of differentially private models published by each peer, one could skip the complexity and risk of relying on a cryptographic protocol to maintain privacy.
+Thus the key question is whether or not aggregation is worth the complexity of a homomorphic encryption protocol. If similar performance can be achieved solely by ensemble classifiers of differentially private models published by each peer, one could skip the complexity and risk of relying on a cryptographic protocol to maintain privacy.
 
 Another possible explanation for this observation is that aggregation might be useful, but not when the peers all have samples of data from the exact same distribution. This is the case with the Spambase data set used in the experiment in Figure \ref{fig:groupsize_is_better}.
 
@@ -174,31 +178,8 @@ An alternative avenue for validating the value of doing aggregation could be to 
 Section \ref{sec:} important motivation for this project was the idea that application users should be able to retain ownership of their own data, and only share it to a degree that they choose.
 
 
-\todo[inline]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches.}
+\todo[inline]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches. Essentially, we have already experimented with a kind of cold start situation when we try to performance numbers for peer\_count 1 to 50}
 
-
-What are the results of our experiments?
-
-What did we learn from the basic structure of creating our framework?
-
-What difficulties did we encounter?
-
-What can we take away from our experiments?
-
-What should have been done better? 
-
-What did we learn from tuning the different parameters?
-
-More data per peer leads to better classification. With small number of peers, there are more records per peer. This generally leads to better classification accuracy. Why is this? 
-
-Australian: Sweet spot for regularization at a 2e-3, 10 peers 5 groupsize
-
-What was the effect of tuning the regularization parameter? High and low regularization leads to more SD on the error rate, but there is a sweet spot.
-
-What was the effect of increasing the epsilon? 
-	It seemed like it was better to keep the perUpdateBudget smaller than the epsilon, so that the models are aggregated more. Did this lead to better accuracy? Why do more aggregations lead to better classification than having a bigger budget but only one aggregation.
-	
-Compare the results of our distributed logistic regression classifier with the tradional ones in literature. Sharma and Arora \cite{sharma2013adaptive} report getting 92.95\% classification accuracy on the same data set. Kumar et al\cite{kumar2012comparative}. reports  0.1389 error rate before filtering when using logistic regression combined with a least squares regularization method. Our classifier can compare to these under certain circumstances, even after noise addition.  
 
 
 

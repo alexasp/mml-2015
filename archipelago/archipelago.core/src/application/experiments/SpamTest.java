@@ -31,7 +31,6 @@ public class SpamTest {
 
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
-        trainData = new DataLoader().readCSVFileReturnSamples("../data/a9a_dense.csv", 0, true);
         trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
         testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
@@ -48,12 +47,15 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(500);
+        List<Integer> dataLimits = Arrays.asList(250);
 
-        List<PeerParam> peerParams = IntStream.range(1, 5).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
+//        List<PeerParam> peerParams = IntStream.range(1, 5).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
+        List<PeerParam> peerParams = Arrays.asList(
+                new PeerParam(10, 10)
+        );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-4, -3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-3, -2).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1.0)

@@ -2,8 +2,125 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51e08562-6ab0-4948-baf1-1109b8f03322" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../report/experiment.tex" afterPath="$PROJECT_DIR$/../report/experiment.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/charts/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.06250000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.12500000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.25000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,0.50000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,1.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,16.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,2.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,32.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,4.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,64.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-0" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-4" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-6" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000/eps,1024.00000000-regularization,8.00000000-cost,1024.000-peers,1-groups,1-data,3000iter-9" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/chart_points/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/summaries/eps2e10,budg=eps,peers1,groups1,reg2e-8-2e8-data3000-adult-localmodelonly-baseline" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/AdultTest.java" afterPath="$PROJECT_DIR$/../archipelago/archipelago.core/src/application/experiments/AdultTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../archipelago/archipelago.core/src/communication/PeerAgent.java" afterPath="$PROJECT_DIR$/../archipelago/archipelago.core/src/communication/PeerAgent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/archipelago_tuples.py" afterPath="$PROJECT_DIR$/scripts/archipelago_tuples.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_summary.py" afterPath="$PROJECT_DIR$/create_summary.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/summaries/eps1.0,budg=eps,peers1-21,groups=peers,reg2e-1-data100-pubAll-adult-nolocalmodel-grouptesting" afterPath="$PROJECT_DIR$/summaries/eps1.0,budg=eps,peers1-21,groups=peers,reg2e-1-data100-pubAll-adult-nolocalmodel-grouptesting" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/make_charts.py" afterPath="$PROJECT_DIR$/scripts/make_charts.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="experiments.iws" />
@@ -28,11 +145,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="create_summary.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="create_summary.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/create_summary.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1734694" vertical-offset="255" max-vertical-offset="1428">
-              <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="439" max-vertical-offset="1548">
+              <caret line="49" column="28" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="28" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -40,14 +157,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="make_charts.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="make_charts.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1156" max-vertical-offset="1258">
-              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.64912283" vertical-offset="241" max-vertical-offset="1386">
+              <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
-                <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -56,8 +172,8 @@
       <file leaf-file-name="archipelago_tuples.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.72" vertical-offset="0" max-vertical-offset="170">
-              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+              <caret line="4" column="73" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -72,16 +188,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/scripts/archipelago_tuples.py" />
-        <option value="$PROJECT_DIR$/create_summary.py" />
         <option value="$PROJECT_DIR$/scripts/make_charts.py" />
+        <option value="$PROJECT_DIR$/create_summary.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-1" />
+    <option name="width" value="1922" />
+    <option name="height" value="1175" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -112,30 +227,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="experiments" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="experiments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="experiments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="experiments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="experiments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -192,7 +283,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="experiments" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/create_summary.py" />
-      <option name="PARAMETERS" value="output/eps1.0,budg=eps,peers1-20,groups1,reg2e2-pubAll-spam-peercounts-data60-CV peer_count 0.0 21.0" />
+      <option name="PARAMETERS" value="output/eps1.0,budg=eps,peers1-20,groups=peers,reg2e-1-data100-pubAll-adult-withlocalmodel-grouptesting group_size,peer_std_mean 0 21" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -347,10 +438,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1" y="0" width="1922" height="1175" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994455" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39556378" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -361,7 +452,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39598733" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39556378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -392,8 +483,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/scripts/make_charts.py</url>
-          <line>47</line>
-          <option name="timeStamp" value="4" />
+          <line>28</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/create_summary.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -403,11 +499,39 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="13" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/create_summary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1512">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="1332">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="180">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/create_summary.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1377">
@@ -424,7 +548,6 @@
           <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -453,7 +576,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -482,7 +604,6 @@
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -511,7 +632,6 @@
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -540,7 +660,6 @@
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -569,7 +688,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -598,7 +716,6 @@
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -627,7 +744,6 @@
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -656,7 +772,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -685,7 +800,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -698,29 +812,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
+    <entry file="file://$PROJECT_DIR$/create_summary.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1156" max-vertical-offset="1258">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="439" max-vertical-offset="1548">
+          <caret line="49" column="28" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="28" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
-            <marker date="1433755447491" expanded="true" signature="267:629" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/archipelago_tuples.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.72" vertical-offset="0" max-vertical-offset="170">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+          <caret line="4" column="73" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/create_summary.py">
+    <entry file="file://$PROJECT_DIR$/scripts/make_charts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1734694" vertical-offset="255" max-vertical-offset="1428">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.64912283" vertical-offset="241" max-vertical-offset="1386">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>

@@ -11,6 +11,8 @@ Other defining works include the two papers written by Frank McSherry. His work 
 \section{Centralized approaches}
 In the years following the release of Dwork's seminal paper there have been a steadily increasing amount of publications, reaching a peak in 2013 with 141 papers published and indexed by the Scopus scientific database. Some of these works have focused on the same area as us, namely classification using logistic regression, but instead opted to focus on a centralized approach. Mentioned below are the work which have either influenced our own, or perfomed similar experiments. 
 
+\todo[]{Mention the objective perurtbation approach suggested by Chaudhuri, and why it isn't really suitable for a Pathak-style solution.}
+
 Chaudhuri and Monteloni designed a logistic regression algorithm which guaranteed differential privacy in 2009. They also provided a mathematical proof for the upper bound of the sensitivity of logistic regression (see Section \ref{sec:Sensitivity_of_LogReg}), which formed the basis of our own solution. The same authors provided a follow-up paper\citep{chaudhuri2011riskMinimization}, in which they further developed a method called object perturbation to add noise to the regularized objective function. Their results which showed that objective perturbation is generally superior to output perturbation has proved very useful to the field of differential privacy. 
 
 Zhang et al \citep{zhang2012functionMechanism} further improved upon Chaudhuri's work by creating a new functional mechanism for objective perturbation, which they tested on a set of census data by employing both linear and logistic regression. 

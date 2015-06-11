@@ -6,7 +6,7 @@ import numpy
 
 def main():
     experiment_identifier = sys.argv[1]
-    chart_type = sys.argv[2]
+    x_value_field, y_value_field = sys.argv[2].split(',')
     x_min = float(sys.argv[3])
     x_max = float(sys.argv[4])
     log = len(sys.argv) == 6 and sys.argv[5] == 'log'
@@ -32,24 +32,26 @@ def main():
     output_path = summaries_dir + "/" + directory_name(experiment_identifier)
     with open(output_path, 'w') as stored_results:
         pickle.dump(results, stored_results)
-    plot(chart_type, output_path, x_min, x_max, log)
+    plot(x_value_field, y_value_field, output_path, x_min, x_max, log)
 
 
 def compute_averages(iterations_filenames, directory):
-    mean, std, maximum, minimum = 0, 0, 0, 0
+    mean, maximum, minimum = 0, 0, 0
     means = []
+    peer_stds = []
     for iteration_filename in iterations_filenames:
         with open(directory + "/" + iteration_filename) as iteration_file:
             means.append(float(iteration_file.readline()))
-            # std += float(iteration_file.readline())
+            peer_stds.append(float(iteration_file.readline()))
             maximum += float(iteration_file.readline())
             minimum += float(iteration_file.readline())
     mean = numpy.mean(means)
-    # std /= float(len(iterations_filenames))
-    std = numpy.std(means) #hotfix
+    mean_std = numpy.std(means)
+    peer_std_std = numpy.std(peer_stds)
+    peer_std_mean = numpy.mean(peer_stds)
     maximum /= float(len(iterations_filenames))
     minimum /= float(len(iterations_filenames))
-    return Metrics(mean, std, maximum, minimum)
+    return Metrics(mean, mean_std, peer_std_mean, peer_std_std, maximum, minimum)
 
 
 def get_parameters(experiment_dirname):
