@@ -3,14 +3,14 @@
 \chapter{Analysis}
 \label{chap:analysis}
 \todo[inline]{Make a table with baseline classification rate for logistic regression, put in our values. 1 Peer with no noise, 1 peer with noise, best case from other experiments that we want to highlight. This can lead to a discussion of why our results are not as good, where they show promise etc}
-
+All prediction results given in this chapter are presented with mean and standard deviation values. These values are computed by evaluating each combination of parameters with 10-fold cross validation and taking the mean and standard deviation of accuracy across the 10 data folds.
 
 
 \section{Baseline Classification results and comparisons}
 \begin{table}[h]
 	\begin{tabular}{ll}
 		\begin{tabular}[c]{@{}l@{}}Error Rate/Spambase\end{tabular} &        \\
-		Sharma\citep{sharma2013adaptive}                                    & 0.0705 \\
+		Sharma\citep{sharma2013adaptive}                                    & 0.0103 \\
 		Kumar\citep{kumar2012comparative}                                  & 0.1389 \\
 		Our optimal result (Local model, no noise, 1 peer)                & 0.100  \\
 		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
@@ -25,9 +25,9 @@
 \begin{table}[h]
 \begin{tabular}{ll}
 	\begin{tabular}[c]{@{}l@{}}Error Rate/Adult\end{tabular} &        \\
-	Krempl,Decision tree with bagging\citep{}                                    & 0.196 \\
-	Pathak\cite{pathak2010diffprivhomo}                                & 0.24 \\
+%	Krempl,Decision tree with bagging\citep{}                                    & 0.196 \\
 	Logistic regression \cite{caruana2006empirical}   				  & 0.114 \\
+	Pathak\cite{pathak2010diffprivhomo}                                & 0.24 \\	
 	Our optimal result (Local model, e=1.0, 10 peer)                  & 0.157 \\
 	High privacy, few peers($\epsilon$=0.1, 50 peers)				  & 0.163  \\
 	Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
@@ -38,10 +38,14 @@
 \label{tab:baseline_class_results_adult}
 \end{table}
 
+
+These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase dataset. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult dataset. Here we chose to provide baselines for two  approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.   
+
+   
 \todo[]{Talk about the baselines and whatnot.}
 
-All prediction results given in this section are presented with mean and standard deviation values. These values are computed by evaluating each combination of parameters with 10-fold cross validation and taking the mean and standard deviation of accuracy across the 10 data folds.
 
+\section{Importance of epsilon}
 As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a dataset by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
 
 \begin{figure}[H]
