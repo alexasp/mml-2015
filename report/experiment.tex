@@ -4,7 +4,7 @@
 
 \section{Overview}
 \label{sec:experiment_overview}
-As presented in Section \ref{sec:problem_statement}, we wanted to do test an architecture that allows fully decentralized machine learning that maintains the privacy of the participants. 
+As stated in Section \ref{sec:problem_statement}, we wanted to do test an architecture that allows fully decentralized machine learning that maintains the privacy of the participants. 
 
 We consider a setting with $N$ peers that each have a local data set. These data sets are assumed to be independently sampled for each peer, but may be sampled from the same distribution. When the system initializes, each peer trains a logistic regression model on its local dataset. The data set and the trained model is private and should only be known by its owner.
 
@@ -59,13 +59,13 @@ What controls the messages and determines where they should go?
 This section will introduce the dataset(s) used. What features it contains, what we try to learn/classify, and why we chose to use it.
 
 Each data set was divided into a training set partitioned among the peers in the system, and a testing set not used until the very end of our project, to verify the results indicated in cross validated experimentation. How the test set was selected is specified later for each data set.
-A feature with constant value 1.0 was appended to all data records before fitting models, to act as the intercept or bias term. When necessary we scaled the features of the data sets to 0-1 range. This is due to the proof in Chaudhuri paper which states the assumption $|X_i|\leq 1$. The scaling was done by the formula
+A feature with constant value 1.0 was appended to all data records before fitting models, to act as the intercept or bias term. When necessary we scaled the features of the data sets to 0-1 range. This is due to the proof in \citep{chaudhuri2009logistic} which states the assumption $|X_i|\leq 1$. The scaling was done by the formula
 
 \begin{eqnarray}
 X_{norm} = \frac{X-X_{min}}{X_{max} - X_{min}}
 \end{eqnarray}
 
-$X_{min} and X_{max}$ were calculated using only the training set of each data set, to avoid leaking information about the test set into the training set. The test sets were then scaled in the same manner using the same $X_{min}$ and $X_{max}$ as calculated on the training set.
+$X_{min}$ and $X_{max}$ were calculated using only the training set of each data set, to avoid leaking information about the test set into the training set. The test sets were then scaled in the same manner using the same $X_{min}$ and $X_{max}$ as calculated on the training set.
 
 This is a potential source of unrealistic information leakage. In a real implementation, globally determining scaling on the training set would be difficult. Instead, it might be necessary to perform this scaling locally at each peer. This means that the scaling constants $X_{min}$ and $X_{max}$ would be at least somewhat different for each peer, and would only be calculated on their particular partition of the training set. We performed the scaling globally on the training set because we believe any effect from this to be small. In particular, it does not detract from the conclusions we make that are the most relevant to our research question, which relates to usefulness of model aggregation and any options we identify to reduce standard deviation across the peer population.  \todo[inline]{Give a compelling reason for why this is. OR - consider making scaling a local problem. This could actual improve our results as it pertains to aggregation usefulness.}
 
@@ -77,7 +77,7 @@ We chose this dataset as it is a popular dataset to analyze the performance of b
 We randomly partitioned this data set into a training set and a test set, with 80\% of the records in the training set and the remaining 20\% in the test set.
 
 \subsection{Australian Credit Approval}
-Another dataset we used, was the Australian Credit Approval (Statlog), which concerns the approval or disapproval of credit card applications. It is publicly available from the UCI machine learning directory. This is a much smaller set of data, with only 690 samples spread over 14 attributes. The data is useful for binary classification as it contains a good mix of attributes: continuous, nominal with small numbers of values, and nominal with larger numbers of values.
+Another dataset we used, was the Australian Credit Approval (Statlog)\citep{australian1987data}, which concerns the approval or disapproval of credit card applications. It is publicly available from the UCI machine learning directory. This is a much smaller set of data, with only 690 samples spread over 14 attributes. The data is useful for binary classification as it contains a good mix of attributes: continuous, nominal with small numbers of values, and nominal with larger numbers of values.
 
 We mostly used this dataset to confirm and double-check the conclusions we drew from the Spambase dataset, as it contains too few data records for it to be 100\% ideal for our use. Due to the sparsity of data we had to scale down the amount of peers in each experiment, so that each peer could get enough data to create a decent local classifier. We chose to keep on using this data as one of the motivating examples in Dwork's book\citep{dwork2013algorithmic} on the applications differential privacy, is to protect data holders from insurance and credit card companies. 
 
@@ -154,7 +154,7 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 \todo[inline]{Make it a bit more explicit that this is Pathaks mechanism, essentially, without the Homomorphic encryption.}
 
 \begin{algorithm}[!h]
-	\label{alg:privacy_mechanism}
+	
 		\KwIn{$\epsilon$ - privacy parameter
 			$\boldmath{M}$ - set of models trained by participating peers\;
 			$\boldmath{N}$ - set of peer training set sizes\;
@@ -167,6 +167,7 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 		\KwRet{$model_{agg}$}
 		
 \caption{$\epsilon$-differentially private aggregation mechanism}
+\label{alg:privacy_mechanism}
 \end{algorithm}
 
 
@@ -191,6 +192,7 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 		$publish(P, model_{agg})$
 }
 \caption{Application of aggregation mechanism}
+\label{alg:aggregation_mechanism}
 \end{algorithm}
 
 \todo[inline]{Defend randomSample procedure using Newscast reference}

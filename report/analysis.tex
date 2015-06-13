@@ -19,6 +19,7 @@ All prediction results given in this chapter are presented with mean and standar
 		
 		
 	\end{tabular}
+	\caption{Table with baseline results from the Adult Dataset}
 	\label{tab:baseline_class_results_spambase}
 \end{table}
 
@@ -26,15 +27,18 @@ All prediction results given in this chapter are presented with mean and standar
 \begin{tabular}{ll}
 	\begin{tabular}[c]{@{}l@{}}Error Rate/Adult\end{tabular} &        \\
 %	Krempl,Decision tree with bagging\citep{}                                    & 0.196 \\
-	Logistic regression \cite{caruana2006empirical}   				  & 0.114 \\
-	Pathak\cite{pathak2010diffprivhomo}                                & 0.24 \\	
+	Logistic regression \citep{caruana2006empirical}   				  & 0.114 \\
+	Pathak\citep{pathak2010diffprivhomo}                                & 0.24 \\	
 	Our optimal result (Local model, e=1.0, 10 peer)                  & 0.157 \\
 	High privacy, few peers($\epsilon$=0.1, 50 peers)				  & 0.163  \\
 	Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
 	Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
+	Some result														  & 0.185 \\
+	Ensemble result													  &	0.165
 	
 	
 \end{tabular}
+\caption{Table with baseline results from the Adult Dataset}
 \label{tab:baseline_class_results_adult}
 \end{table}
 
@@ -42,8 +46,8 @@ All prediction results given in this chapter are presented with mean and standar
 These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase dataset. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult dataset. Here we chose to provide baselines for two  approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.   
 
    
-\todo[]{Talk about the baselines and whatnot.}
-
+\todo[inline]{Expand upon our own baseline results, and compare them to the baselines found in literature}
+\todo[inline]{Add a segway onto the next sections, so that we can discuss the importance of the different parameters in a natural way}
 
 \section{Importance of epsilon}
 As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a dataset by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
@@ -155,7 +159,7 @@ As the previous experiment indicates that publishing newly made models to as man
 
 The results of this experiment is seen in Figure \ref{fig:groupsize_is_better}. It is clear that a smaller group size and consequently more aggregated models published resulted in a strong reduction in accuracy variance. While the variance is too high at larger group sizes to know much about the actual mean value after only 10 repetitions of the experiment, it is unlikely that it is smaller than the mean accuracy observed when the group size is one. 
 
-A possible explanation of this result is that the effects of boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
+A possible explanation of this result is that the effects of \unsure{bagging?} boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
 
 The interesting observation that can be made from this is that the best situation is when there is no aggregation. A group size of one results in only a single model being contributed, and is equivalent to each peer publishing its local model with noise. One possible reason for this could be that there simply is no value in averaging models in the way done in our experiments and by Pathak et al.\cite{pathak2010diffprivhomo}. Neither our experiment or the experiment by Pathak et al. help distinguish between these two possibilities. The experiment by Pathak et al. only demonstrate that their method for creating aggregated models has comparable performance to adding noise to a centrally computed model. Additionally, this is only demonstrated with large data sets. In their experiment, the minimum data set size for any participant is 3256. With data sets this large, it is possible they would have gotten similar results by testing a model produced by a single participant, without performing additional aggregation. However, no experiment evaluating this possibility remains. Their theoretical conclusions stand, but experimentally validating the value of aggregation is necessary.
 

@@ -3,7 +3,7 @@
 
 \chapter{Basic Theory} \label{ch:Basic Theory}
 
-Common to all the attack vectors described in the previous chapter is that the attacker rely on background knowledge, often also called auxiliary information, to perform their linkage attacks. Protecting a database against this threat has long been a major challenge in database design. Already back in 1977 Tore Dalenius \cite{dalenius1977towards} defined a desideratum for data privacy which says that: \begin{quote}
+Common to all the attack vectors described in Section \ref{sec:attack_vectors} is that the attacker rely on background knowledge, often also called auxiliary information, to perform their linkage attacks. Protecting a database against this threat has long been a major challenge in database design. Already back in 1977 Tore Dalenius \citep{dalenius1977towards} defined a desideratum for data privacy which says that: \begin{quote}
 	Access to the published data should not enable the adversary to learn anything extra about target victim compared to no access to the database, even with the presence of any adversary’s background knowledge obtained from other sources.
 \end{quote} 
 
@@ -60,22 +60,22 @@ When using the Laplace mechanism it is necessary to choose a suitable value for 
 \Delta f=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
  \end{eqnarray}
  \missingfigure[figwidth=6cm]{Picture showing the laplacian distribution} \unsure{Not sure if we need the pic. Alex: I think we do.}]
-$
- <math>f(x|\mu,b) = \frac{1}{2b} \exp \left( -\frac{|x-\mu|}{b} \right) \,\!</math>
- <math> = \frac{1}{2b}
- \left\{\begin{matrix}
- 	\exp \left( -\frac{\mu-x}{b} \right) & \mbox{if }x < \mu
- 	\\[8pt]
- 	\exp \left( -\frac{x-\mu}{b} \right) & \mbox{if }x \geq \mu
- \end{matrix}\right.
- </math>
-$
-This equation states that the sensitivity $\Delta f$ is the maximum difference in the values that the function $f$ may take on any pair of databases that differ on only one row. Dwork proved that adding a noise drawn from $Lap(\Delta f/\epsilon)$ to a query, $\epsilon$-differential privacy\cite{dwork2013algorithmic} is guaranteed. 
+%$
+% <math>f(x|\mu,b) = \frac{1}{2b} \exp \left( -\frac{|x-\mu|}{b} \right) \,\!</math>
+% <math> = \frac{1}{2b}
+% \left\{\begin{matrix}
+% 	\exp \left( -\frac{\mu-x}{b} \right) & \mbox{if }x < \mu
+% 	\\[8pt]
+% 	\exp \left( -\frac{x-\mu}{b} \right) & \mbox{if }x \geq \mu
+% \end{matrix}\right.
+% </math>
+%$
+This equation states that the sensitivity $\Delta f$ is the maximum difference in the values that the function $f$ may take on any pair of databases that differ on only one row. Dwork proved that adding a noise drawn from $Lap(\Delta f/\epsilon)$ to a query, $\epsilon$-differential privacy is guaranteed\citep{dwork2013algorithmic}. 
 
 \todo{add a section explaining that while it would seem that sensitivity is would often be high, some functions like count are naturally low sensitivity, and that steps such as clamping can be taken to reduce sensitivity}
 
 \subsubsection{Exponential Mechanism} \label{sec:Exponential Mechanism}
-The exponential mechanism proposed by McSherry and Talwar \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the exponential mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
+The exponential mechanism proposed by \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the exponential mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
 
 More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input dataset is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
 \textbf{Definition 4}: the sensitivity of score function $u_f$ is defined as
@@ -93,7 +93,7 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
  p(y = ±1|\textbf{x}, \theta) = \frac{1}{1 + exp( - \theta^T \textbf{x})}
   \end{eqnarray}
   where $\theta$ is the parameter vector we wish to learn.
- It can be used for predicting the probability of a binary outcome or binary classification by setting a classification threshold. Given a training set we choose the $\theta$ with the largest likelihood, the maximum likelihood estimator (MLE)\cite{elkan2014logreg}. The likelihood of parameter $\theta$ is
+ It can be used for predicting the probability of a binary outcome or binary classification by setting a classification threshold. Given a training set we choose the $\theta$ with the largest likelihood, the maximum likelihood estimator (MLE)\citep{elkan2014logreg}. The likelihood of parameter $\theta$ is
  
    \begin{eqnarray}
    \prod_{i=1}^{m} p(y_i | x_i,\theta)
@@ -105,7 +105,7 @@ For convenience, the point of maximum log-likelihood is used instead. Since the 
   \theta_{MLE} = \arg\max_\theta [\sum_{i=1}^{m} \log p(y_i | x_i,\theta)] - \lambda \|\theta\|^{2}_{2}
   \end{eqnarray}
   
-where the term $\mu\|\theta\|^{2}_{2}$ is a regularization term to restrict the magnitude of $\theta$ and avoid overfitting the training data. Using $\mu > 0$ gives a “regularized” estimate of w which often has superior generalization performance, especially when the dimensionality is high (Nigam et al., 1999). 
+where the term $\mu\|\theta\|^{2}_{2}$ \todo{Shouldn't this be lambda?} is a regularization term to restrict the magnitude of $\theta$ and avoid overfitting the training data. Using $\mu > 0$ gives a “regularized” estimate of w which often has superior generalization performance, especially when the dimensionality is high (Nigam et al., 1999). 
 
 \subsection{Stochastic Gradient Descent}
 \label{sec:gradient_descent}
@@ -119,14 +119,14 @@ Mini-batch SGD is a trade-off between the basic batch gradient descent and singl
 \theta^{t+1}_j = \theta^{t}_j + \alpha[\sum_{i=1}^{b}(y_i - p(y_i | x_i,\theta))x_{ij} - 2\lambda \|\theta^{t}_j\|]
 \end{eqnarray}
 
-As in regular SGD, multiple passes over the data set is performed as necessary. A single, full pass over the data set is called an epoch. As stated by \citep{cotter2011batchsgd}, an adaptive learning rate that decreases sufficiently over time is necessary for existing theoretical proofs of SGD convergence. We use the adaptive learning rate used in the SGD implementation by \cite{bottou2011sgd}, which relies on results in \citep{xu2010learningrate}.
+As in regular SGD, multiple passes over the data set is performed as necessary. A single, full pass over the data set is called an epoch. As stated by \cite{cotter2011batchsgd}, an adaptive learning rate that decreases sufficiently over time is necessary for existing theoretical proofs of SGD convergence. We use the adaptive learning rate used in the SGD implementation by \cite{bottou2011sgd}, which relies on results in \citep{xu2010learningrate}.
 
 \begin{eqnarray}
 \label{eq:learning_rate}
 \alpha = \frac{\eta}{1 + \eta\lambda t}
 \end{eqnarray}
 
-where $\lambda$ is the regularization constant, $t$ is the current epoch and $\eta$ is a parameter used to tune the adaptive learning rate. Note that this means that we do not need to search for suitable values of the learning rate $\alpha$ - instead, we must identify a suitable $\eta$.
+where $\lambda$ is the regularization constant, $t$ is the current epoch and $\eta$ \todo{eta is generally used to indicate noise vector, so can we change this?} is a parameter used to tune the adaptive learning rate. Note that this means that we do not need to search for suitable values of the learning rate $\alpha$ - instead, we must identify a suitable $\eta$.
 
 \subsubsection{Convergence criteria}
 
@@ -200,7 +200,7 @@ We did not strictly use bagging according to its formal definition, as the boots
 
 We initially divided the data sets into a training set and a testing set, the latter being intended to evaluate the performance and properties of our approach. We needed to explore many different combinations and variations of our experiment during, but the test set should only be used as a final step. If the test set is used for repeated validation of different parameters, we would risk overfitting it and getting unrealistic test results. 
 
-One way to do reliable accuracy estimation is with cross validation, which makes more efficient use of training data than creating a separate holdout set and has less bias than as shown by Kohavi \cite{kohavi1995crossvalidation}. Cross validation involves partitioning the training set into K disjoint sets. Then, for each $t \in [1, K]$ partition $t$ is used as the test set, and the remaining partitions are combined to form the training set. Accuracy is reported as number of correctly classified instances divided by the total number of instances over all K partitions. 
+One way to do reliable accuracy estimation is with cross validation, which makes more efficient use of training data than creating a separate holdout set and has less bias than as shown by \cite{kohavi1995crossvalidation}. Cross validation involves partitioning the training set into K disjoint sets. Then, for each $t \in [1, K]$ partition $t$ is used as the test set, and the remaining partitions are combined to form the training set. Accuracy is reported as number of correctly classified instances divided by the total number of instances over all K partitions. 
 
 Kohavi recommends 10-fold stratified cross validation. Stratified cross validation involves ensuring that each fold has the same class distribution as the original data set. . Since the data sets we tested with have thousands of records and close to uniform class distribution, we concluded that stratified folds was not necessary. Our experiments were evaluated with 10-fold cross validation with each fold being a random, disjoint subset of the training set.
 
@@ -228,13 +228,13 @@ The Java Agent framework for Distance learning Environments(JADE) is a middlewar
 
 
 \section{Homomorphic Encryption}\label{sec:homomorphic_encryption}
-Homomorphic encryption is an encryption scheme which allows computations to be carried out on ciphertext, meaning plaintext that has been encrypted using an algorithm and a public key. The result of the computations is also encrypted, and can be deciphered back to plaintext using a private key. This has long been considered as crypthography's holy grail \cite{Micciancio2011HomoEnc}, as this would allowing operating on encrypted text without knowing the decryption key. For example, given ciphertexts $C_1=Enc(Data1)$ and $C_2=Enc(Data2)$, an additively homomorphic encryption scheme would allow to combine $C_1$ and $C_2$ to obtain $Enc_K(Data1+Data2)$. More concretely this means that if you encrypt your data using such an encryption scheme, you can transfer your data to an untrusted server which can perform some arbitrary computations on that data without being able to decrypt the data itself.
+Homomorphic encryption is an encryption scheme which allows computations to be carried out on ciphertext, meaning plaintext that has been encrypted using an algorithm and a public key. The result of the computations is also encrypted, and can be deciphered back to plaintext using a private key. This has long been considered as crypthography's holy grail \citep{Micciancio2011HomoEnc}, as this would allowing operating on encrypted text without knowing the decryption key. For example, given ciphertexts $C_1=Enc(Data1)$ and $C_2=Enc(Data2)$, an additively homomorphic encryption scheme would allow to combine $C_1$ and $C_2$ to obtain $Enc_K(Data1+Data2)$. More concretely this means that if you encrypt your data using such an encryption scheme, you can transfer your data to an untrusted server which can perform some arbitrary computations on that data without being able to decrypt the data itself.
 
-Up until recently, all published homomorphic encryption schemes only supported one basic operation, most commonly addition. These schemes could only be called partially homomorphic, as they did not provide any extensive functionality. The notion of a  fully homomorphic encryption schemes was first proposed by Rivest, Adleman, and Dertouzos in 1978 \cite{rivest1978data}, but it wasn't until 2009 that Craig Gentry published a doctoral thesis where he proved that he had constructed a fully homomorphic scheme\cite{gentry2009FHEpaper}. Gentry's solution was based on "ideal lattices" as well as a method to double-encrypt the data in such a way that the errors could be handled "behind the scenes". By periodically unlocking the inner layer of encryption underneath an outer layer of scrambling, the computer could hide and recover from errors without ever analyzing the secret data. 
+Up until recently, all published homomorphic encryption schemes only supported one basic operation, most commonly addition. These schemes could only be called partially homomorphic, as they did not provide any extensive functionality. The notion of a  fully homomorphic encryption schemes was first proposed by \cite{rivest1978data} in 1978 , but it wasn't realized until 2009 when Craig Gentry published a doctoral thesis where he proved that he had constructed a fully homomorphic scheme\cite{gentry2009FHEpaper}. Gentry's solution was based on "ideal lattices" as well as a method to double-encrypt the data in such a way that the errors could be handled "behind the scenes". By periodically unlocking the inner layer of encryption underneath an outer layer of scrambling, the computer could hide and recover from errors without ever analyzing the secret data. 
 
 \todo{Do we need to talk about a method of HE that doesn't really work for our requirements?}
 
-The downside of Gentry's two-layered approach is that it requires a massive computational effort. Bruce Schneier, a leading American cryptographer, pointed out "Gentry estimates that performing a Google search with encrypted keywords -- a perfectly reasonable simple application of this algorithm -- would increase the amount of computing time by about a trillion. Moore's law calculates that it would be 40 years before that homomorphic search would be as efficient as a search today, and I think he's being optimistic with even this most simple of examples\cite{schneier2009blog}." 
+The downside of Gentry's two-layered approach is that it requires a massive computational effort. Bruce Schneier, a leading American cryptographer, pointed out "Gentry estimates that performing a Google search with encrypted keywords -- a perfectly reasonable simple application of this algorithm -- would increase the amount of computing time by about a trillion. Moore's law calculates that it would be 40 years before that homomorphic search would be as efficient as a search today, and I think he's being optimistic with even this most simple of examples\citep{schneier2009blog}." 
 
 
 \section{Resource consumption}
