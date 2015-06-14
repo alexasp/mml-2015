@@ -30,15 +30,15 @@ public class AdultTest {
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
         trainData = new DataLoader().readCSVFileReturnSamples("../data/a9a_dense.csv", 0, true);
-        testData = null;
+        testData = new DataLoader().readCSVFileReturnSamples("../data/a9a.test_dense.csv", 0, true);
 //        testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
         boolean includeLocalModel = true;
-        PublishTypes modelPublishType = PublishTypes.Party;
-        boolean useCrossValidation = true;
+        PublishTypes modelPublishType = PublishTypes.All;
+        boolean useCrossValidation = false;
         int foldCount = 10;
 
 
@@ -46,15 +46,24 @@ public class AdultTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(250);
+        List<Integer> dataLimits = Arrays.asList(500);
 
 //        List<PeerParam> peerParams = IntStream.range(1, 21).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
-                new PeerParam(10, 10)
+                new PeerParam(5, 5),
+                new PeerParam(10, 5),
+                new PeerParam(15, 5),
+                new PeerParam(20, 5),
+                new PeerParam(25, 5),
+                new PeerParam(30, 5),
+                new PeerParam(35, 5),
+                new PeerParam(40, 5),
+                new PeerParam(45, 5),
+                new PeerParam(50, 5)
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-4, 8).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(1, 2).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
                 new PrivacyParam(1.0)
