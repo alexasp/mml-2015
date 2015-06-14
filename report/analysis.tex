@@ -14,6 +14,8 @@ All prediction results given in this chapter are presented with mean and standar
 		Kumar\citep{kumar2012comparative}                                  & 0.1389 \\
 		Our optimal result (Local model, no noise, 1 peer)                & 0.100  \\
 		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
+		Aggregated model				                                  & 0.157  \\
+		Ensemble model				                                      & 0.157  \\
 		Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
 		Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
 		
@@ -33,8 +35,8 @@ All prediction results given in this chapter are presented with mean and standar
 	High privacy, few peers($\epsilon$=0.1, 50 peers)				  & 0.163  \\
 	Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
 	Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
-	Some result														  & 0.185 \\
-	Ensemble result													  &	0.165
+	Aggregated model														  & 0.185 \\
+	Ensemble model													  &	0.165
 	
 	
 \end{tabular}
@@ -43,9 +45,11 @@ All prediction results given in this chapter are presented with mean and standar
 \end{table}
 
 
-These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase dataset. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult dataset. Here we chose to provide baselines for two  approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.   
+These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase dataset. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult dataset. Here we chose to provide baselines for two approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
-   
+
+
+
 \todo[inline]{Expand upon our own baseline results, and compare them to the baselines found in literature}
 \todo[inline]{Add a segway onto the next sections, so that we can discuss the importance of the different parameters in a natural way}
 
@@ -77,12 +81,12 @@ Data is important, the more data a peer have, the greater the chance is that it 
 	\hspace{.001\linewidth}
 	\begin{minipage}{.49\linewidth}
 		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-withlocalmodel}
-		\captionof{figure}{$\epsilon = 0.1, \lambda = 2^{-2}$, 10 peers, 1 aggregations. Aggregated and local model.}
+		\captionof{figure}{$\epsilon = 0.1, \lambda = 2^{-2}$, 10 peers, 1 aggregation. Aggregated and local model.}
 		\label{fig:data_limit_test_withlocalmodel}
 	\end{minipage}
 	\begin{minipage}{.49\linewidth}
 		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-localmodelonly}
-		\captionof{figure}{$\epsilon = 2^{10}, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation. Local model only.}
+		\captionof{figure}{$\lambda = 2^{-2}$, 10 peers, local model only.}
 		\label{fig:data_limit_test_localmodelonly}
 	\end{minipage}
 \end{figure}
