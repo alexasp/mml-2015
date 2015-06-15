@@ -38,7 +38,7 @@ public class AdultTest {
 
         boolean includeLocalModel = true;
         PublishTypes modelPublishType = PublishTypes.All;
-        boolean useCrossValidation = true;
+        boolean useCrossValidation = false;
         int foldCount = 10;
 
 
@@ -46,18 +46,18 @@ public class AdultTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(150);
+        List<Integer> dataLimits = Arrays.asList(368);
 
 //        List<PeerParam> peerParams = IntStream.range(1, 21).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
-                new PeerParam(100, 20)
+                new PeerParam(10, 10)
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-3, 4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-8, 9).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1.0)
+                new PrivacyParam(1024)
         );
 
         if (useCrossValidation) {
