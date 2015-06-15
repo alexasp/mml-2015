@@ -21,7 +21,7 @@ In an ideal situation, databases which implement differential privacy mechanisms
 \subsection{Definition of Differential Privacy}
 The classic example for explaining a security breach is the case of Mr White: Suppose you have access to a database that allows you to compute the income of all residents in a specified area. If you knew that Mr White was going to move, simply querying the database before and after his relocation would allow you to deduce his income. 
 
-\begin{definition} The distance of two datasets, $d(D_1, D_2)$, denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
+\begin{definition} The distance of two data sets, $d(D_1, D_2)$, denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
 \end{definition}
 
 Formally, differential privacy is defined as follows:
@@ -38,13 +38,13 @@ Privacy preserving data analysis platforms such as PINQ\citep{mcsherry2009PINQ},
 
 \subsection{Privacy Budget}
 \label{section:privacy_budget}
-The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two datasets\citep{abowd2008protective}. \cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one dataset over the other.
+The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two data sets\citep{abowd2008protective}. \cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one data set over the other.
 
-Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the dataset. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 
+Privacy budgeting was introduced to limit the amount of information a data analyst can obtain about any individual with data records in the data set. The data analysis platform will track every query to ensure that both individual queries and aggregation queries do not exceed the given budget. This privacy standard forbids further queries to the database once the budget has been consumed. 
 
 Defining and depleting a privacy budget is possible due to the sequential composition property of $\epsilon$-differentially private mechanisms, as shown by \cite{mcsherry2009PINQ}. Given $N$ mechanisms $M_i$ that offer $\frac{\epsilon}{N}$-differential privacy, applying each mechanism $M_i$ in sequence offers $\epsilon$-differentially privacy.
 
-%When making a practical implementation, the $\epsilon$ value represents the privacy budget of the dataset. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowlfa edge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
+%When making a practical implementation, the $\epsilon$ value represents the privacy budget of the data set. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowlfa edge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
 
 
 \subsection{Noise Mechanisms}
@@ -77,7 +77,7 @@ This equation states that the sensitivity $\Delta f$ is the maximum difference i
 \subsubsection{Exponential Mechanism} \label{sec:Exponential Mechanism}
 The exponential mechanism proposed by \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the exponential mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
 
-More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input dataset is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
+More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input data set is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
 \textbf{Definition 4}: the sensitivity of score function $u_f$ is defined as
 \begin{eqnarray} \label{ExpoMecDef}
 S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
@@ -109,9 +109,9 @@ where the term $\lambda\|\theta\|^{2}_{2}$ is a regularization term to restrict 
 
 \subsection{Stochastic Gradient Descent}
 \label{sec:gradient_descent}
-We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full dataset for a each gradient step. This can be very time consuming for larger datasets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the dataset. If convergence is not achieved after a single pass, SGD can do multiple passes over the dataset as needed. This makes SGD more adaptable to varying dataset sizes than full batch gradient descent. 
+We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full data set for a each gradient step. This can be very time consuming for larger data sets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the data set. If convergence is not achieved after a single pass, SGD can do multiple passes over the data set as needed. This makes SGD more adaptable to varying data set sizes than full batch gradient descent. 
 
-Mini-batch SGD is a trade-off between the basic batch gradient descent and single instance SGD\citep{cotter2011batchsgd}. The dataset is divided into $|D|$/$b$ batches of size $b$, and a gradient step is taken for each batch. Given mini-batch SGD, the rule for updating each dimension $j$ of $\theta$ given a single batch of size $b$ becomes
+Mini-batch SGD is a trade-off between the basic batch gradient descent and single instance SGD\citep{cotter2011batchsgd}. The data set is divided into $|D|$/$b$ batches of size $b$, and a gradient step is taken for each batch. Given mini-batch SGD, the rule for updating each dimension $j$ of $\theta$ given a single batch of size $b$ becomes
 
 \subsubsection{Update Rule}
 
@@ -151,7 +151,7 @@ When aggregating K locally trained models, their approach computes the final mod
 \end{eqnarray}
 
 
-where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest dataset used in training of the K models. This means that they use a bound on output sensitivity of 
+where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest data set used in training of the K models. This means that they use a bound on output sensitivity of 
 
 \begin{eqnarray}
 \label{eq:aggregated_logistic_sensitivity}
@@ -159,7 +159,7 @@ where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-different
 \end{eqnarray}
 
 
-which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their dataset.
+which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their data set.
 
 We can improve upon the sensitivity result by Pathak et al. By following the same argument as in \cite{pathak2010diffprivhomo}, we can show that the sensitivity of the aggregated model is at most 
 
@@ -170,7 +170,7 @@ We can improve upon the sensitivity result by Pathak et al. By following the sam
 
 where K is the number of participants.
 
-\textit{Proof.} As in \cite{pathak2010diffprivhomo}, we consider a case where one record in data set $D$ is changed, giving the adjacent data set $D'$. This data set is partitioned to each of the participants $P_1$ through $P_K$ Assume that the change is in the dataset of participant $P_j$, then the change in the final aggregated model $\hat{\theta}^s$ will only be in $\hat{\theta}_j$, the local model of $P_j$. We denoted this changed model as $\hat{\theta}_j'$. Given the size of the smallest data set partition $n_{(1)}$, that there are K participants and that the sensitivity of $\hat{\theta}_j$ is at most $\frac{2}{\eta_j\lambda}$, we have that
+\textit{Proof.} As in \cite{pathak2010diffprivhomo}, we consider a case where one record in data set $D$ is changed, giving the adjacent data set $D'$. This data set is partitioned to each of the participants $P_1$ through $P_K$ Assume that the change is in the data set of participant $P_j$, then the change in the final aggregated model $\hat{\theta}^s$ will only be in $\hat{\theta}_j$, the local model of $P_j$. We denoted this changed model as $\hat{\theta}_j'$. Given the size of the smallest data set partition $n_{(1)}$, that there are K participants and that the sensitivity of $\hat{\theta}_j$ is at most $\frac{2}{\eta_j\lambda}$, we have that
 \todo{add term between first and second}
 $$
 \frac{P(\boldsymbol{\hat{w}^s}|D)}{P(\boldsymbol{\hat{w}^s}|D')} = \frac{P(\frac{\boldsymbol{\hat{w}_j}}{K} + \eta|D)}{P(\frac{\boldsymbol{\hat{w}_j'}}{K} + \eta|D')} = \frac{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j}}{K}\|_1]}{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j'}}{K}\|_1]}= \frac{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j}\|_1]}{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j'}\|_1]} $$
@@ -185,7 +185,7 @@ $$
 
 \todo{Add proof of above sensitivity}
 
-It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ datasets would allow a third party to learn information. For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about 
+It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ data sets would allow a third party to learn information. For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about 
 individual biometric records. 
 
 As stated by Dwork, groups of records can be protected \todo{Explain how we can protect whole user sets and the balance between data set sizes and limits} \cite{Dwork06differentialprivacy} Dwork points out that the end goal of differential privacy is allow learning aggregate information in a way that privacy. 

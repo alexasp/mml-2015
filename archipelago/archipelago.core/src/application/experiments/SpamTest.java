@@ -39,7 +39,7 @@ public class SpamTest {
 
         boolean includeLocalModel = false;
         PublishTypes modelPublishType = PublishTypes.All;
-        boolean useCrossValidation = true;
+        boolean useCrossValidation = false;
         int foldCount = 10;
 
 
@@ -47,21 +47,21 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(150);
+        List<Integer> dataLimits = Arrays.asList(368);
 
 //        List<PeerParam> peerParams = IntStream.range(1, 5).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
-                new PeerParam(5, 5),
-                new PeerParam(10, 5),
-                new PeerParam(15, 5),
-                new PeerParam(20, 5)
+                new PeerParam(10, 10)
+//                new PeerParam(10, 5),
+//                new PeerParam(15, 5),
+//                new PeerParam(20, 5)
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-3, -2).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-8, 4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1.0)
+                new PrivacyParam(0.01)
         );
 
         if (useCrossValidation) {
