@@ -45,7 +45,7 @@ All prediction results given in this chapter are presented with mean and standar
 \end{table}
 
 
-These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase dataset. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult dataset. Here we chose to provide baselines for two approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
+These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
 
 
@@ -54,7 +54,7 @@ These two tables form the baseline for the analysis of our classification framew
 \todo[inline]{Add a segway onto the next sections, so that we can discuss the importance of the different parameters in a natural way}
 
 \section{Importance of epsilon}
-As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a dataset by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
+As explained in section \ref{section:differential_privacy}, differential privacy works by disguising an individual's data in a data set by adding noise to their records. The amount of noise added is determined by the privacy parameter  $\epsilon$, and grows exponentially the closer the parameter gets to zero. 
 
 \begin{figure}[H]
 	\centering
@@ -63,7 +63,7 @@ As explained in section \ref{section:differential_privacy}, differential privacy
  	\label{fig:epsilon_big_range}
 \end{figure}
  
-Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^{-10}$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. The positive class rate in the UCI Spambase dataset is 0.4, so any error rate at this level is no better than a random classifier. The plot shows how sensitive output is to the values of $\epsilon$.
+Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\epsilon$ in our experiment. We wanted to test the effect of varying the $\epsilon$-value in the range from $2^{-10}$ to $2^9$, especially to find out how the classifier would perform when faced with data with high amount of noise added to it. The positive class rate in the UCI Spambase data set is 0.4, so any error rate at this level is no better than a random classifier. The plot shows how sensitive output is to the values of $\epsilon$.
 
 Figure \ref{fig:linear_epsilon_range} 
 
@@ -114,15 +114,22 @@ The observation we've made is therefore thoroughly grounded in theory, and is im
 		\captionof{figure}{$\epsilon = 0.1, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
 		\label{fig:regularization_normalepsilon}
 	\end{minipage}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/spambase/eps0.01,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testsetmean}
+		\captionof{figure}{$\epsilon = 0.01, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
+		\label{fig:regularization_lowepsilon}
+	\end{minipage}
 \end{figure}
 
 Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy for the Spambase data set, by setting $\epsilon$ so high that noise is essentially nonexistent. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class, which constitutes 60\% of the data set. This happens because the high regularization forces the parameter vector to the zero vector, resulting in uniform class probability for all samples. 
 
-On this particular dataset it appears that a logistic regression model has low risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the lower half of the range should offer reasonable performance. Choosing a level at the high end of this range could still be preferable, motivated by a desire to attain a model that is highly generalizable.
+On this particular data set it appears that a logistic regression model has low risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the lower half of the range should offer reasonable performance. Choosing a level at the high end of this range could still be preferable, motivated by a desire to attain a model that is highly generalizable.
 
-When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda. When epsilon is reduced, and therefore noise variance increased, the choice of regression becomes more clearly restricted than in the noise-free situation. Based on figure Figure \ref{fig:epsilon_big_range}, we picked $\epsilon = 0.1$ to attempt to visualize this effect. At this level of privacy we see a clear decrease in performance, while the models still are making better than random predictions. Figure \ref{fig:regularization_normalepsilon} shows mean error rate when $\epsilon$ is set to this level of privacy. The effect of noise is now clearly visible far into the same range of regularization, only 
+When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda. When epsilon is reduced, and therefore noise variance increased, the choice of regression becomes more clearly restricted than in the noise-free situation. Based on figure Figure \ref{fig:epsilon_big_range}, we picked $\epsilon = 0.1$ to attempt to visualize this effect. At this level of privacy we see a clear decrease in performance, while the models still are making better than random predictions. Figure \ref{fig:regularization_normalepsilon} shows mean error rate when $\epsilon$ is set to this level of privacy. The effect of noise is now clearly visible far into the range of regularization, only returning to comparable error rate when $\lambda = 2^{-2}$. 
 
+A further decrease in $\epsilon$ should shift the optimal regularization level even higher, eventually meeting with the point. This situation is shown in Figure \ref{fig:regularization_lowepsilon}, where the experiment moves into lower variance just as regularization is getting too high to support good model fit. The result is that there is no good value for $\lambda$. A situation like this could be remedied by either decreasing the level of privacy, or increasing the minimum amount of data available at the peers, both of which would decrease noise variance as given by Equation \ref{eq:aggregated_logistic_sensitivity}. This could be something to keep in mind if putting a differential privacy method into practice, whenever the sensitivity depends on data set size
 
+\todo[inline]{We should compare adult and spam, to show the impact of regularization on noise range - since adult handles higher regularization level. Add some adult figures like these into Appendix.}
 
 
 
