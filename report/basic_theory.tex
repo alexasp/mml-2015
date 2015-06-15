@@ -196,13 +196,13 @@ In ensemble learning, the predictions of individually trained models are combine
 
 We did not strictly use bagging according to its formal definition, as the bootstrap step was not used. In our approach models are instead trained on disjoint subsets of the training set, which are then published after being aggregated according to Equation \ref{eq:parametric_aggregation}. There can be many such models published, so they are added to ensembles and prediction is done in the same fashion as in bagging. 
 
-\section{Cross validation}
+\section{Cross-validation} \label{sec:cross_validation}
 
 We initially divided the data sets into a training set and a testing set, the latter being intended to evaluate the performance and properties of our approach. We needed to explore many different combinations and variations of our experiment during, but the test set should only be used as a final step. If the test set is used for repeated validation of different parameters, we would risk overfitting it and getting unrealistic test results. 
 
-One way to do reliable accuracy estimation is with cross validation, which makes more efficient use of training data than creating a separate holdout set and has less bias than as shown by \cite{kohavi1995crossvalidation}. Cross validation involves partitioning the training set into K disjoint sets. Then, for each $t \in [1, K]$ partition $t$ is used as the test set, and the remaining partitions are combined to form the training set. Accuracy is reported as number of correctly classified instances divided by the total number of instances over all K partitions. 
+One way to do reliable accuracy estimation is with cross-validation, which makes more efficient use of training data than creating a separate holdout set and has less bias than as shown by \cite{kohavi1995crossvalidation}. Cross-validation involves partitioning the training set into K disjoint sets. Then, for each $t \in [1, K]$ partition $t$ is used as the test set, and the remaining partitions are combined to form the training set. Accuracy is reported as number of correctly classified instances divided by the total number of instances over all K partitions. 
 
-Kohavi recommends 10-fold stratified cross validation. Stratified cross validation involves ensuring that each fold has the same class distribution as the original data set. . Since the data sets we tested with have thousands of records and close to uniform class distribution, we concluded that stratified folds was not necessary. Our experiments were evaluated with 10-fold cross validation with each fold being a random, disjoint subset of the training set.
+Kohavi recommends 10-fold stratified cross-validation. Stratified cross-validation involves ensuring that each fold has the same class distribution as the original data set. Since the data sets we tested with have thousands of records and close to uniform class distribution, we concluded that stratified folds was not necessary. Our experiments were evaluated with 10-fold cross validation with each fold being a random, disjoint subset of the training set.
 
 
 \section{Programming Frameworks Used}
