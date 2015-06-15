@@ -93,7 +93,7 @@ Data is important, the more data a peer have, the greater the chance is that it 
 
 \todo[inline]{Compare the figures about data limits, ie datalimittestwithoutlocalmodel and such. Clearly, with local model is better than without, but it is not clear whether local only or aggregated+local is better.}
 
-Figure \ref{fig:data_limit_test} indicate how the classification performance improves as the amount of data records available to each peer grows. When each peer only have a small amount of data to create their local classifier, the classifier tends to have display terrible performance. As peers gain more data, both the performance and the variance of the classifier improves.     
+Figure \ref{fig:data_limit_test_withlocalmodel} and \ref{fig:data_limit_test_withoutlocalmodel} indicate how the classification performance improves as the amount of data records available to each peer grows. When each peer only have a small amount of data to create their local classifier, the classifier tends to have display terrible performance. As peers gain more data, both the performance and the variance of the classifier improves.     
 
 The reason for this improvement is two-fold. 1: A bigger sample size for the logistic regression model generally leads to better performance \cite{peduzzi1996simulation}. 2: The sensitivity of logistic regression (see equation \ref{eq:logres_sensitivity}) is bounded by the size of the training set. What this means is that the more data a peer have available, the less amount of noise is needed to obfuscate their logistic model. 
 
@@ -104,25 +104,27 @@ The observation we've made is therefore thoroughly grounded in theory, and is im
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testset}
-		\captionof{figure}{$\epsilon = 0.1, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
-		\label{fig:regularization_normalepsilon}
-	\end{minipage}
-	\hspace{.001\linewidth}
-	\begin{minipage}{.49\linewidth}
 		\includegraphics[width=\linewidth]{fig/spambase/eps2e10,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testset}
 		\captionof{figure}{$\epsilon = 2^{10}, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
 		\label{fig:regularization_extremelyhighepsilon}
 	\end{minipage}
+	\hspace{.001\linewidth}
+	\begin{minipage}{.49\linewidth}
+		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testset}
+		\captionof{figure}{$\epsilon = 0.1, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
+		\label{fig:regularization_normalepsilon}
+	\end{minipage}
 \end{figure}
 
-Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy for the spambase data set, by setting $\epsilon$ so high that noise is essentially nonexistent. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class, which constitutes 60\% of the data set. This happen because the high regularization forces the parameter vector to the zero vector, resulting in uniform class probability for all samples. 
+Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy for the Spambase data set, by setting $\epsilon$ so high that noise is essentially nonexistent. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class, which constitutes 60\% of the data set. This happens because the high regularization forces the parameter vector to the zero vector, resulting in uniform class probability for all samples. 
 
-On this particular dataset it appears that a logistic regression model is not at risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the range $[10^{-5},10^{-2}]$ could be acceptable. Choosing a level at the high end of this range could be a good idea, to reduce the risk of overfitting
+On this particular dataset it appears that a logistic regression model has low risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the lower half of the range should offer reasonable performance. Choosing a level at the high end of this range could still be preferable, motivated by a desire to attain a model that is highly generalizable.
 
-Figure \ref{fig:regularization_normalepsilon} shows mean accuracy over a range of $\lambda$ similar to Figure \ref{fig:regularization_extremelyhighepsilon}, where $\epsilon$ is set to a level where the noise variance still has an effect on prediction accuracy, as seen in figure \ref{fig:epsilon_big_range}.
+When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda. When epsilon is reduced, and therefore noise variance increased, the choice of regression becomes more clearly restricted than in the noise-free situation. Based on figure Figure \ref{fig:epsilon_big_range}, we picked $\epsilon = 0.1$ to attempt to visualize this effect. At this level of privacy we see a clear decrease in performance, while the models still are making better than random predictions. Figure \ref{fig:regularization_normalepsilon} shows mean error rate when $\epsilon$ is set to this level of privacy. The effect of noise is now clearly visible far into the same range of regularization, only 
 
-When noise with significant variance is added to the model creation process, tuning $\lambda$ will adjust noise variance as well. Equation \ref{eq:aggregated_logistic_sensitivity} states that the noise variance is inversely proportional to $\lambda$. The choice of regularization then must balance the model flexibility at lower levels of $\lambda$ with the decreased noise at higher levels of lambda.
+
+
+
 
 \todo[inline]{Talk about how it is interesting that regularization now must respect something other than just model performance, and offer some guidelines on how regularization should be considered, especially in a setting like ours, with many independent parties}
 
@@ -134,8 +136,20 @@ As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we c
 
 The most obvious effect of globally publishing models is that the standard deviation is much lower than the group publishing case. This is not surprising.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig/adult/eps1.0,budg=eps,peers5-55,groups5,reg2e2-data500-pubAll-adult-groupbypeerverification-3-testsetmean}
+	\caption{Effect of peer numbers. Group size: 50. Publishing: All. Data: 500}
+	\label{fig:peer_range_constant_group}
+\end{figure}
+
+Figure \ref{fig:peer_range_constant_group} shows what happens when the aggregation group size stays fixed, but different numbers of peers are available. A higher number of peers mean that more models. In this experiment the aggregation group size was five, which means that just one aggregated model was produced at the low end of the range, while 10 models were produced at the high end. If there is any utility of aggregating models, it is not visible in the mean error rate for the Adult data set with this amount of records. We suspected that an effect would be stronger when the peers have less data, since aggregation should allow the peers to benefit from each other data. We tested with different amounts of available data as low as 75 instances per peer, but we made the same observations in these. The charts showing other levels of data availability are included in the Appendix.  \todo[inline]{Add figures to appendix that show our other tests}.
+
+One possible explanation for the small changes in error rate might be the uniform. In our current experimental setup, the data is partitioned randomly between the peers, which means that the peers will have same number of samples from the same data distribution. In reality, users might have very different numbers of samples with different distributions. This is discussed further in Section \ref{sec:Future Work} on Future Work. On the flip side, these experiments don't show any negative effects of predicting with an ensemble of aggregated models. While we expect that there are situations where ensemble prediction could be detrimental, such issues could be mitigated by actively removing less useful models from the ensemble as it grows.
+
 The truth is probably somewhere in the middle - we can't expect to easily publish models globally in all settings. Additionally, there might be situations were global publishing could be detrimental to real world performance - for instance, if there are strong geographical, temporal or demographic trends, it might be better to limit the amount of model sharing to suitable subsets.
 
+\todo[]{Replace this figure with table showing std numbers and performance for a particular regularization isntead.}
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.49\linewidth}
@@ -185,13 +199,13 @@ An alternative avenue for validating the value of doing aggregation could be to 
 
 \todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
 
-\subsection{Issues with cold start}
-
-Section \ref{sec:} important motivation for this project was the idea that application users should be able to retain ownership of their own data, and only share it to a degree that they choose.
-
-
-\todo[inline]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches. Essentially, we have already experimented with a kind of cold start situation when we try to performance numbers for peer\_count 1 to 50}
-
+%\subsection{Issues with cold start}
+%
+%Section \ref{sec:} important motivation for this project was the idea that application users should be able to retain ownership of their own data, and only share it to a degree that they choose.
+%
+%
+%\todo[inline]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches. Essentially, we have already experimented with a kind of cold start situation when we try to performance numbers for peer\_count 1 to 50}
+%
 
 
 
