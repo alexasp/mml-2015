@@ -3,7 +3,7 @@
 \chapter{Analysis}
 \label{chap:analysis}
 \todo[inline]{Make a table with baseline classification rate for logistic regression, put in our values. 1 Peer with no noise, 1 peer with noise, best case from other experiments that we want to highlight. This can lead to a discussion of why our results are not as good, where they show promise etc}
-All prediction results given in this chapter are presented with mean and standard deviation values. These values are computed by evaluating each combination of parameters with 10-fold cross validation and taking the mean and standard deviation of accuracy across the 10 data folds.
+All prediction results given in this chapter are presented with mean and standard deviation values. These values are computed by evaluating each combination of parameters with 10-fold cross-validation and taking the mean and standard deviation of accuracy across the 10 data folds.
 
 
 \section{Baseline Classification results and comparisons}
@@ -50,6 +50,10 @@ All prediction results given in this chapter are presented with mean and standar
 These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
 We have restricted our analysis to error rates, though confusion matrices and ROC-curves were produced for all of our experiments. The confusion matrices were used to verify that the classifiers were making better than trivial predictions, and we have included some in our Appendix. \todo[inline]{Include confusion matrices in appendix OR in analysis}
+
+Another important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough? We have validated with cross validation and tested with a held out test set, but this luxury is not available in a real setting. The ideal situation would be. 
+
+Ideally, peers could cooperate to form a sort of test set when the system is live by sending incoming data instances to each other. This would allow the system to respond more quickly to changes in data distribution, as deterioration in prediction accuracy can be measured in a near-global fashion as soon as the changes occur. This approach is problematic, since peers may want to keep all incoming data private. The other alternative would be to have peers measure their performance on their respective incoming data only. If peers have very different incoming data distributions, this would give a less biased estimate over time, but building a good estimate could take much longer, depending on the data rate.
 
 
 \todo[inline]{Expand upon our own baseline results, and compare them to the baselines found in literature}
@@ -126,7 +130,7 @@ The observation we've made is therefore thoroughly grounded in theory, and is im
 \subsection{Regularization in a low privacy setting}
 Figure \ref{fig:regularization_extremelyhighepsilon} shows the normal effect regularization has on accuracy for the Spambase data set, by setting $\epsilon$ so high that noise is essentially nonexistent. As the regularization parameter $\lambda$ grows large, the model becomes less able to fit the training data, eventually resulting in models predicting only the negative class, which constitutes 60\% of the data set. This happens because the high regularization forces the parameter vector to the zero vector, resulting in uniform class probability for all samples. 
 
-On this particular data set it appears that a logistic regression model has low risk of overfitting, since the cross validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the lower half of the range should offer reasonable performance. Choosing a level at the high end of this range could still be preferable, motivated by a desire to attain a model that is highly generalizable.
+On this particular data set it appears that a logistic regression model has low risk of overfitting, since the cross-validated error does not increase when the level of regularization is very low. Ignoring the effects of privacy mechanisms, this would mean that selecting some regularization parameter in the lower half of the range should offer reasonable performance. Choosing a level at the high end of this range could still be preferable, motivated by a desire to attain a model that is highly generalizable.
 
 \subsection{Regularization in a high privacy setting}
 
@@ -170,16 +174,14 @@ While it is an important goal to minimize error rates, the variance in performan
 	\caption{Variance among peers, Adult}
 	\label{table:peer_variance_adult}
 	\begin{tabular}{lll}
-		Model                  & Mean errror & Peer std. dev. \\
+		Model                  & Mean error & Peer std. dev. \\
 		Local, no privacy      & 0,179       & 0.017          \\
 		Aggregated, d. privacy & 0,185       & 0.006          \\       
 	\end{tabular}
 \end{table}        
 %figure showing that variances are very small
 
-We see that variance is smaller when the aggregated models are used, but the difference is not very big, as the variance is small in both cases. We believe the weakness of the effect might be for the same reason as the small amount of change in error rate seen in Section \ref{sec:aggregation_effects}. The data is distributed uniformly to the peers, which means that they will get fairly similar models as long as they have sample data to get close to what a model trained on the full data set would look like. Given a dataset partitioned into less uniform subsets, the model variance might increase and . In particular, However, this would also require additional changes such as implementing minimum data set sizes for participation, to avoid excessive noise being added in aggregation. Due to limited time, we have left this for future work.
-
-Another important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough?
+We see that variance is smaller when the aggregated models are used, but the difference is not very big, as the variance is small in both cases. We believe the weakness of the effect might be for the same reason as the small amount of change in error rate seen in Section \ref{sec:aggregation_effects}. The data is distributed uniformly to the peers, which means that they will get fairly similar models as long as they have sample data to get close to what a model trained on the full data set would look like. Given a data set partitioned into less uniform subsets, the model variance might increase and the beneficial effect of aggregations could become more apparent. However, this would require first attaining and preprocessing a suitable dataset. It would also require additional changes such as implementing minimum data set sizes for participation, to avoid excessive noise being added in aggregation. Due to limited time, this is left for future work.
 
 %below is old version
 
