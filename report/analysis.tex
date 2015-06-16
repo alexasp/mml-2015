@@ -47,7 +47,7 @@ All prediction results given in this chapter are presented with mean and standar
 
 These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
-
+We have restricted our analysis to error rates, though confusion matrices and ROC-curves were produced for all of our experiments. The confusion matrices were used to verify that the classifiers were making better than trivial predictions, and we have included some in our Appendix. \todo[inline]{Include confusion matrices in appendix OR in analysis}
 
 
 \todo[inline]{Expand upon our own baseline results, and compare them to the baselines found in literature}
@@ -158,6 +158,12 @@ The previous paragraphs considered effects of noise variance on the ability of p
 Figure \ref{fig:peer_range_constant_group} shows what happens when the aggregation group size stays fixed, but different numbers of peers are available. A higher number of peers mean that more models. In this experiment the aggregation group size was five, which means that just one aggregated model was produced at the low end of the range, while 10 models were produced at the high end. If there is any utility of aggregating models, it is not visible in the mean error rate for the Adult data set with this amount of records. We suspected that an effect would be stronger when the peers have less data, since aggregation should allow the peers to benefit from each other data. We tested with different amounts of available data as low as 75 instances per peer, but we made the same observations in these. The charts showing other levels of data availability are included in the Appendix.  \todo[inline]{Add figures to appendix that show our other tests}.
 
 One possible explanation for the small changes in error rate might be the uniformity of data distribution. In our current experimental setup, the data is partitioned randomly between the peers, which means that the peers will have same number of samples from the same data distribution. In reality, users might have very different numbers of samples with different distributions. This is discussed further in Section \ref{sec:Future Work} on Future Work. On the flip side, these experiments don't show any negative effects of predicting with an ensemble of aggregated models. While we expect that there are situations where ensemble prediction could be detrimental, such issues could be mitigated by actively removing less useful models from the ensemble as it grows.
+
+\section{Analysis of Model Variance}
+
+While it is an important goal to minimize error rates, the variance in performance across peers might be just as important. It could be better that all participants achieve sufficient predictive performance rather than having some peers with fantastic performance while others make useless predictions.
+
+Another important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough?
 
 %below is old version
 
