@@ -45,7 +45,7 @@ All prediction results given in this chapter are presented with mean and standar
 \end{table}
 
 
-These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \cite{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first\cite{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
+These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \citep{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first \citep{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
 
 
@@ -68,8 +68,7 @@ Figure \ref{fig:epsilon_big_range} shows the effect of the privacy parameter $\e
 Figure \ref{fig:linear_epsilon_range} 
 
 \section{The importance of data} \label{importance_of_data}
-One of the more important findings for 
-Data is important, the more data a peer have, the greater the chance is that it will make a decent local classifier. J
+As can be told from Figure \ref{fig:data_limit_test_localmodelonly}, \ref{fig:data_limit_test_withlocalmodel} and \ref{fig:data_limit_test_localmodelonly}, the amount of data available for each peer is important. The more data a peer have, the greater the chance is that it will make a decent local classifier. 
 
 \begin{figure}[h!]
 	\centering
