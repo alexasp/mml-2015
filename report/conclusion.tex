@@ -29,10 +29,10 @@ Despite of all the critique and the difficulty it brings, we have still found it
 
 
 \section{Reflection on implementation challenges and solution}
-\todo{Write some reflections on what we think about how certain problems were solved and should have been solved. Maybe pros and cons on using jade.}
-What did we learn from the basic structure of creating our framework?
-What difficulties did we encounter?
-What should have been done better? 
+
+While JADE was useful in offering an intuitive abstraction for modelling peers, it was challenging to use dynamically. In particular, resetting experiments proved difficult. Since creating a JADE environment creates a new process which also opens a particular TCP port. If a JADE environment was created using the same port, the new instance would fail to start up. Since creation and teardown of the JADE platform is not instantaneous, it was necessary. We also had issues with re-registering new instances of some of the agents we used, since the unregistering is an asynchronous call. All in all, it might have been simpler and less error prone to create a multi-threaded application using a tool that required less investment, like OpenMP. On the other hand, such an implementation would not lend itself as easily to a production prototype - our JADE implementation could with some extensions be tested on in a setting with many devices.
+
+
 
 \section{Threats To Validity}
 \todo[inline]{This section with threats to validity should be moved somewhere else. It does not fit in a reflections/conclusion chapter. Maybe at the end of the analysis? }
