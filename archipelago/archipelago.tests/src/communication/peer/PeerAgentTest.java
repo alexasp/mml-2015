@@ -8,11 +8,8 @@ import communication.PeerAgent;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import communication.peer.behaviours.PeerUpdateBehavior;
-import experiment.ExperimentConfiguration;
-import jade.core.Agent;
 import learning.EnsembleModel;
 import learning.ParametricModel;
-import org.apache.commons.math3.analysis.function.Exp;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,7 +47,7 @@ public class PeerAgentTest {
         stubBehaviourFactory(_behaviourFactory, _parameters);
         stubMessageFacadeFactory(_messageFacadeFactory);
 
-        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations, _peerGraph, _parameters, _updateCost);
+        _peerAgent = new PeerAgent(_data, _behaviourFactory, _ensemble, _messageFacadeFactory, _iterations, _peerGraph, _parameters, _updateCost, configuration);
     }
 
 

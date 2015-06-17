@@ -3,6 +3,7 @@ package communication;
 import communication.messaging.MessageFacade;
 import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
+import experiment.ExperimentConfiguration;
 import jade.core.Agent;
 import learning.EnsembleModel;
 import learning.LabeledSample;
@@ -23,13 +24,15 @@ public class PeerAgent extends Agent {
     private int _parameters;
     private double _updateCost;
     private ParametricModel _trainedModel;
+    private ExperimentConfiguration _configuration;
 
-    public PeerAgent(List data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost) {
+    public PeerAgent(List data, BehaviourFactory behaviourFactory, EnsembleModel ensemble, MessageFacadeFactory messageFacadeFactory, int iterations, PeerGraph _peerGraph, int parameters, double updateCost, ExperimentConfiguration configuration) {
         _ensemble = ensemble;
         _data = data;
         _iterations = iterations;
         _parameters = parameters;
         _updateCost = updateCost;
+        _configuration = configuration;
         _messageFacade = messageFacadeFactory.getFacade(this);
 
         addBehaviour(behaviourFactory.getModelCreation(this, parameters));
@@ -57,8 +60,12 @@ public class PeerAgent extends Agent {
     }
 
     public List<Double> labelData(List<LabeledSample> test) {
-        return _ensemble.label(test);
-//        return getLocalModel().label(test);
+        if(_configuration.classifyLocallyOnly) {
+            return getLocalModel().label(test);
+        }
+        else{
+            return _ensemble.label(test);
+        }
     }
 
     public int getIterations() {
