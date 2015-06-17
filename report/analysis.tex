@@ -37,19 +37,29 @@ All prediction results given in this chapter are presented with mean and standar
 	Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
 	Aggregated model														  & 0.185 \\
 	Ensemble model													  &	0.165
-	
-	
-\todo[inline]{Add some confusion matrices here, ish.}
-	
 \end{tabular}
 \caption{Table with baseline results from the Adult Dataset}
 \label{tab:baseline_class_results_adult}
 \end{table}
 
+	
+\begin{table}[h]
+	\centering
+	\caption{Confusion Matrix: Adult. Local model only. }
+	\label{my-label}
+	\begin{tabular}{llll}
+		& \multicolumn{3}{c}{Actual}                                                      \\
+		\multicolumn{1}{c}{} &                        & 1                         & 0                          \\ \cline{3-4} 
+		Predicted            & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{2097} & \multicolumn{1}{l|}{880}   \\ \cline{3-4} 
+		& \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1749} & \multicolumn{1}{l|}{11555} \\ \cline{3-4} 
+	\end{tabular}
+\end{table}
+
+
 
 These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \citep{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first \citep{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
-We have restricted our analysis to error rates, though confusion matrices and ROC-curves were produced for all of our experiments. The confusion matrices were used to verify that the classifiers were making better than trivial predictions, and we have included some in our Appendix. \todo[inline]{Include confusion matrices in appendix OR in analysis}
+We have restricted our analysis to error rates, though confusion matrices and ROC-curves were produced for all of our experiments. The confusion matrices were used to verify that the classifiers were discriminating between the two classes, and not just making trivial predictions. The remaining confusion matrices are included in the Appendix. \todo[inline]{Include confusion matrices in appendix OR in analysis}
 
 Another important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough? We have validated with cross validation and tested with a held out test set, but this luxury is not available in a real setting. One option would be to design a scheme to perform cross validation at the aggregation group level.
 
