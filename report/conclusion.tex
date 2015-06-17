@@ -33,6 +33,18 @@ Based on these developments, as well as our own findings in this area, we find i
 
 While JADE was useful in offering an intuitive abstraction for modelling peers, it was challenging to use dynamically. In particular, resetting experiments proved difficult. Since creating a JADE environment creates a new process which also opens a particular TCP port. If a JADE environment was created using the same port, the new instance would fail to start up. Since creation and teardown of the JADE platform is not instantaneous, it was necessary. We also had issues with re-registering new instances of some of the agents we used, since the unregistering is an asynchronous call. All in all, it might have been simpler and less error prone to create a multi-threaded application using a tool that required less investment, like OpenMP. On the other hand, such an implementation would not lend itself as easily to a production prototype - our JADE implementation could with some extensions be tested on in a setting with many devices.
 
+\section{Conclusion and final remarks}
+\textbf{RQ1: How big is the loss of accuracy in a distributed, differentially private system, compared to a centrally trained model}
+Answer:
+
+\vspace{2mm}
+\noindent
+\textbf{RQ2: How can the variance in accuracy between participants be minimized?}
+Answer:
+
+\vspace{2mm}
+\noindent
+\textbf{RQ3: Can we validate and enhance earlier research in distributed differentially private machine learning?}
 
 
 \section{Threats To Validity}
@@ -76,18 +88,6 @@ Work on a system that would work in a online setting. It could potentially impro
 Security mechanisms for stopping sabotage. In our current system we have assumed that the peers will be honest-but-curious when sharing their data, meaning that we have no way of detecting dishonest peers. In a real world system there would need to be safeguards against people which intend to either destroy the validity of the classifier created by feeding misinformation into the system, or people who tries to intercept and expose the data from other peers. Potential research ares would be intrusion detection in distributed systems, fraud detection, trust networks and reputation systems, and further research into encryption.  
 
 
-\section{Conclusion and final remarks}
-\textbf{RQ1: How big is the loss of accuracy in a distributed, differentially private system, compared to a centrally trained model}
-Answer:
-
-\vspace{2mm}
-\noindent
-\textbf{RQ2: How can the variance in accuracy between participants be minimized?}
-Answer:
-
-\vspace{2mm}
-\noindent
-\textbf{RQ3: Can we validate and enhance earlier research in distributed differentially private machine learning?}
 
 \newpage
 \listoftodos[Notes]
