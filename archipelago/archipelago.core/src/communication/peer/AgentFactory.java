@@ -6,7 +6,6 @@ import communication.PeerAgent;
 import communication.messaging.MessageFacadeFactory;
 import communication.messaging.PeerGraph;
 import experiment.DataLoader;
-import experiment.Experiment;
 import experiment.ExperimentConfiguration;
 import jade.core.AID;
 import learning.EnsembleModel;
@@ -14,7 +13,6 @@ import learning.LabeledSample;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -41,7 +39,7 @@ public class AgentFactory {
 
         for(List<LabeledSample> partition : partitions){
             agents.add(new PeerAgent(partition, _behaviourFactory, new EnsembleModel(), _messageFacadeFactory,
-                    configuration.aggregations, _peerGraph, configuration.parameters, configuration.updateCost));
+                    configuration.aggregations, _peerGraph, configuration.parameters, configuration.updateCost, configuration));
         }
 
         return agents;

@@ -38,6 +38,7 @@ public class SpamTest {
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
         boolean includeLocalModel = false;
+        boolean classifyLocallyOnly = false;
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = false;
         int foldCount = 10;
@@ -47,9 +48,9 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(368);
+        List<Integer> dataLimits = Arrays.asList(250);
 
-//        List<PeerParam> peerParams = IntStream.range(1, 5).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
+//        List<PeerParam> peerParams    = IntStream.range(1, 5).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
                 new PeerParam(10, 10)
 //                new PeerParam(10, 5),
@@ -58,10 +59,10 @@ public class SpamTest {
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(-8, 4).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(0.01)
+                new PrivacyParam(1.0)
         );
 
         if (useCrossValidation) {
@@ -91,6 +92,7 @@ public class SpamTest {
                         ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
                         configuration.publishType = modelPublishType;
                         configuration.localModelInEnsemble = includeLocalModel;
+                        configuration.classifyLocallyOnly = classifyLocallyOnly;
 
                         testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
                     }
