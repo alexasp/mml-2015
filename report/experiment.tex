@@ -6,7 +6,7 @@
 \section{Experiment plans}
 \label{sec:experiment_plan}
 
-In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}.
+In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. 
 
 
 \subsection{Establishing Logistic Regression Baselines}
@@ -14,9 +14,9 @@ In this section we list the set of experiments we have performed in order to ans
 \begin{table}[h]
 	\centering
 	\caption{Our baseline experiments}
-	\label{my-label}
+	\label{tab:experiments_baselines}
 	\begin{tabular}{|l|l|l|l|}
-		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data} & $\boldsymbol{\lambda}$      \\
+		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$      \\
 		\hline
 		Spam, centralized  & 1     & 3680 & $[2^{-8},2^{-8}]$ \\
 		Adult, centralized & 1     & 3000 & $[2^{-8},2^{-8}]$ \\
@@ -33,14 +33,14 @@ In this project we have implemented training of a logistic regression, the aggre
 
 \subsubsection{Changes in $\epsilon$}
 
-The variance of the noise added when producing aggregated models is proportional to the parameter $\epsilon$. This should. To confirm this behavior, we ran experiments with all parameters fixed except for $\epsilon$, which we tested over a wide range. Since noise is only added when locally trained models are aggregated, it was necessary to test with more than one participating peer.
+The variance of the noise added when producing aggregated models is proportional to the parameter $\epsilon$. To confirm this behavior, we ran experiments with all parameters fixed except for $\epsilon$, which we tested over a wide range. Since noise is only added when locally trained models are aggregated, it was necessary to test with more than one participating peer.
 
 \begin{table}[h]
 	\centering
-	\caption{My caption}
-	\label{my-label}
+	\caption{Effects of privacy level}
+	\label{tab:experiments_privacy_level}
 	\begin{tabular}{|l|l|l|l|l|}
-		\textbf{Experiment Name}            & \textbf{Peers} & \textbf{Data} &
+		\textbf{Experiment Name}            & \textbf{Peers} & \textbf{Data per peer} &
 		 $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$                                              \\
 		 \hline
 		Spam, observing $\epsilon$ & 10    & 368  & $2^{-2}$  & $[2^{-8}, 2^{8}]$
@@ -51,7 +51,26 @@ All the peers in this experiment collaborate to produce one aggregated model, an
 
 \subsubsection{Changes in $\lambda$}
 
+As stated by Equation \ref{eq:aggregated_logistic_sensitivity}, the regularization parameter $\lambda$ is inversely proportional to the variance of the noise added to aggregated models. For this reason we expected that higher values of regularization should be help counter the detrimental effect of lower values of $\epsilon$. However, as regularization grows too large, predictive performance should degrade as the models become unable to fit to data. To confirm these effects, we tested wide ranges of regularization strength with different levels of privacy.
+
+\begin{table}[h]
+	\centering
+	\caption{Effects of regularization strength}
+	\label{tab:experiments_regularization_strength}
+	\begin{tabular}{|l|l|l|l|l|}
+		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$         & $\boldsymbol{\epsilon}$ \\
+		\hline
+		Spam, observing $\lambda$, no privacy       & 10    & 368  & $[2^{-8}, 2^{3}]$ & $2^{10}$   \\
+		Spam, observing $\lambda$, common privacy   & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.1$      \\
+		Spam, observing $\lambda$, stronger privacy & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.01$    
+	\end{tabular}
+\end{table}
+
+The values of $\epsilon$ for the  common privacy level in Table \ref{tab:experiments_regularization_strength} is chosen based on \cite{dwork2008differential}, which suggests that $0.1$ is a common value.
+
 \subsection{Effects of Data Availability}
+
+
 
 \subsection{Effects of User Base Growth}
 
