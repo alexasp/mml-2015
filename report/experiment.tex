@@ -6,8 +6,81 @@
 \section{Experiment plans}
 \label{sec:experiment_plan}
 
-In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}.
+In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. 
 
+
+\subsection{Establishing Logistic Regression Baselines}
+
+\begin{table}[h]
+	\centering
+	\caption{Our baseline experiments}
+	\label{tab:experiments_baselines}
+	\begin{tabular}{|l|l|l|l|}
+		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$      \\
+		\hline
+		Spam, centralized  & 1     & 3680 & $[2^{-8},2^{-8}]$ \\
+		Adult, centralized & 1     & 3000 & $[2^{-8},2^{-8}]$ \\
+		Susy, centralized  & 1     & 3000 & $[2^{-8},2^{-8}]$
+	\end{tabular}
+\end{table}
+
+These experiments were intended establish the best achievable performance with our implementation of logistic regression trained by SGD. They correspond to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to established a baseline that we can compare the models that are formed by our approach in a private and decentralized manner.
+
+
+\subsection{Confirming Expected Effects of Differential Privacy}
+
+In this project we have implemented training of a logistic regression, the aggregation mechanism guaranteeing differential privacy and the communication scheme that forms groups of peers to create aggregate models. When tuning the parameters of the implementation, we expected certain changes in the measured performance based on the theoretical and experimental results of previous work. The experiments in this section is intended to be validation of our implementation. In particular, we expected certain impacts when changing the privacy parameter $\epsilon$ and the regularization parameter $\lambda$. By confirming the expected behavior, we can have increased confidence in the correctness of our implementation, while also visualizing the dynamics of differential privacy.
+
+\subsubsection{Changes in $\epsilon$}
+
+The variance of the noise added when producing aggregated models is proportional to the parameter $\epsilon$. To confirm this behavior, we ran experiments with all parameters fixed except for $\epsilon$, which we tested over a wide range. Since noise is only added when locally trained models are aggregated, it was necessary to test with more than one participating peer.
+
+\begin{table}[h]
+	\centering
+	\caption{Effects of privacy level}
+	\label{tab:experiments_privacy_level}
+	\begin{tabular}{|l|l|l|l|l|}
+		\textbf{Experiment Name}            & \textbf{Peers} & \textbf{Data per peer} &
+		 $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$                                              \\
+		 \hline
+		Spam, observing $\epsilon$ & 10    & 368  & $2^{-2}$  & $[2^{-8}, 2^{8}]$
+	\end{tabular}
+\end{table}
+
+All the peers in this experiment collaborate to produce one aggregated model, and the full privacy budget is expended in the single aggregation. When the peers are tasked to label the test data, they use their local model and the aggregated model in an ensemble.
+
+\subsubsection{Changes in $\lambda$}
+
+As stated by Equation \ref{eq:aggregated_logistic_sensitivity}, the regularization parameter $\lambda$ is inversely proportional to the variance of the noise added to aggregated models. For this reason we expected that higher values of regularization should be help counter the detrimental effect of lower values of $\epsilon$. However, as regularization grows too large, predictive performance should degrade as the models become unable to fit to data. To confirm these effects, we tested wide ranges of regularization strength with different levels of privacy.
+
+\begin{table}[h]
+	\centering
+	\caption{Effects of regularization strength}
+	\label{tab:experiments_regularization_strength}
+	\begin{tabular}{|l|l|l|l|l|}
+		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$         & $\boldsymbol{\epsilon}$ \\
+		\hline
+		Spam, observing $\lambda$, no privacy       & 10    & 368  & $[2^{-8}, 2^{3}]$ & $2^{10}$   \\
+		Spam, observing $\lambda$, common privacy   & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.1$      \\
+		Spam, observing $\lambda$, stronger privacy & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.01$    
+	\end{tabular}
+\end{table}
+
+The values of $\epsilon$ for the  common privacy level in Table \ref{tab:experiments_regularization_strength} is chosen based on \cite{dwork2008differential}, which suggests that $0.1$ is a common value.
+
+\subsection{Effects of Data Availability}
+
+
+
+\subsection{Effects of User Base Growth}
+
+\subsection{Minimizing Peer Model Variance}
+
+\subsection{Effects of Model Propegation}
+
+\subsection{Effects of Aggregation Participation}
+
+\subsection{Value of Budgeting Privacy}
 
 \section{Results}
 
@@ -16,7 +89,7 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 %output of various basic experiments intended to answers RQs
 \begin{table}[h]
 	\begin{tabular}{ll}
-		\begin{tabular}[c]{@{}l@{}}Error Rate/Spambase\end{tabular} &        \\
+		\textbf{Spambase} & \textbf{Error rate}\\
 		Our optimal result (Local model, no noise, 1 peer)                & 0.100  \\
 		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
 		Aggregated model				                                  & 0.157  \\
@@ -32,13 +105,12 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 
 \begin{table}[h]
 	\begin{tabular}{ll}
-		\begin{tabular}[c]{@{}l@{}}Error Rate/Adult\end{tabular} &        \\
-		%	Krempl,Decision tree with bagging\citep{}                                    & 0.196 \\	
+		\textbf{Adult} & \textbf{Error rate} \\
 		Our optimal result (Local model, e=1.0, 10 peer)                  & 0.157 \\
 		High privacy, few peers($\epsilon$=0.1, 50 peers)				  & 0.163  \\
 		Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
 		Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
-		Aggregated model														  & 0.185 \\
+		Aggregated model												  & 0.185 \\
 		Ensemble model													  &	0.165
 	\end{tabular}
 	\caption{Table with baseline results from the Adult Dataset}
@@ -46,6 +118,7 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 \end{table}
 
 %testing range of epsilon to see expected behavior
+\todo[inline]{Consider rerunning this experiment without local model}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{fig/spambase/eps2e-8-2e8,budg=eps,peers10,groups10,reg2e-2-data368-pubAll-spam-baseline-testset}
