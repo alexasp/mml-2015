@@ -68,11 +68,26 @@ As stated by Equation \ref{eq:aggregated_logistic_sensitivity}, the regularizati
 
 The values of $\epsilon$ for the  common privacy level in Table \ref{tab:experiments_regularization_strength} is chosen based on \cite{dwork2008differential}, which suggests that $0.1$ is a common value.
 
-\subsection{Effects of Data Availability}
+\subsection{Changes in Data Availability}
 
+As we are pursuing a decentralized setting, we wanted to compare how the local, the aggregated models and both of them in an ensemble respond to changes in data availability.
 
+\begin{table}[h]
+	\centering
+	\caption{Effects of data availability}
+	\label{tab:experiments_data_availability}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		\textbf{Experiment Name}                                 & \textbf{Peers} & \textbf{Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & \textbf{Type}       \\
+		\hline
+		Spambase, data availability, only local         & 10    & 360  & $2^{-2}$  & $0.1$      & Local      \\
+		Spambase, data availbaility, only aggregated    & 10    & 360  & $2^{-2}$  & $0.1$      & Aggregated \\
+		Spambase, observing $\lambda$, both in ensemble & 10    & 360  & $2^{-2}$  & $0.1$      & Ensemble  
+	\end{tabular}
+\end{table}
 
 \subsection{Effects of User Base Growth}
+
+
 
 \subsection{Minimizing Peer Model Variance}
 
