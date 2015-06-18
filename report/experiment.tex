@@ -85,15 +85,39 @@ As we are pursuing a decentralized setting, we wanted to compare how the local, 
 	\end{tabular}
 \end{table}
 
-\subsection{Effects of User Base Growth}
+\subsection{Changes in Number of Participants}
 
-
+\begin{table}[h]
+	\centering
+	\caption{Effects of number of peers}
+	\label{my-label}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		\textbf{Experiment Name}                & \textbf{Peers}      & \textbf{Group size} & \textbf{Data per peer} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ \\
+		\hline
+		Adult, increasing participants & {[}5-50{]} & 5          & 500  & $2^{2}$   & $1.0$     
+	\end{tabular}
+\end{table}
 
 \subsection{Minimizing Peer Model Variance}
 
-\subsection{Effects of Model Propegation}
+In these experiments we wish to. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
 
-\subsection{Effects of Aggregation Participation}
+\begin{table}[h]
+	\centering
+	\caption{My caption}
+	\label{my-label}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
+		\hline
+		Adult, peer variance, only local       & 10          & 250        & $2^{2}$   & $1.0$      & Local      \\
+		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\
+		Adult, peer variance, ensemble of both & 10          & 250        & $2^{2}$   & $1.0$      & Ensemble  
+	\end{tabular}
+\end{table}
+
+\subsection{Effects of Model Propagation}
+
+\subsection{Effects of Aggregation Group Sizes}
 
 \subsection{Value of Budgeting Privacy}
 
@@ -200,10 +224,12 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 	\centering
 	\caption{Variance among peers, Adult}
 	\label{table:peer_variance_adult}
-	\begin{tabular}{lll}
-		Model                  & Mean error & Peer std. dev. \\
-		Local, no privacy      & 0,179       & 0.017          \\
-		Aggregated, d. privacy & 0,185       & 0.006          \\       
+	\begin{tabular}{|l|l|l|}
+		\textbf{Model}                  & \textbf{Mean error} & \textbf{Peer std. dev.} \\
+		\hline
+		Local, no privacy      & 0,175 & 0.006 \\
+		Aggregated, d. privacy & 0,158 & 0.002 \\
+		Ensemble with both & 0.166 & 0.002 \\
 	\end{tabular}
 \end{table}      
 
