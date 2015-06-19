@@ -42,6 +42,10 @@ Answer:
 \textbf{RQ2: How can the variance in accuracy between participants be minimized?}
 Answer:
 
+Since our tests involved uniform distributions of data among the participants, we observed very low variance in accuracy even in the predictions of locally trained models. While it is clear that variance will be zero if all peers use the same, aggregated models, the gain is very small. Due to this, we have to conclude that in a setting with uniform data distribution among participants, there is no compelling reason to use the aggregates if the goal is to reduce variance. We believe that experiments in future work conducted with non-uniform data distribution might lead to a different conclusion.
+
+Note that we did in some cases see better error rate for the aggregated model than the locals, so when considering both the error rate and its variance the aggregated model can be the best choice despite the insignificant difference in variance.
+
 \vspace{2mm}
 \noindent
 \textbf{RQ3: Can we validate and enhance earlier research in distributed differentially private machine learning?}
