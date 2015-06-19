@@ -7,7 +7,7 @@
 %
 % At its fundamental core,  it is merely a neat mathematical guarantee for the participants in a datasets that they will not be affected by providing their data for analysis.    
 
-\section{Reflections on Privacy and Utility }
+\section{Reflections on Privacy and Utility } \label{sec:privacy_utility_reflection}
 
 Although the promise of differential privacy (see Section \ref{section:differential_privacy}) seems to be an ideal guarantee for each of the data subjects in a data set, it has received mixed reviews from legal scholars and computer scientist in it usefulness for resolving privacy-utility trade-offs. Narayanan and Shmatikov praised differential privacy as "a major step in the right direction\citep{narayanan2010myths}". Sarathy and Muralidhar, on the other hand, contend that differentially private mechanisms are impracticable in computationally intensive context, as well offering either very little privacy or very little utility\citep{Sarathy2011evaluating}. Xiao et al. also criticized that the mechanisms often placed undue burdens on data researchers due to decreased utility, especially with large data sets used in research on populations\citep{xiao2011differential}. UCLA law professor Paul Ohm presented a legal review of current anonymization techniques, including differential privacy, and practically dismissed it as a possible solution to the utility-privacy trade-off. His critique was based on several factors; Such as the mechanism not being very intuitive, having limited usefulness in high noise situations, and potentially bug-prone security functions. He concluded that "utility and privacy are, at bottom, two goals at war with one another. In order to be useful, anonymized data must be imperfectly anonymous\citep{ohm2010brokenPrivacyPromise}."
 
@@ -34,8 +34,8 @@ Based on these developments, as well as our own findings in this area, we find i
 While JADE was useful in offering an intuitive abstraction for modelling peers, it was challenging to use dynamically. In particular, resetting experiments proved difficult. Since creating a JADE environment creates a new process which also opens a particular TCP port. If a JADE environment was created using the same port, the new instance would fail to start up. Since creation and teardown of the JADE platform is not instantaneous, it was necessary. We also had issues with re-registering new instances of some of the agents we used, since the unregistering is an asynchronous call. All in all, it might have been simpler and less error prone to create a multi-threaded application using a tool that required less investment, like OpenMP. On the other hand, such an implementation would not lend itself as easily to a production prototype - our JADE implementation could with some extensions be tested on in a setting with many devices.
 
 \section{Conclusion and final remarks}
-\textbf{RQ1: How big is the loss of accuracy in a distributed, differentially private system, compared to a centrally trained model}
-Answer:
+\textbf{RQ1: How big is the loss of accuracy in a distributed, differentially private system, compared to a centrally trained model?} \\
+We have found that under ideal conditions and perfectly tuned parameters, the loss of accuracy can be minimized to a negligible difference compared to a centralized and noise-less solution. We have however noted in our reflection that the research community have not yet reached consensus on appropriate standards for the privacy parameter $\epsilon$, but our results indicate that a range between 0.1 and 1.0 seems like an ideal range. Further testing and standardization by the community is ultimately needed before deciding in which situations different values will be appropriate.
 
 \vspace{2mm}
 \noindent
@@ -48,7 +48,7 @@ Note that we did in some cases see better error rate for the aggregated model th
 
 \vspace{2mm}
 \noindent
-\textbf{RQ3: Can we validate and enhance earlier research in distributed differentially private machine learning?}
+\textbf{RQ3: Can we validate and enhance earlier research in distributed differentially private machine learning?} \\
 We have validated the research performed by \cite{pathak2010diffprivhomo} by using their proposed solution as a baseline, and then extending it with some design of our own. We've ran similar tests on the same dataset as they did, and found that our framework classified with a mean error of 0.165 compared to their best case of 0.24. When we ran the experiment with the same configuration as them, ergo without our upgrades, we achieved a mean error of 0.185. This indicates that they might have an non-optimal implementation, or that some details of their configuration might be missing or misleading. 
 
 \section{Threats To Validity}
