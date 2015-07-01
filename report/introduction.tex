@@ -1,0 +1,165 @@
+%===================================== CHAP 1 =================================
+
+\chapter{Introduction}
+All over the world people are interacting with technology more than ever; when using their cell phone, shopping online, visiting a doctor who uses electronic records, and in countless other acts. This usage generates a massive amount of information, leading to data being more deeply integrated into our daily lives than ever before. Sintef published a report in 2013 which stated that: "A full 90\% of all the data in the world has been generated over the last two years \citep{dragland2013big}." With this massive influx of information, new fields of both academic study and commercial interest have appeared to find out how to best analyze this data. 
+
+The terms "big data" and "analytics" have been widely used as common designations for this emerging field of technology. The communal definition for describing big data stems from a 2001 research report\citep{laney2001dataVs}, in which analyst Doug Laney defined the problem of being a three-dimensional challenge: "“Big data is high-volume, -velocity and -variety information assets that demand cost-effective, innovative forms of information processing for enhanced insight and decision making." The first part of his challenge, commonly known as the 3 Vs of big data, deals with the necessary qualifications for data to be called "big data", while part two and three is the how and why.  
+   
+The wide variety of the potential applications of big data analytics have also raised essential questions about whether our social and ethical norms are sufficient to protect privacy in a world which has entered "the era of big data". Both in the European Union and in the United States there have been efforts made to create new laws for handling data privacy. The Council to the President, an advisory group to the US President, concluded in their 2014 report \citep{house2014bigdata} that preserving privacy values would be their number one recommendation when designing a new policy framework for big data. Furthermore, they advised that more than 70 million USD should be made available to federal research in privacy-enhancing technologies. 
+
+\section{Objective and Scope / Problem Statement}
+\label{sec:problem_statement}
+The objective of this study is to contribute to the aforementioned field of study, more specifically in the area of Privacy-Preserving Data Mining (PPDM). In our work we explore the utility of employing a privacy-preserving technique called differential privacy. Relying on previous research on differential privacy, homomorphic encryption, and peer to peer communication, we would like to create an framework that allows for distributed, scalable machine learning while preserving the privacy of the participants. 
+
+\vspace{3mm}
+\noindent\textbf{RQ1: How big is the loss of accuracy in a distributed, differentially private system, compared to a centrally trained model?}
+
+\noindent While there have been research on both distributed and differentially private machine learning system, there have been very little research done on a combination of both. Results from research on differential privacy indicate that there often is a trade-off between privacy and a loss of accuracy. We want to study this trade-off in our distributed approach and analyze which factors comes into play and how they can be handled in a way that leads to an optimal result. 
+
+\vspace{3mm}
+\noindent
+\textbf{RQ2: How can the variance in accuracy between participants be minimized?}
+
+\noindent Our system architecture is based on a notion of independent peers which collaborate to create aggregated logistic regression models which is used for classification. Due to there not being one single centralized classifier, there will most likely be a variance in the accuracy of the classifiers each peer hold. We want to explore options on how to reduce this variance, so that we can reduce the likelihood of one peer having a well-performing classifier while another produces poor classification results. 
+
+\vspace{3mm}
+\noindent
+\textbf{RQ3: Can we validate and enhance earlier research in distributed differentially private machine learning?}
+
+\noindent Our own research does not exist in a vacuum, so we intend to study and employ techniques reported in the literature, and try to validate and enhance their results.   
+
+%\section{Research Question/Goal}
+%Can we do distributed machine learning while still provide a differential privacy guarantee?
+
+
+\section{Thesis Structure}
+\subsubsection{Chapter 2: Background and Motivation}
+This chapter introduces some concepts in privacy-preserving data publishing, and provides a thorough background on our motivation for doing this project.
+
+\subsubsection{Chapter 4: Basic Theory}
+This chapter presents the basic theory necessary to gain an understanding of our project. Important concepts such as differential privacy and multi-party logistic regression is presented in an condensed and straightforward manner.
+
+\subsubsection{Chapter 4: Related Work}
+As our work is but a part of a bigger research effort, we use this chapter to give an overview of works similar to our own. Most of these papers we are presenting have helped shape our own project in some way, either through theory or as inspiration.
+
+\subsubsection{Chapter 5: Experiment}
+Here we present the architecture and execution of our experimental procedure. We detail the usage of data sets and how they were preprocessed, as well as how we tuned the parameters involved. Toward the end of the chapter, we explain the algorithms we employ.
+
+\subsubsection{Chapter 6: Analysis}
+All of the scientific results we have gained through our experimentation are presented in this chapter and analyzed. The main part of the analysis will be used to explain the impact each parameter can have on the final results of our classifier.
+
+\subsubsection{Chapter 7: Toward a Real-World Application}
+This chapter is intended to be discussion on the real-world utility of our distributed privacy framework. We start by proposing a set of suitability criteria for such an application, and then explore two potential business cases where we consider our framework to be suitable for future implementation.   
+
+\subsubsection{Chapter 8: Reflections and Conclusion}
+This final chapter provides a reflection on the research we have explored, as well as the some of the challenges we have encountered. We then suggest a route for future work on extending and improving our framework, and wraps up with a final conclusion.
+
+%\section{Equations}
+%
+%To write an equation
+%
+%\begin{verbatim}
+%\begin{eqnarray}\label{eq1}
+%F = m \times a
+%\end{eqnarray}
+%\end{verbatim}
+%
+%\noindent This will produceasdasd asdf asdf asdf
+%
+%\begin{eqnarray}\label{eq1}
+%F = m \times a
+%\end{eqnarray}
+%
+%\noindent To refer to the equation
+%
+%\begin{verbatim}
+%\eqref{eq1}
+%\end{verbatim}
+%
+%\noindent This will produce \eqref{eq1}.
+%
+%
+%\section{Figures}
+%To create a figure
+%
+%\begin{verbatim}
+%\begin{figure}[h!]
+%  \centering
+%    \includegraphics[width=0.5\textwidth]{fig/pikachu}
+%  \caption{Pikachu.}
+%\label{fig1}
+%\end{figure}
+%\end{verbatim}
+%
+%\begin{figure}[h!]
+%  \centering
+%    \includegraphics[width=0.5\textwidth]{fig/pikachu}
+% \caption{Pikachu.}
+%\label{fig1}
+%\end{figure}
+%
+%\noindent To refer to the figure
+%
+%\begin{verbatim}
+%\textbf{Fig. \ref{fig1}}
+%\end{verbatim}
+%
+%\noindent This will produce \textbf{Fig. \ref{fig1}}
+%
+%\section{References}
+%
+%To cite references
+%
+%\begin{verbatim}
+%\cite{1,2,3}
+%\end{verbatim}
+%or
+%\begin{verbatim}
+%\citep{1,2,3}
+%\end{verbatim}
+%
+%\noindent This will produce: \cite{1,2,3} or \citep{1,2,3}, respectively.
+%
+%\section{Tables}
+%
+%To creat a table
+%
+%\begin{verbatim}
+%\begin{table}[!h]
+%\begin{center}
+%    \begin{tabular}{ | l | l | l | l |}
+%    \hline
+%    \textbf{No.} & \textbf{Data 1} & \textbf{Data 2} \\ \hline
+%     1 & a1 & b1 \\ \hline
+%     2 & a2 & b2 \\ \hline
+%    \end{tabular}
+%\end{center}
+%\caption{Table 1.}
+%\label{Tab1}
+%\end{table}
+%\end{verbatim}
+%
+%\noindent This will produce
+%
+%\begin{table}[!h]
+%\begin{center}
+%    \begin{tabular}{ | l | l | l | l |}
+%    \hline
+%    \textbf{No.} & \textbf{Data 1} & \textbf{Data 2} \\ \hline
+%     1 & a1 & b1 \\ \hline
+%     2 & a2 & b2 \\ \hline
+%    \end{tabular}
+%\end{center}
+%\caption{Table 1.}
+%\label{Tab1}
+%\end{table}
+%
+%\noindent To refer to the table
+%
+%\begin{verbatim}
+%\textbf{Table. \ref{Tab1}}
+%\end{verbatim}
+%
+%\noindent This will produce \textbf{Table. \ref{Tab1}}.
+
+\cleardoublepage
