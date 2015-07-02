@@ -55,7 +55,7 @@ As stated by Equation \ref{eq:aggregated_logistic_sensitivity}, the regularizati
 
 \begin{table}[h]
 	\centering
-	\caption{Effects of regularization strength}
+	\caption{Effect of regularization strength}
 	\label{tab:experiments_regularization_strength}
 	\begin{tabular}{|l|l|l|l|l|}
 		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$         & $\boldsymbol{\epsilon}$ \\
@@ -74,7 +74,7 @@ As we are pursuing a decentralized setting, we wanted to compare how the local, 
 
 \begin{table}[h]
 	\centering
-	\caption{Effects of data availability}
+	\caption{Effect of data availability}
 	\label{tab:experiments_data_availability}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                                 & \textbf{Peers} & \textbf{Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & \textbf{Type}       \\
@@ -89,23 +89,22 @@ As we are pursuing a decentralized setting, we wanted to compare how the local, 
 
 \begin{table}[h]
 	\centering
-	\caption{Effects of number of peers}
-	\label{my-label}
+	\label{tab:experiments_peer_numbers}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                & \textbf{Peers}      & \textbf{Group size} & \textbf{Data per peer} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ \\
 		\hline
 		Adult, increasing participants & {[}5-50{]} & 5          & 500  & $2^{2}$   & $1.0$     
 	\end{tabular}
+	\caption{Effect of number of peers}
 \end{table}
 
 \subsection{Minimizing Peer Model Variance}
 
-In these experiments we wish to. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
+In this experiment we wish to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
 
 \begin{table}[h]
 	\centering
-	\caption{My caption}
-	\label{my-label}
+	\label{tab:experiments_peer_variance}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
 		\hline
@@ -113,13 +112,31 @@ In these experiments we wish to. In order to increase the chances that we can ob
 		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\
 		Adult, peer variance, ensemble of both & 10          & 250        & $2^{2}$   & $1.0$      & Ensemble  
 	\end{tabular}
+		\caption{Observing peer accuracy variance}
 \end{table}
 
-\subsection{Effects of Model Propagation}
+\subsection{Effect of Model Propagation}
 
-\subsection{Effects of Aggregation Group Sizes}
+\subsection{Effect of Aggregation Group Sizes}
+
+We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. 
+
+\begin{table}[h]
+	\centering
+	\label{tab:experiments_group_sizes}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
+		\hline
+		Adult, group sizes       & 30          & 300        & $2^{2}$   & $1.0$      & Aggregated   \\
+	\end{tabular}
+	\caption{Effect of aggregation group size}
+\end{table}
 
 \subsection{Value of Budgeting Privacy}
+
+As discussed in Section \ref{section:privacy_budget}, it is possible to spread usage of the privacy guarantee in a budgeted fashion.
+
+\FloatBarrier
 
 \section{Results}
 
@@ -233,8 +250,16 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 	\end{tabular}
 \end{table}      
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{fig/adult/GroupSizeTest}
+	\caption{Effect of Aggregation Group Sizes.}
+	\label{fig:results_group_sizes}
+\end{figure}
 
 %add - some result comparing difference between party and all publishing
+
+
 %add - some result showing what happens when group sizes change - maybe combined with the above
 
 %add - some result showing what happens when the amount of privacy budget used is changed - possibly considering all vs party also here
