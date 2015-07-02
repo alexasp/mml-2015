@@ -72,7 +72,6 @@ When using the Laplace mechanism it is necessary to choose a suitable value for 
 %$
 This equation states that the sensitivity $\Delta f$ is the maximum difference in the values that the function $f$ may take on any pair of databases that differ on only one row. Dwork proved that adding a noise drawn from $Lap(\Delta f/\epsilon)$ to a query, $\epsilon$-differential privacy is guaranteed\citep{dwork2013algorithmic}. 
 
-\todo{add a section explaining that while it would seem that sensitivity is would often be high, some functions like count are naturally low sensitivity, and that steps such as clamping can be taken to reduce sensitivity}
 
 \subsubsection{Exponential Mechanism} \label{sec:Exponential Mechanism}
 The exponential mechanism proposed by \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the exponential mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
