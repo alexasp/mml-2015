@@ -141,6 +141,8 @@ We see that variance is smaller when the aggregated models are used, but the dif
 %below is old version
 
 \section{Analysis of Propagation Effects}
+\begin{comment}
+This must be updated if new propegation experiments are added
 
 As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated. In this section we present the effects of publishing method. Figure \ref{fig:RegRangeTestPubParty} shows the case where each group of peers only share the perturbed, aggregate model among themselves, while Figure \ref{fig:RegRangeTestPubAll} shows the results the model is sent to all existing peers. 
 
@@ -151,6 +153,8 @@ The truth is probably somewhere in the middle - we can't expect to easily publis
 \todo[inline]{Add figure to results that deal with comparing party vs all}
 
 As the previous experiment indicates that publishing newly made models to as many peers as possible is better \todo{Add a reflection talking about why this makes sense.}, we performed an additional experiment to determine whether it in such a scenario would be better to perform many aggregations with fewer models included in each aggregate or performing few aggregations including many models. This was achieved by testing performance with a range of values. In the experiment, each peer can only participate in a single aggregation before reaching the limit set by the privacy guarantee. For example, given a set of 50 peers, a aggregation size of 25 can only publish two aggregated models.
+
+\end{comment}
  
 \todo[inline]{Add figure to results that deal with comparing group sizes}
 
