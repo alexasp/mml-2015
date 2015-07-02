@@ -109,7 +109,7 @@ where the term $\lambda\|\theta\|^{2}_{2}$ is a regularization term to restrict 
 
 \subsection{Stochastic Gradient Descent}
 \label{sec:gradient_descent}
-We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full data set for a each gradient step. This can be very time consuming for larger data sets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the data set. If convergence is not achieved after a single pass, SGD can do multiple passes over the data set as needed. This makes SGD more adaptable to varying data set sizes than full batch gradient descent. 
+We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full data set for each gradient step. This can be very time consuming for larger data sets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the data set. If convergence is not achieved after a single pass, SGD can do multiple passes over the data set as needed. This makes SGD more adaptable to varying data set sizes than full batch gradient descent. 
 
 Mini-batch SGD is a trade-off between the basic batch gradient descent and single instance SGD\citep{cotter2011batchsgd}. The data set is divided into $|D|$/$b$ batches of size $b$, and a gradient step is taken for each batch. Given mini-batch SGD, the rule for updating each dimension $j$ of $\theta$ given a single batch of size $b$ becomes
 
@@ -119,7 +119,7 @@ Mini-batch SGD is a trade-off between the basic batch gradient descent and singl
 \theta^{t+1}_j = \theta^{t}_j + \alpha[\sum_{i=1}^{b}(y_i - p(y_i | x_i,\theta))x_{ij} - 2\lambda \|\theta^{t}_j\|]
 \end{eqnarray}
 
-As in regular SGD, multiple passes over the data set is performed as necessary. A single, full pass over the data set is called an epoch. As stated by \cite{cotter2011batchsgd}, an adaptive learning rate that decreases sufficiently over time is necessary for existing theoretical proofs of SGD convergence. We use the adaptive learning rate used in the SGD implementation by \cite{bottou2011sgd}, which relies on results in \citep{xu2010learningrate}.
+As in regular SGD, multiple passes over the data set are performed as necessary. A single, full pass over the data set is called an epoch. As stated by \cite{cotter2011batchsgd}, an adaptive learning rate that decreases sufficiently over time is necessary for existing theoretical proofs of SGD convergence. We use the adaptive learning rate used in the SGD implementation by \cite{bottou2011sgd}, which relies on results in \citep{xu2010learningrate}.
 
 \begin{eqnarray}
 \label{eq:learning_rate}
@@ -134,7 +134,7 @@ where $\lambda$ is the regularization constant, $t$ is the current epoch and $\g
 
 \subsection{Sensitivity of Logistic Regression Aggregation Mechanism} \label{sec:Sensitivity_of_LogReg}
 
-In order to built logistic regression models in a way that preserves privacy, it is necessary to determine the sensitivity of the output model. \cite{chaudhuri2009logistic} showed that the sensitivity of logistic regression is at most 
+In order to build logistic regression models in a privacy-preserving manner, it is necessary to determine the sensitivity of the output model. \cite{chaudhuri2009logistic} showed that the sensitivity of logistic regression is at most 
 \begin{eqnarray}\label{eq:logres_sensitivity}
 \frac{2}{n\lambda}
 \end{eqnarray}
@@ -161,29 +161,29 @@ where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-different
 
 which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their data set.
 
-We can improve upon the sensitivity result by Pathak et al. By following the same argument as in \cite{pathak2010diffprivhomo}, we can show that the sensitivity of the aggregated model is at most 
-
-\begin{eqnarray}
-\label{eq:aggregated_logistic_sensitivity_stronger}
-\Delta\boldsymbol{\hat{\theta^s}} = \frac{2}{K n_j	\lambda}
-\end{eqnarray}
-
-where K is the number of participants.
-
-\textit{Proof.} As in \cite{pathak2010diffprivhomo}, we consider a case where one record in data set $D$ is changed, giving the adjacent data set $D'$. This data set is partitioned to each of the participants $P_1$ through $P_K$ Assume that the change is in the data set of participant $P_j$, then the change in the final aggregated model $\hat{\theta}^s$ will only be in $\hat{\theta}_j$, the local model of $P_j$. We denoted this changed model as $\hat{\theta}_j'$. Given the size of the smallest data set partition $n_{(1)}$, that there are K participants and that the sensitivity of $\hat{\theta}_j$ is at most $\frac{2}{\eta_j\lambda}$, we have that
-\todo{add term between first and second}
-$$
-\frac{P(\boldsymbol{\hat{w}^s}|D)}{P(\boldsymbol{\hat{w}^s}|D')} = \frac{P(\frac{\boldsymbol{\hat{w}_j}}{K} + \eta|D)}{P(\frac{\boldsymbol{\hat{w}_j'}}{K} + \eta|D')} = \frac{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j}}{K}\|_1]}{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j'}}{K}\|_1]}= \frac{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j}\|_1]}{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j'}\|_1]} $$
-$$\leq \exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j} - \boldsymbol{\hat{w}_j'}\|_1]
-\leq \exp[\frac{n_{(1)}\epsilon\lambda}{2}\frac{2}{n_j\lambda}]
-= \exp[\frac{n_{(1)}\epsilon}{n_j}]
-\leq \exp(\epsilon)
-$$
-\todo{Prove or remove.}
-
-\todo{Show/explain that the same holds for the lower bound -epsilon also, as in Pathak}
-
-\todo{Add proof of above sensitivity}
+%We can improve upon the sensitivity result by Pathak et al. By following the same argument as in \cite{pathak2010diffprivhomo}, we can show that the sensitivity of the aggregated model is at most 
+%
+%\begin{eqnarray}
+%\label{eq:aggregated_logistic_sensitivity_stronger}
+%\Delta\boldsymbol{\hat{\theta^s}} = \frac{2}{K n_j	\lambda}
+%\end{eqnarray}
+%
+%where K is the number of participants.
+%
+%\textit{Proof.} As in \cite{pathak2010diffprivhomo}, we consider a case where one record in data set $D$ is changed, giving the adjacent data set $D'$. This data set is partitioned to each of the participants $P_1$ through $P_K$ Assume that the change is in the data set of participant $P_j$, then the change in the final aggregated model $\hat{\theta}^s$ will only be in $\hat{\theta}_j$, the local model of $P_j$. We denoted this changed model as $\hat{\theta}_j'$. Given the size of the smallest data set partition $n_{(1)}$, that there are K participants and that the sensitivity of $\hat{\theta}_j$ is at most $\frac{2}{\eta_j\lambda}$, we have that
+%\todo{add term between first and second}
+%$$
+%\frac{P(\boldsymbol{\hat{w}^s}|D)}{P(\boldsymbol{\hat{w}^s}|D')} = \frac{P(\frac{\boldsymbol{\hat{w}_j}}{K} + \eta|D)}{P(\frac{\boldsymbol{\hat{w}_j'}}{K} + \eta|D')} = \frac{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j}}{K}\|_1]}{\exp[\frac{K n_{(1)}\epsilon\lambda}{2}\|\frac{\boldsymbol{\hat{w}_j'}}{K}\|_1]}= \frac{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j}\|_1]}{\exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j'}\|_1]} $$
+%$$\leq \exp[\frac{n_{(1)}\epsilon\lambda}{2}\|\boldsymbol{\hat{w}_j} - \boldsymbol{\hat{w}_j'}\|_1]
+%\leq \exp[\frac{n_{(1)}\epsilon\lambda}{2}\frac{2}{n_j\lambda}]
+%= \exp[\frac{n_{(1)}\epsilon}{n_j}]
+%\leq \exp(\epsilon)
+%$$
+%\todo{Prove or remove.}
+%
+%\todo{Show/explain that the same holds for the lower bound -epsilon also, as in Pathak}
+%
+%\todo{Add proof of above sensitivity}
 
 It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ data sets would allow a third party to learn information. For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about 
 individual biometric records. 
@@ -192,7 +192,7 @@ As stated by Dwork, groups of records can be protected \todo{Explain how we can 
 
 \section{Ensemble learning}
 
-In ensemble learning, the predictions of individually trained models are combined to form a final prediction\citep{opitz1999popularensemble}. In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by \cite{breiman1996bagging}. Breiman showed that when changes in the training set has a significant effect on the trained model, bagging can give better performance than training a single model on the learning set. Bootstrap aggregating involves creating new learning sets by sampling from the original set with replacement, and training a model on each new set produced. These models are all added to the ensemble, which then makes predictions by taking a majority vote.
+In ensemble learning, the predictions of individually trained models are combined to form a final prediction\citep{opitz1999popularensemble}. In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by \cite{breiman1996bagging}. Breiman proved that when changes in the training set have a significant effect on the trained model, bagging can give better performance than training a single model on the learning set. Bootstrap aggregating involves creating new learning sets by sampling from the original set with replacement, and training a model on each new set produced. These models are all added to the ensemble, which then makes predictions by taking a majority vote.
 
 We did not strictly use bagging according to its formal definition, as the bootstrap step was not used. In our approach models are instead trained on disjoint subsets of the training set, which are then published after being aggregated according to Equation \ref{eq:parametric_aggregation}. There can be many such models published, so they are added to ensembles and prediction is done in the same fashion as in bagging. 
 
@@ -224,21 +224,19 @@ The Java Agent framework for Distance learning Environments(JADE) is a middlewar
 	 	\todo[inline]{Consider remaking this figure so we don't have to cite it}
  \end{figure}
 
-\todo[inline]{Write how we adapted the use of JADE here}
-
+Details of our implementation can be found in Section \ref{sec:architecture}.
 
 \section{Homomorphic Encryption}\label{sec:homomorphic_encryption}
-Homomorphic encryption is an encryption scheme which allows computations to be carried out on ciphertext, meaning plaintext that has been encrypted using an algorithm and a public key. The result of the computations is also encrypted, and can be deciphered back to plaintext using a private key. This has long been considered as crypthography's holy grail \citep{Micciancio2011HomoEnc}, as this would allowing operating on encrypted text without knowing the decryption key. For example, given ciphertexts $C_1=Enc(Data1)$ and $C_2=Enc(Data2)$, an additively homomorphic encryption scheme would allow to combine $C_1$ and $C_2$ to obtain $Enc_K(Data1+Data2)$. More concretely this means that if you encrypt your data using such an encryption scheme, you can transfer your data to an untrusted server which can perform some arbitrary computations on that data without being able to decrypt the data itself.
+Homomorphic encryption is an encryption scheme which allows computations to be carried out on ciphertext, meaning plaintext that has been encrypted using an algorithm and a public key. The result of the computations is also encrypted, and can be deciphered back to plaintext using a private key. This has long been considered crypthography's holy grail \citep{Micciancio2011HomoEnc}, as this would allowing operating on encrypted text without knowing the decryption key. For example, given ciphertexts $C_1=Enc(Data1)$ and $C_2=Enc(Data2)$, an additively homomorphic encryption scheme would allow to combine $C_1$ and $C_2$ to obtain $Enc_K(Data1+Data2)$. More concretely this means that if you encrypt your data using such an encryption scheme, you can transfer your data to an untrusted server which can perform some arbitrary computations on that data without being able to decrypt the data itself.
 
-Up until recently, all published homomorphic encryption schemes only supported one basic operation, most commonly addition. These schemes could only be called partially homomorphic, as they did not provide any extensive functionality. The notion of a  fully homomorphic encryption schemes was first proposed by \cite{rivest1978data} in 1978 , but it wasn't realized until 2009 when Craig Gentry published a doctoral thesis where he proved that he had constructed a fully homomorphic scheme\cite{gentry2009FHEpaper}. Gentry's solution was based on "ideal lattices" as well as a method to double-encrypt the data in such a way that the errors could be handled "behind the scenes". By periodically unlocking the inner layer of encryption underneath an outer layer of scrambling, the computer could hide and recover from errors without ever analyzing the secret data. 
+Up until recently, all published homomorphic encryption schemes only supported one basic operation, most commonly addition. These schemes could only be called partially homomorphic, as they did not provide any extensive functionality. The notion of a  fully homomorphic encryption schemes was first proposed by \cite{rivest1978data}, but it wasn't realized until 2009 when Craig Gentry published a doctoral thesis where he proved that he had constructed a fully homomorphic scheme\cite{gentry2009FHEpaper}. Gentry's solution was based on "ideal lattices" as well as a method to double-encrypt the data in such a way that the errors could be handled "behind the scenes". By periodically unlocking the inner layer of encryption underneath an outer layer of scrambling, the computer could hide and recover from errors without ever analyzing the secret data. 
 
-\todo{Do we need to talk about a method of HE that doesn't really work for our requirements?}
 
 The downside of Gentry's two-layered approach is that it requires a massive computational effort. Bruce Schneier, a leading American cryptographer, pointed out "Gentry estimates that performing a Google search with encrypted keywords -- a perfectly reasonable simple application of this algorithm -- would increase the amount of computing time by about a trillion. Moore's law calculates that it would be 40 years before that homomorphic search would be as efficient as a search today, and I think he's being optimistic with even this most simple of examples\citep{schneier2009blog}." 
 
 
-\section{Resource consumption}
-\todo{Give analysis of time and space complexities and how much this taxes a device.}
+%\section{Resource consumption}
+%\todo{Give analysis of time and space complexities and how much this taxes a device.}
 
 
 \cleardoublepage
