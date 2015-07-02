@@ -89,23 +89,22 @@ As we are pursuing a decentralized setting, we wanted to compare how the local, 
 
 \begin{table}[h]
 	\centering
-	\caption{Effects of number of peers}
-	\label{my-label}
+	\label{tab:experiments_peer_numbers}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                & \textbf{Peers}      & \textbf{Group size} & \textbf{Data per peer} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ \\
 		\hline
 		Adult, increasing participants & {[}5-50{]} & 5          & 500  & $2^{2}$   & $1.0$     
 	\end{tabular}
+	\caption{Effects of number of peers}
 \end{table}
 
 \subsection{Minimizing Peer Model Variance}
 
-In these experiments we wish to. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
+In this experiment we wish to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
 
 \begin{table}[h]
 	\centering
-	\caption{My caption}
-	\label{my-label}
+	\label{tab:experiments_peer_variance}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
 		\hline
@@ -113,11 +112,25 @@ In these experiments we wish to. In order to increase the chances that we can ob
 		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\
 		Adult, peer variance, ensemble of both & 10          & 250        & $2^{2}$   & $1.0$      & Ensemble  
 	\end{tabular}
+		\caption{My caption}
 \end{table}
 
 \subsection{Effects of Model Propagation}
 
 \subsection{Effects of Aggregation Group Sizes}
+
+We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. 
+
+\begin{table}[h]
+	\centering
+	\label{tab:experiments_group_sizes}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
+		\hline
+		Adult, peer variance, only local       & 30          & 250        & $2^{2}$   & $1.0$      & Aggregated   \\
+	\end{tabular}
+	\caption{My caption}
+\end{table}
 
 \subsection{Value of Budgeting Privacy}
 
