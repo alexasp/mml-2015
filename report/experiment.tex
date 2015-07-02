@@ -55,7 +55,7 @@ As stated by Equation \ref{eq:aggregated_logistic_sensitivity}, the regularizati
 
 \begin{table}[h]
 	\centering
-	\caption{Effects of regularization strength}
+	\caption{Effect of regularization strength}
 	\label{tab:experiments_regularization_strength}
 	\begin{tabular}{|l|l|l|l|l|}
 		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$         & $\boldsymbol{\epsilon}$ \\
@@ -74,7 +74,7 @@ As we are pursuing a decentralized setting, we wanted to compare how the local, 
 
 \begin{table}[h]
 	\centering
-	\caption{Effects of data availability}
+	\caption{Effect of data availability}
 	\label{tab:experiments_data_availability}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                                 & \textbf{Peers} & \textbf{Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & \textbf{Type}       \\
@@ -95,7 +95,7 @@ As we are pursuing a decentralized setting, we wanted to compare how the local, 
 		\hline
 		Adult, increasing participants & {[}5-50{]} & 5          & 500  & $2^{2}$   & $1.0$     
 	\end{tabular}
-	\caption{Effects of number of peers}
+	\caption{Effect of number of peers}
 \end{table}
 
 \subsection{Minimizing Peer Model Variance}
@@ -112,7 +112,7 @@ In this experiment we wish to explore the variance in the quality of models held
 		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\
 		Adult, peer variance, ensemble of both & 10          & 250        & $2^{2}$   & $1.0$      & Ensemble  
 	\end{tabular}
-		\caption{My caption}
+		\caption{Observing peer accuracy variance}
 \end{table}
 
 \subsection{Effects of Model Propagation}
@@ -127,12 +127,16 @@ We believed that the number of peers participating in creating aggregated models
 	\begin{tabular}{|l|l|l|l|l|l|}
 		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
 		\hline
-		Adult, peer variance, only local       & 30          & 250        & $2^{2}$   & $1.0$      & Aggregated   \\
+		Adult, group sizes       & 30          & 300        & $2^{2}$   & $1.0$      & Aggregated   \\
 	\end{tabular}
-	\caption{My caption}
+	\caption{Effect of aggregation group size}
 \end{table}
 
 \subsection{Value of Budgeting Privacy}
+
+As discussed in Section \ref{section:privacy_budget}, it is possible to spread usage of the privacy guarantee in a budgeted fashion.
+
+\FloatBarrier
 
 \section{Results}
 
