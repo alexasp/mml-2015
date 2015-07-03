@@ -136,6 +136,18 @@ We believed that the number of peers participating in creating aggregated models
 
 As discussed in Section \ref{section:privacy_budget}, it is possible to spread usage of the privacy guarantee in a budgeted fashion.
 
+\begin{table}[h]
+	\centering	
+	\label{tab:experiments_budgeting_privacy}
+	\begin{tabular}{|l|l|l|l|}
+		Experiment Name   & Peers & Epsilon & Aggregation cost        \\
+		\hline
+		Budgeting privacy & 10    & 0.1     & $[\frac{0.1}{16}, 0.1]$
+	\end{tabular}
+	\caption{Effect of budgeting privacy}
+\end{table}
+
+
 \FloatBarrier
 
 \section{Results}
@@ -261,6 +273,15 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 
 
 %add - some result showing what happens when group sizes change - maybe combined with the above
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{fig/adult/eps0.1,bud0.1div1-4,peers10,groups2,reg2e2-pubAll-groupsizetest-withoutlocal-data300-adultmean}
+	\caption{Effect of Privacy Budgeting.}
+	\label{fig:results_privacy_budget}
+\end{figure}
+
 
 %add - some result showing what happens when the amount of privacy budget used is changed - possibly considering all vs party also here
 
