@@ -121,7 +121,7 @@ Secondly, the fact that regularization has such a significant effect on the nois
 
 We believe the most practical way to do this would be by letti	ng each peer choose the strongest possible regularization that is within some bounded distance from the optimal value found in cross-validation on their local data. The protocol by \cite{pathak2010diffprivhomo} briefly described in Section \ref{sec:Sensitivity_of_LogReg} also includes a step to secretly communicate the minimum data set size among all the participants. The peers could additionally communicate their chosen $\lambda$ and the curator could then use the minimal regularization level when choosing the level of noise to add.
 
-\section{Analysis of Aggregation Effects}
+\section{Analysis of Peer Participation Effects}
 \label{sec:aggregation_effects}
 
 The previous paragraphs considered effects of noise variance on the ability of peers to make predictions. In this section we consider another important aspect that determines the quality of aggregated models - the number of peers that participate to create them. 
@@ -133,15 +133,14 @@ One possible explanation for the small changes in error rate might be the unifor
 \section{Analysis of Model Variance}
 
 While it is an important goal to minimize error rates, the variance in performance across peers might be just as important. It could be better that all participants achieve sufficient predictive performance rather than having some peers with fantastic performance while others make useless predictions.
-  
-%figure showing that variances are very small
+ 
 
-We see that variance is smaller when the aggregated models are used, but the difference is not very big, as the variance is small in both cases. We believe the weakness of the effect might be for the same reason as the small amount of change in error rate seen in Section \ref{sec:aggregation_effects}. The data is distributed uniformly to the peers, which means that they will get fairly similar models as long as they have sample data to get close to what a model trained on the full data set would look like. Given a data set partitioned into less uniform subsets, the model variance might increase and the beneficial effect of aggregations could become more apparent. However, this would require first attaining and preprocessing a suitable dataset. It would also require additional changes such as implementing minimum data set sizes for participation, to avoid excessive noise being added in aggregation. Due to limited time, this is left for future work.
+We see from the results in Figure \ref{table:peer_variance_adult} that variance is smaller when the aggregated models are used, but the difference is not very big, as the variance is small in both cases. We believe the weakness of the effect might be for the same reason as the small amount of change in error rate seen in Section \ref{sec:aggregation_effects}. The data is distributed uniformly to the peers, which means that they will get fairly similar models as long as they have sample data to get close to what a model trained on the full data set would look like. Given a data set partitioned into less uniform subsets, the model variance might increase and the beneficial effect of aggregations could become more apparent. However, this would require first attaining and preprocessing a suitable dataset. It would also require additional changes such as implementing minimum data set sizes for participation, to avoid excessive noise being added in aggregation. Due to limited time, this is left for future work.
 
 %below is old version
-
-\section{Analysis of Propagation Effects}
 \begin{comment}
+\section{Analysis of Propagation Effects}
+
 This must be updated if new propegation experiments are added
 
 As mentioned in Section \ref{sec:PropagationPubModel}, we hypothesized that we could improve the overall classification accuracy of our system by publishing the aggregated models generated. In this section we present the effects of publishing method. Figure \ref{fig:RegRangeTestPubParty} shows the case where each group of peers only share the perturbed, aggregate model among themselves, while Figure \ref{fig:RegRangeTestPubAll} shows the results the model is sent to all existing peers. 
@@ -155,10 +154,10 @@ The truth is probably somewhere in the middle - we can't expect to easily publis
 As the previous experiment indicates that publishing newly made models to as many peers as possible is better \todo{Add a reflection talking about why this makes sense.}, we performed an additional experiment to determine whether it in such a scenario would be better to perform many aggregations with fewer models included in each aggregate or performing few aggregations including many models. This was achieved by testing performance with a range of values. In the experiment, each peer can only participate in a single aggregation before reaching the limit set by the privacy guarantee. For example, given a set of 50 peers, a aggregation size of 25 can only publish two aggregated models.
 
 \end{comment}
- 
-\todo[inline]{Add figure to results that deal with comparing group sizes}
 
-The results of this experiment is seen in Figure \ref{fig:groupsize_is_better}. It is clear that a smaller group size and consequently more aggregated models published resulted in a strong reduction in accuracy variance. While the variance is too high at larger group sizes to know much about the actual mean value after only 10 repetitions of the experiment, it is unlikely that it is smaller than the mean accuracy observed when the group size is one. 
+\section{Analysis of Aggregation Group Sizes}
+
+The results of this experiment is seen in Figure \ref{fig:results_group_sizes}. It is clear that a smaller group size and consequently more aggregated models published resulted in a strong reduction in accuracy variance. While the variance is too high at larger group sizes to know much about the actual mean value after only 10 repetitions of the experiment, it is unlikely that it is smaller than the mean accuracy observed when the group size is one. 
 
 A possible explanation of this result is that the effects of \unsure{bagging?} boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
 
