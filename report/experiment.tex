@@ -1,7 +1,7 @@
 %===================================== CHAP 4 =================================
 
 \chapter{Experiment planning and results}
-
+\label{chap:analysis}
 
 \section{Experiment plans}
 \label{sec:experiment_plan}
@@ -119,15 +119,15 @@ In this experiment we wish to explore the variance in the quality of models held
 
 \subsection{Effect of Aggregation Group Sizes}
 
-We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. 
+We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. In the experiment seen in Table \ref{tab:experiments_group_sizes} we have a fixed number of peers and a fairly high level of $\epsilon$. The privacy level was chosen from the high end of possible values, since we wanted to make sure that the aggregated models were useful after noise addition.
 
 \begin{table}[h]
 	\centering
 	\label{tab:experiments_group_sizes}
-	\begin{tabular}{|l|l|l|l|l|l|}
-		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
+	\begin{tabular}{|l|l|l|l|}
+		{\bf Experiment Name} & {\bf Peers} & {\bf Group size} & $\epsilon$ \\
 		\hline
-		Adult, group sizes       & 30          & 300        & $2^{2}$   & $1.0$      & Aggregated   \\
+		Changing group sizes  & 30          & $[1, 30]$      &     $1.0$     \\ 
 	\end{tabular}
 	\caption{Effect of aggregation group size}
 \end{table}
@@ -162,8 +162,6 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
 		Aggregated model				                                  & 0.157  \\
 		Ensemble model				                                      & 0.157  \\
-		Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
-		Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
 		
 		
 	\end{tabular}
@@ -176,8 +174,6 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 		\textbf{Adult} & \textbf{Error rate} \\
 		Our optimal result (Local model, e=1.0, 10 peer)                  & 0.157 \\
 		High privacy, few peers($\epsilon$=0.1, 50 peers)				  & 0.163  \\
-		Less noise, more peers($\epsilon$=1.0, 100 peers)				  & xxx  \\
-		Noisy result ($\epsilon$=0.1, 50 peers)                           & xxx  \\
 		Aggregated model												  & 0.185 \\
 		Ensemble model													  &	0.165
 	\end{tabular}
@@ -277,7 +273,7 @@ This section gives the results of the experiments listed in Section \ref{sec:exp
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{fig/adult/eps0.1,bud0.1div1-4,peers10,groups2,reg2e2-pubAll-groupsizetest-withoutlocal-data300-adultmean}
+	\includegraphics[width=\textwidth]{fig/adult/eps0.1,bud0.1div1-64,peers10,groups2,reg2e2-pubAll-groupsizetest-withoutlocal-data200-adultmean}
 	\caption{Effect of Privacy Budgeting.}
 	\label{fig:results_privacy_budget}
 \end{figure}
