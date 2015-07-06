@@ -1,7 +1,7 @@
 %===================================== CHAP 4 =================================
 
 \chapter{Experiment planning and results}
-\label{chap:analysis}
+\label{ch:experiments_and_results}
 
 \section{Experiment plans}
 \label{sec:experiment_plan}
@@ -9,22 +9,32 @@
 In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. 
 
 
-\subsection{Establishing Logistic Regression Baselines}
+\subsection{Measuring accuracy}
+
+The experiments in this section are intended to show the accuracy that results from differentially private model aggregation compared to . When more than one peer was involved, we measured the mean accuracy of all peers.
 
 \begin{table}[h]
 	\centering
-	\caption{Our baseline experiments}
-	\label{tab:experiments_baselines}
+	\label{tab:experiment_accuracy_measuring}
 	\begin{tabular}{|l|l|l|l|}
-		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$      \\
+		{\bf Experiment Name}           & {\bf Peers} & {\bf Data} & {\bf $\epsilon$} \\
 		\hline
-		Spam, centralized  & 1     & 3680 & $[2^{-8},2^{8}]$ \\
-		Adult, centralized & 1     & 3000 & $[2^{-8},2^{8}]$ \\
-		Susy, centralized  & 1     & 3000 & $[2^{-8},2^{8}]$
+		Centralized logistic regression & 1           & 3000       & N/A              \\
+		Disjoint logistic regression    & 10          & 300        & N/A              \\
+		Aggregated model                & 10          & 300        & 1.0              \\
+		Ensemble model                  & 10          & 300        & 1.0              \\
+		Aggregated model                & 10          & 300        & 0.1              \\
+		Ensemble model  & 10    & 300        & 0.1             
 	\end{tabular}
+	\caption{Measuring accuracy}
 \end{table}
 
-These experiments were intended establish the best achievable performance with our implementation of logistic regression trained by SGD. They correspond to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to established a baseline that we can compare the models that are formed by our approach in a private and decentralized manner.
+In each of these experiments, we first choose an optimal  regularization $\lambda$ in the range $[-8, 8]$ by cross validation. We then measured the classification accuracy with the chosen $\lambda$ on the test set. In all experiments, the aggregation group size was set to be equal to the number of peers, and $\epsilon_{A}$ was set to be equal to $\epsilon$. This means that there could be produced at most one aggregated model, and it would be available to all the participants.
+
+The \textit{Centralized logistic regression} experiment was intended establish the best achievable performance with our implementation of logistic regression trained by SGD. They correspond to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to established a baseline that we can compare the models that are formed by our approach in a private and decentralized manner. The \textit{Disjoint logistic regression} experiment considers a situation were the participating peers have a subset of the data and locally train a model each. Each peer fits a model and makes predictions independently.
+
+The \textit{Aggregated model} experiment let's the peer create an aggregated model using Pathaks approach, and the peers uses this model only when labeling data. This means that the locally trained model is only used to produce the aggregate model and never for classification. In \textit{Ensemble model} experiment the peers also produce an aggregate model, but when classifying data their local model and the aggregated model classifies in an ensemble. The \textit{Aggregated model} and \textit{Ensemble model} experiments were run twice, with two different values of $\epsilon$, which represent a significant difference in privacy level.
+
 
 
 \subsection{Confirming Expected Effects of Differential Privacy}
@@ -146,140 +156,3 @@ As discussed in Section \ref{section:privacy_budget}, it is possible to spread u
 	\end{tabular}
 	\caption{Effect of budgeting privacy}
 \end{table}
-
-
-\FloatBarrier
-
-\section{Results}
-
-This section gives the results of the experiments listed in Section \ref{sec:experiment_plan}, which are analysed further in Chapter \ref{ch:analysis}.
-
-%output of various basic experiments intended to answers RQs
-\begin{table}[h]
-	\begin{tabular}{ll}
-		\textbf{Spambase} & \textbf{Error rate}\\
-		Our optimal result (Local model, no noise, 1 peer)                & 0.100  \\
-		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
-		Aggregated model				                                  & 0.157  \\
-		Ensemble model				                                      & 0.157  \\
-		
-		
-	\end{tabular}
-	\caption{Table with baseline results from the Adult Dataset}
-	\label{tab:baseline_class_results_spambase}
-\end{table}
-
-\begin{table}[h]
-	\begin{tabular}{ll}
-		\textbf{Adult} & \textbf{Error rate} \\
-		Our optimal result (Local model, e=1.0, 10 peer)                  & 0.157 \\
-		High privacy, few peers($\epsilon$=0.1, 50 peers)				  & 0.163  \\
-		Aggregated model												  & 0.185 \\
-		Ensemble model													  &	0.165
-	\end{tabular}
-	\caption{Table with baseline results from the Adult Dataset}
-	\label{tab:baseline_class_results_adult}
-\end{table}
-
-%testing range of epsilon to see expected behavior
-\todo[inline]{Consider rerunning this experiment without local model}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{fig/spambase/eps2e-8-2e8,budg=eps,peers10,groups10,reg2e-2-data368-pubAll-spam-baseline-testset}
-	\caption{$\epsilon = [10^{-3}, 10^{3}], \lambda = 2^{-4}$, 50 peers, 1 aggregation}
-	\label{fig:epsilon_big_range}
-\end{figure}
-
-%testing range of regularization in various settings to validate presence of expected behavior
-\begin{figure}[h!]
-	\centering
-	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps2e10,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testset}
-		\captionof{figure}{$\epsilon = 2^{10}, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
-		\label{fig:regularization_extremelyhighepsilon}
-	\end{minipage}
-	\hspace{.001\linewidth}
-	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testset}
-		\captionof{figure}{$\epsilon = 0.1, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
-		\label{fig:regularization_normalepsilon}
-	\end{minipage}
-	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps0.01,budg=eps,peers10,groups10,reg2e-8-2e3-data368-pubAll-spam-baseline-testsetmean}
-		\captionof{figure}{$\epsilon = 0.01, \lambda = [2^{-8}, 2^{3}]$, 10 peers, 1 aggregation}
-		\label{fig:regularization_lowepsilon}
-	\end{minipage}
-\end{figure}
-
-%figures showing the effect of data amounts in various combinations of models
-
-\begin{figure}[h!]
-	\centering
-	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-withoutlocalmodel}
-		\captionof{figure}{$\epsilon = 0.1, \lambda = 2^{-2}$, 10 peers, 1 aggregations. Aggregated model only.}
-		\label{fig:data_limit_test_withoutlocalmodel}
-	\end{minipage}
-	\hspace{.001\linewidth}
-	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-withlocalmodel}
-		\captionof{figure}{$\epsilon = 0.1, \lambda = 2^{-2}$, 10 peers, 1 aggregation. Aggregated and local model.}
-		\label{fig:data_limit_test_withlocalmodel}
-	\end{minipage}
-	\begin{minipage}{.49\linewidth}
-		\includegraphics[width=\linewidth]{fig/spambase/eps0.1,budg=eps,peers10,groups10,reg2e-2-pubAll-spam-baseline-data10-360-testset-localmodelonly}
-		\captionof{figure}{$\lambda = 2^{-2}$, 10 peers, local model only.}
-		\label{fig:data_limit_test_localmodelonly}
-	\end{minipage}
-\end{figure}
-
-%result of testing constant group size with ever larger number of peers
-\todo[inline]{make Effect of peer numbers into a simple table row showing min/max instead}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{fig/adult/eps1.0,budg=eps,peers5-55,groups5,reg2e2-data500-pubAll-adult-groupbypeerverification-3-testsetmean}
-	\caption{Effect of peer numbers. Group size: 50. Publishing: All. Data: 500}
-	\label{fig:peer_range_constant_group}
-\end{figure}
-
-
-%figure showing the presence of variance among peers 
-\todo[inline]{replace variance table with numbers from recent, properly CVed runs. ALSO, add std.dev. of std dev. :)}
-\begin{table}[h]
-	\centering
-	\caption{Variance among peers, Adult}
-	\label{table:peer_variance_adult}
-	\begin{tabular}{|l|l|l|}
-		\textbf{Model}                  & \textbf{Mean error} & \textbf{Peer std. dev.} \\
-		\hline
-		Local, no privacy      & 0,175 & 0.006 \\
-		Aggregated, d. privacy & 0,158 & 0.000	 \\
-		Ensemble with both & 0.166 & 0.002 \\
-	\end{tabular}
-\end{table}      
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{fig/adult/GroupSizeTest}
-	\caption{Effect of Aggregation Group Sizes.}
-	\label{fig:results_group_sizes}
-\end{figure}
-
-%add - some result comparing difference between party and all publishing
-
-
-%add - some result showing what happens when group sizes change - maybe combined with the above
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{fig/adult/eps0.1,bud0.1div1-64,peers10,groups2,reg2e2-pubAll-groupsizetest-withoutlocal-data200-adultmean}
-	\caption{Effect of Privacy Budgeting.}
-	\label{fig:results_privacy_budget}
-\end{figure}
-
-
-%add - some result showing what happens when the amount of privacy budget used is changed - possibly considering all vs party also here
-
-
-\cleardoublepage
