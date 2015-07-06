@@ -4,8 +4,8 @@
 \label{ch:analysis}
 In this chapter we will give our analysis of the experimental results seen in Section \ref{sec:experiment_results}.
 
-
-\section{Baseline Classification results and comparisons}
+\section{Comparing measured accuracy}
+\todo[inline]{Include results from previous chap once more}
 \begin{table}[h]
 	\begin{tabularx}{\textwidth}{|X|l|}
 		\textbf{Experiment and author}                                             & \textbf{Error Rate}      \\
@@ -29,9 +29,11 @@ In this chapter we will give our analysis of the experimental results seen in Se
 
 	
 
-These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have presented the results of two classifiers reported in the literature \citep{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first \citep{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
+These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have included the results of two classifiers reported in the literature \citep{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first \citep{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
-We have restricted our analysis to error rates, though confusion matrices and ROC-curves were produced for all of our experiments. The confusion matrices were used to verify that the classifiers were discriminating between the two classes. While error rates are presented as mean value among all peers, we give only the confusion matrix of a single, randomly selected peer. The intention is that the error rates we report reflect the model quality on average for all participants in the system, while the confusion matrices are intended to support the claim that the reported error rates correspond to non-trivial classifiers. Confusion matrices for all the data sets are included in the Appendix. \todo[inline]{Include confusion matrices in appendix OR in analysis}
+An immediate surprise we should point out is that \cite{pathak2010diffprivhomo} gives the error rate of their optimal, centralized solution applied to the Adult set as $0.24$. This is strange, since it is very close to the class distribution of the Adult data set. While they show that their differentially private solution approaches their centralized solution, they give no compelling reason to believe that the error rate of $0.24$ is a non-trivial performance. A very similar error rate could be achieved by only predicting the negative class.
+
+We have restricted our analysis to the error rates of our solution, though confusion matrices and ROC-curves were produced for all experiments. The confusion matrices were used to verify that the classifiers were discriminating between the two classes. While error rates are presented as mean value among all peers, we give only the confusion matrix of a single, randomly selected peer. The intention is that the error rates we report reflect the model quality on average for all participants in the system, while the confusion matrices are intended to support the claim that the reported error rates correspond to non-trivial classifiers. Confusion matrices for all the data sets are included in the Appendix.
 
 
 \begin{table}[h]
