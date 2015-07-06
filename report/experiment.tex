@@ -6,7 +6,7 @@
 \section{Experiment plans}
 \label{sec:experiment_plan}
 
-In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. 
+In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments we have performed, and the parameter configuration we employed for each experiment. The results of these experiments will be provided in section \ref{experiment_results}.
 
 
 \subsection{Measuring accuracy}
@@ -15,7 +15,6 @@ The experiments in this section are intended to show the accuracy that results f
 
 \begin{table}[h]
 	\centering
-	\label{tab:experiment_accuracy_measuring}
 	\begin{tabular}{|l|l|l|l|}
 		{\bf Experiment Name}           & {\bf Peers} & {\bf Data} & {\bf $\epsilon$} \\
 		\hline
@@ -27,19 +26,20 @@ The experiments in this section are intended to show the accuracy that results f
 		Ensemble model  & 10    & 300        & 0.1             
 	\end{tabular}
 	\caption{Measuring accuracy}
+	\label{tab:experiment_accuracy_measuring}
 \end{table}
 
-In each of the experiments in Table \ref{tab:experiment_accuracy_measuring}, we first choose an optimal regularization $\lambda$ in the range $[-8, 8]$ by cross validation. We then measured the classification accuracy with the chosen $\lambda$ on the test set. In all experiments, the aggregation group size was set to be equal to the number of peers, and $\epsilon_{A}$ was set to be equal to $\epsilon$. This means that there could be produced at most one aggregated model, and it would be available to all the participants.
+In each of the experiments in Table \ref{tab:experiment_accuracy_measuring}, we first chose an optimal regularization $\lambda$ in the range $[2^{-8}, 2^8]$ by cross validation. We then measured the classification accuracy with the chosen $\lambda$ on the test set. In all experiments, the aggregation group size was set to be equal to the number of peers, and $\epsilon_{A}$ was set to be equal to $\epsilon$. This means that there could be produced at most one aggregated model, and it would be available to all the participants.
 
-The \textit{Centralized logistic regression} experiment was intended establish the best achievable performance with our implementation of logistic regression trained by SGD. It corresponds to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to establish a baseline that we can compare with when producing models that are formed in a private and decentralized manner. 
+The \textit{Centralized logistic regression} experiment was intended to establish the best achievable performance with our implementation of logistic regression trained by SGD. It corresponds to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to establish a baseline that we can compare with when producing models that are formed in a private and decentralized manner. 
 
-The \textit{Disjoint logistic regression} experiment considers a situation were the participating peers have a subset of the data and locally train a model each. Each peer fits a model and makes predictions independently.
+The \textit{Disjoint logistic regression} experiment considers a situation where the participating peers have a subset of the data and locally train one model each. Each peer fits a model and makes predictions independently.
 
-The \textit{Aggregated model} experiment lets the peers create an aggregate model using Pathaks approach, and the peers use this model only when labeling data. This means that the locally trained model is only used to produce the aggregate model and never for classification. In \textit{Ensemble model} experiment the peers also produce an aggregate model, but when classifying data their local model and the aggregated model classifies in an ensemble. The \textit{Aggregated model} and \textit{Ensemble model} experiments were run twice, with two different values of $\epsilon$, which represent a significant difference in privacy level.
+The \textit{Aggregated model} experiment let the peers create an aggregate model using \cite{pathak2010diffprivhomo} approach, and the peers use this model only when labeling data. This means that the locally trained model is only used to produce the aggregate model and never for classification. In the \textit{Ensemble model} experiment the peers also produce an aggregate model, but when classifying data their local model and the aggregated model classifies in an ensemble. The \textit{Aggregated model} and \textit{Ensemble model} experiments were run twice, with two different values of $\epsilon$, which represent a significant difference in privacy level.
 
 \subsection{Confirming Expected Effects of Differential Privacy}
 
-In this project we have implemented training of a logistic regression, the aggregation mechanism guaranteeing differential privacy and the communication scheme that forms groups of peers to create aggregate models. When tuning the parameters of the implementation, we expected certain changes in the measured performance based on the theoretical and experimental results of previous work. The experiments in this section is intended to be validation of our implementation. In particular, we expected certain effects when changing the privacy parameter $\epsilon$ and the regularization parameter $\lambda$. By confirming the expected behavior, we could increase confidence in the correctness of our implementation, while also visualizing the dynamics of differential privacy.
+In this project we have implemented training of a logistic regression, the aggregation mechanism guaranteeing differential privacy and the communication scheme that forms groups of peers to create aggregate models. When tuning the parameters of the implementation, we expected certain changes in the measured performance based on the theoretical and experimental results of previous work. The experiments in this section are intended to be validation of our implementation. In particular, we expected certain effects when changing the privacy parameter $\epsilon$ and the regularization parameter $\lambda$. By confirming the expected behavior, we could increase confidence in the correctness of our implementation, while also visualizing the dynamics of differential privacy.
 
 \subsubsection{Changes in $\epsilon$}
 
@@ -47,26 +47,25 @@ The variance of the noise added when producing aggregated models increases with 
 
 \begin{table}[h]
 	\centering
-	\caption{Effects of privacy level}
-	\label{tab:experiments_privacy_level}
+
 	\begin{tabular}{|l|l|l|l|l|}
 		\textbf{Experiment Name}            & \textbf{Peers} & \textbf{Data per peer} &
 		 $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$                                              \\
 		 \hline
 		Spam, effect of $\epsilon$ & 10    & 368  & $2^{-2}$  & $[2^{-8}, 2^{8}]$
 	\end{tabular}
+	\caption{Effects of privacy level}
+	\label{tab:experiments_privacy_level}
 \end{table}
 
 All the peers in this experiment collaborate to produce one aggregated model, and the full privacy budget is expended in the single aggregation. When the peers are tasked to label the test data, they use their local model and the aggregated model in an ensemble.
 
 \subsubsection{Changes in $\lambda$}
 
-As stated by Equation \ref{eq:aggregated_logistic_sensitivity}, the regularization parameter $\lambda$, increasing the regularization will decrease the variance of noise added when aggregating. For this reason we expected that higher values of regularization should be help counter the detrimental effect of lower values of $\epsilon$. However, as regularization grows too large, predictive performance should degrade as the models become unable to fit to data. To confirm these effects, we tested wide ranges of regularization strength with different levels of privacy.
+As stated by Equation \ref{eq:aggregated_logistic_sensitivity},  increasing the regularization parameter $\lambda$ will decrease the variance of noise added when aggregating. For this reason we expected that higher values of regularization should help counter the perturbing effect of lower values of $\epsilon$. However, as the regularization value grows, the predictive performance should degrade as the models become unable to fit to the data. To confirm these effects, we tested wide ranges of regularization strength with different levels of privacy.
 
 \begin{table}[h]
 	\centering
-	\caption{Effect of regularization strength}
-	\label{tab:experiments_regularization_strength}
 	\begin{tabular}{|l|l|l|l|l|}
 		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$         & $\boldsymbol{\epsilon}$ \\
 		\hline
@@ -74,18 +73,18 @@ As stated by Equation \ref{eq:aggregated_logistic_sensitivity}, the regularizati
 		Spam, observing $\lambda$, common privacy   & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.1$      \\
 		Spam, observing $\lambda$, stronger privacy & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.01$    
 	\end{tabular}
+	\caption{Effect of regularization strength}
+	\label{tab:experiments_regularization_strength}
 \end{table}
 
 The values of $\epsilon$ for the  common privacy level in Table \ref{tab:experiments_regularization_strength} is chosen based on \cite{dwork2008differential}, which suggests that $0.1$ is a common value.
 
 \subsection{Changes in Data Availability}
 
-As we are pursuing a decentralized setting, we wanted to compare how the local, the aggregated models and both of them in an ensemble respond to changes in data availability.
+As we are testing in a decentralized setting, we wanted to compare how the local, the aggregated models, and both of them in an ensemble respond to changes in data availability.
 
 \begin{table}[h]
 	\centering
-	\caption{Effect of data availability}
-	\label{tab:experiments_data_availability}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                                 & \textbf{Peers} & \textbf{Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & \textbf{Type}       \\
 		\hline
@@ -93,6 +92,8 @@ As we are pursuing a decentralized setting, we wanted to compare how the local, 
 		Spambase, data availability, aggregated    & 10    & 360  & $2^{-2}$  & $0.1$      & Aggregated \\
 		Spambase, observing $\lambda$, ensemble & 10    & 360  & $2^{-2}$  & $0.1$  & Ensemble  
 	\end{tabular}
+	\caption{Effect of data availability}
+	\label{tab:experiments_data_availability}
 \end{table}
 
 \subsection{Changes in Number of Participants}
@@ -101,22 +102,21 @@ If aggregating models produced better accuracy, we expected that giving more mod
 
 \begin{table}[h]
 	\centering
-	\label{tab:experiments_peer_numbers}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                & \textbf{Peers}      & \textbf{Group size} & \textbf{Data per peer} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ \\
 		\hline
 		Adult, increasing participants & {[}5-50{]} & 5          & 500  & $2^{2}$   & $1.0$     
 	\end{tabular}
 	\caption{Effect of number of peers}
+	\label{tab:experiments_peer_numbers}
 \end{table}
 
 \subsection{Minimizing Peer Model Variance}
 
-In this experiment we wish to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
+With this experiment we intend to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
 
 \begin{table}[h]
 	\centering
-	\label{tab:experiments_peer_variance}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
 		\hline
@@ -124,7 +124,8 @@ In this experiment we wish to explore the variance in the quality of models held
 		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\
 		Adult, peer variance, ensemble of both & 10          & 250        & $2^{2}$   & $1.0$      & Ensemble  
 	\end{tabular}
-		\caption{Observing peer accuracy variance}
+	\caption{Observing peer accuracy variance}
+	\label{tab:experiments_peer_variance}
 \end{table}
 
 \subsection{Effect of Aggregation Group Sizes}
@@ -133,28 +134,28 @@ We believed that the number of peers participating in creating aggregated models
 
 \begin{table}[h]
 	\centering
-	\label{tab:experiments_group_sizes}
 	\begin{tabular}{|l|l|l|l|}
 		{\bf Experiment Name} & {\bf Peers} & {\bf Group size} & $\epsilon$ \\
 		\hline
 		Changing group sizes  & 30          & $[1, 30]$      &     $1.0$     \\ 
 	\end{tabular}
 	\caption{Effect of aggregation group size}
+	\label{tab:experiments_group_sizes}
 \end{table}
  
 \todo{add this with both public and party propeation, and mention that we compare these also}
 
 \subsection{Value of Budgeting Privacy}
  
-As discussed in Section \ref{section:privacy_budget}, it is possible to spread usage of the privacy guarantee in a budgeted fashion. Table \ref{tab:experiments_budgeting_privacy} details an experiment where we wanted to explore the potential benefit of performing repeated aggregations, at the cost of lower $\epsilon$ in each aggregation.
+As discussed in Section \ref{section:privacy_budget}, it is possible to spread the usage of the privacy guarantee in a budgeted fashion. Table \ref{tab:experiments_budgeting_privacy} details an experiment where we wanted to explore the potential benefit of performing repeated aggregations, at the cost of lower $\epsilon$ in each aggregation.
 
 \begin{table}[h]
 	\centering	
-	\label{tab:experiments_budgeting_privacy}
 	\begin{tabular}{|l|l|l|l|}
 		{\bf Experiment Name} & {\bf Peers} & $\boldsymbol{\epsilon}$ & {\bf Aggregation cost}        \\
 		\hline
 		Budgeting privacy & 10    & 0.1     & $[\frac{0.1}{16}, 0.1]$
 	\end{tabular}
 	\caption{Effect of budgeting privacy}
+	\label{tab:experiments_budgeting_privacy}
 \end{table}
