@@ -18,7 +18,7 @@ This privacy goal was rejected by Cynthia Dwork, who showed the general impossib
 The term "differential privacy" was defined by Dwork as a description of a promise, made by a data holder to a data subject: "You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available." \citep{dwork2013algorithmic}
 In an ideal situation, databases which implement differential privacy mechanisms can make confidential data widely available for accurate data analysis, without resorting to data usage agreements, data protection plans, or restricted views. Nevertheless, the Fundamental Law of Information Recovery states that overly accurate answers to too many questions will destroy privacy in a spectacular way \citep{dwork2013algorithmic}, meaning that data utility will eventually be consumed.
 
-\subsection{Definition of Differential Privacy}
+\subsection{Definition of differential privacy}
 The classic example for explaining a security breach is the case of Mr White: Suppose you have access to a database that allows you to compute the income of all residents in a specified area. If you knew that Mr White was going to move, simply querying the database before and after his relocation would allow you to deduce his income. 
 
 \begin{definition} The distance of two data sets, $d(D_1, D_2)$, denotes the minimum number of sample changes that are required to change $D_1$ into $D_2$.
@@ -36,7 +36,7 @@ Informally, the presence or absence of a single record in a database should not 
 
 Privacy preserving data analysis platforms such as PINQ\citep{mcsherry2009PINQ}, Airavat\citep{roy2010airavat} and Fuzz\citep{Haeberlen2011fuzz} have all implemented features such as privacy budgeting and noise mechanisms to compute useful queries while fulfilling Equation \ref{DiffPrivDef}.
 
-\subsection{Privacy Budget}
+\subsection{Privacy budget}
 \label{section:privacy_budget}
 The quotient $\frac{Pr[M(D_1)\in S]}{Pr[M(D_2)\in S]}$ measures the extent to which an attacker can ascertain the difference between the two data sets\citep{abowd2008protective}. \cite{Sarathy2011evaluating} calls this ratio the ''knowledge gain ratio''. Differential privacy requires that this ratio is limited to $e^\epsilon$. This is because as the ratio grows larger, an attacker can determine with greater probability that the query result was obtained from one data set over the other.
 
@@ -47,10 +47,10 @@ Defining and depleting a privacy budget is possible due to the sequential compos
 %When making a practical implementation, the $\epsilon$ value represents the privacy budget of the data set. The budget value is set by the data analyst, but as it was shown in \cite{Sarathy2011evaluating} that the attacker's knowlfa edge gain rises exponentially with the rising number of queries. Setting a high value for $\epsilon$ will have a measurable impact on data privacy. 
 
 
-\subsection{Noise Mechanisms}
+\subsection{Noise mechanisms}
 Given a target function $f$ to compute on a database $D$, it is necessary to design a randomized function $M$ which fulfills Equation \ref{DiffPrivDef} while yielding a useful approximation to the true $f$. This randomized function $M$ can be created by adding noise to the computation of $f$. There are many different mechanisms for applying this noise, but the two most common are the Laplace mechanism and the Exponential mechanism. 
 
-\subsubsection{Laplace Mechanism}
+\subsubsection{Laplace mechanism}
 The Laplace mechanism involves adding random noise which follows the Laplace statistical distribution. The Laplace distribution centered around zero has only one parameter, its scale $b$, and this is proportional to its standard deviation. 
 \begin{eqnarray} \label{LaplaceDisDef}
 Lap(x|b) = \frac{1}{2b} exp (-\frac{|x|}{b})
@@ -73,7 +73,7 @@ When using the Laplace mechanism it is necessary to choose a suitable value for 
 This equation states that the sensitivity $\Delta f$ is the maximum difference in the values that the function $f$ may take on any pair of databases that differ on only one row. Dwork proved that adding a noise drawn from $Lap(\Delta f/\epsilon)$ to a query, $\epsilon$-differential privacy is guaranteed\citep{dwork2013algorithmic}. 
 
 
-\subsubsection{Exponential Mechanism} \label{sec:Exponential Mechanism}
+\subsubsection{Exponential mechanism} \label{sec:Exponential Mechanism}
 The exponential mechanism proposed by \cite{mcsherry2007} is a method for selecting one element from a set, and is commonly used if a non-numeric value query is used. An example would be: "What is the most common eye color in this room?". Here it would not make sense to perturb the answer by adding noise drawn from the Laplace distribution. The idea of the exponential mechanism is to select the output from all the possible answers at random, with the probability of selecting a particular output being higher for those outputs that are "closer" to the true output. 
 
 More formally, let A be the range of of possible outputs for the query function $f$. Also, let $u_f(D,a)$ be a utility function that measures how good an output $a\in A$ is as an answer to the query function $f$ given that the input data set is $D$ (Note that higher values of $u_f$ represents better outputs). The sensitivity function will then be defined as the maximum possible change in the utility function's value $u_f$ due to the addition or removal of one person's data from the input, i.e: \newline
@@ -106,13 +106,13 @@ For convenience, the point of maximum log-likelihood is used instead. Since the 
   
 where the term $\lambda\|\theta\|^{2}_{2}$ is a regularization term to restrict the magnitude of $\theta$ and avoid overfitting the training data. Using $\lambda > 0$ gives a “regularized” estimate of w which often has superior generalization performance, especially when the dimensionality is high (Nigam et al., 1999). 
 
-\subsection{Stochastic Gradient Descent}
+\subsection{Stochastic gradient descent}
 \label{sec:gradient_descent}
 We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full data set for each gradient step. This can be very time consuming for larger data sets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the data set. If convergence is not achieved after a single pass, SGD can do multiple passes over the data set as needed. This makes SGD more adaptable to varying data set sizes than full batch gradient descent. 
 
 Mini-batch SGD is a trade-off between the basic batch gradient descent and single instance SGD\citep{cotter2011batchsgd}. The data set is divided into $|D|$/$b$ batches of size $b$, and a gradient step is taken for each batch. Given mini-batch SGD, the rule for updating each dimension $j$ of $\theta$ given a single batch of size $b$ becomes
 
-\subsubsection{Update Rule}
+\subsubsection{Update rule}
 
 \begin{eqnarray}
 \theta^{t+1}_j = \theta^{t}_j + \alpha[\sum_{i=1}^{b}(y_i - p(y_i | x_i,\theta))x_{ij} - 2\lambda \|\theta^{t}_j\|]
@@ -135,7 +135,7 @@ While we have defined a maximum number of epochs for the stochastic gradient des
 |LCL_i - LCL_{i-1}| < 0.01
 \end{eqnarray}
 
-\subsection{Sensitivity of Logistic Regression Aggregation Mechanism} \label{sec:Sensitivity_of_LogReg}
+\subsection{Sensitivity of logistic regression aggregation mechanism} \label{sec:Sensitivity_of_LogReg}
 
 In order to build logistic regression models in a privacy-preserving manner, it is necessary to determine the sensitivity of the output model. \cite{chaudhuri2009logistic} showed that the sensitivity of logistic regression is at most 
 \begin{eqnarray}\label{eq:logres_sensitivity}
@@ -193,7 +193,7 @@ individual biometric records.
 
 As stated by Dwork, groups of records can be protected \todo{Explain how we can protect whole user sets and the balance between data set sizes and limits} \cite{Dwork06differentialprivacy} Dwork points out that the end goal of differential privacy is allow learning aggregate information in a way that privacy. 
 
-\section{Ensemble learning}
+\section{Ensemble Learning}
 
 In ensemble learning, the predictions of individually trained models are combined to form a final prediction\citep{opitz1999popularensemble}. In this project we will be using a variant of ensemble learning called bootstrap aggregating or bagging, as presented by \cite{breiman1996bagging}. Breiman proved that when changes in the training set have a significant effect on the trained model, bagging can give better performance than training a single model on the learning set. Bootstrap aggregating involves creating new learning sets by sampling from the original set with replacement, and training a model on each new set produced. These models are all added to the ensemble, which then makes predictions by taking a majority vote.
 

@@ -1,4 +1,4 @@
-\chapter{Design Of Experiments}
+\chapter{Design of Experiments}
 
 \section{Overview}
 \label{sec:experiment_overview}
@@ -32,7 +32,7 @@ As stated in Section \ref{sec:experiment_overview},  the experiment terminates w
 
 %when we are talking about peers, we are refering to instance of the PeerAgent
 
-\section{Dataset and preprocessing steps}
+\section{Dataset and Preprocessing Steps}
 \label{sec:data sets}
 This section will introduce the data sets we have used for analysis. Each section introduces a data set, and details what features it contains, what we try to learn and classify, and why we chose to use it.
 
@@ -67,7 +67,7 @@ downloaded the data set pre-processed by \cite{platt1999fast}, where the continu
 
 This data set is very popular to use in various machine learning experiments, ranking second on the download list for the UCI machine learning repository. This data set has also been used before in research in privacy research, most notably in the work by \cite{pathak2010diffprivhomo}. This has given us some baselines to compare our own results against, which can be found in Chapter \ref{ch:analysis}
 
-\section{Parameter tuning}
+\section{Parameter Tuning}
 \label{sec:parameter_tuning}
 The number of peers, $P$, specifies how many different peers participate in the experiment, and necessarily the number of partitions of the training data sets. The training is divided into $P$ parts of equal size.
 
@@ -99,7 +99,7 @@ Following the approach outlined in Section \ref{sec:parameter_tuning}, we establ
 
 \todo[inline]{Explain how we are measuring standard deviation - and explain that there are two notions of variance that we test - across iterations and peer }
 
-\section{Experiment execution}
+\section{Experiment Execution}
 
 For each experiment, we selected a single parameter for exploration from the set of parameters specified in Section \ref{sec:parameter_tuning}. We wanted to explore the results of the system as the parameter took a range of values. To start, we specified a range of fixed, scalar values for each of the parameters. For example, one of the experiments we performed was intended to test the effect of varying number of peers participating in the system. One possible parameter combination to test this could then be
 
@@ -116,11 +116,11 @@ As previously stated, each set of parameters was tested 10 times. For each of th
 
 First, the data is shuffled. Shuffling is performed since the manner of which the data is distributed among the peers, can turn out to have a significant effect on the quality of their local model. If each peer was given thousands of records these partitions would likely be fairly uniform, and shuffling the training data would be less important. However, since we wanted to experiment with data quantities below 100 instances per peer, we expected significant variance in the trained models. The data is partitioned into $P$ partitions of equal size. $P$ instances of PeerAgent are created, and one partition of training instances is given to each peer.
 
-\subsubsection{Fitting Local Classifiers}
+\subsubsection{Fitting local classifiers}
 
 Once the environment is set up, all agents are registered and the peers have been given their data partition, the peers fit a logistic regression model to the data they have been given. The model fitting is done by mini-batch SGD as described in Section \ref{sec:gradient_descent}. Each peer runs 3-fold cross-validation over a single epoch to determine the optimal $\alpha$, and picks the $\alpha$ which has the lowest average prediction error on average. When $\alpha$ has been determined, the logistic regression model is fitted to the peers local data, with the chosen $\alpha$ and the $\lambda$ specified for that particular experiment. The fitting is done by running mini-batch SGD for a maximum of 100 epochs.
 
-\subsubsection{Application of Aggregation Mechanism}
+\subsubsection{Application of aggregation mechanism}
 
 After all peers have fitted their local classifiers, the aggregation phase begins. The GroupAgent has a list of the peers that still permit their locally trained classifiers to take part in a published, perturbed model. While there still are enough peers to form a set of size $g$, the GroupAgent randomly selects a subset of these peers. Among this subset, it randomly picks one peer to act as the curator, responsible for performing the steps that result in an aggregated model that can be published with a differential privacy guarantee. It then sends a message to each of the selected peers.
 
@@ -181,7 +181,7 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 \label{fig:peerAggregationFigure}
 \end{figure}
 
-\subsubsection{Propagation Of Published Models} \label{sec:PropagationPubModel}
+\subsubsection{Propagation of published models} \label{sec:PropagationPubModel}
 
 Originally in our system, aggregated models were only propagated to the peers that had participated in creating that model, as can be seen in Figure \ref{fig:peerAggregationFigure}. What resulted from this, especially when epsilon was set to a low amount such as 0.1 or lower, was that the high amount of noise made the classifiers have a big standard deviation on their mean classification rate. This meant  that the classifiers could be very accurate in some peers, classifying up towards 90\% accuracy, while also being significantly worse in other peers. 
 
