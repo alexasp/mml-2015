@@ -1,7 +1,7 @@
 \chapter{Toward a Real-World Application} \label{ch:RW_application}
 Due to the relative novelty of differential privacy as a concept, we've found the research and discussion of the real-world applicability of a DP-based system lacking in content. We therefore want to contribute to this field by adding some of our own experiences and thoughts.  This chapter will therefore discuss the potential applications of a system based on our distributed machine learner, and some of the prerequisite criteria we've found to need fulfillment before designing an application in the first place.   
 
-\section{Criteria for an application} \label{sec:suitability_criteria}
+\section{Criteria for an Application} \label{sec:suitability_criteria}
 What we've discovered during our pre-studies and experimentation have resulted in the following suitability criteria for a potential application. 
 \begin{enumerate}
 	\item The interest in privacy is strong, and the risk of re-identification is significant.
@@ -15,7 +15,7 @@ These criteria are not meant to provide an all-compassing set of rules that when
 \subsection{Strong privacy interest}
 As a first criterion, a solid interest in privacy is necessary due to implementation of a differential privacy mechanism will lead to a trade-off between utility and privacy. As we've have shown in our analysis the effects of this trade-off can be minimized, but stronger privacy guarantees will inevitably lead to decaying accuracy due to the noise addition. The underlying assumption in this criterion is therefore that the risk of re-identification is significant, but manageable to secure by applying a differential privacy mechanism. The potential for future re-identification should be a factor in determining the strength of the privacy risk, but it should not prevent consideration of other factors, such as the potential public utility one can gain from data analysis.
 
-\subsection{Structured Data}
+\subsection{Structured data}
 The mechanisms that were originally designed to support differential privacy were created to address the threats to privacy from the sharing of information contained in a centralized database. We've shown through our experimentation that there are an potential applicability in designing a distributed machine learning system, but there are still a criterion that the data must be structured and labeled before any form for learning can be applied. Future experimentation can potentially prove that this criterion can be relaxed. This can then open avenues for exploring the usage of other branches of machine learning, such as deep learning and unsupervised learning. For the moment however, structured data is an important prerequisite.
 
 \subsection{Data size}
@@ -36,7 +36,7 @@ This is not to say that research on health data or census data is completely inf
 The fifth criterion for adopting differential privacy is that it precludes the study of outliers. The goal of such a study is inconsistent with the differential privacy goal of preventing the identification of the presence or absence of a record in a database. An application based on our architecture should therefore instead focus on finding similarities between users, and how to best leverage the aggregation mechanism we employ. 
 
 
-\section{Potential future applications}
+\section{Potential Future Applications}
 \subsection{Wearable health sensor data analysis }
 A growing worldwide market is the sale and usage of wearable sensors, such as environmental sensors, motion sensors, and health sensors. A IHS report \citep{ihs2014reportwearables} from 2014 estimates that the market for sensors in wearables will expand to 135 million units in 2019, up from 50 million in 2013. These wearables will evolve from being just a single purpose device such as a pedometer and grow into more multipurpose devices such as a smartwatch, which will consist of several sensors which can monitor varying areas of use. 
 
