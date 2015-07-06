@@ -98,8 +98,8 @@ S(u_f) = \underset{d(D_1,D_2)=1,a\in A}{max}||u_f(D_1, a)-u_f(D_2,a)||
    \prod_{i=1}^{m} p(y_i | x_i,\theta)
    \end{eqnarray}
    
-For convenience, the point of maximum log-likelihood is used instead. Since the log function is monotonically increasing, the maximum likelihood estimator and the maximum log-likelihood estimator is the same. We then select
- 
+For convenience, the point of maximum log-likelihood is used instead. Since the log function is monotonically increasing, the maximum likelihood estimator and the maximum log conditional likelihood estimator is the same, assuming labels $y_i$ are independent of each other when conditioned on their respective feature vectors $x_i$. We then select
+
   \begin{eqnarray}
   \theta_{MLE} = \arg\max_\theta [\sum_{i=1}^{m} \log p(y_i | x_i,\theta)] - \lambda \|\theta\|^{2}_{2}
   \end{eqnarray}
@@ -129,7 +129,11 @@ where $\lambda$ is the regularization constant, $t$ is the current epoch and $\g
 
 \subsubsection{Convergence criteria}
 
-\todo{Give the convergence criteria we use - lcl or max epochs}
+While we have defined a maximum number of epochs for the stochastic gradient descent, convergence to a near-optimal parameter vector might occur well before this limit is reached. To save time, we used a convergence criteria to stop optimization when the improvement in the objective function is sufficiently small. The optimization terminates when 
+
+\begin{eqnarray}
+|LCL_i - LCL_{i-1}| < 0.01
+\end{eqnarray}
 
 \subsection{Sensitivity of Logistic Regression Aggregation Mechanism} \label{sec:Sensitivity_of_LogReg}
 
