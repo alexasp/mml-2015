@@ -158,7 +158,9 @@ As the previous experiment indicates that publishing newly made models to as man
 
 \section{Analysis of Aggregation Group Sizes}
 
-The results of this experiment is seen in Figure \ref{fig:results_group_sizes}. It is clear that a smaller group size and consequently more aggregated models published resulted in a strong reduction in accuracy variance. While the variance is too high at larger group sizes to know much about the actual mean value after only 10 repetitions of the experiment, it is unlikely that it is smaller than the mean accuracy observed when the group size is one. 
+The results of this experiment is seen in Figure \ref{fig:results_group_sizes}. 
+
+\begin{comment}It is clear that a smaller group size and consequently more aggregated models published resulted in a strong reduction in accuracy variance. While the variance is too high at larger group sizes to know much about the actual mean value after only 10 repetitions of the experiment, it is unlikely that it is smaller than the mean accuracy observed when the group size is one. 
 
 A possible explanation of this result is that the effects of \unsure{bagging?} boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 
 
@@ -173,6 +175,7 @@ One way to answer question would be by finding a data set which has subsets that
 \todo[inline]{Add figure to results that deal with effect of various budget divisions}
 
 An alternative avenue for validating the value of doing aggregation could be to reduce the amount of data given to each peer. If just one peer has data sufficient to train a good classifier, it is sufficient. For that reason it makes sense to stage a situation were it is highly unlikely that even a single peer gets a lucky subset of data. Figure \ref{fig:groupsize_limiteddata} demonstrates such a case. Again, there is not clear indication that averaging multiple models is better than simply publishing them individually and using them in ensemble classifiers.
+\end{comment}
 
 \todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
 
@@ -183,10 +186,6 @@ An alternative avenue for validating the value of doing aggregation could be to 
 %
 %\todo[inline]{Explain what cold start issues is. Discuss how this is very prominent in our sitaution, and the different ways we can deal with the cold start, and pros and cons of those approaches. Essentially, we have already experimented with a kind of cold start situation when we try to performance numbers for peer\_count 1 to 50}
 %
-
-
-
-
 
 
 
