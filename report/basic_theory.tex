@@ -59,7 +59,12 @@ When using the Laplace mechanism it is necessary to choose a suitable value for 
 \begin{eqnarray} \label{eq:sensitivity_def}
 \Delta f=\underset{D_1,D_2}{max}||\mathit{f(D_1)}-\mathit{f(D_2)}||_{1}
  \end{eqnarray}
- \missingfigure[figwidth=6cm]{Picture showing the laplacian distribution} \unsure{Not sure if we need the pic. Alex: I think we do.}]
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig/laplace}
+	\caption{Probability distributions of the Laplace mechanism for two neighboring databases. (Adapted from \citep{hsu2014economicEpsilon})}
+	\label{fig:laplace_distribution}
+\end{figure}
 %$
 % <math>f(x|\mu,b) = \frac{1}{2b} \exp \left( -\frac{|x-\mu|}{b} \right) \,\!</math>
 % <math> = \frac{1}{2b}
