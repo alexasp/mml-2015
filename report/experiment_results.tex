@@ -4,11 +4,12 @@
 
 	This section provides the results of the experiments listed in Section \ref{sec:experiment_plan}, which are analyzed further in Chapter \ref{ch:analysis}.
 
-\subsection{measuring accuracy}
+\subsection{Measuring error rate}
 
 \begin{table}[H]
+			\centering
 	\begin{tabular}{|l|l|l|l|}
-		\centering
+
 		{\bf Experiment Name}            & {\bf Mean error} & {\bf Std. dev.} & $\lambda$ \\
 		\hline
 		Centralized logistic regression  & $0.162$          & $0.0020$        & $2^3$     \\
@@ -18,7 +19,7 @@
 		Aggregated model, $\epsilon=0.1$ & $0.160$          & $0.0030$        & $2^0$     \\
 		Ensemble model, $\epsilon=0.1$   & $0.164$          & $0.0013$        & $2^2$    
 	\end{tabular}
-	\caption{Measuring accuracy}
+	\caption{Measuring accuracy: Adult}
 	\label{tab:results_measuring_accuracy}
 \end{table}
 
