@@ -7,12 +7,16 @@
 \subsection{measuring accuracy}
 
 \begin{table}[H]
-	\begin{tabular}{ll}
-		\textbf{Adult} & \textbf{Error rate} \\
-		Our optimal result (Local model, e=1.0, 10 peer)                  & 0.157 \\
-		High privacy, few peers($\epsilon$=0.1, 50 peers)				  & 0.163  \\
-		Aggregated model												  & 0.185 \\
-		Ensemble model													  &	0.165
+	\begin{tabular}{|l|l|l|l|}
+		\centering
+		{\bf Experiment Name}            & {\bf Mean error} & {\bf Std. dev.} & $\lambda$ \\
+		\hline
+		Centralized logistic regression  & $0.162$          & $0.0020$        & $2^3$     \\
+		Disjoint logistic regression     & $0.172$          & $0.0014$        & $2^2$     \\
+		Aggregated model, $\epsilon=1.0$ & $0.154$          & $0.0015$        & $2^{-1}$  \\
+		Ensemble model, $\epsilon=1.0$   & $0.162$          & $0.0013$        & $2^1$     \\
+		Aggregated model, $\epsilon=0.1$ & $0.160$          & $0.0030$        & $2^0$     \\
+		Ensemble model, $\epsilon=0.1$   & $0.164$          & $0.0013$        & $2^2$    
 	\end{tabular}
 	\caption{Measuring accuracy}
 	\label{tab:results_measuring_accuracy}

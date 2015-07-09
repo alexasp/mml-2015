@@ -36,7 +36,7 @@ public class AdultTest {
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        boolean includeLocalModel = false;
+        boolean includeLocalModel = true;
         boolean classifyLocallyOnly = false;
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = false;
@@ -47,7 +47,7 @@ public class AdultTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(250);
+        List<Integer> dataLimits = Arrays.asList(300);
 
 //        List<PeerParam> peerParams = IntStream.range(1, 21).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
@@ -55,10 +55,10 @@ public class AdultTest {
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(0, 1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(2, 3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1.0)
+                new PrivacyParam(0.1)
         );
 
         if (useCrossValidation) {
