@@ -106,16 +106,39 @@
 \end{table}      
 
 \subsection{Effect of aggregation group sizes}
-\begin{figure}[H]
+\begin{table}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{fig/adult/GroupSizeTest}
-	\caption{Effect of Aggregation Group Sizes.(Adult)}
-	\label{fig:results_group_sizes}
-\end{figure}
+	\begin{tabular}{|l|l|l|}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error \\ std. dev.\end{tabular}} \\
+		\hline
+		1                                                           & 0.174                                                       & 0.0048                                                           \\
+		5                                                           & 0.168                                                       & 0.0061                                                           \\
+		10                                                          & 0.171                                                       & 0.0064                                                           \\
+		15                                                          & 0.172                                                       & 0.0048                                                           \\
+		20                                                          & 0.170                                                       & 0.0052                                                           \\
+		25                                                          & 0.168                                                       & 0.0051                                                           \\
+		30                                                          & 0.168                                                       & 0.0040                                                          
+	\end{tabular}
+	\caption{Effect of aggregation group size. Party-publishing. Adult.}
+	\label{tab:results_groupsize_party}
+\end{table}
 
-%add - some result comparing difference between party and all publishing
-
-
+\begin{table}[]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error \\ std. dev.\end{tabular}} \\
+		\hline
+		1                                                           & 0.168                                                       & 0.0009                                                           \\
+		5                                                           & 0.165                                                       & 0.0013                                                           \\
+		10                                                          & 0.165                                                       & 0.0012                                                           \\
+		15                                                          & 0.165                                                       & 0.0008                                                           \\
+		20                                                          & 0.165                                                       & 0.0005                                                           \\
+		25                                                          & 0.165                                                       & 0.0007                                                           \\
+		30                                                          & 0.165                                                       & 0.0006                                                          
+	\end{tabular}
+	\caption{Effect of aggregation group size. All-publishing. Adult.}
+	\label{tab:results_groupsize_all}
+\end{table}
 
 \subsection{Value of budgeting privacy}
 
