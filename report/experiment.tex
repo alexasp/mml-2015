@@ -80,16 +80,16 @@ The values of $\epsilon$ for the  common privacy level in Table \ref{tab:experim
 
 \subsection{Changes in data availability}
 
-As we are testing in a decentralized setting, we wanted to compare how the local, the aggregated models, and both of them in an ensemble respond to changes in data availability.
+As we are testing in a decentralized setting, we wanted to compare how the local, the aggregated models, and both of them in an ensemble respond to changes in data availability.  The experiment seen in Table \ref{tab:experiments_data_availability} is concerned with exploring the way data availability affects error rate in the distributed setting. As all other parameters except for the amount of data per peer is fixed, the overall size of data in the system changes for each parameter combination in this experiment.
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                                 & \textbf{Peers} & \textbf{Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & \textbf{Type}       \\
 		\hline
-		Spambase, data availability, disjoint         & 10    & 360  & $2^{-2}$  & $0.1$      & Local      \\
-		Spambase, data availability, aggregated    & 10    & 360  & $2^{-2}$  & $0.1$      & Aggregated \\
-		Spambase, observing $\lambda$, ensemble & 10    & 360  & $2^{-2}$  & $0.1$  & Ensemble  
+		Spambase, data availability, disjoint         & 10    & $10-360$  & $2^{-2}$  & $0.1$      & Local      \\
+		Spambase, data availability, aggregated    & 10    & $10-360$  & $2^{-2}$  & $0.1$      & Aggregated \\
+		Spambase, observing $\lambda$, ensemble & 10    & $10-360$  & $2^{-2}$  & $0.1$  & Ensemble  
 	\end{tabular}
 	\caption{Effect of data availability}
 	\label{tab:experiments_data_availability}
@@ -98,8 +98,7 @@ As we are testing in a decentralized setting, we wanted to compare how the local
 \subsection{Changes in number of participants}
 
  
-
-The experiment shown in Table \ref{tab:experiments_peer_numbers} is an attempt to partially answer to our research question about the possible loss of accuracy in our distributed setting. As we expected the error rate might be affected by the number of participating peers, we designed this experiment to give an idea of how peer prediction changes when more peers are present. Except for the number of peers, all parameters were kept fixed, including the amount of data per peer. This means that as the number of peers increase, there is more data available in the system.
+The experiment shown in Table \ref{tab:experiments_peer_numbers} is an attempt to partially answer to our research question about the possible loss of accuracy in our distributed setting from the participation perspective. As we expected the error rate might be affected by the number of participating peers, we designed this experiment to give an idea of how peer prediction changes when more peers are present. Except for the number of peers, all parameters were kept fixed, including the amount of data per peer. This means that as the number of peers increase, there is more data available in the system.
 
 \begin{table}[h]
 	\centering
