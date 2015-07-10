@@ -97,14 +97,16 @@ As we are testing in a decentralized setting, we wanted to compare how the local
 
 \subsection{Changes in number of participants}
 
-If aggregating models produced better accuracy, we expected that giving more models to the mechanism would produce higher quality aggregates.
+ 
+
+The experiment shown in Table \ref{tab:experiments_peer_numbers} is an attempt to partially answer to our research question about the possible loss of accuracy in our distributed setting. As we expected the error rate might be affected by the number of participating peers, we designed this experiment to give an idea of how peer prediction changes when more peers are present. Except for the number of peers, all parameters were kept fixed, including the amount of data per peer. This means that as the number of peers increase, there is more data available in the system.
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\textbf{Experiment Name}                & \textbf{Peers}      & \textbf{Group size} & \textbf{Data per peer} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ \\
 		\hline
-		Adult, increasing participants & {[}5-50{]} & 5          & 500  & $2^{2}$   & $1.0$     
+		Adult, increasing participants & $5-50$ & 5          & 500  & $2^{2}$   & $1.0$     
 	\end{tabular}
 	\caption{Effect of number of peers}
 	\label{tab:experiments_peer_numbers}
