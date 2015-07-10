@@ -6,12 +6,12 @@
 \section{Experiment Plans}
 \label{sec:experiment_plan}
 
-In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments we have performed, and the parameter configuration we employed for each experiment. The results of these experiments will be provided in section \ref{experiment_results}.
+In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments we have performed, and the parameter configuration we employed for each experiment. The results of these experiments will be provided in section \ref{experiment_results}. When more than one peer was involved in the execution of an experiment, we measured and report the mean accuracy of all peers.
 
 
 \subsection{Measuring accuracy}
 \label{sec:experiment_measuring_accuracy}
-The experiments in this section are intended to show the accuracy that results from differentially private model aggregation compared to locally trained models. When more than one peer was involved, we measured the mean accuracy of all peers.
+The experiments in this section are intended to show the accuracy that results from differentially private model aggregation compared to locally trained models. This experiment is concerned with our goal of validating previous work and how error rates differ in the centralized and the distributed, differentially private setting.
 
 \begin{table}[h]
 	\centering
@@ -39,7 +39,7 @@ The \textit{Aggregated model} experiment let the peers create an aggregate model
 
 \subsection{Confirming expected effects of differential privacy}
 
-In this project we have implemented training of a logistic regression, the aggregation mechanism guaranteeing differential privacy and the communication scheme that forms groups of peers to create aggregate models. When tuning the parameters of the implementation, we expected certain changes in the measured performance based on the theoretical and experimental results of previous work. The experiments in this section are intended to be validation of our implementation. In particular, we expected certain effects when changing the privacy parameter $\epsilon$ and the regularization parameter $\lambda$. By confirming the expected behavior, we could increase confidence in the correctness of our implementation, while also visualizing the dynamics of differential privacy.
+In this project we have implemented training of a logistic regression, the aggregation mechanism guaranteeing differential privacy and the communication scheme that forms groups of peers to create aggregate models. When tuning the parameters of the implementation, we expected certain changes in the measured performance based on the theoretical and experimental results of previous work. The experiments in this section are intended to be validation of both previous work and of our implementation. In particular, we expected certain effects when changing the privacy parameter $\epsilon$ and the regularization parameter $\lambda$. By confirming the expected behavior, we could increase confidence in the correctness of our implementation, while also visualizing the dynamics of differential privacy.
 
 \subsubsection{Changes in $\epsilon$}
 
