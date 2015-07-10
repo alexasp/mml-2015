@@ -129,14 +129,14 @@ With this experiment we intend to explore the variance in the quality of models 
 
 \subsection{Effect of aggregation group sizes}
 
-We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. In the experiment seen in Table \ref{tab:experiments_group_sizes} we have a fixed number of peers and a fairly high level of $\epsilon$. The privacy level was chosen from the high end of possible values, since we wanted to make sure that the aggregated models were useful after noise addition.
+We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. In the experiment seen in Table \ref{tab:experiments_group_sizes} we have a fixed number of peers and a fairly high level of $\epsilon$. The privacy level was chosen from the high end of candidate values. This is because we want to observe the value of aggregating models, which should be more apparent in a situation with lower perturbation.
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|}
 		{\bf Experiment Name} & {\bf Peers} & {\bf Group size} & $\epsilon$ \\
 		\hline
-		Changing group sizes  & 30          & $[1, 30]$      &     $1.0$     \\ 
+		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$     \\ 
 	\end{tabular}
 	\caption{Effect of aggregation group size}
 	\label{tab:experiments_group_sizes}
@@ -146,7 +146,9 @@ We believed that the number of peers participating in creating aggregated models
 
 \subsection{Value of budgeting privacy}
  
-As discussed in Section \ref{section:privacy_budget}, it is possible to spread the usage of the privacy guarantee in a budgeted fashion. Table \ref{tab:experiments_budgeting_privacy} details an experiment where we wanted to explore the potential benefit of performing repeated aggregations, at the cost of lower $\epsilon$ in each aggregation.
+As discussed in Section \ref{section:privacy_budget}, it is possible to spread the usage of the privacy guarantee in a budgeted fashion. Table \ref{tab:experiments_budgeting_privacy} shows the experiment where we wanted to explore the potential benefit of performing repeated aggregations, at the cost of lower $\epsilon$ in each aggregation. 
+
+This relates to our first research question, with considers loss in accuracy, in two ways. Firstly, creating ten aggregated models by spreading the budget and then using them in an ensemble might on its own have interesting effects on quality of predictions. Secondly, it might be necessary for peers in a distributed setting to participate in aggregations several times. This is especially true if aggregated models cannot be shared globally for privacy or practical reasons.
 
 \begin{table}[h]
 	\centering	
