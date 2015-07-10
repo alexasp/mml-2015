@@ -110,10 +110,12 @@ If aggregating models produced better accuracy, we expected that giving more mod
 	\label{tab:experiments_peer_numbers}
 \end{table}
 
-\subsection{Minimizing peer model variance}
+\subsection{Peer error rate variance}
 
-With this experiment we intend to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
+With this experiment we wanted to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
 
+This experiment was concerned with reduction of peer error rate variance and to some extent validation of previous work. Concerning the latter, we hoped to show whether or not there was benefit in differentially private model aggregation compared to each peer using a local model. Concerning the former, we wished to see if publishing aggregated models and using them in ensembles to make predictions could help reduce peer error rate variance.
+ 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|l|l|}
