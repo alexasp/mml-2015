@@ -193,10 +193,9 @@ which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lo
 %
 %\todo{Add proof of above sensitivity}
 
-It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will go, and in principle sufficient knowledge about the other $d_{i \neq k}$ data sets would allow a third party to learn information. For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about 
-individual biometric records. 
+It is important to note that this does not offer full protection to participants. It only offers differential privacy guarantee for individual records in their data set. This means that aggregate information about a participants data set will be incorporated in the learned models. Sufficient knowledge about the other $d_{i \neq k}$ data sets would allow a third party to learn information about the user. For example, an individual might not want insurance companies to know about the averages of features in their biometric records. The current system would not help with that concern - it only protects against specific knowledge about individual biometric records. 
 
-As stated by Dwork, groups of records can be protected \todo{Explain how we can protect whole user sets and the balance between data set sizes and limits} \cite{Dwork06differentialprivacy} Dwork points out that the end goal of differential privacy is allow learning aggregate information in a way that privacy. 
+As stated by Dwork, groups of records can be protected \cite{Dwork06differentialprivacy}. Dwork points out that the end goal of differential privacy is allow learning aggregate information in a way that privacy. By this she means that it is inherent in the task at hand that aggregate information must be preserved somehow. While this point stands, we suggest an approach in Section \ref{sec:Future Work} that could allow full protection of even the aggregate information of users in our setting, while allowing model training on their data. In this project, we only protect the individual records held by each user.
 
 \section{Ensemble Learning}
 

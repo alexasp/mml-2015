@@ -136,18 +136,20 @@ We believed that the number of peers participating in creating aggregated models
 
 This experiment relates to two of our research questions - reduction of accuracy loss and peer accuracy variance in our distributed, differentially private setting. We hoped to identify group configurations that minimized both of these performance metrics.
 
+We run this experiment with two different approaches for publishing the aggregated models, as discussed in Section \ref{sec:PropagationPubModel}.
+
 \begin{table}[h]
 	\centering
-	\begin{tabular}{|l|l|l|l|}
-		{\bf Experiment Name} & {\bf Peers} & {\bf Group size} & $\epsilon$ \\
+	\begin{tabular}{|l|l|l|l|l|}
+		{\bf Experiment Name} & {\bf Peers} & {\bf Group size} & $\epsilon$ & {\bf Publication} \\
 		\hline
-		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$     \\ 
+		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$ & Party     \\ 
+		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$ & All     \\ 
 	\end{tabular}
 	\caption{Effect of aggregation group size}
 	\label{tab:experiments_group_sizes}
 \end{table}
- 
-\todo{add this with both public and party propegation, and mention that we compare these also}
+
 
 \subsection{Value of budgeting privacy}
  

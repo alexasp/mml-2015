@@ -5,7 +5,6 @@
 In this chapter we will give our analysis of the experimental results seen in Section \ref{sec:experiment_results}.
 
 \section{Comparing Measured Error Rate}
-\todo[inline]{Include results from previous chap once more}
 \begin{table}[h]
 	\begin{tabularx}{\textwidth}{|X|l|}
 		\textbf{Experiment and author}                                             & \textbf{Error Rate}      \\
@@ -95,13 +94,13 @@ Looking at Table \ref{tab:results_measuring_accuracy}, we see that the differenc
 As can be told from Figure \ref{fig:data_limit_test_localmodelonly}, \ref{fig:data_limit_test_withlocalmodel} and \ref{fig:data_limit_test_localmodelonly}, the amount of data available for each peer is important. The more data a peer have, the greater the chance is that it will make a decent local classifier. 
 
 
-\todo[inline]{Compare the figures about data limits, ie datalimittestwithoutlocalmodel and such. Clearly, with local model is better than without, but it is not clear whether local only or aggregated+local is better.}
+
 
 Figure \ref{fig:data_limit_test_withlocalmodel} and \ref{fig:data_limit_test_withoutlocalmodel} indicate how the classification performance improves as the amount of data records available to each peer grows. When each peer only have a small amount of data to create their local classifier, the classifier tends to have display terrible performance. As peers gain more data, both the performance and the variance of the classifier improves.     
 
 The reason for this improvement is two-fold. 1: A bigger sample size for the logistic regression model generally leads to better performance \cite{peduzzi1996simulation}. 2: The sensitivity of logistic regression (see equation \ref{eq:logres_sensitivity}) is bounded by the size of the training set. What this means is that the more data a peer have available, the less amount of noise is needed to obfuscate their logistic model. 
 
-The observation we've made is therefore thoroughly grounded in theory, and is important to highlight when discussing our main research question. Until a certain amount of data has been gathered, a system based on our distributed architecture will display very poor performance. What is interesting however, is that the amount of data needed seems to be a relatively low number. In the paper written by \cite{pathak2010diffprivhomo}, they report that each party was given at least 3256 data records. In our experiments we found that a much smaller amount of data could still be used and create decent classifiers. We believe this is due to our choice of propagating every model out, so that each peer can create an ensemble of classifiers. \todo[inline]{Fix this last sentence. It is not that good}  	  	
+The observation we've made is therefore thoroughly grounded in theory, and is important to highlight when discussing our main research question. Until a certain amount of data has been gathered, a system based on our distributed architecture will display very poor performance. What is interesting however, is that the amount of data needed seems to be a relatively low number. In the paper written by \cite{pathak2010diffprivhomo}, they report that each party was given at least 3256 data records. In our experiments we found that a much smaller amount of data could still result in decent classifiers. 	  	
 
 \section{Importance of Regularization}
 
@@ -131,7 +130,7 @@ We believe the most practical way to do this would be by letti	ng each peer choo
 
 The previous paragraphs considered effects of noise variance on the ability of peers to make predictions. In this section we consider another important aspect that determines the quality of aggregated models - the number of peers that participate to create them. 
 
-Figure \ref{fig:peer_range_constant_group} shows what happens when the aggregation group size stays fixed, but different numbers of peers are available. A higher number of peers mean that more models. In this experiment the aggregation group size was five, which means that just one aggregated model was produced at the low end of the range, while 10 models were produced at the high end. If there is any utility of aggregating models, it is not visible in the mean error rate for the Adult data set with this amount of records. We suspected that an effect would be stronger when the peers have less data, since aggregation should allow the peers to benefit from each other data. We tested with different amounts of available data as low as 75 instances per peer, but we made the same observations in these. The charts showing other levels of data availability are included in the Appendix.  \todo[inline]{Add figures to appendix that show our other tests}.
+Figure \ref{fig:peer_range_constant_group} shows what happens when the aggregation group size stays fixed, but different numbers of peers are available. A higher number of peers mean that more models. In this experiment the aggregation group size was five, which means that just one aggregated model was produced at the low end of the range, while 10 models were produced at the high end. If there is any utility of aggregating models, it is not visible in the mean error rate for the Adult data set with this amount of records. We suspected that an effect would be stronger when the peers have less data, since aggregation should allow the peers to benefit from each other data. We tested with different amounts of available data as low as 75 instances per peer, but we made the same observations in these. The charts showing other levels of data availability are included in the Appendix.  \todo[inline]{Add figures to appendix that show our other tests}
 
 One possible explanation for the small changes in error rate might be the uniformity of data distribution. In our current experimental setup, the data is partitioned randomly between the peers, which means that the peers will have same number of samples from the same data distribution. In reality, users might have very different numbers of samples with different distributions. This is discussed further in Section \ref{sec:Future Work} on Future Work. On the flip side, these experiments don't show any negative effects of predicting with an ensemble of aggregated models. While we expect that there are situations where ensemble prediction could be detrimental, such issues could be mitigated by actively removing less useful models from the ensemble as it grows.
 
@@ -188,8 +187,6 @@ One way to answer question would be by finding a data set which has subsets that
 
 An alternative avenue for validating the value of doing aggregation could be to reduce the amount of data given to each peer. If just one peer has data sufficient to train a good classifier, it is sufficient. For that reason it makes sense to stage a situation were it is highly unlikely that even a single peer gets a lucky subset of data. Figure \ref{fig:groupsize_limiteddata} demonstrates such a case. Again, there is not clear indication that averaging multiple models is better than simply publishing them individually and using them in ensemble classifiers.
 \end{comment}
-
-\todo[inline]{redo this experiment above with regularization=0, as indicated by the previous figures shown}
 
 %\subsection{Issues with cold start}
 %
