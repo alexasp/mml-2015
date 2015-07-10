@@ -6,7 +6,7 @@
 \section{Experiment Plans}
 \label{sec:experiment_plan}
 
-In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments we have performed, and the parameter configuration we employed for each experiment. The results of these experiments will be provided in section \ref{experiment_results}. When more than one peer was involved in the execution of an experiment, we measured and report the mean accuracy of all peers.
+In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments we have performed, and the parameter configuration we employed for each experiment. The results of these experiments will be provided in section \ref{sec:experiment_results}. When more than one peer was involved in the execution of an experiment, we measured and report the mean accuracy of all peers.
 
 
 \subsection{Measuring accuracy}
@@ -16,7 +16,7 @@ The experiments in this section are intended to show the accuracy that results f
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|}
-		{\bf Experiment Name}           & {\bf Peers} & {\bf Data} & {\bf $\epsilon$} \\
+		{\bf Experiment Name}           & {\bf Peers} & {\bf Data per peer} & {\bf $\epsilon$} \\
 		\hline
 		Centralized logistic regression & 1           & 3000       & N/A              \\	
 		Disjoint logistic regression    & 10          & 300        & N/A              \\
@@ -84,12 +84,12 @@ As we are testing in a decentralized setting, we wanted to compare how the local
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{|l|l|l|l|l|l|}
-		\textbf{Experiment Name}                                 & \textbf{Peers} & \textbf{Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & \textbf{Type}       \\
+	\begin{tabular}{|l|l|l|l|l|}
+		\textbf{Experiment Name}                                 & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$  & \textbf{Type}       \\
 		\hline
-		Spambase, data availability, disjoint         & 10    & $10-360$  & $2^{-2}$  & $0.1$      & Local      \\
-		Spambase, data availability, aggregated    & 10    & $10-360$  & $2^{-2}$  & $0.1$      & Aggregated \\
-		Spambase, observing $\lambda$, ensemble & 10    & $10-360$  & $2^{-2}$  & $0.1$  & Ensemble  
+		Spambase, data availability, disjoint         & 10    & $10-360$  & $2^{-2}$       & Local      \\
+		Spambase, data availability, aggregated    & 10    & $10-360$  & $2^{-2}$       & Aggregated \\
+		Spambase, observing $\lambda$, ensemble & 10    & $10-360$  & $2^{-2}$   & Ensemble  
 	\end{tabular}
 	\caption{Effect of data availability}
 	\label{tab:experiments_data_availability}
@@ -130,9 +130,9 @@ This experiment was concerned with reduction of peer error rate variance and to 
 	\label{tab:experiments_peer_variance}
 \end{table}
 
-\subsection{Effect of aggregation group sizes}
+\subsection{Effect of aggregation group size and model propagation}
 
-We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. In the experiment seen in Table \ref{tab:experiments_group_sizes} we have a fixed number of peers and a fairly high level of $\epsilon$. The privacy level was chosen from the high end of candidate values. This is because we want to observe the value of aggregating models, which should be more apparent in a situation with lower perturbation. 
+We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. In the experiment seen in Table \ref{tab:experiments_group_sizes} we have a fixed number of peers and a fairly high level of $\epsilon$. The privacy level was chosen from the high end of candidate values. This is because we want to observe the value of aggregating models, which should be more apparent in a situation with lower perturbation. Since participation in a single model aggregation fully expends the privacy budget of a peer and the number of peers is fixed, a higher number of aggregate models are produced when the group size is smaller. Smaller groups result in each peer having a larger ensemble with each model being based on less data. Larger groups result in each peer having a smaller ensemble with each model being based on more data.
 
 This experiment relates to two of our research questions - reduction of accuracy loss and peer accuracy variance in our distributed, differentially private setting. We hoped to identify group configurations that minimized both of these performance metrics.
 
