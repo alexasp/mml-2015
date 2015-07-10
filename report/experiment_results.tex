@@ -106,18 +106,18 @@
 \end{table}      
 
 \subsection{Effect of aggregation group sizes}
-\begin{table}[h]
+\begin{table}[]
 	\centering
-	\begin{tabular}{|l|l|l|}
-		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error \\ std. dev.\end{tabular}} \\
+	\begin{tabular}{|l|l|l|l|}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error\\ std. dev.\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Peer error\\ std. dev.\end{tabular}} \\
 		\hline
-		1                                                           & 0.174                                                       & 0.0048                                                           \\
-		5                                                           & 0.168                                                       & 0.0061                                                           \\
-		10                                                          & 0.171                                                       & 0.0064                                                           \\
-		15                                                          & 0.172                                                       & 0.0048                                                           \\
-		20                                                          & 0.170                                                       & 0.0052                                                           \\
-		25                                                          & 0.168                                                       & 0.0051                                                           \\
-		30                                                          & 0.168                                                       & 0.0040                                                          
+		1                                                           & 0.174                                                       & 0.0048                                                          & 0.0068                                                               \\
+		5                                                           & 0.168                                                       & 0.0061                                                          & 0.0054                                                               \\
+		10                                                          & 0.171                                                       & 0.0064                                                          & 0.0078                                                               \\
+		15                                                          & 0.172                                                       & 0.0048                                                          & 0.0071                                                               \\
+		20                                                          & 0.170                                                       & 0.0052                                                          & 0.0057                                                               \\
+		25                                                          & 0.168                                                       & 0.0051                                                          & 0.0052                                                               \\
+		30                                                          & 0.168                                                       & 0.0040                                                          & 0.0031                                                              
 	\end{tabular}
 	\caption{Effect of aggregation group size. Party-publishing. Adult.}
 	\label{tab:results_groupsize_party}
@@ -125,16 +125,16 @@
 
 \begin{table}[]
 	\centering
-	\begin{tabular}{|l|l|l|}
-		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error \\ std. dev.\end{tabular}} \\
+	\begin{tabular}{|l|l|l|l|}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error \\ std. dev.\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Peer error \\ std.dev.\end{tabular}} \\
 		\hline
-		1                                                           & 0.168                                                       & 0.0009                                                           \\
-		5                                                           & 0.165                                                       & 0.0013                                                           \\
-		10                                                          & 0.165                                                       & 0.0012                                                           \\
-		15                                                          & 0.165                                                       & 0.0008                                                           \\
-		20                                                          & 0.165                                                       & 0.0005                                                           \\
-		25                                                          & 0.165                                                       & 0.0007                                                           \\
-		30                                                          & 0.165                                                       & 0.0006                                                          
+		1                                                           & 0.168                                                       & 0.0009                                                           & 0.0003                                                               \\
+		5                                                           & 0.165                                                       & 0.0013                                                           & 0.0007                                                               \\
+		10                                                          & 0.165                                                       & 0.0012                                                           & 0.0008                                                               \\
+		15                                                          & 0.165                                                       & 0.0008                                                           & 0.0026                                                               \\
+		20                                                          & 0.165                                                       & 0.0005                                                           & 0.0026                                                               \\
+		25                                                          & 0.165                                                       & 0.0007                                                           & 0.0027                                                               \\
+		30                                                          & 0.165                                                       & 0.0006                                                           & 0.0027                                                              
 	\end{tabular}
 	\caption{Effect of aggregation group size. All-publishing. Adult.}
 	\label{tab:results_groupsize_all}
