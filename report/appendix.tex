@@ -35,3 +35,25 @@ $\\[0.5cm]$
 	\caption{Effect of peer numbers. Spambase.}
 	\label{fig:peer_range_constant_group_spam}
 \end{figure}
+
+
+\subsection{Peer error rate variance}
+
+TBD
+
+\subsection{Effect of aggregation group size and model propagation}
+
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{llll}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error\\ std. dev.\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Peer error\\ std. dev.\end{tabular}} \\
+		1                                                           & 0.233                                                       & 0.0184                                                          & 0.0435                                                               \\
+		5                                                           & 0.217                                                       & 0.0185                                                          & 0.0399                                                               \\
+		10                                                          & 0.223                                                       & 0.0179                                                          & 0.0368                                                               \\
+		15                                                          & 0.221                                                       & 0.0245                                                          & 0.0290                                                               \\
+		20                                                          & 0.205                                                       & 0.0323                                                          & 0.0257                                                              
+	\end{tabular}
+	\caption{Effect of aggregation group size. Party-publishing. Spambase.}
+	\label{tab:results_groupsize_party_spam}
+\end{table}
