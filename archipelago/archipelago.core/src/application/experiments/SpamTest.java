@@ -47,18 +47,22 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(300);
+        List<Integer> dataLimits = Arrays.asList(150);
 
 //        List<PeerParam> peerParams = IntStream.range(1, 21).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
-                new PeerParam(10, 10)
+                new PeerParam(5, 5),
+                new PeerParam(10, 5),
+                new PeerParam(15, 5),
+                new PeerParam(20, 5)
+
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
         List<Double> regularizations = IntStream.range(-2, -1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(0.1)
+                new PrivacyParam(1.0)
         );
 
         if (useCrossValidation) {
