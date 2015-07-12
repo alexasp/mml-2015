@@ -44,10 +44,11 @@ TBD
 \subsection{Effect of aggregation group size and model propagation}
 
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
-	\begin{tabular}{llll}
+	\begin{tabular}{|l|l|l|l|}
 		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error\\ std. dev.\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Peer error\\ std. dev.\end{tabular}} \\
+		\hline
 		1                                                           & 0.233                                                       & 0.0184                                                          & 0.0435                                                               \\
 		5                                                           & 0.217                                                       & 0.0185                                                          & 0.0399                                                               \\
 		10                                                          & 0.223                                                       & 0.0179                                                          & 0.0368                                                               \\
@@ -57,3 +58,21 @@ TBD
 	\caption{Effect of aggregation group size. Party-publishing. Spambase.}
 	\label{tab:results_groupsize_party_spam}
 \end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error\\ std. dev.\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Peer error\\ std. dev.\end{tabular}} \\
+		\hline
+		1                                                           & 0.215                                                       & 0.0076                                                          & 0.0036                                                               \\
+		5                                                           & 0.211                                                       & 0.0135                                                          & 0.0125                                                               \\
+		10                                                          & 0.197                                                       & 0.0116                                                          & 0.0191                                                               \\
+		15                                                          & 0.200                                                       & 0.0090                                                          & 0.0225                                                               \\
+		20                                                          & 0.195                                                       & 0.0110                                                          & 0.0202                                                              
+	\end{tabular}
+	\caption{Effect of aggregation group size. All-publishing. Spambase.}
+	\label{tab:results_groupsize_all_spam}
+\end{table}
+
+\subsection{Value of budgeting privacy}
+

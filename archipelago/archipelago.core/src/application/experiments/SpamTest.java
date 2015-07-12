@@ -38,8 +38,8 @@ public class SpamTest {
 
         boolean includeLocalModel = true;
         boolean classifyLocallyOnly = false;
-        PublishTypes modelPublishType = PublishTypes.Party;
-        boolean useCrossValidation = true;
+        PublishTypes modelPublishType = PublishTypes.All;
+        boolean useCrossValidation = false;
         int foldCount = 10;
 
 
@@ -56,6 +56,7 @@ public class SpamTest {
                 new PeerParam(20, 10),
                 new PeerParam(20, 15),
                 new PeerParam(20, 20)
+
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
