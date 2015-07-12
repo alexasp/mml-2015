@@ -5,16 +5,23 @@ $\\[0.5cm]$
 \noindent Write your appendix here...
 
 \todo[inline]{Include confusion matrices for the remaining data sets}
+ 
+\section{Additional Results}
 
-%output of various basic experiments intended to answers RQs
-\begin{table}[h]
-	\begin{tabular}{ll}
-		\textbf{Spambase} & \textbf{Error rate}\\
-		Centralized                & 0.100  \\
-		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
-		Aggregated model				                                  & 0.157  \\
-		Ensemble model				                                      & 0.157  \\
+\subsection{Measuring error rate}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		{\bf Experiment Name}            & {\bf Mean error} & {\bf Std. dev.} & {\bf $\lambda$} \\
+		\hline
+		Centralized logistic regression  & $0.104$          & $0.0059$        & $2^{-8}$        \\
+		Disjoint logistic regression     & $0.159$          & $0.0026$        & $2^{-5}$        \\
+		Aggregated model, $\epsilon=1.0$ & $0.163$          & $0.0103$        & $2^{-3}$        \\
+		Ensemble model, $\epsilon=1.0$   & $0.150$          & $0.0045$        & $2^{-5}$        \\
+		Aggregated model, $\epsilon=0.1$ & $0.182$          & $0.0256$        & $2^{-1}$        \\
+		Ensemble model, $\epsilon=0.1$   & $0.157$          & $0.0117$        & $2^{-2}$       
 	\end{tabular}
-	\caption{Table with baseline results from the Adult Dataset}
-	\label{tab:baseline_class_results_spambase}
+	\caption{Measuring accuracy: Spambase}
+	\label{tab:results_measuring_accuracy_spam}
 \end{table}
