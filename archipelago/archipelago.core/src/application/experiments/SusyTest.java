@@ -37,7 +37,7 @@ public class SusyTest {
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
         boolean includeLocalModel = true;
-        boolean classifyLocallyOnly = true;
+        boolean classifyLocallyOnly = false;
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = false;
         int foldCount = 10;
@@ -47,19 +47,18 @@ public class SusyTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(3000);
+        List<Integer> dataLimits = Arrays.asList(300);
 
 //        List<PeerParam> peerParams = IntStream.range(1, 21).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
-                new PeerParam(1, 1)
-
+                new PeerParam(10, 10)
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(2, 3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(0, 1).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
 
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(0.001, 0.001)
+                new PrivacyParam(0.1, 0.1)
 //                new PrivacyParam(0.1, 0.1/2),
 //                new PrivacyParam(0.1, 0.1/4),
 //                new PrivacyParam(0.1, 0.1/8),
