@@ -19,8 +19,24 @@
 		Aggregated model, $\epsilon=0.1$ & $0.160$          & $0.0030$        & $2^0$     \\
 		Ensemble model, $\epsilon=0.1$   & $0.164$          & $0.0013$        & $2^2$    
 	\end{tabular}
-	\caption{Measuring accuracy: Adult}
+	\caption{Measuring error rate: Adult}
 	\label{tab:results_measuring_accuracy}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		{\bf Experiment Name}            & {\bf Mean error} & {\bf Std. dev.} & {\bf $\lambda$} \\
+		\hline
+		Centralized logistic regression  & $0.104$          & $0.0059$        & $2^{-8}$        \\
+		Disjoint logistic regression     & $0.159$          & $0.0026$        & $2^{-5}$        \\
+		Aggregated model, $\epsilon=1.0$ & $0.163$          & $0.0103$        & $2^{-3}$        \\
+		Ensemble model, $\epsilon=1.0$   & $0.150$          & $0.0045$        & $2^{-5}$        \\
+		Aggregated model, $\epsilon=0.1$ & $0.182$          & $0.0256$        & $2^{-1}$        \\
+		Ensemble model, $\epsilon=0.1$   & $0.157$          & $0.0117$        & $2^{-2}$       
+	\end{tabular}
+	\caption{Measuring error rate: Spambase}
+	\label{tab:results_measuring_accuracy_spam}
 \end{table}
 
 \subsection{Confirming expected effects of differential privacy}
@@ -83,7 +99,7 @@
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{fig/adult/peer_range_constant_group}
-	\caption{Effect of peer numbers. (Adult)}
+	\caption{Effect of peer numbers. Adult.}
 	\label{fig:peer_range_constant_group}
 \end{figure}
 
@@ -101,7 +117,7 @@
 		Aggregated, d. privacy & 0,158 & 0.000	 \\
 		Ensemble with both & 0.166 & 0.002 \\
 	\end{tabular}
-	\caption{Variance among peers, (Adult)}
+	\caption{Variance among peers. Adult.}
 	\label{table:peer_variance_adult}
 \end{table}      
 
