@@ -112,7 +112,7 @@ The experiment shown in Table \ref{tab:experiments_peer_numbers} is an attempt t
 \end{table}
 
 \subsection{Peer error rate variance}
-
+\label{sec:experiment_peer_variance}
 With this experiment we wanted to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
 
 This experiment was concerned with reduction of peer error rate variance and to some extent validation of previous work. Concerning the latter, we hoped to show whether or not there was benefit in differentially private model aggregation compared to each peer using a local model. Concerning the former, we wished to see if publishing aggregated models and using them in ensembles to make predictions could help reduce peer error rate variance.
@@ -120,7 +120,7 @@ This experiment was concerned with reduction of peer error rate variance and to 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|l|l|}
-		{\bf Experiment Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
+		{\bf Experiment 	Name}                  & {\bf Peers} & {\bf Data} & $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$ & {\bf Type} \\
 		\hline
 		Adult, peer variance, only local       & 10          & 250        & $2^{2}$   & $1.0$      & Local      \\
 		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\

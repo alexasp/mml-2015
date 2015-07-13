@@ -14,16 +14,11 @@ import jade.wrapper.ControllerException;
 import learning.LabeledSample;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static java.util.Collections.max;
 
 /**
  * Created by aspis on 25.03.2015.
@@ -35,14 +30,16 @@ public class SusyTest {
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
         trainData = new DataLoader().readCSVFileReturnSamples("../data/susy_10000_dense.csv.train", 18, true);
-//      testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
+        testData = new DataLoader().readCSVFileReturnSamples("../data/susy_10000_dense.csv.test", 18, true);
+//        testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
-        testData = null;
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
+        boolean includeLocalModel = true;
+        boolean classifyLocallyOnly = true;
         PublishTypes modelPublishType = PublishTypes.All;
-        boolean useCrossValidation = true;
+        boolean useCrossValidation = false;
         int foldCount = 10;
 
 
@@ -50,17 +47,26 @@ public class SusyTest {
             testData = null;
         }
 
+        List<Integer> dataLimits = Arrays.asList(3000);
 
-        List<Integer> dataLimits = Arrays.asList(200);
-        List<Integer> peerCounts = Arrays.asList(40);
+//        List<PeerParam> peerParams = IntStream.range(1, 21).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
+        List<PeerParam> peerParams = Arrays.asList(
+                new PeerParam(1, 1)
 
-//        List<Integer> groupSizes = IntStream.range(2, 21).boxed().collect(Collectors.toList());
-        List<Integer> groupSizes = Arrays.asList(1);
+        );
 
-//        List<PrivacyParam> privacyParams = IntStream.range(10, 11).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
-        List<Double> regularizations = IntStream.range(2,3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+//        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
+        List<Double> regularizations = IntStream.range(2, 3).mapToDouble(i -> Math.pow(2, i)).boxed().collect(Collectors.toList());
+
         List<PrivacyParam> privacyParams = Arrays.asList(
-                new PrivacyParam(1.0)
+                new PrivacyParam(0.001, 0.001)
+//                new PrivacyParam(0.1, 0.1/2),
+//                new PrivacyParam(0.1, 0.1/4),
+//                new PrivacyParam(0.1, 0.1/8),
+//                new PrivacyParam(0.1, 0.1/16),
+//                new PrivacyParam(0.1, 0.1/32),
+//                new PrivacyParam(0.1, 0.1/64)
+
         );
 
         if (useCrossValidation) {
@@ -74,27 +80,25 @@ public class SusyTest {
 
         Injector injector = Guice.createInjector(new AppInjector());
 
-        for (int maxRecordsPerPeer : dataLimits) {
-            int recordsPerPeer = Math.min((int) (trainDataSize / (double) max(peerCounts)), maxRecordsPerPeer);
+        for (int recordsPerPeer : dataLimits) {
 
-            for (Integer peerCount : peerCounts) {
-                for (Integer groupSize : groupSizes) {
+            for (PeerParam peerParam : peerParams) {
 
-                    if (groupSize > peerCount) {
-                        continue;
-                    }
+                int peerCount = peerParam.peerCount;
+                int groupSize = peerParam.groupSize;
 
-                    for (PrivacyParam privacyParam : privacyParams) {
-                        for (double regularization : regularizations) {
+                for (PrivacyParam privacyParam : privacyParams) {
+                    for (double regularization : regularizations) {
 
-                            int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize) / groupSize);
-                            aggregations = aggregations == 0 ? 1 : aggregations;
+                        int aggregations = (int) (privacyParam.epsilon / privacyParam.perUpdateBudget * (peerCount - groupSize) / groupSize);
+                        aggregations = aggregations == 0 ? 1 : aggregations;
 
-                            ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
-                            configuration.publishType = modelPublishType;
+                        ExperimentConfiguration configuration = new ExperimentConfiguration(aggregations, privacyParam.perUpdateBudget, peerCount, parameters, privacyParam.epsilon, regularization, groupSize, recordsPerPeer, foldCount, useCrossValidation);
+                        configuration.publishType = modelPublishType;
+                        configuration.localModelInEnsemble = includeLocalModel;
+                        configuration.classifyLocallyOnly = classifyLocallyOnly;
 
-                            testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
-                        }
+                        testWithParameters(peerCount, groupSize, trainData, testData, recordsPerPeer, injector, configuration);
                     }
                 }
             }
