@@ -26,6 +26,22 @@ $\\[0.5cm]$
 	\label{tab:results_measuring_accuracy_spam}
 \end{table}
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		{\bf Experiment Name}            & {\bf Mean error} & {\bf Std. dev.} & {\bf $\lambda$} \\
+		\hline
+		Centralized logistic regression  & 0.306            & 0.0809          & $2^{2}$         \\
+		Disjoint logistic regression     & 0.279            & 0.0035          & $2^{-3}$        \\
+		Aggregated model, $\epsilon=1.0$ & 0.271            & 0.0056          & $2^{-2}$        \\
+		Ensemble model, $\epsilon=1.0$   & 0.274            & 0.0034          & $2^{-3}$        \\
+		Aggregated model, $\epsilon=0.1$ & 0.291            & 0.0112          & $2^0$           \\
+		Ensemble model, $\epsilon=0.1$   & 0.285            & 0.0087          & $2^0$          
+	\end{tabular}
+	\caption{Measuring accuracy: Susy}
+	\label{tab:results_measuring_accuracy_susy}
+\end{table}
+
 \subsection{Changes in number of participants}
 
 
