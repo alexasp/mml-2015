@@ -71,7 +71,7 @@ We have restricted our analysis to the error rates of our solution, though confu
 		\label{fig:confmat_adult_ensemble}
 \end{table}
 
-Another important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough? We have validated with cross validation and tested with a held out test set, but this luxury is not available in a real setting. One option would be to design a scheme to perform cross validation at the aggregation group level.
+An important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough? We have validated with cross validation and tested with a held out test set, but this luxury is not available in a real setting. One option would be to design a scheme to perform cross validation at the aggregation group level.
 
 Ideally, peers could cooperate to form a sort of test set when the system is live by sending incoming data instances to each other. This would allow the system to respond more quickly to changes in data distribution, as deterioration in prediction accuracy can be measured in a near-global fashion as soon as the changes occur. This approach is problematic, since peers may want to keep all incoming data private. The other alternative would be to have peers measure their performance on their respective incoming data only. If peers have very different incoming data distributions, this would give a less biased estimate over time, but building a good estimate could take much longer, depending on the data rate.
 

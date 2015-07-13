@@ -67,7 +67,7 @@ downloaded the data set pre-processed by \cite{platt1999fast}, where the continu
 
 This data set is very popular to use in various machine learning experiments, ranking second on the download list for the UCI machine learning repository. This data set has also been used before in research in privacy research, most notably in the work by \cite{pathak2010diffprivhomo}. This has given us some baselines to compare our own results against, which can be found in Chapter \ref{ch:analysis}
 
-\section{Parameter Tuning}
+\section{Parameter Description}
 \label{sec:parameter_tuning}
 The number of peers, $P$, specifies how many different peers participate in the experiment, and necessarily the number of partitions of the training data sets. The training set is divided into $P$ parts of equal size.
 
@@ -85,25 +85,25 @@ When we wanted to test a new number of records per peer $R$ or the privacy level
 
 The manner in which we choose $\lambda$ should be considered a bit of an optimistic approach. In reality, global cross-validation to determine best regularization is not practical and would create challenges with the privacy guarantees. Since we mostly experimented with less than 100 peers, we believe our global cross-validation is reasonable close to an approach where peers cooperate to pick the strongest possible $\lambda$ with acceptable performance on average.
 
-Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_A$. Each data partition can participate the aggregation mechanism $n$ times, where $n \times \epsilon_A \leq \epsilon$.
+Finally, the parameter $\epsilon$ can be divided across several applications of the aggregation mechanism, as described in Section \ref{section:privacy_budget}. This was achieved with a per-aggregation parameter $\epsilon_A$. Each data partition can participate in the aggregation mechanism $n$ times, where $n \times \epsilon_A \leq \epsilon$.
 
 \section{Validation}
 
 The test sets were created as described in Section \ref{sec:data sets}. These test sets were set aside and could not be used when tuning and evaluating our solution. In order to explore the effects of the various parameters we used cross-validation with number of folds $n=10$. For a given combination of parameters, performance metrics were measured as their average across ten repetitions. In repetition $i$, data fold $i$ was used as validation set and the remaining $n-1$ data folds were combined to form the test set.
 
-Following the approach outlined in Section \ref{sec:parameter_tuning}, we established suitable ranges of logistic regression hyperparameters, before proceeding to testing with different levels of privacy, peer numbers, group sizes and record numbers. Once we felt confident that we had established a set of experiments that could answer our research questions, we started performing the actual experiments. All numbers reported in Chapter \ref{chap:analysis} are average measures on the test set across ten full executions of the experiment, with the training set being randomized before each iteration.
+Following the approach outlined in Section \ref{sec:parameter_tuning}, we established suitable ranges of logistic regression hyperparameters, before proceeding to testing with different levels of privacy, peer numbers, group sizes and record numbers. Once we felt confident that we had established a set of experiments that could answer our research questions, we started performing the actual experiments. All numbers reported in Chapter \ref{ch:analysis} are mean measurements on the test set across ten full executions of the experiment, with the training set being randomized before each iteration.
 
 \section{Experiment Execution}
 
 For each experiment, we selected a single parameter for exploration from the set of parameters specified in Section \ref{sec:parameter_tuning}. We wanted to explore the results of the system as the parameter took a range of values. To start, we specified a range of fixed, scalar values for each of the parameters. For example, one of the experiments we performed was intended to test the effect of varying number of peers participating in the system. One possible parameter combination to test this could then be
 
-$$P=[10, 20, 30, 40, 50], G=10, \epsilon=0.1, \epsilon_{A}=0.1, \lambda=1.0$$
+$$P=[10, 20, 30, 40, 50], g=10, \epsilon=0.1, \epsilon_{A}=0.1, \lambda=1.0$$
 
 We then performed a full simulation with $p$ peers is repeated and evaluated 10 times, either by cross-validation or test set, for each $p$ in the specified parameter set $P$. 
 
 \subsection{The execution of a single experiment}
 
-As previously stated, each set of parameters was tested 10 times. For each of these iterations, there is a set of instances used to train logistic regression models, and a set of instances used to quantify the predictive performance of the peers after the number of aggregations available given a particular combination of $P$, $g$, $\epsilon$ and $\epsilon_A$ have occured. In the following paragraphs we provide more details on the steps we used to perform our experiments given a set of training and testing instances.
+As previously stated, each set of parameters was tested 10 times. For each of these iterations, there is a set of data instances used to train logistic regression models, and a set of data instances used to quantify the predictive performance of the peers after the number of aggregations available given a particular combination of $P$, $g$, $\epsilon$ and $\epsilon_A$ have occurred. In the following paragraphs we provide more details on the steps we used to perform our experiments given a set of training and testing instances.
 
 \subsubsection{Instantiation}
 
@@ -116,7 +116,7 @@ Once the environment is set up, all agents are registered and the peers have bee
 
 \subsubsection{Application of aggregation mechanism}
 
-After all peers have fitted their local classifiers, the aggregation phase begins. The GroupAgent has a list of the peers that still permit their locally trained classifiers to take part in a published, perturbed model. While there still are enough peers to form a set of size $g$, the GroupAgent randomly selects a subset of these peers. Among this subset, it randomly picks one peer to act as the curator, responsible for performing the steps that result in an aggregated model that can be published with a differential privacy guarantee. It then sends a message to each of the selected peers.
+After all peers have fitted their local classifiers, the aggregation phase begins. The steps of this phase is shown in Algorithm \ref{alg:aggregation_mechanism}. The GroupAgent has a list of the peers that still permit their locally trained classifiers to take part in producing a published, perturbed model. While there still are enough peers to form a set of size $g$, the GroupAgent randomly selects a subset of these peers. Among this subset, it randomly picks one peer to act as the curator, responsible for performing the steps that result in an aggregated model that can be published with a differential privacy guarantee. It then sends a message to each of the selected peers.
 
 Once a PeerAgent is notified that it has been selected to be the curator of a group, it starts waiting for messages from the other peers in the set. The other $g-1$ peers that are selected to be contributors will send their local classifiers to the curator as soon as they are notified by the GroupAgent. When the peer acting as curator has received all the $g-1$ models, it applies the aggregation mechanism given in Algorithm \ref{alg:privacy_mechanism}. It includes its own local classifier in this step, which produces a final aggregate model from the $g$ other models. This aggregation mechanism computes the same output that follows from the approach of \cite{pathak2010diffprivhomo}, but does not include the homomorphic encryption steps that ensure secrecy.
 
@@ -132,7 +132,7 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 	\KwOut{Perturbed aggregate of the models in $\boldmath{M}$}
 	$n_{min} \leftarrow min(\boldmath{N})$\;
 	$\eta \leftarrow Laplace(0; \frac{2}{n_{min}\epsilon\lambda})$\;
-	$model_{agg} \leftarrow 1/K\sum_{j=1}^{|\boldmath{N}|} \boldmath{w_j} + \boldmath{\eta}$\;
+	$model_{agg} \leftarrow \frac{1}{K}\sum_{j=1}^{|\boldmath{N}|} \boldmath{w_j} + \boldmath{\eta}$\;
 	\KwRet{$model_{agg}$}
 	
 	\caption{$\epsilon$-differentially private aggregation mechanism}
@@ -145,12 +145,12 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 		$\epsilon$ - privacy parameter\; 
 		$\epsilon_A$ - privacy level of a mechanism application\;
 		$A$ - the $\epsilon_A$-differentially private aggregation mechanism\;
-		$group\_size$ - number of peers in a single mechanism application}
+		$g$ - number of peers in a single mechanism application}
 	\For{peer $\in$ P}{
 		$budget_{peer} \leftarrow \epsilon$\;
 	}
-	\While{$|P| \geq group\_size$}{
-		$group \leftarrow randomSample(P, group\_size)$\;
+	\While{$|P| \geq g$}{
+		$group \leftarrow randomSample(P, g)$\;
 		$model_{agg} \leftarrow A(group)$\;
 		\For{peer $\in$ group}{
 			$budget_{peer} \leftarrow budget_{peer} - \epsilon_A$\;
@@ -174,7 +174,7 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 
 \subsubsection{Propagation of published models} \label{sec:PropagationPubModel}
 
-Originally in our system, aggregated models were only propagated to the peers that had participated in creating that model, as can be seen in Figure \ref{fig:peerAggregationFigure}. What resulted from this, especially when epsilon was set to a low amount such as 0.1 or lower, was that the high amount of noise made the classifiers have a big standard deviation on their mean classification rate. This meant  that the classifiers could be very accurate in some peers, classifying up towards 90\% accuracy, while also being significantly worse in other peers. 
+Originally in our system, aggregated models were only propagated to the peers that had participated in creating that model, as can be seen in Figure \ref{fig:peerAggregationFigure}. What resulted from this, especially when $\epsilon$ was set to a low level such as 0.1 or lower, was that the high amount of noise made the classifiers have a big standard deviation on their mean classification rate. This meant  that the classifiers could be very accurate in some peers, classifying up towards 90\% accuracy, while also being significantly worse in other peers. 
 
 We theorized that we could improve the ensemble classifier in each peer if we could propagate the aggregated models to all the peers in the network, instead of just those who had participated in making them. Our hypotheses was that this would lead to more stable classifiers with lower standard deviation, due to a smoothing effect in having more models in the ensemble classifier in each peer. This is basically the same idea as bootstrap aggregating, or bagging, which has been proven to lead to improvements in unstable procedures\citep{breiman1996bagging}. 
 
