@@ -5,16 +5,74 @@ $\\[0.5cm]$
 \noindent Write your appendix here...
 
 \todo[inline]{Include confusion matrices for the remaining data sets}
+ 
+\section{Additional Results}
 
-%output of various basic experiments intended to answers RQs
-\begin{table}[h]
-	\begin{tabular}{ll}
-		\textbf{Spambase} & \textbf{Error rate}\\
-		Centralized                & 0.100  \\
-		High privacy, few peers($\epsilon$=0.1, 10 peers)				  & 0.157  \\
-		Aggregated model				                                  & 0.157  \\
-		Ensemble model				                                      & 0.157  \\
+\subsection{Measuring error rate}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		{\bf Experiment Name}            & {\bf Mean error} & {\bf Std. dev.} & {\bf $\lambda$} \\
+		\hline
+		Centralized logistic regression  & $0.104$          & $0.0059$        & $2^{-8}$        \\
+		Disjoint logistic regression     & $0.159$          & $0.0026$        & $2^{-5}$        \\
+		Aggregated model, $\epsilon=1.0$ & $0.163$          & $0.0103$        & $2^{-3}$        \\
+		Ensemble model, $\epsilon=1.0$   & $0.150$          & $0.0045$        & $2^{-5}$        \\
+		Aggregated model, $\epsilon=0.1$ & $0.182$          & $0.0256$        & $2^{-1}$        \\
+		Ensemble model, $\epsilon=0.1$   & $0.157$          & $0.0117$        & $2^{-2}$       
 	\end{tabular}
-	\caption{Table with baseline results from the Adult Dataset}
-	\label{tab:baseline_class_results_spambase}
+	\caption{Measuring accuracy: Spambase}
+	\label{tab:results_measuring_accuracy_spam}
 \end{table}
+
+\subsection{Changes in number of participants}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig/spambase/eps1.0,bud1.0,peers5-30,groups5,reg2e-2-puball-peercounts-data150-spam-testmean}
+	\caption{Effect of peer numbers. Spambase.}
+	\label{fig:peer_range_constant_group_spam}
+\end{figure}
+
+
+\subsection{Peer error rate variance}
+
+TBD
+
+\subsection{Effect of aggregation group size and model propagation}
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error\\ std. dev.\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Peer error\\ std. dev.\end{tabular}} \\
+		\hline
+		1                                                           & 0.233                                                       & 0.0184                                                          & 0.0435                                                               \\
+		5                                                           & 0.217                                                       & 0.0185                                                          & 0.0399                                                               \\
+		10                                                          & 0.223                                                       & 0.0179                                                          & 0.0368                                                               \\
+		15                                                          & 0.221                                                       & 0.0245                                                          & 0.0290                                                               \\
+		20                                                          & 0.205                                                       & 0.0323                                                          & 0.0257                                                              
+	\end{tabular}
+	\caption{Effect of aggregation group size. Party-publishing. Spambase.}
+	\label{tab:results_groupsize_party_spam}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		{\bf \begin{tabular}[c]{@{}l@{}}Group \\ size\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Mean \\ error\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Error\\ std. dev.\end{tabular}} & {\bf \begin{tabular}[c]{@{}l@{}}Peer error\\ std. dev.\end{tabular}} \\
+		\hline
+		1                                                           & 0.215                                                       & 0.0076                                                          & 0.0036                                                               \\
+		5                                                           & 0.211                                                       & 0.0135                                                          & 0.0125                                                               \\
+		10                                                          & 0.197                                                       & 0.0116                                                          & 0.0191                                                               \\
+		15                                                          & 0.200                                                       & 0.0090                                                          & 0.0225                                                               \\
+		20                                                          & 0.195                                                       & 0.0110                                                          & 0.0202                                                              
+	\end{tabular}
+	\caption{Effect of aggregation group size. All-publishing. Spambase.}
+	\label{tab:results_groupsize_all_spam}
+\end{table}
+
+\subsection{Value of budgeting privacy}
+

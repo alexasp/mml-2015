@@ -20,8 +20,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.Collections.max;
-
 /**
  * Created by aspis on 25.03.2015.
  */
@@ -33,11 +31,12 @@ public class SpamTest {
         List<LabeledSample> testData;
         trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
         testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
+//        testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 
 //        trainData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv.train", 14, true);
 //      testData = new DataLoader().readCSVFileReturnSamples("../data/australian_test_fixed.csv", 14, true);
 
-        boolean includeLocalModel = false;
+        boolean includeLocalModel = true;
         boolean classifyLocallyOnly = false;
         PublishTypes modelPublishType = PublishTypes.All;
         boolean useCrossValidation = false;
@@ -48,14 +47,16 @@ public class SpamTest {
             testData = null;
         }
 
-        List<Integer> dataLimits = Arrays.asList(250);
+        List<Integer> dataLimits = Arrays.asList(150);
 
-//        List<PeerParam> peerParams    = IntStream.range(1, 5).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
+//        List<PeerParam> peerParams = IntStream.range(1, 21).mapToObj(i -> new PeerParam(i, i)).collect(Collectors.toList());
         List<PeerParam> peerParams = Arrays.asList(
-                new PeerParam(10, 10)
-//                new PeerParam(10, 5),
-//                new PeerParam(15, 5),
-//                new PeerParam(20, 5)
+                new PeerParam(20, 1),
+                new PeerParam(20, 5),
+                new PeerParam(20, 10),
+                new PeerParam(20, 15),
+                new PeerParam(20, 20)
+
         );
 
 //        List<PrivacyParam> privacyParams = IntStream.range(-1, 0).mapToObj(i -> PrivacyParam.get(Math.pow(2, i), Math.pow(2, i))).collect(Collectors.toList());
@@ -82,7 +83,7 @@ public class SpamTest {
 
                 int peerCount = peerParam.peerCount;
                 int groupSize = peerParam.groupSize;
-                
+
                 for (PrivacyParam privacyParam : privacyParams) {
                     for (double regularization : regularizations) {
 
