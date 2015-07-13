@@ -6,12 +6,12 @@
 \section{Experiment Plans}
 \label{sec:experiment_plan}
 
-In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments and the parameter configuration we used in each experiment. The results of these experiments will be provided in section \ref{sec:experiment_results}. When more than one peer was involved in the execution of an experiment, we measured and report the mean accuracy of all peers.
+In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments and the parameter configuration we used in each experiment. The results of these experiments will be provided in section \ref{sec:experiment_results}. When more than one peer was involved in the execution of an experiment, we measured and report the mean error rate of all peers.
 
 
 \subsection{Measuring error rates}
 \label{sec:experiment_measuring_accuracy}
-The experiments in this section are intended to show the accuracy that results from differentially private model aggregation compared to locally trained models. This experiment is concerned with our goal of validating previous work and how error rates differ in the centralized and the distributed, differentially private setting.
+The experiments in this section are intended to show the error rates that results from differentially private model aggregation compared to locally trained models. This experiment is concerned with our goal of validating previous work and how error rates differ in the centralized and the distributed, differentially private setting.
 
 \begin{table}[h]
 	\centering
@@ -29,7 +29,7 @@ The experiments in this section are intended to show the accuracy that results f
 	\label{tab:experiment_accuracy_measuring}
 \end{table}
 
-In each of the experiments in Table \ref{tab:experiment_accuracy_measuring}, we first chose an optimal regularization $\lambda$ in the range $[2^{-8}, 2^8]$ by cross validation. We then measured the classification accuracy with the chosen $\lambda$ on the test set. In all experiments, the aggregation group size was set to be equal to the number of peers, and $\epsilon_{A}$ was set to be equal to $\epsilon$. This means that there could be produced at most one aggregated model, and it would be available to all the participants.
+In each of the experiments in Table \ref{tab:experiment_accuracy_measuring}, we first chose an optimal regularization $\lambda$ in the range $[2^{-8}, 2^8]$ by cross validation. We then measured the classification error with the chosen $\lambda$ on the test set. In all experiments, the aggregation group size was set to be equal to the number of peers, and $\epsilon_{A}$ was set to be equal to $\epsilon$. This means that there could be produced at most one aggregated model, and it would be available to all the participants.
 
 The \textit{Centralized logistic regression} experiment was intended to establish the best achievable performance with our implementation of logistic regression trained by SGD. It corresponds to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to establish a baseline that we can compare with when producing models that are formed in a private and decentralized manner. We were mainly interested in observable difference in performance metrics when we compared our centralized solution and distributed, differentially private solution.
 
@@ -128,7 +128,7 @@ This experiment was concerned with reduction of peer error rate variance and to 
 		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\
 		Adult, peer variance, ensemble of both & 10          & 250        & $2^{2}$   & $1.0$      & Ensemble  
 	\end{tabular}
-	\caption{Observing peer accuracy variance}
+	\caption{Observing peer error rate variance}
 	\label{tab:experiments_peer_variance}
 \end{table}
 
