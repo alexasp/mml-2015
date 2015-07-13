@@ -3,10 +3,9 @@
 
 \chapter{Basic Theory} \label{ch:Basic Theory}
 
-Common to all the attack vectors described in Section \ref{sec:attack_vectors} is that the attacker rely on background knowledge, often also called auxiliary information, to perform their linkage attacks. Protecting a database against this threat has long been a major challenge in database design. Already back in 1977 Tore Dalenius \citep{dalenius1977towards} defined a desideratum for data privacy which says that: \begin{quote}
+Common to all the attack vectors described in Section \ref{sec:attack_vectors} is that the attacker rely on background knowledge, often also called auxiliary information, to perform their linkage attacks. Protecting a database against this threat has long been a major challenge in database design. Already back in 1977 Tore \cite{dalenius1977towards} defined a desideratum for data privacy which states: \begin{quote}
 	Access to the published data should not enable the adversary to learn anything extra about target victim compared to no access to the database, even with the presence of any adversary’s background knowledge obtained from other sources.
 \end{quote} 
-
 This privacy goal was rejected by Cynthia Dwork, who showed the general impossibility of Dalenius' goal due to the existence of auxiliary information. Instead she chose to formulate a probabilistic privacy goal, which places an upper bound on how much the risk of privacy breach can increase by participating in a database.
 
 %In a world where massive amounts of sensitive personal data are being collected, attacks on the individual's privacy are becoming more and more of a threat. One type of attack is the identification of an individual's personal information from massive data sets, such as people's movie ratings from the Netflix data set\cite{narayanan2008robust}, and the medical records of a former governor of Massachusetts\cite{barth2012re}. These types of privacy breaches may lead to the unwanted discovery of a person's embarrassing information, and could also lead to the theft of an individual's private data or identity.  
@@ -113,7 +112,7 @@ where the term $\lambda\|\theta\|^{2}_{2}$ is a regularization term to restrict 
 
 \subsection{Stochastic gradient descent}
 \label{sec:gradient_descent}
-We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full data set for each gradient step. This can be very time consuming for larger data sets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the data set. If convergence is not achieved after a single pass, SGD can do multiple passes over the data set as needed. This makes SGD more adaptable to varying data set sizes than full batch gradient descent. 
+We find the point of maximum log-likelihood by mini-batch stochastic gradient descent (SGD) of the regularized objective. In normal batch gradient descent, the gradient is computed by computing an error sum over the full data set for each gradient step. This can be very time consuming for larger data sets. In single instance SGD, each gradient descent step is calculated using only a single training instance. This gives noisy gradient steps, but has the advantage of being able to converge without doing a full pass through the data set. If convergence is not achieved after a single pass, SGD can do multiple passes over the data set if needed. This makes SGD more adaptable to varying data set sizes than full batch gradient descent. 
 
 Mini-batch SGD is a trade-off between the basic batch gradient descent and single instance SGD\citep{cotter2011batchsgd}. The data set is divided into $|D|$/$b$ batches of size $b$, and a gradient step is taken for each batch. Given mini-batch SGD, the rule for updating each dimension $j$ of $\theta$ given a single batch of size $b$ becomes
 
@@ -146,7 +145,6 @@ In order to build logistic regression models in a privacy-preserving manner, it 
 \begin{eqnarray}\label{eq:logres_sensitivity}
 \frac{2}{n\lambda}
 \end{eqnarray}
-
 where $n$ is the size of the training set and $\lambda$ is the regularization parameter used in model training.
 
 This solves only the case of training a privacy-preserving logistic regression model on local data. Our research goal involves any number of peers cooperating to build useful models without compromising the privacy of their local data. \cite{pathak2010diffprivhomo} proposed an approach where locally trained logistic regression classifiers are aggregated by averaging. Secrecy is achieved by using an encryption method to compute the aggregate classifier, ensuring that local data is not shared while allowing a differentially private model to be published. This encrypted computation method is presented in more detail in Section \ref{sec:homomorphic_encryption}. It is important to note that the approach of \cite{pathak2010diffprivhomo} assumes that the participants are honest-but-curious. This assumption means that participants will follow the established protocol, but will read any information that is somehow available to it. Their method is not robust against malicious sabotage. 
@@ -157,16 +155,12 @@ When aggregating K locally trained models, their approach computes the final mod
 \label{eq:parametric_aggregation}
 \boldsymbol{\theta} = 1/K\sum_{j=1}^{K} \boldsymbol{\theta_j} + \boldsymbol{\eta}
 \end{eqnarray}
-
-
 where $\boldsymbol{\eta}$ is a noise vector that guarantees $\epsilon$-differential privacy. This noise vector is drawn from the Laplace distribution with parameter $\frac{2}{n_j\epsilon\lambda}$, where $n_j$ is the size of the smallest data set used in training of the K models. This means that they use a bound on output sensitivity of 
 
 \begin{eqnarray}
 \label{eq:aggregated_logistic_sensitivity}
 \Delta\boldsymbol{\hat{\theta^s}} = \frac{2}{n_j\lambda}
 \end{eqnarray}
-
-
 which is the same as in Equation \ref{eq:logres_sensitivity}, except that the lowest $n_j$ is used. Since the lowest $n_j$ corresponds to the highest noise variance, this gives protection to all the participants regardless of the size of their data set.
 
 %We can improve upon the sensitivity result by Pathak et al. By following the same argument as in \cite{pathak2010diffprivhomo}, we can show that the sensitivity of the aggregated model is at most 
