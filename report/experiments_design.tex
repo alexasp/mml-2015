@@ -55,11 +55,11 @@ We chose this data set as it is a popular data set to analyze the performance of
 
 We randomly partitioned this data set into a training set and a test set, with 80\% of the records in the training set and the remaining 20\% in the test set.
 
-\subsection{Australian Credit Approval}
-Another data set we used, was the Australian Credit Approval (Statlog)\citep{australian1987data}, which concerns the approval or disapproval of credit card applications. It is publicly available from the UCI machine learning directory. This is a much smaller set of data, with only 690 samples spread over 14 attributes. The data is useful for binary classification as it contains a good mix of attributes: continuous, nominal with small numbers of values, and nominal with larger numbers of values.
 
-We mostly used this data set to confirm and double-check the conclusions we drew from the Spambase data set, as it contains too few data records for it to be 100\% ideal for our use. Due to the small amount of data we had to scale down the amount of peers in each experiment, so that each peer could get enough data to create a decent local classifier. We chose to keep on using this data, as one of the motivating examples in Dwork's book\citep{dwork2013algorithmic} on the applications differential privacy is to protect data holders from insurance and credit card companies. 
-
+%\subsection{Australian Credit Approval}
+%Another data set we used, was the Australian Credit Approval (Statlog)\citep{australian1987data}, which concerns the approval or disapproval of credit card applications. It is publicly available from the UCI machine learning directory. This is a much smaller set of data, with only 690 samples spread over 14 attributes. The data is useful for binary classification as it contains a good mix of attributes: continuous, nominal with small numbers of values, and nominal with larger numbers of values.
+%
+%We mostly used this data set to confirm and double-check the conclusions we drew from the Spambase data set, as it contains too few data records for it to be 100\% ideal for our use. Due to the sparsity of data we had to scale down the amount of peers in each experiment, so that each peer could get enough data to create a decent local classifier. We chose to keep on using this data as one of the motivating examples in Dwork's book\citep{dwork2013algorithmic} on the applications differential privacy, is to protect data holders from insurance and credit card companies. 
 
 \subsection{Adult}
 As we needed a larger data set to enable us to scale the amounts of peers in the experiments, we chose to use the Adult data set from the UCI machine learning repository.  It consists of personal information records extracted from the US census database and the task is to predict whether a given person has an annual income over or under \$50,000. The original Adult data set has six continuous and eight categorical features. We
@@ -67,7 +67,14 @@ downloaded the data set pre-processed by \cite{platt1999fast}, where the continu
 
 This data set is very popular to use in various machine learning experiments, ranking second on the download list for the UCI machine learning repository. This data set has also been used before in research in privacy research, most notably in the work by \cite{pathak2010diffprivhomo}. This has given us some baselines to compare our own results against, which can be found in Chapter \ref{ch:analysis}
 
+
+\subsection{SUSY}
+The SUSY dataset \citep{susy2014data} was produced as a benchmark classification task where the goal is to distinguish between a signal process which produces supersymmetric particles and a background process which does not. This data set is available from the UCI machine learning repository, where the data set was preprocessed by a deep learning process to extract the 18 most interesting features. It contains exactly 5,000,000 data records, where 10\% is designated as a test set.
+
+We employed this data set as it is massive in scale, and this allowed us to run experiments where the peers had a big amount of data available. Since it was already preprocessed, it was easy to put to use, which also was a big motivating factor when we decided to employ it. The classification task is however not of much value for our project, so we mostly used this data set to confirm the results we saw from the other two data sets.     
+
 \section{Parameter Description}
+
 \label{sec:parameter_tuning}
 The number of peers, $P$, specifies how many different peers participate in the experiment, and necessarily the number of partitions of the training data sets. The training set is divided into $P$ parts of equal size.
 
