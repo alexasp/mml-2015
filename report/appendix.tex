@@ -39,7 +39,21 @@ $\\[0.5cm]$
 
 \subsection{Peer error rate variance}
 
-TBD
+\begin{table}[H]
+	\centering
+	
+	\begin{tabular}{|l|l|l|}
+		\textbf{Model}                  & \textbf{Mean error} & \textbf{Peer std. dev.} \\
+		\hline
+		Local, no privacy      & 0,159 & 0.016 \\
+		Aggregated, d. privacy & 0,163 & 0.000	 \\
+		Ensemble with both & 0.150 & 0.006 \\
+	\end{tabular}
+	\caption{Variance among peers. Spambase.}
+	\label{table:peer_variance_spam}
+\end{table}
+
+Note that the results seen in Table \ref{table:peer_variance_spam} differ in the experimental setup described Section \ref{sec:experiment_peer_variance} in that each peer had 300 records instead of 250.
 
 \subsection{Effect of aggregation group size and model propagation}
 

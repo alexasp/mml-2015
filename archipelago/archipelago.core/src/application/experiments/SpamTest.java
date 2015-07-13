@@ -29,6 +29,7 @@ public class SpamTest {
 
         List<LabeledSample> trainData;
         List<LabeledSample> testData;
+        trainData = new DataLoader().readCSVFileReturnSamples("../data/susy_10000_dense.csv.train", 18, true);
         trainData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.train", 57, true);
         testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
 //        testData = new DataLoader().readCSVFileReturnSamples("../data/uci_spambase.csv.test", 57, true);
