@@ -5,9 +5,22 @@
 In this chapter we will give our analysis of the experimental results seen in Section \ref{sec:experiment_results}.
 
 \section{Comparing Measured Error Rate}
+
+\begin{table}[h]
+	\begin{tabularx}{\textwidth}{|X|l|}
+		\textbf{Experiment and author}                                                 & \textbf{Error Rate}      \\
+				\hline
+		%	Krempl,Decision tree with bagging\citep{}                                    & 0.196 \\
+		Optimal Logistic regression \citep{caruana2006empirical}   				       & 0.114 \\
+		Multiparty DP LogReg \citep{pathak2010diffprivhomo}                            & 0.24 \\
+	\end{tabularx}
+	\caption{Table with baseline results from the Adult Dataset}
+	\label{tab:baseline_class_results_adult}
+\end{table}
 \begin{table}[h]
 	\begin{tabularx}{\textwidth}{|X|l|}
 		\textbf{Experiment and author}                                             & \textbf{Error Rate}      \\
+		\hline
 		LOGICBOOST\citep{sharma2013adaptive}                                       & 0.1024 \\
 		LogReg-TRIRLS\citep{kumar2012comparative}                                  & 0.1389 \\
 	\end{tabularx}
@@ -15,24 +28,29 @@ In this chapter we will give our analysis of the experimental results seen in Se
 	\label{tab:baseline_class_results_spambase}
 \end{table}
 
-\begin{table}[h]
-\begin{tabularx}{\textwidth}{|X|l|}
-	\textbf{Experiment and author}                                                 & \textbf{Error Rate}      \\
-%	Krempl,Decision tree with bagging\citep{}                                    & 0.196 \\
-	Optimal Logistic regression \citep{caruana2006empirical}   				       & 0.114 \\
-	Multiparty DP LogReg \citep{pathak2010diffprivhomo}                            & 0.24 \\	
-\end{tabularx}
-\caption{Table with baseline results from the Adult Dataset}
-\label{tab:baseline_class_results_adult}
-\end{table}
-
-	
-
 These two tables form the baseline for the analysis of our classification framework. In Table \ref{tab:baseline_class_results_spambase} we have included the results of two classifiers reported in the literature \citep{sharma2013adaptive,kumar2012comparative} for the Spambase data set. These are both centralized approaches to logistic regression, where both had as a research goal of trying to find an ideal classifier for spam detection. In similar fashion, we provide two baseline classification results in Table \ref{tab:baseline_class_results_adult} for the Adult data set. Here we chose to provide baselines for two approaches, where the first \citep{caruana2006empirical} is an optimal result using logistic regression in a centralized manner. The second entry is the result of the differentially private system of \cite{pathak2010diffprivhomo}, on which we've stated that we wish to improve in RQ3.
 
-An immediate surprise we should point out is that \cite{pathak2010diffprivhomo} gives the error rate of their optimal, centralized solution applied to the Adult set as $0.24$. This is strange, since it is very close to the class distribution of the Adult data set. While they show that their differentially private solution approaches their centralized solution, they give no compelling reason to believe that the error rate of $0.24$ is a non-trivial performance. A very similar error rate could be achieved by only predicting the negative class.
+\subsection{Adult data set}
 
-We have restricted our analysis to the error rates of our solution, though confusion matrices and ROC-curves were produced for all experiments. The confusion matrices were used to verify that the classifiers were discriminating between the two classes. While error rates are presented as mean value among all peers, we give only the confusion matrix of a single, randomly selected peer. The intention is that the error rates we report reflect the model quality on average for all participants in the system, while the confusion matrices are intended to support the claim that the reported error rates correspond to non-trivial classifiers. Confusion matrices for all the data sets are included in the Appendix.
+We first consider our error rate measurements on the Adult data set, seen in Table \ref{tab:results_measuring_accuracy}. We measured a mean error rate of 0.162 for \textit{Centralized logistic regression}. This is not as good as the baseline result of 0.114 reported by \citep{caruana2006empirical}, but still is well below the positive class rate of 0.24. In the \textit{Disjoint logistic regression} experiment, where each peer has a smaller subset of the data and disjointly train models and classify data, we measured an error rate of 0.172. This is expected, since there is significiantly less data available to fit the models. 
+
+For \textit{Aggregated model, $\epsilon=1.0$}, we measured an error rate of 0.154, which is lower than our centralized result. This is very interesting, as it indicates that an aggregated model formed from models trained on data subsets of size 300 can yield lower error rates than a model trained in a centralized model on a data set of 3000. This same behavior was observed for the Susy data set, which is listed in the Appendix. It is not clear if this is a common occurence or if it is only applicable to these particular data sets. It is not observed for the Spambase data set, where the error rate jumps from 0.104 to 0.163 when comparing the centralized and the distributed, aggregation setting. A possible explanation for why we don't see the positive effect for the Spambase data set might be the scale of the regularization used. For Susy and Adult, the optimal $\lambda$ was found to be $2^{-2}$ and $2^{-1}$ respectively, while it was $2^{-3}$ for Spambase. A lower $\lambda$ increases variance of noise, so the aggregated models are more perturbed for Spambase, even though $\epsilon$ is the same for all data sets. Lastly, it is notable that the error rate on the Adult data set increased only slightly from 0.154 to 0.160 for the aggregated model when $\epsilon$ changed from 1.0 to 0.1. This indicates that a strong privacy guarantee is feasible.
+
+For \textit{Ensemble model, $\epsilon=1.0$} error rate increases slightly to 0.162, which is slightly worse than \textit{Aggregate model}, but still not worse than the centralized model. For this particular data set, it is not clear whether it is worthwhile to include the locally trained model in an ensemble when classifying.
+
+We should point out that \cite{pathak2010diffprivhomo} report the error rate of their optimal, centralized solution applied to the Adult set as $0.24$. This is strange, since it is very close to the class distribution of the Adult data set. While they show that their differentially private solution approaches their centralized solution, they give no compelling reason to believe that the error rate of $0.24$ is a non-trivial performance. A very similar error rate could be achieved by only predicting the negative class.
+
+\subsection{Spambase data set}
+
+We next consider the error rate measurements on the Spambase data set, seen in Table \ref{tab:results_measuring_accuracy_spam}. We measured a mean error rate of 0.104 for \textit{Centralized logistic regression}, which is very close to the results of \citep{sharma2013adaptive} at 0.1024. 
+
+Contrary to the results seen for the Adult data set, neither the \textit{Aggregated model} or the \textit{Ensemble model} is able to achieve error rates comparable to the \textit{Centralized logistic regression} test. As discussed in the previous section, this might be due to the lower regularization required for the Spambase data set.
+
+While the positive effects of aggregation is not seen for the Spambase data set with the configuration we have tested, it appears to support the \textit{Ensemble model} approach. While the error rate is 0.163 for \textit{Aggregated model, $\epsilon=1.0$}, it is 0.150 for \textit{Ensemble model, $\epsilon=1.0$}. The same pattern is seen with $\epsilon=0.1$, where the error rate goes from 0.182 for the \textit{Aggregate model} setting to 0.157 for the \textit{Ensemble model} setting. We also note that a positive effect is also seen with \textit{Ensemble model} for the Susy data set, when $\epsilon=0.1$. It appears that using the aggregated model and the locally trained model in an ensemble can help reduce the error rate, but that this is not always the case.
+
+\subsection{Validating model quality}
+
+We have restricted our analysis to the error rates of our solution, though confusion matrices and ROC-curves were produced for all experiments. The confusion matrices were used to verify that the classifiers were discriminating between the two classes. While error rates are presented as mean value among all peers, we give only the confusion matrix of a single, randomly selected peer. The intention is that the error rates we report reflect the model quality on average for all participants in the system, while the confusion matrices are intended to support the claim that the reported error rates correspond to non-trivial classifiers. Confusion matrices for the Spambase data set is included in the Appendix.
 
 
 \begin{table}[h]
@@ -71,7 +89,7 @@ We have restricted our analysis to the error rates of our solution, though confu
 		\label{fig:confmat_adult_ensemble}
 \end{table}
 
-Another important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough? We have validated with cross validation and tested with a held out test set, but this luxury is not available in a real setting. One option would be to design a scheme to perform cross validation at the aggregation group level.
+An important point to discuss in this context is validation at the peer level. How would a peer know if its local model or ensemble is good enough? We have validated with cross validation and tested with a held out test set, but this luxury is not available in a real setting. One option would be to design a scheme to perform cross validation at the aggregation group level.
 
 Ideally, peers could cooperate to form a sort of test set when the system is live by sending incoming data instances to each other. This would allow the system to respond more quickly to changes in data distribution, as deterioration in prediction accuracy can be measured in a near-global fashion as soon as the changes occur. This approach is problematic, since peers may want to keep all incoming data private. The other alternative would be to have peers measure their performance on their respective incoming data only. If peers have very different incoming data distributions, this would give a less biased estimate over time, but building a good estimate could take much longer, depending on the data rate.
 

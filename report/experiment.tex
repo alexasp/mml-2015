@@ -6,12 +6,12 @@
 \section{Experiment Plans}
 \label{sec:experiment_plan}
 
-In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments we have performed, and the parameter configuration we employed for each experiment. The results of these experiments will be provided in section \ref{sec:experiment_results}. When more than one peer was involved in the execution of an experiment, we measured and report the mean accuracy of all peers.
+In this section we list the set of experiments we have performed in order to answer the research questions as stated in Section \ref{sec:problem_statement}. In the first section, we list all the experiments and the parameter configuration we used in each experiment. The results of these experiments will be provided in section \ref{sec:experiment_results}. When more than one peer was involved in the execution of an experiment, we measured and report the mean error rate of all peers.
 
 
-\subsection{Measuring accuracy}
+\subsection{Measuring error rates}
 \label{sec:experiment_measuring_accuracy}
-The experiments in this section are intended to show the accuracy that results from differentially private model aggregation compared to locally trained models. This experiment is concerned with our goal of validating previous work and how error rates differ in the centralized and the distributed, differentially private setting.
+The experiments in this section are intended to show the error rates that results from differentially private model aggregation compared to locally trained models. This experiment is concerned with our goal of validating previous work and how error rates differ in the centralized and the distributed, differentially private setting.
 
 \begin{table}[h]
 	\centering
@@ -25,17 +25,19 @@ The experiments in this section are intended to show the accuracy that results f
 		Aggregated model                & 10          & 300        & 0.1              \\
 		Ensemble model  & 10    & 300        & 0.1             
 	\end{tabular}
-	\caption{Measuring accuracy}
+	\caption{Measuring error rates}
 	\label{tab:experiment_accuracy_measuring}
 \end{table}
 
-In each of the experiments in Table \ref{tab:experiment_accuracy_measuring}, we first chose an optimal regularization $\lambda$ in the range $[2^{-8}, 2^8]$ by cross validation. We then measured the classification accuracy with the chosen $\lambda$ on the test set. In all experiments, the aggregation group size was set to be equal to the number of peers, and $\epsilon_{A}$ was set to be equal to $\epsilon$. This means that there could be produced at most one aggregated model, and it would be available to all the participants.
+In each of the experiments in Table \ref{tab:experiment_accuracy_measuring}, we first chose an optimal regularization $\lambda$ in the range $[2^{-8}, 2^8]$ by cross validation. We then measured the classification error with the chosen $\lambda$ on the test set. In all experiments, the aggregation group size was set to be equal to the number of peers, and $\epsilon_{A}$ was set to be equal to $\epsilon$. This means that there could be produced at most one aggregated model, and it would be available to all the participants.
 
-The \textit{Centralized logistic regression} experiment was intended to establish the best achievable performance with our implementation of logistic regression trained by SGD. It corresponds to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to establish a baseline that we can compare with when producing models that are formed in a private and decentralized manner. 
+The \textit{Centralized logistic regression} experiment was intended to establish the best achievable performance with our implementation of logistic regression trained by SGD. It corresponds to the traditional non-private and centralized training of classification models. Note that the results of these experiments may not be state-of-the-art for each data set, since we have not performed advanced feature extraction and selection. This is acceptable, since the intention of these experiments was to establish a baseline that we can compare with when producing models that are formed in a private and decentralized manner. We were mainly interested in observable difference in performance metrics when we compared our centralized solution and distributed, differentially private solution.
 
 The \textit{Disjoint logistic regression} experiment considers a situation where the participating peers have a subset of the data and locally train one model each. Each peer fits a model and makes predictions independently.
 
-The \textit{Aggregated model} experiment lets the peers create an aggregate model using \cite{pathak2010diffprivhomo} approach, and the peers use this model only when labeling data. This means that the locally trained model is only used to produce the aggregate model and never for classification. In the \textit{Ensemble model} experiment the peers also produce an aggregate model, but when classifying data their local model and the aggregated model classifies in an ensemble. The \textit{Aggregated model} and \textit{Ensemble model} experiments were run twice, with two different values of $\epsilon$, which represent a significant difference in privacy level.
+The \textit{Aggregated model} experiment lets the peers create an aggregate model using \cite{pathak2010diffprivhomo} approach, and the peers use this model only when labeling data. This means that the locally trained model is only used to produce the aggregate model and never for classification. 
+
+In the \textit{Ensemble model} experiment the peers also produce an aggregate model, but when classifying data their local model and the aggregated model classify in an ensemble. The \textit{Aggregated model} and \textit{Ensemble model} experiments were run twice, with two different values of $\epsilon$ which represent a significant difference in privacy level.
 
 \subsection{Confirming expected effects of differential privacy}
 
@@ -43,17 +45,17 @@ In this project we have implemented training of a logistic regression, the aggre
 
 \subsubsection{Changes in $\epsilon$}
 
-The variance of the noise added when producing aggregated models increases with the parameter $\epsilon$. To confirm this behavior, we ran experiments with all parameters fixed except for $\epsilon$.
+The variance of the noise added when producing aggregated models increases with the parameter $\epsilon$. To confirm this behavior, we ran experiments with all parameters fixed except for $\epsilon$. Each peer was given 368 data records. The regularization level was chosen based on the results in Section \ref{sec:experiment_measuring_accuracy}.
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|l|}
-		\textbf{Experiment Name}            & \textbf{Peers} & \textbf{Data per peer} &
+		\textbf{Experiment Name}            & \textbf{Peers} & \textbf{Group size} &
 		 $\boldsymbol{\lambda}$ & $\boldsymbol{\epsilon}$                                              \\
 		 \hline
-		Spam, effect of $\epsilon$ & 10    & 368  & $2^{-2}$  & $[2^{-8}, 2^{8}]$
+		Spam, effect of $\epsilon$ & 10    & 10  & $2^{-2}$  & $[2^{-8}, 2^{8}]$
 	\end{tabular}
-	\caption{Effects of privacy level}
+	\caption{Effects of privacy level. Adult.}
 	\label{tab:experiments_privacy_level}
 \end{table}
 
@@ -61,16 +63,16 @@ All the peers in this experiment collaborate to produce one aggregated model, an
 
 \subsubsection{Changes in $\lambda$}
 
-As stated by Equation \ref{eq:aggregated_logistic_sensitivity},  increasing the regularization parameter $\lambda$ will decrease the variance of noise added when aggregating. For this reason we expected that higher values of regularization should help counter the perturbing effect of lower values of $\epsilon$. However, as the regularization value grows, the predictive performance should degrade as the models become unable to fit to the data. To confirm these effects, we tested wide ranges of regularization strength with different levels of privacy.
+As stated by Equation \ref{eq:aggregated_logistic_sensitivity},  increasing the regularization parameter $\lambda$ will decrease the variance of noise added when aggregating. For this reason we expected that higher values of regularization should help counter the perturbing effect of lower values of $\epsilon$. However, as the regularization value grows, the predictive performance should degrade as the models become unable to fit to the data. To confirm these effects, we tested wide ranges of regularization strength with different levels of privacy. Each peer was given 368 data records.
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|l|l|l|l|}
-		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Data per peer} & $\boldsymbol{\lambda}$         & $\boldsymbol{\epsilon}$ \\
+		\textbf{Experiment Name}    & \textbf{Peers} & \textbf{Group size} & $\boldsymbol{\lambda}$         & $\boldsymbol{\epsilon}$ \\
 		\hline
-		Spam, observing $\lambda$, no privacy       & 10    & 368  & $[2^{-8}, 2^{3}]$ & $2^{10}$   \\
-		Spam, observing $\lambda$, common privacy   & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.1$      \\
-		Spam, observing $\lambda$, stronger privacy & 10    & 368  & $[2^{-8}, 2^{3}]$ & $0.01$    
+		Spam, observing $\lambda$, no privacy       & 10    & 10  & $[2^{-8}, 2^{3}]$ & $2^{10}$   \\
+		Spam, observing $\lambda$, common privacy   & 10    & 10  & $[2^{-8}, 2^{3}]$ & $0.1$      \\
+		Spam, observing $\lambda$, stronger privacy & 10    & 10  & $[2^{-8}, 2^{3}]$ & $0.01$    
 	\end{tabular}
 	\caption{Effect of regularization strength}
 	\label{tab:experiments_regularization_strength}
@@ -80,7 +82,7 @@ The values of $\epsilon$ for the  common privacy level in Table \ref{tab:experim
 
 \subsection{Changes in data availability}
 
-As we are testing in a decentralized setting, we wanted to compare how the local, the aggregated models, and both of them in an ensemble respond to changes in data availability.  The experiment seen in Table \ref{tab:experiments_data_availability} is concerned with exploring the way data availability affects error rate in the distributed setting. As all other parameters except for the amount of data per peer is fixed, the overall size of data in the system changes for each parameter combination in this experiment.
+As we are testing in a decentralized setting were data quantities might be low, we wanted to compare how the local, the aggregated models, and both of them in an ensemble respond to changes in data availability.  The experiment seen in Table \ref{tab:experiments_data_availability} is concerned with exploring the way data availability affects error rate in the distributed setting. Since all other parameters except for the amount of data per peer is fixed, the overall quantity of data in the system changes for each parameter combination in this experiment. The regularization level was chosen based on the results in Section \ref{sec:experiment_measuring_accuracy}.
 
 \begin{table}[h]
 	\centering
@@ -98,7 +100,7 @@ As we are testing in a decentralized setting, we wanted to compare how the local
 \subsection{Changes in number of participants}
 
  
-The experiment shown in Table \ref{tab:experiments_peer_numbers} is an attempt to partially answer to our research question about the possible loss of accuracy in our distributed setting from the participation perspective. As we expected the error rate might be affected by the number of participating peers, we designed this experiment to give an idea of how peer prediction changes when more peers are present. Except for the number of peers, all parameters were kept fixed, including the amount of data per peer. This means that as the number of peers increase, there is more data available in the system.
+The experiment shown in Table \ref{tab:experiments_peer_numbers} is an attempt to partially answer to our research question about the possible loss of accuracy in our distributed setting from the participation perspective. As we expected the error rate might be affected by the number of participating peers, we designed this experiment to give an idea of how peer prediction quality changes when more peers are present. Except for the number of peers, all parameters were kept fixed, including the amount of data per peer. This means that as the number of peers increase, there is more data available in the system. The regularization level was chosen based on the results in Section \ref{sec:experiment_measuring_accuracy}.
 
 \begin{table}[h]
 	\centering
@@ -113,7 +115,7 @@ The experiment shown in Table \ref{tab:experiments_peer_numbers} is an attempt t
 
 \subsection{Peer error rate variance}
 \label{sec:experiment_peer_variance}
-With this experiment we wanted to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250.
+With this experiment we wanted to explore the variance in the quality of models held by each peer, and see how it changes when aggregate models are introduced. In order to increase the chances that we can observe variance among peers, the amount of data owned by each peer is set at a low level of 250. The regularization level was chosen based on the results in Section \ref{sec:experiment_measuring_accuracy}.
 
 This experiment was concerned with reduction of peer error rate variance and to some extent validation of previous work. Concerning the latter, we hoped to show whether or not there was benefit in differentially private model aggregation compared to each peer using a local model. Concerning the former, we wished to see if publishing aggregated models and using them in ensembles to make predictions could help reduce peer error rate variance.
  
@@ -126,25 +128,25 @@ This experiment was concerned with reduction of peer error rate variance and to 
 		Adult, peer variance, aggregated       & 10          & 250        & $2^{2}$   & $1.0$      & Aggregated \\
 		Adult, peer variance, ensemble of both & 10          & 250        & $2^{2}$   & $1.0$      & Ensemble  
 	\end{tabular}
-	\caption{Observing peer accuracy variance}
+	\caption{Observing peer error rate variance}
 	\label{tab:experiments_peer_variance}
 \end{table}
 
 \subsection{Effect of aggregation group size and model propagation}
 
-We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. In the experiment seen in Table \ref{tab:experiments_group_sizes} we have a fixed number of peers and a fairly high level of $\epsilon$. The privacy level was chosen from the high end of candidate values. This is because we want to observe the value of aggregating models, which should be more apparent in a situation with lower perturbation. Since participation in a single model aggregation fully expends the privacy budget of a peer and the number of peers is fixed, a higher number of aggregate models are produced when the group size is smaller. Smaller groups result in each peer having a larger ensemble with each model being based on less data. Larger groups result in each peer having a smaller ensemble with each model being based on more data.
+We believed that the number of peers participating in creating aggregated models could affect the quality of the produced models. In the experiment seen in Table \ref{tab:experiments_group_sizes} we have a fixed number of peers and a fairly high level of $\epsilon$. This is because we want to observe the value of aggregating models, which should be more apparent in a situation with lower perturbation. Since participation in a single model aggregation fully expends the privacy budget of a peer and the number of peers is fixed, a higher number of aggregate models are produced when the group size is smaller. Smaller groups result in each peer having a larger ensemble with each model being based on less data. Larger groups result in each peer having a smaller ensemble with each model being based on more data.
 
 This experiment relates to two of our research questions - reduction of accuracy loss and peer accuracy variance in our distributed, differentially private setting. We hoped to identify group configurations that minimized both of these performance metrics.
 
-We run this experiment with two different approaches for publishing the aggregated models, as discussed in Section \ref{sec:PropagationPubModel}.
+We run this experiment with two different approaches for publishing the aggregated models, as discussed in Section \ref{sec:PropagationPubModel}. The regularization level was chosen based on the results in Section \ref{sec:experiment_measuring_accuracy}.
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{|l|l|l|l|l|}
-		{\bf Experiment Name} & {\bf Peers} & {\bf Group size} & $\epsilon$ & {\bf Publication} \\
+	\begin{tabular}{|l|l|l|l|l|l|}
+		{\bf Experiment Name} & {\bf Peers} & {\bf Group size} & $\boldsymbol{\epsilon}$ & $\boldsymbol{\lambda}$ & {\bf Publication} \\
 		\hline
-		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$ & Party     \\ 
-		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$ & All     \\ 
+		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$ & $2^{2}$ & Party     \\ 
+		Changing group sizes  & 30          & $[1, 5, 10, 15, 20, 25, 30]$      &     $1.0$ & $2^{2}$ & All     \\ 
 	\end{tabular}
 	\caption{Effect of aggregation group size}
 	\label{tab:experiments_group_sizes}
@@ -157,12 +159,14 @@ As discussed in Section \ref{section:privacy_budget}, it is possible to spread t
 
 This relates to our first research question, with considers loss in accuracy, in two ways. Firstly, creating ten aggregated models by spreading the budget and then using them in an ensemble might on its own have interesting effects on quality of predictions. Secondly, it might be necessary for peers in a distributed setting to participate in aggregations several times. This is especially true if aggregated models cannot be shared globally for privacy or practical reasons.
 
+The regularization level was chosen based on the results in Section \ref{sec:experiment_measuring_accuracy}.
+
 \begin{table}[h]
 	\centering	
-	\begin{tabular}{|l|l|l|l|}
-		{\bf Experiment Name} & {\bf Peers} & $\boldsymbol{\epsilon}$ & $\boldsymbol{\epsilon_A}$        \\
+	\begin{tabular}{|l|l|l|l|l|}
+		{\bf Experiment Name} & {\bf Peers} & $\boldsymbol{\epsilon}$ &  $\boldsymbol{\epsilon_A}$&$\boldsymbol{\lambda}$        \\
 		\hline
-		Budgeting privacy & 10    & 0.1     & $[\frac{0.1}{16}, 0.1]$
+		Budgeting privacy & 10    & 0.1 & $[\frac{0.1}{16}, 0.1]$     & $2^2$
 	\end{tabular}
 	\caption{Effect of budgeting privacy}
 	\label{tab:experiments_budgeting_privacy}
