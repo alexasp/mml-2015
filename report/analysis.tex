@@ -170,6 +170,17 @@ Next, we consider the standard deviation, or error variance, measured among the 
 
 This effect might be caused by the fact that the peers include their locally fitted models in their ensemble when classifying 
 data. As seen from the results in  Section \ref{sec:results_peer_error_variance}, the variance in error rate among peers is zero for aggregated models. This is as expected, since all peers share the exact same set of models. The local models on the other hand result only from the local  data of each peer. Since all models in the ensembles are weighted equally, the effect of the local model decreases as a higher number of aggregate models are published. If this is the case of lower peer error rate variance at lower group sizes, a similar decrease in variance might be achieved by decreasing the weight of the local model. On the other hand, this might be detrimental for those peers that succeeded in training high quality models. In an online learning setting, models weights could be learned over time as new labeled data arrives.
+
+\section{Analysis of Privacy Budgeting}
+
+Next we consider the results of the privacy budgeting experiment, seen in Figure \ref{fig:results_privacy_budget}. For lower values of per aggregation $\epsilon_A$, more aggregated models are produced, but they are more perturbed. For most levels of $\epsilon_A$, including the maximum level of 0.1, the error rate remained fairly fixed just below 0.2. Once the lowest values of $\epsilon_A$ is reached, at $\frac{\epsilon}{16}$ and $\frac{\epsilon}{32}$ the error rate rises sharply.
+
+Firstly, we note that there appears to be no improvement in the error rate when aggregating multiple, more perturbed models and using them in an ensemble. Furthermore, when $\epsilon_A$ is too low, the error rate increases. This indicates that it might make more sense to fully expend the privacy budget on a single aggregation, in a setting where the aggregated model can be shared globally. This maximizes the chance that the aggregated model is not too perturbed to be a good fit to data, while there is nothing to lose from only being able to produce a single model. 
+
+In a setting where models cannot be shared globally, either for practical or privacy reasons, the results are perhaps even more interesting. Since the error rate stays approximately the same in the range $[\frac{\epsilon}{8}, \epsilon]$, it is possible to choose a lower $\epsilon_A$ and allow each peer to take part in $\frac{\epsilon}{\epsilon_A}$ model aggregations. The error rate could be very similar, but it would let the information held in each data partition to be spread to a wider set of peers.
+
+The same effects can be observed in the budgeting experiment on the Spambase data set, though the error rate increases at much higher values of $\epsilon_A$, likely due to the lower regularization required for Spambase.
+
 \begin{comment}ly
 
 A possible explanation of this result is that the effects of \unsure{bagging?} boosting counters the loss in accuracy that results from the addition of noise. Since models will have noise added to them before being published, expending all data to produce a single model might yield a worse classifier than partitioning data, adding noise to each separate, weaker model and combining them in an ensemble. On the other hand, this effect could be caused by some leakage of privacy which becomes visible over repeated applications of the aggregation mechanism. \todo{Figure out if there is some way we could test or prove that this is not the case.} 

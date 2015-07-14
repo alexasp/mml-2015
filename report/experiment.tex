@@ -35,7 +35,7 @@ The \textit{Centralized logistic regression} experiment was intended to establis
 
 The \textit{Disjoint logistic regression} experiment considers a situation where the participating peers have a subset of the data and locally train one model each. Each peer fits a model and makes predictions independently.
 
-The \textit{Aggregated model} experiment let the peers create an aggregate model using \cite{pathak2010diffprivhomo} approach, and the peers use this model only when labeling data. This means that the locally trained model is only used to produce the aggregate model and never for classification. In the \textit{Ensemble model} experiment the peers also produce an aggregate model, but when classifying data their local model and the aggregated model classifies in an ensemble. The \textit{Aggregated model} and \textit{Ensemble model} experiments were run twice, with two different values of $\epsilon$, which represent a significant difference in privacy level.
+The \textit{Aggregated model} experiment lets the peers create an aggregate model using \cite{pathak2010diffprivhomo} approach, and the peers use this model only when labeling data. This means that the locally trained model is only used to produce the aggregate model and never for classification. In the \textit{Ensemble model} experiment the peers also produce an aggregate model, but when classifying data their local model and the aggregated model classifies in an ensemble. The \textit{Aggregated model} and \textit{Ensemble model} experiments were run twice, with two different values of $\epsilon$, which represent a significant difference in privacy level.
 
 \subsection{Confirming expected effects of differential privacy}
 
@@ -160,7 +160,7 @@ This relates to our first research question, with considers loss in accuracy, in
 \begin{table}[h]
 	\centering	
 	\begin{tabular}{|l|l|l|l|}
-		{\bf Experiment Name} & {\bf Peers} & $\boldsymbol{\epsilon}$ & {\bf Aggregation cost}        \\
+		{\bf Experiment Name} & {\bf Peers} & $\boldsymbol{\epsilon}$ & $\boldsymbol{\epsilon_A}$        \\
 		\hline
 		Budgeting privacy & 10    & 0.1     & $[\frac{0.1}{16}, 0.1]$
 	\end{tabular}
