@@ -69,9 +69,9 @@ This data set is very popular to use in various machine learning experiments, ra
 
 
 \subsection{SUSY}
-The SUSY dataset \citep{susy2014data} was produced as a benchmark classification task where the goal is to distinguish between a signal process which produces supersymmetric particles and a background process which does not. This data set is available from the UCI machine learning repository, where the data set was preprocessed by a deep learning process to extract the 18 most interesting features. It contains exactly 5,000,000 data records, where 10\% is designated as a test set.
+The SUSY dataset \citep{susy2014data} was produced as a benchmark classification task where the goal is to distinguish between a signal process which produces supersymmetric particles and a background process which does not. This data set is available from the UCI machine learning repository, where the data set was preprocessed to extract the 18 high level features. It contains exactly 5,000,000 data records, where 10\% is designated as a test set. We did not use this particular test set. We down-sampled the data set to 100,000 records, and generated a training set from 80\% of this subset and a test set from 20\% of this subset.
 
-We employed this data set as it is massive in scale, and this allowed us to run experiments where the peers had a big amount of data available. Since it was already preprocessed, it was easy to put to use, which also was a big motivating factor when we decided to employ it. The classification task is however not of much value for our project, so we mostly used this data set to confirm the results we saw from the other two data sets.     
+We employed this data set as it had a sufficient number of records, and this allowed us to run experiments where the peers had the necessary amount of data available. Since it was already preprocessed, it was easy to put to use, which also was a big motivating factor when we decided to employ it. The classification task is however not of much value for our project, so we mostly used this data set to confirm the results we saw from the other two data sets.     
 
 \section{Parameter Description}
 
@@ -84,7 +84,7 @@ The privacy parameter $\epsilon$ determines the level of privacy required for ea
 
 Each peer will get $n$ number of records. This parameter will obviously have a significant effect on how well the local model each peer creates is able to generalize to new data instances. 
 
-Each peer trains a local logistic regression classifier on its data partition. This requires selection of an adaptive learning rate parameter $\alpha$, a regularization constant $\lambda$ and a maximum number of epochs of stochastic gradient descent. We tuned $\alpha$ by running 3-fold cross-validation where each peer fits its local model to identify the best $\alpha$ by powers of 10 in the range $[10^{-2}, 10^{2}]$. When using SGD with adaptive learning rate, this range proved sufficient to find classifiers that were as good as our best baseline throughout experimentation. 3-fold cross-validation was chosen because of time constraints on the project. Each experiment in its entirety is tested with 10-fold cross-validation, so it was necessary to reduce local model training time in order to run in a reasonably short time on a single computer.
+Each peer trains a local logistic regression classifier on its data partition. This requires selection of an adaptive learning rate parameter $\alpha$, a regularization constant $\lambda$ and a maximum number of epochs of stochastic gradient descent. We tuned $\alpha$ by running 3-fold cross-validation where each peer fits its local model to identify the best $\gamma$ by powers of 10 in the range $[10^{-2}, 10^{2}]$. When using SGD with adaptive learning rate, this range proved sufficient to find classifiers that were as good as our best baseline throughout experimentation. 3-fold cross-validation was chosen because of time constraints on the project. Each experiment in its entirety is tested with 10-fold cross-validation, so it was necessary to reduce local model training time in order to run in a reasonably short time on a single computer.
 
 In normal data mining applications the regularization $\lambda$ would be tuned in this manner as well, but in our case the sensitivity of the aggregation mechanism depends on $\lambda$, as seen in Equation \ref{eq:aggregated_logistic_sensitivity}. This means that the peers will have to communicate to either agree on a regularization level or to determine the smallest regularization constant to identify the worst case noise level. In our experiments we chose a global regularization level, which was used by all peers. We identified the best $\lambda$ by testing a coarse grid of powers of 2 in the range $[2^{-8}, 2^{8}]$ whenever we tested with a new data set or the number of records owned by each peer changed. If several values of $\lambda$ presented similar prediction performance results, we chose the highest value. This is motivated by both a desire to have each model generalize as well as possible to future data instances, and the fact that lower values of regularization increases the noise added in model aggregation.
 
@@ -104,9 +104,9 @@ Following the approach outlined in Section \ref{sec:parameter_tuning}, we establ
 
 For each experiment, we selected a single parameter for exploration from the set of parameters specified in Section \ref{sec:parameter_tuning}. We wanted to explore the results of the system as the parameter took a range of values. To start, we specified a range of fixed, scalar values for each of the parameters. For example, one of the experiments we performed was intended to test the effect of varying number of peers participating in the system. One possible parameter combination to test this could then be
 
-$$P=[10, 20, 30, 40, 50], g=10, \epsilon=0.1, \epsilon_{A}=0.1, \lambda=1.0$$
+$$P=[10, 20, 30, 40, 50], g=10, R=500, \epsilon=0.1, \epsilon_{A}=0.1, \lambda=1.0$$
 
-We then performed a full simulation with $p$ peers is repeated and evaluated 10 times, either by cross-validation or test set, for each $p$ in the specified parameter set $P$. 
+We then perform a full simulation with $p$ peers is repeated and evaluated 10 times, either by cross-validation or test set, for each $p$ in the specified parameter set $P$. 
 
 \subsection{The execution of a single experiment}
 
@@ -131,15 +131,15 @@ As presented in Section \ref{sec:Sensitivity_of_LogReg}, the sensitivity of logi
 
 \begin{algorithm}[H]
 	
-	\KwIn{$\epsilon$ - privacy parameter
-		$\boldmath{M}$ - set of models trained by participating peers\;
+	\KwIn{$\epsilon$ - privacy parameter\;
+		$\boldsymbol{\theta}$ - set of models trained by participating peers\;
 		$\boldmath{N}$ - set of peer training set sizes\;
-		$\lambda$ - regularization level used when training each model in $\boldmath{M}$\;
+		$\lambda$ - regularization level used when training each model in $\boldsymbol{\theta}$\;
 	}
 	\KwOut{Perturbed aggregate of the models in $\boldmath{M}$}
 	$n_{min} \leftarrow min(\boldmath{N})$\;
 	$\eta \leftarrow Laplace(0; \frac{2}{n_{min}\epsilon\lambda})$\;
-	$model_{agg} \leftarrow \frac{1}{K}\sum_{j=1}^{|\boldmath{N}|} \boldmath{w_j} + \boldmath{\eta}$\;
+	$model_{agg} \leftarrow \frac{1}{K}\sum_{j=1}^{|\boldsymbol{\theta}|} \boldmath{\theta_j} + \boldmath{\eta}$\;
 	\KwRet{$model_{agg}$}
 	
 	\caption{$\epsilon$-differentially private aggregation mechanism}
