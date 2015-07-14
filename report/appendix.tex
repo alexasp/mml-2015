@@ -26,6 +26,7 @@ $\\[0.5cm]$
 	\label{tab:results_measuring_accuracy_spam}
 \end{table}
 
+
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|l|l|}
@@ -40,6 +41,42 @@ $\\[0.5cm]$
 	\end{tabular}
 	\caption{Measuring accuracy: Susy}
 	\label{tab:results_measuring_accuracy_susy}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{llll}
+		& \multicolumn{3}{c}{Actual}                                                      \\
+		\multicolumn{1}{c}{} &                        & 1                         & 0                          \\ \cline{3-4} 
+		Predicted            & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{273} & \multicolumn{1}{l|}{49}   \\ \cline{3-4} 
+		& \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{81} & \multicolumn{1}{l|}{518} \\ \cline{3-4} 
+	\end{tabular}
+	\caption{Confusion Matrix: Spambase. Local model only.}
+	\label{fig:confmat_spam_local}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{llll}
+		& \multicolumn{3}{c}{Actual}                                                      \\
+		\multicolumn{1}{c}{} &                        & 1                         & 0                          \\ \cline{3-4} 
+		Predicted            & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{268} & \multicolumn{1}{l|}{38}   \\ \cline{3-4} 
+		& \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{86} & \multicolumn{1}{l|}{529} \\ \cline{3-4} 
+	\end{tabular}
+	\caption{Confusion Matrix: Spambase. Aggregated, DP model only.}
+	\label{fig:confmat_spam_aggdp}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{llll}
+		& \multicolumn{3}{c}{Actual} \\
+		\multicolumn{1}{c}{} &                        & 1                         & 0                          \\ \cline{3-4} 
+		Predicted            & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{257} & \multicolumn{1}{l|}{35}   \\ \cline{3-4} 
+		& \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{97} & \multicolumn{1}{l|}{5d32} \\ \cline{3-4} 
+	\end{tabular}
+	\caption{Confusion Matrix: Spambase. Ensemble of Aggregated and Local.}
+	\label{fig:confmat_spamd_ensemble}
 \end{table}
 
 \subsection{Changes in number of participants}
